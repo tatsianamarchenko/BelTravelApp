@@ -13,7 +13,7 @@
         <!--Explore-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,7 +186,7 @@
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="qvk-JW-Zaq">
             <objects>
-                <viewController id="ii8-8R-iqc" customClass="SelectedPlaceViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectedPlaceViewController" id="ii8-8R-iqc" customClass="SelectedPlaceViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kqc-rg-4of">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,7 +333,7 @@
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="ORQ-2X-zQA">
             <objects>
-                <viewController id="9ch-Am-a53" customClass="SelectedTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectedTripViewController" id="9ch-Am-a53" customClass="SelectedTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2a8-6z-EsL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,7 +420,7 @@
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="6P7-Dx-9IT">
             <objects>
-                <viewController id="dGc-lD-hrK" customClass="UpcomingTripInformationViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpcomingTripInformationViewController" id="dGc-lD-hrK" customClass="UpcomingTripInformationViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nN5-oL-CkO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -529,7 +529,7 @@
         <!--Favorite-->
         <scene sceneID="WKP-iH-RGO">
             <objects>
-                <viewController id="Oks-xj-eEl" customClass="FavoriteViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteViewController" id="Oks-xj-eEl" customClass="FavoriteViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="omf-YQ-h7t">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -599,7 +599,7 @@
         <!--Chat-->
         <scene sceneID="6LV-JS-L1w">
             <objects>
-                <viewController id="d4h-Qu-E5f" customClass="ChatViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="d4h-Qu-E5f" customClass="ChatViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PdI-iY-Lgy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -641,7 +641,7 @@
         <!--Profile-->
         <scene sceneID="ziJ-A6-ehI">
             <objects>
-                <viewController id="O05-uo-0o6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="O05-uo-0o6" customClass="ProfileViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRp-kV-D2z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1194,7 +1194,7 @@
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="IzD-Rl-IJN">
             <objects>
-                <viewController id="Lgb-mp-k9H" customClass="CreateTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateTripViewController" id="Lgb-mp-k9H" customClass="CreateTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="61d-rp-XND">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

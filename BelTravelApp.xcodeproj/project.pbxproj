@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D329A72F874C9E2EA794C52 /* Pods_BelTravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B45B03D0CA517FD2A262868 /* Pods_BelTravelApp.framework */; };
 		BF5B6268282BFB7F00D5844D /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B6266282BFB7F00D5844D /* PlaceCollectionViewCell.swift */; };
 		BF5B6269282BFB7F00D5844D /* PlaceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B6267282BFB7F00D5844D /* PlaceCollectionViewCell.xib */; };
 		BF5B626D282BFC7F00D5844D /* UpcomingTripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B626B282BFC7F00D5844D /* UpcomingTripCollectionViewCell.swift */; };
 		BF5B626E282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B626C282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib */; };
 		BF5B6272282BFE2C00D5844D /* ParticipantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B6270282BFE2C00D5844D /* ParticipantCollectionViewCell.swift */; };
 		BF5B6273282BFE2C00D5844D /* ParticipantCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B6271282BFE2C00D5844D /* ParticipantCollectionViewCell.xib */; };
+		BF5B6275282C010300D5844D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF5B6274282C010300D5844D /* GoogleService-Info.plist */; };
 		BFA60B85282B1E07006B3DC4 /* SelectedTripPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60B7F282B1E07006B3DC4 /* SelectedTripPresenter.swift */; };
 		BFA60B86282B1E07006B3DC4 /* SelectedTripWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60B80282B1E07006B3DC4 /* SelectedTripWorker.swift */; };
 		BFA60B87282B1E07006B3DC4 /* SelectedTripRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60B81282B1E07006B3DC4 /* SelectedTripRouter.swift */; };
@@ -57,7 +59,6 @@
 		BFA60BD3282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCD282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
-		BFCC29A2282AB2B3004FE1FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29A1282AB2B3004FE1FE /* ViewController.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
 		BFCC29A7282AB2C6004FE1FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */; };
 		BFCC29AA282AB2C6004FE1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A8282AB2C6004FE1FE /* LaunchScreen.storyboard */; };
@@ -72,12 +73,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B45B03D0CA517FD2A262868 /* Pods_BelTravelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BelTravelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59373C6AE4C8BF75A921E1C1 /* Pods-BelTravelApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BelTravelApp.release.xcconfig"; path = "Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp.release.xcconfig"; sourceTree = "<group>"; };
 		BF5B6266282BFB7F00D5844D /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		BF5B6267282BFB7F00D5844D /* PlaceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceCollectionViewCell.xib; sourceTree = "<group>"; };
 		BF5B626B282BFC7F00D5844D /* UpcomingTripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripCollectionViewCell.swift; sourceTree = "<group>"; };
 		BF5B626C282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingTripCollectionViewCell.xib; sourceTree = "<group>"; };
 		BF5B6270282BFE2C00D5844D /* ParticipantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCollectionViewCell.swift; sourceTree = "<group>"; };
 		BF5B6271282BFE2C00D5844D /* ParticipantCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantCollectionViewCell.xib; sourceTree = "<group>"; };
+		BF5B6274282C010300D5844D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BFA60B7F282B1E07006B3DC4 /* SelectedTripPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTripPresenter.swift; sourceTree = "<group>"; };
 		BFA60B80282B1E07006B3DC4 /* SelectedTripWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTripWorker.swift; sourceTree = "<group>"; };
 		BFA60B81282B1E07006B3DC4 /* SelectedTripRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTripRouter.swift; sourceTree = "<group>"; };
@@ -123,7 +127,6 @@
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BFCC29A1282AB2B3004FE1FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BFCC29A4282AB2B3004FE1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFCC29A9282AB2C6004FE1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -136,6 +139,7 @@
 		BFCC29BE282AF4EB004FE1FE /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		BFD57562282BEE28007CBBE8 /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
 		BFD57563282BEE28007CBBE8 /* RegionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionCollectionViewCell.xib; sourceTree = "<group>"; };
+		CC5FB13307FD300722427CE1 /* Pods-BelTravelApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BelTravelApp.debug.xcconfig"; path = "Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,12 +147,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D329A72F874C9E2EA794C52 /* Pods_BelTravelApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD51456387D955C8AA146C03 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC5FB13307FD300722427CE1 /* Pods-BelTravelApp.debug.xcconfig */,
+				59373C6AE4C8BF75A921E1C1 /* Pods-BelTravelApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BF5B6262282BFABF00D5844D /* RegionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +218,8 @@
 			children = (
 				BFCC299C282AB2B3004FE1FE /* BelTravelApp */,
 				BFCC299B282AB2B3004FE1FE /* Products */,
+				AD51456387D955C8AA146C03 /* Pods */,
+				D83654848DCA5C41C1A7D37E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,11 +236,11 @@
 			children = (
 				BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */,
 				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
-				BFCC29A1282AB2B3004FE1FE /* ViewController.swift */,
 				BFCC29B1282AB7F8004FE1FE /* Scenes */,
-				BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */,
 				BFD57561282BEDEA007CBBE8 /* Views */,
+				BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */,
 				BFCC29AB282AB2C6004FE1FE /* Info.plist */,
+				BF5B6274282C010300D5844D /* GoogleService-Info.plist */,
 			);
 			path = BelTravelApp;
 			sourceTree = "<group>";
@@ -347,6 +364,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D83654848DCA5C41C1A7D37E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B45B03D0CA517FD2A262868 /* Pods_BelTravelApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -354,9 +379,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFCC29AE282AB2C6004FE1FE /* Build configuration list for PBXNativeTarget "BelTravelApp" */;
 			buildPhases = (
+				938A5A52F98CB493049A17EC /* [CP] Check Pods Manifest.lock */,
 				BFCC2996282AB2B2004FE1FE /* Sources */,
 				BFCC2997282AB2B2004FE1FE /* Frameworks */,
 				BFCC2998282AB2B2004FE1FE /* Resources */,
+				B4BFABB18E7B4ED72ACF3CB1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -412,10 +439,53 @@
 				BF5B626E282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib in Resources */,
 				BFCC29A7282AB2C6004FE1FE /* Assets.xcassets in Resources */,
 				BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */,
+				BF5B6275282C010300D5844D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		938A5A52F98CB493049A17EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BelTravelApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4BFABB18E7B4ED72ACF3CB1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BFCC2996282AB2B2004FE1FE /* Sources */ = {
@@ -427,7 +497,6 @@
 				BFA60BCE282B1F02006B3DC4 /* UpcomingTripInformationPresenter.swift in Sources */,
 				BFA60BB9282B1EC3006B3DC4 /* ChatModels.swift in Sources */,
 				BFA60B94282B1E17006B3DC4 /* SelectedPlaceModels.swift in Sources */,
-				BFCC29A2282AB2B3004FE1FE /* ViewController.swift in Sources */,
 				BFA60BAC282B1E93006B3DC4 /* ProfileModels.swift in Sources */,
 				BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */,
 				BFD57564282BEE28007CBBE8 /* RegionCollectionViewCell.swift in Sources */,
@@ -618,6 +687,7 @@
 		};
 		BFCC29AF282AB2C6004FE1FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC5FB13307FD300722427CE1 /* Pods-BelTravelApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -646,6 +716,7 @@
 		};
 		BFCC29B0282AB2C6004FE1FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59373C6AE4C8BF75A921E1C1 /* Pods-BelTravelApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
