@@ -57,6 +57,13 @@
 		BFA60BD1282B1F02006B3DC4 /* UpcomingTripInformationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCB282B1F02006B3DC4 /* UpcomingTripInformationModels.swift */; };
 		BFA60BD2282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCC282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift */; };
 		BFA60BD3282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCD282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift */; };
+		BFB319052832AFB500E13C65 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB319042832AFB500E13C65 /* FirebaseManager.swift */; };
+		BFBB173C2832887D00F6C6A9 /* AllLocationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17362832887C00F6C6A9 /* AllLocationsPresenter.swift */; };
+		BFBB173D2832887D00F6C6A9 /* AllLocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17372832887C00F6C6A9 /* AllLocationsWorker.swift */; };
+		BFBB173E2832887D00F6C6A9 /* AllLocationsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17382832887D00F6C6A9 /* AllLocationsRouter.swift */; };
+		BFBB173F2832887D00F6C6A9 /* AllLocationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17392832887D00F6C6A9 /* AllLocationsModels.swift */; };
+		BFBB17402832887D00F6C6A9 /* AllLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB173A2832887D00F6C6A9 /* AllLocationsViewController.swift */; };
+		BFBB17412832887D00F6C6A9 /* AllLocationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB173B2832887D00F6C6A9 /* AllLocationsInteractor.swift */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
@@ -124,6 +131,13 @@
 		BFA60BCB282B1F02006B3DC4 /* UpcomingTripInformationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationModels.swift; sourceTree = "<group>"; };
 		BFA60BCC282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationViewController.swift; sourceTree = "<group>"; };
 		BFA60BCD282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationInteractor.swift; sourceTree = "<group>"; };
+		BFB319042832AFB500E13C65 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		BFBB17362832887C00F6C6A9 /* AllLocationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsPresenter.swift; sourceTree = "<group>"; };
+		BFBB17372832887C00F6C6A9 /* AllLocationsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsWorker.swift; sourceTree = "<group>"; };
+		BFBB17382832887D00F6C6A9 /* AllLocationsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsRouter.swift; sourceTree = "<group>"; };
+		BFBB17392832887D00F6C6A9 /* AllLocationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsModels.swift; sourceTree = "<group>"; };
+		BFBB173A2832887D00F6C6A9 /* AllLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsViewController.swift; sourceTree = "<group>"; };
+		BFBB173B2832887D00F6C6A9 /* AllLocationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsInteractor.swift; sourceTree = "<group>"; };
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,7 +174,6 @@
 				CC5FB13307FD300722427CE1 /* Pods-BelTravelApp.debug.xcconfig */,
 				59373C6AE4C8BF75A921E1C1 /* Pods-BelTravelApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,6 +226,19 @@
 			path = ChatScene;
 			sourceTree = "<group>";
 		};
+		BFBB17352832885C00F6C6A9 /* AllLocationsScene */ = {
+			isa = PBXGroup;
+			children = (
+				BFBB17362832887C00F6C6A9 /* AllLocationsPresenter.swift */,
+				BFBB17372832887C00F6C6A9 /* AllLocationsWorker.swift */,
+				BFBB17382832887D00F6C6A9 /* AllLocationsRouter.swift */,
+				BFBB17392832887D00F6C6A9 /* AllLocationsModels.swift */,
+				BFBB173A2832887D00F6C6A9 /* AllLocationsViewController.swift */,
+				BFBB173B2832887D00F6C6A9 /* AllLocationsInteractor.swift */,
+			);
+			path = AllLocationsScene;
+			sourceTree = "<group>";
+		};
 		BFCC2991282AB2B2004FE1FE = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +280,7 @@
 				BFCC29B5282AB83E004FE1FE /* SelectedTripScene */,
 				BFA60BAF282B1EA2006B3DC4 /* ChatScene */,
 				BFCC29B4282AB82C004FE1FE /* ProfileScene */,
+				BFBB17352832885C00F6C6A9 /* AllLocationsScene */,
 				BFCC29B3282AB817004FE1FE /* FavoriteScene */,
 				BFCC29B2282AB802004FE1FE /* MainScene */,
 			);
@@ -360,6 +387,7 @@
 				BF5B6262282BFABF00D5844D /* RegionCell */,
 				BFCC29A3282AB2B3004FE1FE /* Main.storyboard */,
 				BFCC29A8282AB2C6004FE1FE /* LaunchScreen.storyboard */,
+				BFB319042832AFB500E13C65 /* FirebaseManager.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -499,6 +527,7 @@
 				BFA60B94282B1E17006B3DC4 /* SelectedPlaceModels.swift in Sources */,
 				BFA60BAC282B1E93006B3DC4 /* ProfileModels.swift in Sources */,
 				BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */,
+				BFBB17412832887D00F6C6A9 /* AllLocationsInteractor.swift in Sources */,
 				BFD57564282BEE28007CBBE8 /* RegionCollectionViewCell.swift in Sources */,
 				BFA60B88282B1E07006B3DC4 /* SelectedTripModels.swift in Sources */,
 				BFA60B85282B1E07006B3DC4 /* SelectedTripPresenter.swift in Sources */,
@@ -512,12 +541,16 @@
 				BFA60B8A282B1E07006B3DC4 /* SelectedTripInteractor.swift in Sources */,
 				BFA60B95282B1E17006B3DC4 /* SelectedPlaceViewController.swift in Sources */,
 				BFA60B9F282B1E6C006B3DC4 /* FavoriteRouter.swift in Sources */,
+				BFBB17402832887D00F6C6A9 /* AllLocationsViewController.swift in Sources */,
+				BFB319052832AFB500E13C65 /* FirebaseManager.swift in Sources */,
 				BFA60BC5282B1EF3006B3DC4 /* CreateTripModels.swift in Sources */,
 				BFA60BA9282B1E93006B3DC4 /* ProfilePresenter.swift in Sources */,
 				BFA60B87282B1E07006B3DC4 /* SelectedTripRouter.swift in Sources */,
 				BFCC29C0282AF4EB004FE1FE /* MainWorker.swift in Sources */,
 				BFCC29BF282AF4EB004FE1FE /* MainPresenter.swift in Sources */,
 				BFA60BBB282B1EC3006B3DC4 /* ChatInteractor.swift in Sources */,
+				BFBB173D2832887D00F6C6A9 /* AllLocationsWorker.swift in Sources */,
+				BFBB173C2832887D00F6C6A9 /* AllLocationsPresenter.swift in Sources */,
 				BFA60B86282B1E07006B3DC4 /* SelectedTripWorker.swift in Sources */,
 				BFA60B9E282B1E6C006B3DC4 /* FavoriteWorker.swift in Sources */,
 				BFCC29C4282AF4EB004FE1FE /* MainInteractor.swift in Sources */,
@@ -542,9 +575,11 @@
 				BFA60BA1282B1E6C006B3DC4 /* FavoriteViewController.swift in Sources */,
 				BFCC29C3282AF4EB004FE1FE /* MainViewController.swift in Sources */,
 				BF5B6272282BFE2C00D5844D /* ParticipantCollectionViewCell.swift in Sources */,
+				BFBB173E2832887D00F6C6A9 /* AllLocationsRouter.swift in Sources */,
 				BFA60BC7282B1EF3006B3DC4 /* CreateTripInteractor.swift in Sources */,
 				BFA60B9D282B1E6C006B3DC4 /* FavoritePresenter.swift in Sources */,
 				BFA60BB7282B1EC3006B3DC4 /* ChatWorker.swift in Sources */,
+				BFBB173F2832887D00F6C6A9 /* AllLocationsModels.swift in Sources */,
 				BFA60B92282B1E17006B3DC4 /* SelectedPlaceWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

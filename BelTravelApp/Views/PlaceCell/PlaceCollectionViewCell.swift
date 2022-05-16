@@ -8,10 +8,11 @@
 import UIKit
 
 class PlaceCollectionViewCell: UICollectionViewCell {
+	static let identifier = "PlaceCollectionViewCell"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+	@IBOutlet weak var imageOfLocation: UIImageView!
 
+	override func awakeFromNib() {
+		super.awakeFromNib()
+	}
 }

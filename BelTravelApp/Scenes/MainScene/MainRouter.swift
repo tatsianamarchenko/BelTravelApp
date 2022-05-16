@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol MainRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+  func routeToAllLocationsViewController()
 }
 
 protocol MainDataPassing
@@ -29,32 +29,25 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToAllLocationsViewController() {
+
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let destinationVC = storyboard.instantiateViewController(withIdentifier: "AllLocationsViewController") as! AllLocationsViewController
+	  destinationVC.region = dataStore?.region
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+      navigateToSomewhere(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: MainViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToSomewhere(source: MainViewController, destination: AllLocationsViewController) {
+	  source.navigationController?.pushViewController(destination, animated: true)
+  }
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: MainDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+	func passDataToSomewhere(source: MainDataStore, destination: inout AllLocationsDataStore) {
+		destination.region = source.region
+	}
 }

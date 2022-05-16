@@ -19,14 +19,14 @@ protocol MainBusinessLogic
 
 protocol MainDataStore
 {
-  //var name: String { get set }
+  var region: String { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore
 {
   var presenter: MainPresentationLogic?
   var worker: MainWorker?
-  //var name: String = ""
+  var region: String = ""
   
   // MARK: Do something
   
@@ -34,7 +34,7 @@ class MainInteractor: MainBusinessLogic, MainDataStore
   {
     worker = MainWorker()
     worker?.doSomeWork()
-    
+	  region = request.region
     let response = Main.Something.Response()
     presenter?.presentSomething(response: response)
   }

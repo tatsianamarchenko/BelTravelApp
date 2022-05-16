@@ -20,6 +20,7 @@ enum Main
   {
     struct Request
     {
+		var region: String
     }
     struct Response
     {
