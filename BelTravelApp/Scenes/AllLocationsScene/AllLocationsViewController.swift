@@ -15,6 +15,7 @@ import UIKit
 protocol AllLocationsDisplayLogic: class
 {
   func presentLocationsInSelectedRegion(viewModel: AllLocations.Something.ViewModel)
+	func presentLocation()
 }
 
 class AllLocationsViewController: UIViewController, AllLocationsDisplayLogic
@@ -101,6 +102,9 @@ class AllLocationsViewController: UIViewController, AllLocationsDisplayLogic
 		locationsCollection.reloadData()
 		
 	}
+	func presentLocation() {
+		router?.routeToSelectedPlaceViewcontroller()
+	}
 }
 
 
@@ -156,5 +160,6 @@ extension AllLocationsViewController: UICollectionViewDelegate, UICollectionView
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		interactor?.setLocation(request: AllLocations.Something.Request(location: locationsArray[indexPath.row]))
 	}
 }

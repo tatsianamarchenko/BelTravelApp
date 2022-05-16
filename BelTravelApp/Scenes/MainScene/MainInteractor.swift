@@ -12,30 +12,29 @@
 
 import UIKit
 
-protocol MainBusinessLogic
-{
-  func doSomething(request: Main.Something.Request)
+protocol MainBusinessLogic {
+  func loadInformation(request: Main.Something.Request)
 }
 
-protocol MainDataStore
-{
+protocol MainDataStore {
   var region: String { get set }
 }
 
-class MainInteractor: MainBusinessLogic, MainDataStore
-{
+class MainInteractor: MainBusinessLogic, MainDataStore {
   var presenter: MainPresentationLogic?
   var worker: MainWorker?
   var region: String = ""
   
   // MARK: Do something
   
-  func doSomething(request: Main.Something.Request)
-  {
-    worker = MainWorker()
-    worker?.doSomeWork()
-	  region = request.region
-    let response = Main.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+  func loadInformation(request: Main.Something.Request) {
+		worker = MainWorker()
+		worker?.doSomeWork()
+		region = request.region
+
+		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
+			let response = Main.Something.Response(locations: locations)
+			self?.presenter?.presentPopularPlaces(response: response)
+		}
+	}
 }

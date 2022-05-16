@@ -61,23 +61,26 @@ class MainViewController: UIViewController, MainDisplayLogic {
   
   // MARK: View lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-	  makeCollections()
-    doSomething()
-  }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		makeRegionsCollection()
+		makeMostPopularPlacesCollection()
+		loadInformationForCollections()
+		print(regionName)
+	}
 
-  let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk"),
-				 Region(image: Image(withImage: UIImage(named: "Brest")!), name: "Brest"),
-				 Region(image: Image(withImage: UIImage(named: "Vitebsk")!), name: "Vitebsk"),
-				 Region(image: Image(withImage: UIImage(named: "Gomel")!), name: "Gomel"),
-				 Region(image: Image(withImage: UIImage(named: "Grodno")!), name: "Grodno"),
-				 Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev")
+	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
+				   Region(image: Image(withImage: UIImage(named: "Brest")!), name: "Brest", identifier: "BrestRegion"),
+				   Region(image: Image(withImage: UIImage(named: "Vitebsk")!), name: "Vitebsk", identifier: "VitebskRegion"),
+				   Region(image: Image(withImage: UIImage(named: "Gomel")!), name: "Gomel", identifier: "GomelRegion"),
+				   Region(image: Image(withImage: UIImage(named: "Grodno")!), name: "Grodno", identifier: "GrodnoRegion"),
+				   Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev", identifier: "MogilevRegion")
   ]
+	var popularPlaces = [Location]()
 
 	@IBOutlet weak var regionsCollection: UICollectionView!
-	@IBOutlet weak var mostPopularPlacesCollection: UICollectionView!
 	@IBOutlet weak var nextTripsCollection: UICollectionView!
+	@IBOutlet weak var popularPlacesCollection: UICollectionView!
 	@IBOutlet weak var mapView: MKMapView!
 
 	@IBAction func allLocationButtonAction(_ sender: Any) {
@@ -85,21 +88,26 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	}
 
 
-	func makeCollections () {
-		regionsCollection.delegate = self
-		regionsCollection.dataSource = self
+	func makeRegionsCollection () {
 		let nib = UINib(nibName: "RegionCollectionViewCell", bundle: nil)
 		regionsCollection.register(nib, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
 	}
+
+	func makeMostPopularPlacesCollection () {
+//		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
+//		popularPlacesCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	}
+
 var regionName = "MinskRegion"
-	func doSomething() {
+	func loadInformationForCollections() {
     let request = Main.Something.Request(region: regionName)
-    interactor?.doSomething(request: request)
+    interactor?.loadInformation(request: request)
   }
   
-  func displaySomething(viewModel: Main.Something.ViewModel) {
-    //nameTextField.text = viewModel.name
-  }
+	func displaySomething(viewModel: Main.Something.ViewModel) {
+		popularPlaces = viewModel.locations
+		popularPlacesCollection.reloadData()
+	}
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -107,6 +115,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if collectionView == regionsCollection {
 			return regions.count
+		}
+		if collectionView == popularPlacesCollection {
+			return popularPlaces.count
 		}
 		return 0
 	}
@@ -117,45 +128,95 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if collectionView == regionsCollection {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																RegionCollectionViewCell.identifier, for: indexPath)
 				as? RegionCollectionViewCell else {
 					return UICollectionViewCell()
 				}
 		cell.config(model: regions[indexPath.row])
-		cell.layer.borderWidth = 0
-		cell.layer.shadowColor = UIColor.systemGray.cgColor
-		cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-		cell.layer.shadowRadius = 3
-		cell.layer.shadowOpacity = 0.5
-		cell.layer.cornerRadius = 15
-		cell.layer.masksToBounds = false
-		return cell
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+//
+//		if collectionView == popularPlacesCollection {
+//			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+//																	PlaceCollectionViewCell.identifier, for: indexPath)
+//					as? PlaceCollectionViewCell else {
+//						return UICollectionViewCell()
+//					}
+//			cell.imageOfLocation.image =  popularPlaces[indexPath.row].image
+//		}
+
+		return UICollectionViewCell()
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
+		if collectionView == regionsCollection {
+			return CGSize(width: 100, height: 100)
+		}
 		return CGSize(width: 100, height: 100)
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		if collectionView == regionsCollection {
+			return 1
+		}
 		return 1
 	}
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		if collectionView == regionsCollection {
+			return 20
+		}
 		return 20
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						insetForSectionAt section: Int) -> UIEdgeInsets {
+		if collectionView == regionsCollection {
+			return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
+		}
 		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		if collectionView == regionsCollection {
+			if	regions[indexPath.row].identifier == "MinskRegion" {
+				regionName = "MinskRegion"
+				self.viewDidLoad()
+			} else if regions[indexPath.row].identifier == "BrestRegion" {
+				regionName = "BrestRegion"
+				self.viewDidLoad()
+			}
+			else if regions[indexPath.row].identifier == "VitebskRegion" {
+				regionName = "VitebskRegion"
+				self.viewDidLoad()
+			}
+			else if regions[indexPath.row].identifier == "GrodnoRegion" {
+				regionName = "GrodnoRegion"
+				self.viewDidLoad()
+			}
+			else if regions[indexPath.row].identifier == "GomelRegion" {
+				regionName = "GomelRegion"
+				self.viewDidLoad()
+			}
+			else if regions[indexPath.row].identifier == "MogilevRegion" {
+				regionName = "MogilevRegion"
+				self.viewDidLoad()
+			}
+		}
 	}
 }

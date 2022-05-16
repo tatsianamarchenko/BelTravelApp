@@ -14,27 +14,34 @@ import UIKit
 
 protocol AllLocationsBusinessLogic {
   func loadLocation(request: AllLocations.Something.Request)
+	func setLocation(request: AllLocations.Something.Request)
 }
 
 protocol AllLocationsDataStore {
 	var region: String { get set }
+	var location: Location? { get set }
 }
 
 class AllLocationsInteractor: AllLocationsBusinessLogic, AllLocationsDataStore {
-
-  var presenter: AllLocationsPresentationLogic?
-  var worker: AllLocationsWorker?
+	var location: Location?
+	var presenter: AllLocationsPresentationLogic?
+	var worker: AllLocationsWorker?
 	var region: String = ""
-  
-  // MARK: Do something
-  
-  func loadLocation(request: AllLocations.Something.Request) {
-    worker = AllLocationsWorker()
-    worker?.doSomeWork()
-	  region = request.region
-	  FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
-		  let response = AllLocations.Something.Response(locations: locations)
-		  self?.presenter?.presentLocations(response: response)
-	  }
-  }
+
+	// MARK: Do something
+
+	func setLocation(request: AllLocations.Something.Request) {
+		location = request.location
+		self.presenter?.presentLocation()
+	}
+
+	func loadLocation(request: AllLocations.Something.Request) {
+		worker = AllLocationsWorker()
+		worker?.doSomeWork()
+		region = request.region!
+		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region!) { [weak self] locations in
+			let response = AllLocations.Something.Response(locations: locations)
+			self?.presenter?.presentLocations(response: response)
+		}
+	}
 }

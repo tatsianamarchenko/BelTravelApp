@@ -27,6 +27,8 @@ class RegionCollectionViewCell: UICollectionViewCell {
 struct Region {
 	var image: Image
 	var name: String
+	var identifier: String
+
 }
 
 struct Image: Codable {

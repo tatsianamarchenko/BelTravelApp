@@ -14,6 +14,7 @@ import UIKit
 
 protocol AllLocationsPresentationLogic {
   func presentLocations(response: AllLocations.Something.Response)
+	func presentLocation()
 }
 
 class AllLocationsPresenter: AllLocationsPresentationLogic {
@@ -25,4 +26,9 @@ class AllLocationsPresenter: AllLocationsPresentationLogic {
 	  let viewModel = AllLocations.Something.ViewModel(locations: response.locations)
 	  viewController?.presentLocationsInSelectedRegion(viewModel: viewModel)
   }
+
+	func presentLocation() {
+		viewController?.presentLocation()
+	}
+
 }

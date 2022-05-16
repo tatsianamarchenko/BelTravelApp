@@ -17,7 +17,8 @@ enum AllLocations {
   
   enum Something {
     struct Request {
-		var region: String
+		var region: String?
+		var location: Location?
     }
 	  struct Response {
 		  var locations: [Location]

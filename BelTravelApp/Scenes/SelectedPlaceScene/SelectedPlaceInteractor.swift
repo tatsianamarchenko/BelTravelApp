@@ -12,26 +12,22 @@
 
 import UIKit
 
-protocol SelectedPlaceBusinessLogic
-{
+protocol SelectedPlaceBusinessLogic {
   func doSomething(request: SelectedPlace.Something.Request)
 }
 
-protocol SelectedPlaceDataStore
-{
-  //var name: String { get set }
+protocol SelectedPlaceDataStore {
+  var location: Location? { get set }
 }
 
-class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStore
-{
+class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStore {
   var presenter: SelectedPlacePresentationLogic?
   var worker: SelectedPlaceWorker?
-  //var name: String = ""
+  var location: Location?
   
   // MARK: Do something
   
-  func doSomething(request: SelectedPlace.Something.Request)
-  {
+  func doSomething(request: SelectedPlace.Something.Request) {
     worker = SelectedPlaceWorker()
     worker?.doSomeWork()
     

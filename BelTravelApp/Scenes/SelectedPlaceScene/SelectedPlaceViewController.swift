@@ -69,15 +69,23 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+//	  desctiptionLable.layer.masksToBounds = true
+//	  desctiptionLable.layer.cornerRadius = 15
     doSomething()
   }
   
   // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
+	var location: Location?
+	@IBOutlet weak var titleName: UINavigationItem!
+	@IBOutlet weak var whoWantToVisitThisPlaceCollection: UICollectionView!
+	@IBOutlet weak var locationImage: UIImageView!
+	@IBOutlet weak var photosOfOtherUsersCollection: UICollectionView!
+	@IBOutlet weak var desctiptionLable: UILabel!
+	
+	func doSomething() {
+	  titleName.title = location?.name
+		locationImage.image = location?.image
+		desctiptionLable.text = location?.description
     let request = SelectedPlace.Something.Request()
     interactor?.doSomething(request: request)
   }

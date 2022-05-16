@@ -12,21 +12,18 @@
 
 import UIKit
 
-enum Main
-{
+enum Main {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
 		var region: String
     }
-    struct Response
-    {
+    struct Response {
+		var locations: [Location]
     }
-    struct ViewModel
-    {
+    struct ViewModel {
+		var locations: [Location]
     }
   }
 }
