@@ -94,8 +94,10 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	}
 
 	func makeMostPopularPlacesCollection () {
-//		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
-//		popularPlacesCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+//		popularPlacesCollection.delegate = self
+//		popularPlacesCollection.dataSource = self
+		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
+		popularPlacesCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
 	}
 
 var regionName = "MinskRegion"
@@ -144,15 +146,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			cell.layer.masksToBounds = false
 			return cell
 		}
-//
-//		if collectionView == popularPlacesCollection {
-//			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-//																	PlaceCollectionViewCell.identifier, for: indexPath)
-//					as? PlaceCollectionViewCell else {
-//						return UICollectionViewCell()
-//					}
-//			cell.imageOfLocation.image =  popularPlaces[indexPath.row].image
-//		}
+
+		if collectionView == popularPlacesCollection {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	PlaceCollectionViewCell.identifier, for: indexPath)
+					as? PlaceCollectionViewCell else {
+						return UICollectionViewCell()
+					}
+			cell.imageOfLocation.image =  popularPlaces[indexPath.row].image
+		}
 
 		return UICollectionViewCell()
 	}
