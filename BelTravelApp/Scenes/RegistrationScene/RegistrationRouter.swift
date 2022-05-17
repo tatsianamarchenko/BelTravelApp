@@ -28,14 +28,14 @@ class RegistrationRouter: NSObject, RegistrationRoutingLogic, RegistrationDataPa
   
 	func routeToMessengerTabBarViewController (){
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
 		destinationVC.modalPresentationStyle = .fullScreen
 		navigateToMessengerTabBarViewController(source: viewController!, destination: destinationVC)
 	}
 
 	// MARK:  Navigation
   
-  func navigateToMessengerTabBarViewController(source: RegistrationViewController, destination: MainViewController) {
+  func navigateToMessengerTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
     source.show(destination, sender: nil)
   }
 }

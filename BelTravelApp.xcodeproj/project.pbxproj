@@ -318,6 +318,7 @@
 		BFBF0A47283437B20000559E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				BFBF0A452834359B0000559E /* CheckField.swift */,
 				BFB319042832AFB500E13C65 /* FirebaseManager.swift */,
 				BFBF0A27283428840000559E /* AuthManager.swift */,
 				BFBF0A48283437B20000559E /* MessangeManager.swift */,
@@ -371,7 +372,6 @@
 			children = (
 				BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */,
 				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
-				BFBF0A452834359B0000559E /* CheckField.swift */,
 				BFCC29B1282AB7F8004FE1FE /* Scenes */,
 				BFD57561282BEDEA007CBBE8 /* Views */,
 				BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */,

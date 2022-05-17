@@ -75,7 +75,12 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
-  
+	@IBAction func exitButton(_ sender: Any) {
+		FirebaseAuthManager.shered.signOut {
+			self.router?.routeToSliderViewController()
+		}
+	}
+
   func doSomething()
   {
     let request = Profile.Something.Request()

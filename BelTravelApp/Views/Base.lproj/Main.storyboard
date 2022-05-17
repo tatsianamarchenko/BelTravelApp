@@ -712,7 +712,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aQp-ii-fd9">
-                                <rect key="frame" x="0.0" y="300" width="414" height="513"/>
+                                <rect key="frame" x="0.0" y="300" width="414" height="464"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6JA-CU-0v9">
                                     <size key="itemSize" width="128" height="128"/>
@@ -731,13 +731,26 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-0J-TfG">
+                                <rect key="frame" x="319" y="111" width="65" height="32"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Exit" cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="7m3-CT-AwT" eventType="touchUpInside" id="7Hz-fS-0s5"/>
+                                    <action selector="closeButtonAction:" destination="8Fa-mC-9Rn" eventType="touchUpInside" id="YwJ-cL-kne"/>
+                                    <action selector="exitButton:" destination="O05-uo-0o6" eventType="touchUpInside" id="tBY-NB-RvI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eUN-bc-5Ya"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="eUN-bc-5Ya" firstAttribute="bottom" secondItem="aQp-ii-fd9" secondAttribute="bottom" id="1gh-NG-hIe"/>
+                            <constraint firstItem="eUN-bc-5Ya" firstAttribute="trailing" secondItem="oNR-0J-TfG" secondAttribute="trailing" constant="30" id="4r8-s1-FeG"/>
                             <constraint firstItem="LPU-sj-i4n" firstAttribute="top" secondItem="6ux-Cc-SUn" secondAttribute="bottom" constant="20" id="9xn-02-QS8"/>
                             <constraint firstItem="on6-n8-QqT" firstAttribute="leading" secondItem="eUN-bc-5Ya" secondAttribute="leading" constant="10" id="BKm-7e-LVw"/>
+                            <constraint firstItem="oNR-0J-TfG" firstAttribute="top" secondItem="6ux-Cc-SUn" secondAttribute="bottom" constant="30" id="EOx-9Z-S7n"/>
                             <constraint firstItem="eUN-bc-5Ya" firstAttribute="trailing" secondItem="6ux-Cc-SUn" secondAttribute="trailing" constant="30" id="IBE-kN-6aX"/>
                             <constraint firstItem="eUN-bc-5Ya" firstAttribute="trailing" secondItem="aQp-ii-fd9" secondAttribute="trailing" id="IGe-HO-ZP3"/>
                             <constraint firstItem="sgm-g6-C0Q" firstAttribute="top" secondItem="LPU-sj-i4n" secondAttribute="bottom" constant="20" id="KZe-AN-tXO"/>
@@ -761,6 +774,8 @@
                             </hierarchicalColors>
                         </imageReference>
                     </tabBarItem>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJU-Ho-upX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1296,7 +1311,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="voU-lB-7IG">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Daw-mj-XFe" customClass="TabBarViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" automaticallyAdjustsScrollViewInsets="NO" id="Daw-mj-XFe" customClass="TabBarViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vYs-tq-egD">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
