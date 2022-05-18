@@ -160,6 +160,7 @@ extension AllLocationsViewController: UICollectionViewDelegate, UICollectionView
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		interactor?.setLocation(request: AllLocations.Something.Request(location: locationsArray[indexPath.row]))
+		let request = AllLocations.Something.Request(location: locationsArray[indexPath.row])
+		interactor?.setLocation(request: request)
 	}
 }

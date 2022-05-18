@@ -14,17 +14,19 @@ import UIKit
 
 protocol MainBusinessLogic {
   func loadInformation(request: Main.Something.Request)
+	func setPopularLocation(request: Main.Something.Request)
 }
 
 protocol MainDataStore {
   var region: String { get set }
+	var selectedPopularlocation: Location? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
   var presenter: MainPresentationLogic?
   var worker: MainWorker?
   var region: String = ""
-  
+	var selectedPopularlocation: Location?
   // MARK: Do something
   
   func loadInformation(request: Main.Something.Request) {
@@ -36,5 +38,10 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 			let response = Main.Something.Response(locations: locations)
 			self?.presenter?.presentPopularPlaces(response: response)
 		}
+	}
+
+	func setPopularLocation(request: Main.Something.Request) {
+		selectedPopularlocation = request.selectedPopularPlace
+		self.presenter?.presentSelectedPopularlocation()
 	}
 }

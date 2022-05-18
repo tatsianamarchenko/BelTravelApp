@@ -9,19 +9,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="UpcomingTripCollectionViewCell" customModule="BelTravelApp" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UpcomingTripCollectionViewCell" id="gTV-IL-0wX" customClass="UpcomingTripCollectionViewCell" customModule="BelTravelApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="263" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="263" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="biL-je-dNg">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back1" translatesAutoresizingMaskIntoConstraints="NO" id="biL-je-dNg">
                         <rect key="frame" x="10" y="10" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="W8m-HO-KDV"/>
                             <constraint firstAttribute="width" constant="80" id="pv7-1K-FaU"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cu-gI-8dg">
                         <rect key="frame" x="100" y="10" width="153" height="23.5"/>
@@ -60,7 +65,16 @@
                 <constraint firstItem="7Cu-gI-8dg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="yxE-7j-wPj"/>
             </constraints>
             <size key="customSize" width="263" height="100"/>
+            <connections>
+                <outlet property="placeImage" destination="biL-je-dNg" id="83n-zr-yDd"/>
+                <outlet property="placeName" destination="7Cu-gI-8dg" id="gQs-By-4rN"/>
+                <outlet property="quantityOfPeople" destination="dEO-lW-h7d" id="He7-sI-7hQ"/>
+                <outlet property="tripDate" destination="dfW-d4-ew5" id="eBU-xT-xgI"/>
+            </connections>
             <point key="canvasLocation" x="292.02898550724638" y="79.6875"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="back1" width="2500" height="1667"/>
+    </resources>
 </document>

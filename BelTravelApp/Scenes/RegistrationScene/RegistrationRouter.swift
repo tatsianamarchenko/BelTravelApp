@@ -21,11 +21,11 @@ protocol RegistrationDataPassing {
 }
 
 class RegistrationRouter: NSObject, RegistrationRoutingLogic, RegistrationDataPassing {
-  weak var viewController: RegistrationViewController?
-  var dataStore: RegistrationDataStore?
-  
-  // MARK: Routing
-  
+	weak var viewController: RegistrationViewController?
+	var dataStore: RegistrationDataStore?
+
+	// MARK: Routing
+
 	func routeToMessengerTabBarViewController (){
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
@@ -34,8 +34,8 @@ class RegistrationRouter: NSObject, RegistrationRoutingLogic, RegistrationDataPa
 	}
 
 	// MARK:  Navigation
-  
-  func navigateToMessengerTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
-    source.show(destination, sender: nil)
-  }
+	
+	func navigateToMessengerTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
+		source.show(destination, sender: nil)
+	}
 }

@@ -52,31 +52,31 @@
                                                 </connections>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cKs-2P-yqs">
-                                                <rect key="frame" x="0.0" y="150" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="150" width="414" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="t1o-aE-BHn"/>
+                                                    <constraint firstAttribute="height" constant="150" id="t1o-aE-BHn"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qUD-FZ-uVT">
-                                                    <size key="itemSize" width="134" height="209"/>
+                                                    <size key="itemSize" width="150" height="150"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceCollectionViewCell" id="6p0-Iv-ML2">
-                                                        <rect key="frame" x="0.0" y="-4.5" width="134" height="209"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M2G-1g-6Bx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="134" height="209"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </collectionViewCellContentView>
-                                                        <size key="customSize" width="134" height="209"/>
+                                                        <size key="customSize" width="150" height="150"/>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="erd-G3-Qat">
-                                                <rect key="frame" x="0.0" y="390" width="414" height="100"/>
+                                                <rect key="frame" x="0.0" y="340" width="414" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="YKa-iV-QCW"/>
@@ -87,6 +87,19 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No trips created yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SDl-OF-jC4" userLabel="No trips created yet">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="iuJ-lu-kBE">
                                                         <rect key="frame" x="0.0" y="1" width="129" height="98"/>
@@ -106,13 +119,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming trips to this region:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIG-OB-a5u">
-                                                <rect key="frame" x="10" y="360" width="394" height="20"/>
+                                                <rect key="frame" x="10" y="310" width="394" height="20"/>
                                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aWm-nv-eKq">
-                                                <rect key="frame" x="0.0" y="500" width="414" height="571.5"/>
+                                                <rect key="frame" x="0.0" y="450" width="414" height="621.5"/>
                                             </mapView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-NU-o4V">
                                                 <rect key="frame" x="30" y="1101.5" width="354" height="34.5"/>
@@ -188,6 +201,7 @@
                     <connections>
                         <outlet property="mapView" destination="aWm-nv-eKq" id="c4e-tu-7B3"/>
                         <outlet property="nextTripsCollection" destination="erd-G3-Qat" id="QK0-rU-Ov8"/>
+                        <outlet property="noTripsLable" destination="SDl-OF-jC4" id="ruE-d3-bcj"/>
                         <outlet property="popularPlacesCollection" destination="cKs-2P-yqs" id="tiv-TB-Nny"/>
                         <outlet property="regionsCollection" destination="BXB-6H-Rhz" id="fsm-24-QnI"/>
                     </connections>
@@ -290,7 +304,7 @@
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-Gp-fmv">
                                                 <rect key="frame" x="10" y="684" width="394" height="356.5"/>
                                                 <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <mutableString key="text">bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf</mutableString>
+                                                <string key="text">bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf</string>
                                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>

@@ -18,6 +18,7 @@ enum Main {
   enum Something {
     struct Request {
 		var region: String
+		var selectedPopularPlace: Location?
     }
     struct Response {
 		var locations: [Location]

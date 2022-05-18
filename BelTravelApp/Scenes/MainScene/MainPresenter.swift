@@ -14,6 +14,7 @@ import UIKit
 
 protocol MainPresentationLogic {
   func presentPopularPlaces(response: Main.Something.Response)
+	func presentSelectedPopularlocation()
 }
 
 class MainPresenter: MainPresentationLogic {
@@ -23,6 +24,10 @@ class MainPresenter: MainPresentationLogic {
   
   func presentPopularPlaces(response: Main.Something.Response) {
 	  let viewModel = Main.Something.ViewModel(locations: response.locations)
-    viewController?.displaySomething(viewModel: viewModel)
+    viewController?.displayPopularPlaces(viewModel: viewModel)
   }
+
+	func presentSelectedPopularlocation() {
+		viewController?.presentSelectedPopularPlaceViewController()
+	}
 }

@@ -14,7 +14,8 @@ import UIKit
 import MapKit
 
 protocol MainDisplayLogic: class {
-  func displaySomething(viewModel: Main.Something.ViewModel)
+  func displayPopularPlaces(viewModel: Main.Something.ViewModel)
+	func presentSelectedPopularPlaceViewController()
 }
 
 class MainViewController: UIViewController, MainDisplayLogic {
@@ -66,6 +67,7 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		makeRegionsCollection()
 		makeMostPopularPlacesCollection()
 		loadInformationForCollections()
+		makeNextTripsCollection()
 		print(regionName)
 	}
 
@@ -77,12 +79,13 @@ class MainViewController: UIViewController, MainDisplayLogic {
 				   Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev", identifier: "MogilevRegion")
   ]
 	var popularPlaces = [Location]()
+	var createdTrips = [CreatedTrip]()
 
 	@IBOutlet weak var regionsCollection: UICollectionView!
 	@IBOutlet weak var nextTripsCollection: UICollectionView!
 	@IBOutlet weak var popularPlacesCollection: UICollectionView!
 	@IBOutlet weak var mapView: MKMapView!
-
+	@IBOutlet weak var noTripsLable: UILabel!
 	@IBAction func allLocationButtonAction(_ sender: Any) {
 		router?.routeToAllLocationsViewController()
 	}
@@ -94,10 +97,17 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	}
 
 	func makeMostPopularPlacesCollection () {
-//		popularPlacesCollection.delegate = self
-//		popularPlacesCollection.dataSource = self
+		popularPlacesCollection.delegate = self
+		popularPlacesCollection.dataSource = self
 		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
 		popularPlacesCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	}
+
+	func makeNextTripsCollection () {
+		nextTripsCollection.delegate = self
+		nextTripsCollection.dataSource = self
+		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
+		nextTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
 
 var regionName = "MinskRegion"
@@ -106,9 +116,13 @@ var regionName = "MinskRegion"
     interactor?.loadInformation(request: request)
   }
   
-	func displaySomething(viewModel: Main.Something.ViewModel) {
+	func displayPopularPlaces(viewModel: Main.Something.ViewModel) {
 		popularPlaces = viewModel.locations
 		popularPlacesCollection.reloadData()
+	}
+
+	func presentSelectedPopularPlaceViewController() {
+		router?.routeToSelectedPlaceViewController()
 	}
 }
 
@@ -120,6 +134,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		}
 		if collectionView == popularPlacesCollection {
 			return popularPlaces.count
+		}
+		if collectionView == nextTripsCollection {
+			return createdTrips.count
 		}
 		return 0
 	}
@@ -153,7 +170,35 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 					as? PlaceCollectionViewCell else {
 						return UICollectionViewCell()
 					}
-			cell.imageOfLocation.image =  popularPlaces[indexPath.row].image
+			cell.imageOfLocation.image = popularPlaces[indexPath.row].image
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		if collectionView == nextTripsCollection {
+			if !createdTrips.isEmpty {
+				noTripsLable.isHidden = true
+			}
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
+					as? UpcomingTripCollectionViewCell else {
+						return UICollectionViewCell()
+					}
+			cell.config(model: createdTrips[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
 		}
 
 		return UICollectionViewCell()
@@ -165,6 +210,14 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		if collectionView == regionsCollection {
 			return CGSize(width: 100, height: 100)
 		}
+
+		if collectionView == popularPlacesCollection {
+			return CGSize(width: 150, height: 150)
+		}
+		if collectionView == nextTripsCollection {
+			return CGSize(width: 100, height: 100)
+		}
+
 		return CGSize(width: 100, height: 100)
 	}
 
@@ -219,6 +272,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 				regionName = "MogilevRegion"
 				self.viewDidLoad()
 			}
+		}
+
+		if collectionView == popularPlacesCollection {
+			let request = Main.Something.Request(region: regionName, selectedPopularPlace: popularPlaces[indexPath.row])
+			interactor?.setPopularLocation(request: request)
 		}
 	}
 }
