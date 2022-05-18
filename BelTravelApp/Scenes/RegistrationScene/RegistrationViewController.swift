@@ -76,23 +76,31 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
 	@IBOutlet weak var repeatPasswordTextField: UITextField!
+	@IBOutlet weak var nameTextField: UITextField!
+	@IBOutlet weak var lastNameTextField: UITextField!
+	@IBOutlet weak var defaultLocationTextField: UITextField!
 
 	@objc func tapped() {
 		self.view.endEditing(true)
 	}
 
 	func displaySomething(viewModel: Registration.Something.ViewModel) {
-		router?.routeToMessengerTabBarViewController()
+		router?.routeToTabBarViewController()
 	}
 
 	@IBAction func registrationButtonAction(_ sender: UIButton) {
+		if !nameTextField.text!.isEmpty && !lastNameTextField.text!.isEmpty && !defaultLocationTextField.text!.isEmpty {
+		guard let name = nameTextField.text else {return}
+		guard let lastName = lastNameTextField.text else {return}
+		guard let defaultLocation = defaultLocationTextField.text else {return}
 		if checkField.validField(emailView, emailTextField),
 		   checkField.validField(passwordView, passwordTextField) {
 			if passwordTextField.text == repeatPasswordTextField.text {
-				let request = Registration.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "")
+				let request = Registration.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "", name: name, lastName: lastName, defaultLocation: defaultLocation)
 				interactor?.createNewUser(request: request)
 			}
 		}
+	}
 	}
 
 	@IBAction func closeButtonAction(_ sender: UIButton) {

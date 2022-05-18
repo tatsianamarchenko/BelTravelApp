@@ -57,8 +57,8 @@ class CheckField{
 
 	private func validView(_ parentView: UIView, _ field: UITextField, _ valid: Bool){
         if valid{
-            field.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412415624, blue: 0.9410631061, alpha: 1)
-            parentView.backgroundColor = #colorLiteral(red: 0.9410838485, green: 0.9412415624, blue: 0.9410631061, alpha: 1)
+            field.backgroundColor = #colorLiteral(red: 0.862870574, green: 0.725133419, blue: 0.9991236329, alpha: 1)
+            parentView.backgroundColor = #colorLiteral(red: 0.862870574, green: 0.725133419, blue: 0.9991236329, alpha: 1)
 
         } else {
             field.backgroundColor = #colorLiteral(red: 1, green: 0.2566739321, blue: 0.3427716792, alpha: 1)

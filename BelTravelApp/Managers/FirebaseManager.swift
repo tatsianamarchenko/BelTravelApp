@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 
 class FirebaseDatabaseManager {
 
@@ -49,26 +50,39 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-	public func fetchImage(collection: String, imageView: UIImageView) {
-		db.collection(collection).getDocuments { (querySnapshot, error) in
-			guard let documents = querySnapshot?.documents else {
-				print("No documents")
+	public func addUserToDatabase(with userInformation: FirebaseAuthManager.FullInformationAppUser, id: String) {
+		db.collection("users").document(id).setData([
+			"email": userInformation.email,
+			"name": userInformation.name,
+			"lastName": userInformation.lastName,
+			"defaultLocation": userInformation.defaultLocation
+		])
+	}
+
+	public func fetchUser(complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").getDocument(completion: { (querySnapshot, error) in
+			guard let data = querySnapshot?.data() else {
+				print("No document")
 				return
 			}
-			documents.map { queryDocumentSnapshot in
-				let	data = queryDocumentSnapshot.data()
-				let path = data["image"] as? String ?? ""
-				let storage = Storage.storage().reference()
-				let fileRef = storage.child(path)
-				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-					if error == nil {
-						guard let data = data else {
-							return
-						}
-						imageView.image = UIImage(data: data)!
+			var image: UIImage?
+			let email = data["email"] as? String ?? ""
+			let name = data["name"] as? String ?? ""
+			let lastName = data["lastName"] as? String ?? ""
+			let defaultLocation = data["defaultLocation"] as? String ?? ""
+			let path = data["image"] as? String ?? ""
+			let storage = Storage.storage().reference()
+			let fileRef = storage.child(path)
+			fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+				if error == nil {
+					guard let data = data else {
+						return
 					}
+					image = UIImage(data: data)
+					let user = FirebaseAuthManager.FullInformationAppUser(email: email, name: name, lastName: lastName, defaultLocation: defaultLocation, image: image)
+					complition(user)
 				}
 			}
-		}
+		})
 	}
 }

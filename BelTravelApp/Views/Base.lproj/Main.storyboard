@@ -222,7 +222,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIN-eX-bMf">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1050.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="who also want to visit this palce:" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZB-uO-8Qn">
                                                 <rect key="frame" x="10" y="10" width="394" height="54"/>
@@ -242,6 +242,19 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No added in wishlist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gA9-Bl-hZE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="S8g-vL-vh1">
                                                         <rect key="frame" x="0.0" y="-39" width="128" height="128"/>
@@ -273,20 +286,33 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OQD-7p-IhZ">
-                                                <rect key="frame" x="0.0" y="437" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="437" width="414" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="lTN-lF-RkM"/>
+                                                    <constraint firstAttribute="height" constant="150" id="lTN-lF-RkM"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="02e-WB-kEg">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="02e-WB-kEg">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No photos yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KTk-Wp-wcK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Qll-4h-qRu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <rect key="frame" x="0.0" y="11" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yZJ-Yw-NLc">
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -296,13 +322,13 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWi-Hq-qMv">
-                                                <rect key="frame" x="124" y="647" width="166.5" height="27"/>
+                                                <rect key="frame" x="124" y="597" width="166.5" height="27"/>
                                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-Gp-fmv">
-                                                <rect key="frame" x="10" y="684" width="394" height="356.5"/>
+                                                <rect key="frame" x="10" y="634" width="394" height="356.5"/>
                                                 <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <string key="text">bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf bgdfgbdfgnfgnbfghthnfdhnfdnbfgbgfbdgbdfbdfgbdbdbdbdgfbdgbgdf</string>
                                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
@@ -365,10 +391,30 @@
                             <constraint firstItem="DDL-Mm-H3R" firstAttribute="leading" secondItem="c2D-a6-Vqn" secondAttribute="leading" id="qLs-ZD-7vA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="vtT-VV-G4E"/>
+                    <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="vtT-VV-G4E">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="4fL-SD-WuV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="okO-BF-Jra">
+                                <rect key="frame" x="360" y="5" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonConfiguration key="configuration" style="filled" image="heart.fill" catalog="system" cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="7m3-CT-AwT" eventType="touchUpInside" id="HO2-iK-MLM"/>
+                                    <action selector="closeButtonAction:" destination="8Fa-mC-9Rn" eventType="touchUpInside" id="P68-FV-6im"/>
+                                    <action selector="exitButton:" destination="O05-uo-0o6" eventType="touchUpInside" id="lDA-J2-80D"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="addToFavoriteButton:" destination="ii8-8R-iqc" id="g9B-7z-aJc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="desctiptionLable" destination="o1e-Gp-fmv" id="mzX-YJ-1Bs"/>
                         <outlet property="locationImage" destination="vUw-Vh-I1p" id="59x-ks-v3Y"/>
+                        <outlet property="noParticipantsLable" destination="gA9-Bl-hZE" id="cBg-tO-raJ"/>
+                        <outlet property="noPhotoLable" destination="KTk-Wp-wcK" id="dBx-L9-f27"/>
                         <outlet property="photosOfOtherUsersCollection" destination="OQD-7p-IhZ" id="690-BU-ljE"/>
                         <outlet property="titleName" destination="vtT-VV-G4E" id="cuc-md-QGh"/>
                         <outlet property="whoWantToVisitThisPlaceCollection" destination="0WS-ff-Azz" id="Bqc-db-t01"/>
@@ -694,39 +740,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tatsiana" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-Cc-SUn">
-                                <rect key="frame" x="30" y="54" width="354" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-Cc-SUn">
+                                <rect key="frame" x="30" y="54" width="354" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-sj-i4n">
-                                <rect key="frame" x="167" y="101" width="80" height="80"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-sj-i4n">
+                                <rect key="frame" x="167" y="71" width="80" height="86"/>
+                                <color key="tintColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="1eL-RH-dfI"/>
                                     <constraint firstAttribute="height" constant="80" id="NrG-EE-sYn"/>
                                 </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-g6-C0Q">
-                                <rect key="frame" x="10" y="201" width="125" height="27"/>
+                                <rect key="frame" x="10" y="174" width="125" height="27"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minsk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="on6-n8-QqT">
-                                <rect key="frame" x="10" y="233" width="52" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="on6-n8-QqT">
+                                <rect key="frame" x="10" y="206" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips: 8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GH-ce-g5T">
-                                <rect key="frame" x="10" y="263" width="111" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GH-ce-g5T">
+                                <rect key="frame" x="10" y="216" width="84" height="27"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aQp-ii-fd9">
-                                <rect key="frame" x="0.0" y="300" width="414" height="464"/>
+                                <rect key="frame" x="0.0" y="253" width="414" height="511"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6JA-CU-0v9">
                                     <size key="itemSize" width="128" height="128"/>
@@ -746,7 +794,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-0J-TfG">
-                                <rect key="frame" x="319" y="111" width="65" height="32"/>
+                                <rect key="frame" x="319" y="84" width="65" height="32"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Exit" cornerStyle="capsule">
                                     <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -756,6 +804,12 @@
                                     <action selector="exitButton:" destination="O05-uo-0o6" eventType="touchUpInside" id="tBY-NB-RvI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qC2-ue-ywx">
+                                <rect key="frame" x="104" y="229.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eUN-bc-5Ya"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -769,7 +823,9 @@
                             <constraint firstItem="eUN-bc-5Ya" firstAttribute="trailing" secondItem="aQp-ii-fd9" secondAttribute="trailing" id="IGe-HO-ZP3"/>
                             <constraint firstItem="sgm-g6-C0Q" firstAttribute="top" secondItem="LPU-sj-i4n" secondAttribute="bottom" constant="20" id="KZe-AN-tXO"/>
                             <constraint firstItem="sgm-g6-C0Q" firstAttribute="leading" secondItem="rRp-kV-D2z" secondAttribute="leading" constant="10" id="WLK-Gf-2x3"/>
+                            <constraint firstItem="qC2-ue-ywx" firstAttribute="centerY" secondItem="0GH-ce-g5T" secondAttribute="centerY" id="WMx-7u-zbH"/>
                             <constraint firstItem="0GH-ce-g5T" firstAttribute="leading" secondItem="eUN-bc-5Ya" secondAttribute="leading" constant="10" id="a06-od-Jr2"/>
+                            <constraint firstItem="qC2-ue-ywx" firstAttribute="leading" secondItem="0GH-ce-g5T" secondAttribute="trailing" constant="10" id="hYJ-xF-0Fk"/>
                             <constraint firstItem="0GH-ce-g5T" firstAttribute="top" secondItem="on6-n8-QqT" secondAttribute="bottom" constant="10" id="hhs-bL-cLh"/>
                             <constraint firstItem="6ux-Cc-SUn" firstAttribute="top" secondItem="eUN-bc-5Ya" secondAttribute="top" constant="10" id="ibw-Y4-F9x"/>
                             <constraint firstItem="on6-n8-QqT" firstAttribute="top" secondItem="sgm-g6-C0Q" secondAttribute="bottom" constant="5" id="l2b-jp-byy"/>
@@ -790,6 +846,13 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="defaultLocationLable" destination="on6-n8-QqT" id="ODT-F8-mNA"/>
+                        <outlet property="nameLable" destination="6ux-Cc-SUn" id="jKz-da-2ii"/>
+                        <outlet property="numberOfTripsOfUserLable" destination="qC2-ue-ywx" id="4fm-7e-1t6"/>
+                        <outlet property="photoOfUser" destination="LPU-sj-i4n" id="NlO-3E-AhT"/>
+                        <outlet property="photoOfUserCollection" destination="aQp-ii-fd9" id="gsl-Nb-dxO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJU-Ho-upX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1133,12 +1196,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jVI-Ta-M8R">
-                                <rect key="frame" x="157" y="74" width="100" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jVI-Ta-M8R">
+                                <rect key="frame" x="157" y="71" width="100" height="106"/>
+                                <color key="tintColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Eyb-We-aE6"/>
                                     <constraint firstAttribute="width" constant="100" id="xlZ-h6-Oz0"/>
                                 </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEg-W0-uql">
                                 <rect key="frame" x="352" y="54" width="32" height="32"/>
@@ -1163,9 +1228,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="defaultLocationTextField" destination="a06-l0-MoG" id="MtQ-p4-wMY"/>
                         <outlet property="emailTextField" destination="IQw-Y7-OSZ" id="BJM-Im-kYO"/>
                         <outlet property="emailView" destination="Uuc-5D-ic3" id="PIk-uP-BPp"/>
+                        <outlet property="lastNameTextField" destination="Tvq-oX-Q80" id="xJW-yi-sXY"/>
                         <outlet property="mainView" destination="Kfm-Nn-EC2" id="oei-0s-sGq"/>
+                        <outlet property="nameTextField" destination="W49-Zs-YOT" id="4CP-zU-npZ"/>
                         <outlet property="passwordTextField" destination="9Fm-wT-hyu" id="URk-oE-gOX"/>
                         <outlet property="passwordView" destination="v9M-et-yl4" id="VSs-FO-tTR"/>
                         <outlet property="repeatPasswordTextField" destination="tX0-Ze-eDz" id="VLJ-vm-UPA"/>
@@ -1612,8 +1680,11 @@
     <resources>
         <image name="Vitebsk" width="552" height="396"/>
         <image name="globe.europe.africa.fill" catalog="system" width="128" height="121"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="secondaryLabelColor">

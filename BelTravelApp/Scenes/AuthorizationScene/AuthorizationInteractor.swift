@@ -31,7 +31,7 @@ class AuthorizationInteractor: AuthorizationBusinessLogic, AuthorizationDataStor
     worker = AuthorizationWorker()
     worker?.doSomeWork()
 
-	  FirebaseAuthManager.shered.enterUser(with: FirebaseAuthManager.AppUser(email: request.email, passward: request.passward)) { [weak self] result in
+	  FirebaseAuthManager.shered.enterUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward)) { [weak self] result in
 		  switch result {
 		  case .success() :
 			  let response = Authorization.Something.Response()

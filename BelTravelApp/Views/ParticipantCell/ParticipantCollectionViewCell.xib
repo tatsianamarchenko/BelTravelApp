@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ParticipantCollectionViewCell" customModule="BelTravelApp" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ParticipantCollectionViewCell" id="gTV-IL-0wX" customClass="ParticipantCollectionViewCell" customModule="BelTravelApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -42,6 +42,10 @@
                 <constraint firstItem="lXn-84-Us6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="zXu-fW-VKf"/>
             </constraints>
             <size key="customSize" width="192" height="50"/>
+            <connections>
+                <outlet property="nameLable" destination="wZP-Jx-oWG" id="b7M-2P-aq5"/>
+                <outlet property="photoOfUser" destination="lXn-84-Us6" id="Okl-3f-9Ww"/>
+            </connections>
             <point key="canvasLocation" x="240.57971014492756" y="63.616071428571423"/>
         </collectionViewCell>
     </objects>

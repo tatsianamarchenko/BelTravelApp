@@ -70,11 +70,22 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
   {
     super.viewDidLoad()
     doSomething()
+	  FirebaseDatabaseManager.shered.fetchUser {[weak self] user in
+		  print(user)
+		  self?.nameLable.text = "\(user.name) \(user.lastName)"
+		  self?.defaultLocationLable.text = user.defaultLocation
+		  self?.numberOfTripsOfUserLable.text = user.lastName
+	  }
   }
   
   // MARK: Do something
   
-  //@IBOutlet weak var nameTextField: UITextField!
+	@IBOutlet weak var nameLable: UILabel!
+	@IBOutlet weak var photoOfUser: UIImageView!
+	@IBOutlet weak var defaultLocationLable: UILabel!
+	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
+	@IBOutlet weak var photoOfUserCollection: UICollectionView!
+
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
 			self.router?.routeToSliderViewController()

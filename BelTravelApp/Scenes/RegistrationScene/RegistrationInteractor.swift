@@ -35,14 +35,11 @@ class RegistrationInteractor: RegistrationBusinessLogic, RegistrationDataStore
   {
 //    worker = RegistrationWorker()
 //    worker?.doSomeWork()
-	  FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUser(email: request.email, passward: request.passward)) { [weak self] error in
+	  FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward), fullInformationAboutUser: FirebaseAuthManager.FullInformationAppUser(email: request.email, name: request.name, lastName: request.lastName, defaultLocation: request.defaultLocation, image: nil)) { [weak self] error in
 		  if error == nil {
 			  if Auth.auth().currentUser != nil {
 				  let response = Registration.Something.Response()
 				  self?.presenter?.presentAuthorized(response: response)
-//				  let startVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MessengerTabBarViewController")
-//				  startVC.modalPresentationStyle = .fullScreen
-//				  self?.present(startVC, animated: false)
 			  }
 		  }
 	  }

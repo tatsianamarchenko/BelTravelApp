@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol RegistrationRoutingLogic {
-  func routeToMessengerTabBarViewController()
+  func routeToTabBarViewController()
 }
 
 protocol RegistrationDataPassing {
@@ -26,16 +26,16 @@ class RegistrationRouter: NSObject, RegistrationRoutingLogic, RegistrationDataPa
 
 	// MARK: Routing
 
-	func routeToMessengerTabBarViewController (){
+	func routeToTabBarViewController (){
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
 		destinationVC.modalPresentationStyle = .fullScreen
-		navigateToMessengerTabBarViewController(source: viewController!, destination: destinationVC)
+		navigateToTabBarViewController(source: viewController!, destination: destinationVC)
 	}
 
 	// MARK:  Navigation
 	
-	func navigateToMessengerTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
+	func navigateToTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
 		source.show(destination, sender: nil)
 	}
 }

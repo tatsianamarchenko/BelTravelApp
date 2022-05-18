@@ -66,12 +66,11 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
   
   // MARK: View lifecycle
   
-  override func viewDidLoad()
-  {
+  override func viewDidLoad() {
     super.viewDidLoad()
-//	  desctiptionLable.layer.masksToBounds = true
-//	  desctiptionLable.layer.cornerRadius = 15
-    doSomething()
+	  makeWhoWantToVisitThisPlaceCollection()
+	  makePhotosOfOtherUsersCollection()
+	  doSomething()
   }
   
   // MARK: Do something
@@ -81,17 +80,143 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	@IBOutlet weak var locationImage: UIImageView!
 	@IBOutlet weak var photosOfOtherUsersCollection: UICollectionView!
 	@IBOutlet weak var desctiptionLable: UILabel!
-	
+	@IBOutlet weak var noPhotoLable: UILabel!
+	@IBOutlet weak var noParticipantsLable: UILabel!
+	@IBAction func addToFavoriteButton(_ sender: Any) {
+		
+	}
+	var peopleWhoWansToParticipate = [FirebaseAuthManager.FullInformationAppUser]()
+	var photosOfOtherUsers = [UIImage]()
+
+	func makeWhoWantToVisitThisPlaceCollection () {
+		whoWantToVisitThisPlaceCollection.delegate = self
+		whoWantToVisitThisPlaceCollection.dataSource = self
+		let nib = UINib(nibName: "ParticipantCollectionViewCell", bundle: nil)
+		whoWantToVisitThisPlaceCollection.register(nib, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
+	}
+
+	func makePhotosOfOtherUsersCollection () {
+		photosOfOtherUsersCollection.delegate = self
+		photosOfOtherUsersCollection.dataSource = self
+		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
+		photosOfOtherUsersCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	}
+
 	func doSomething() {
-	  titleName.title = location?.name
+		titleName.title = location?.name
 		locationImage.image = location?.image
 		desctiptionLable.text = location?.description
-    let request = SelectedPlace.Something.Request()
-    interactor?.doSomething(request: request)
-  }
+		let request = SelectedPlace.Something.Request()
+		interactor?.doSomething(request: request)
+	}
   
-  func displaySomething(viewModel: SelectedPlace.Something.ViewModel)
-  {
+  func displaySomething(viewModel: SelectedPlace.Something.ViewModel) {
     //nameTextField.text = viewModel.name
   }
+}
+
+
+extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == whoWantToVisitThisPlaceCollection {
+			return peopleWhoWansToParticipate.count
+		}
+		if collectionView == photosOfOtherUsersCollection {
+			return photosOfOtherUsers.count
+		}
+		return 0
+	}
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if collectionView == whoWantToVisitThisPlaceCollection {
+
+			if peopleWhoWansToParticipate.isEmpty {
+				noParticipantsLable.isHidden = false
+			}
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	ParticipantCollectionViewCell.identifier, for: indexPath)
+					as? ParticipantCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+			cell.config(model: peopleWhoWansToParticipate[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		if collectionView == photosOfOtherUsersCollection {
+			if photosOfOtherUsers.isEmpty {
+				noPhotoLable.isHidden = false
+			}
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	PlaceCollectionViewCell.identifier, for: indexPath)
+					as? PlaceCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+					cell.imageOfLocation.image = photosOfOtherUsers[indexPath.row]
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		return UICollectionViewCell()
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
+		if collectionView == whoWantToVisitThisPlaceCollection {
+			return CGSize(width: 100, height: 100)
+		}
+
+		if collectionView == photosOfOtherUsersCollection {
+			return CGSize(width: 150, height: 150)
+		}
+
+		return CGSize(width: 100, height: 100)
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 1
+	}
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		if collectionView == whoWantToVisitThisPlaceCollection {
+		}
+
+		if collectionView == photosOfOtherUsersCollection {
+
+		}
+	}
 }

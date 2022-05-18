@@ -19,6 +19,9 @@ enum Registration {
 		struct Request {
 			var email: String
 			var passward: String
+			let name: String
+			let lastName: String
+			let defaultLocation: String
 		}
 		struct Response {
 		}
