@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SelectedPlaceBusinessLogic {
-  func doSomething(request: SelectedPlace.Something.Request)
+  func addToFavorite(request: SelectedPlace.Something.Request)
 }
 
 protocol SelectedPlaceDataStore {
@@ -27,11 +27,20 @@ class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStor
   
   // MARK: Do something
   
-  func doSomething(request: SelectedPlace.Something.Request) {
+  func addToFavorite(request: SelectedPlace.Something.Request) {
     worker = SelectedPlaceWorker()
     worker?.doSomeWork()
-    
-    let response = SelectedPlace.Something.Response()
-    presenter?.presentSomething(response: response)
+
+	  FirebaseDatabaseManager.shered.addFavoriteToDatabase(location: request.location, complition: {
+		 [weak self] result in
+		  if result == true {
+			  let response = SelectedPlace.Something.Response(result: "Added")
+			  self?.presenter?.presentResult(response: response)
+		  }
+		  else {
+			  let response = SelectedPlace.Something.Response(result: "Error")
+			  self?.presenter?.presentResult(response: response)
+		  }
+	  })
   }
 }

@@ -20,12 +20,15 @@ enum SelectedPlace
   {
     struct Request
     {
+		var location: Location
     }
     struct Response
     {
+		var result: String
     }
     struct ViewModel
     {
+		var result: String
     }
   }
 }

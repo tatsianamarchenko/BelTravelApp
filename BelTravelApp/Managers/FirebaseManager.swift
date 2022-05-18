@@ -25,6 +25,7 @@ class FirebaseDatabaseManager {
 			var result = [Location]()
 			documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
+				let	documentPath = queryDocumentSnapshot.reference.path
 				var image: UIImage?
 				let coordinats = data["coordinats"] as? String ?? ""
 				let description = data["description"] as? String ?? ""
@@ -40,7 +41,7 @@ class FirebaseDatabaseManager {
 						}
 
 						image = UIImage(data: data)
-						let location = Location(coordinats: coordinats, description: description, image: image!, name: name, type: type)
+						let location = Location(coordinats: coordinats, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
 						result.append(location)
 						complition(result)
 					}
@@ -59,6 +60,17 @@ class FirebaseDatabaseManager {
 		])
 	}
 
+	public func addFavoriteToDatabase(location: Location, complition: @escaping(Bool)-> Void) {
+
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite": location.firebasePath]) { error in
+			if error == nil {
+				complition(true)
+			} else {
+				complition(false)
+			}
+		}
+	}
+	
 	public func fetchUser(complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
 		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").getDocument(completion: { (querySnapshot, error) in
 			guard let data = querySnapshot?.data() else {

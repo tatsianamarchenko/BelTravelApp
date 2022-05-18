@@ -14,7 +14,7 @@ import UIKit
 
 protocol SelectedPlaceDisplayLogic: class
 {
-  func displaySomething(viewModel: SelectedPlace.Something.ViewModel)
+  func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
 }
 
 class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
@@ -70,7 +70,9 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
     super.viewDidLoad()
 	  makeWhoWantToVisitThisPlaceCollection()
 	  makePhotosOfOtherUsersCollection()
-	  doSomething()
+	  titleName.title = location?.name
+	  locationImage.image = location?.image
+	  desctiptionLable.text = location?.description
   }
   
   // MARK: Do something
@@ -82,9 +84,12 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	@IBOutlet weak var desctiptionLable: UILabel!
 	@IBOutlet weak var noPhotoLable: UILabel!
 	@IBOutlet weak var noParticipantsLable: UILabel!
+
+	@IBOutlet weak var favoriteButtonOutlet: UIBarButtonItem!
 	@IBAction func addToFavoriteButton(_ sender: Any) {
-		
+		addToFavorite()
 	}
+
 	var peopleWhoWansToParticipate = [FirebaseAuthManager.FullInformationAppUser]()
 	var photosOfOtherUsers = [UIImage]()
 
@@ -102,16 +107,17 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 		photosOfOtherUsersCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
 	}
 
-	func doSomething() {
-		titleName.title = location?.name
-		locationImage.image = location?.image
-		desctiptionLable.text = location?.description
-		let request = SelectedPlace.Something.Request()
-		interactor?.doSomething(request: request)
+	func addToFavorite() {
+		let request = SelectedPlace.Something.Request(location: location!)
+		interactor?.addToFavorite(request: request)
 	}
   
-  func displaySomething(viewModel: SelectedPlace.Something.ViewModel) {
-    //nameTextField.text = viewModel.name
+  func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {
+	  if viewModel.result == "Added" {
+		print("added")
+	  } else {
+		  print(viewModel.result)
+	  }
   }
 }
 

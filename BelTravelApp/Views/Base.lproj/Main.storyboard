@@ -400,18 +400,20 @@
                                     <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="addToFavoriteButton:" destination="ii8-8R-iqc" eventType="touchUpInside" id="cIk-YS-1TD"/>
                                     <action selector="closeButtonAction:" destination="7m3-CT-AwT" eventType="touchUpInside" id="HO2-iK-MLM"/>
                                     <action selector="closeButtonAction:" destination="8Fa-mC-9Rn" eventType="touchUpInside" id="P68-FV-6im"/>
                                     <action selector="exitButton:" destination="O05-uo-0o6" eventType="touchUpInside" id="lDA-J2-80D"/>
                                 </connections>
                             </button>
                             <connections>
-                                <action selector="addToFavoriteButton:" destination="ii8-8R-iqc" id="g9B-7z-aJc"/>
+                                <action selector="addToFavoriteButton:" destination="ii8-8R-iqc" id="kBd-wB-x61"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="desctiptionLable" destination="o1e-Gp-fmv" id="mzX-YJ-1Bs"/>
+                        <outlet property="favoriteButtonOutlet" destination="4fL-SD-WuV" id="NCW-If-W2H"/>
                         <outlet property="locationImage" destination="vUw-Vh-I1p" id="59x-ks-v3Y"/>
                         <outlet property="noParticipantsLable" destination="gA9-Bl-hZE" id="cBg-tO-raJ"/>
                         <outlet property="noPhotoLable" destination="KTk-Wp-wcK" id="dBx-L9-f27"/>
@@ -634,43 +636,40 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UHi-zH-cmD">
-                                <rect key="frame" x="0.0" y="121" width="414" height="692"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nfj-hp-Oys">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eM2-32-Sol">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VUR-UQ-BK6">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to visit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aV3-xX-7Ay">
                                 <rect key="frame" x="10" y="91" width="394" height="20"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-EN-MW5">
+                                <rect key="frame" x="0.0" y="121" width="414" height="692"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No locations in favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KXy-37-Lp8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                            <integer key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ti5-Uv-JlL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lHg-l1-70p" firstAttribute="leading" secondItem="Ti5-Uv-JlL" secondAttribute="leading" constant="30" id="5pu-mr-wBU"/>
-                            <constraint firstItem="UHi-zH-cmD" firstAttribute="top" secondItem="aV3-xX-7Ay" secondAttribute="bottom" constant="10" id="6wb-8b-83W"/>
-                            <constraint firstItem="Ti5-Uv-JlL" firstAttribute="trailing" secondItem="UHi-zH-cmD" secondAttribute="trailing" id="JgC-Oa-OWI"/>
-                            <constraint firstItem="UHi-zH-cmD" firstAttribute="leading" secondItem="Ti5-Uv-JlL" secondAttribute="leading" id="M22-W1-coX"/>
-                            <constraint firstItem="Ti5-Uv-JlL" firstAttribute="bottom" secondItem="UHi-zH-cmD" secondAttribute="bottom" id="Rbk-hr-UeP"/>
+                            <constraint firstItem="3Q2-EN-MW5" firstAttribute="leading" secondItem="Ti5-Uv-JlL" secondAttribute="leading" id="ZQE-Yi-gb3"/>
                             <constraint firstItem="lHg-l1-70p" firstAttribute="top" secondItem="Ti5-Uv-JlL" secondAttribute="top" constant="10" id="Zuu-1S-hN0"/>
+                            <constraint firstItem="3Q2-EN-MW5" firstAttribute="top" secondItem="aV3-xX-7Ay" secondAttribute="bottom" constant="10" id="dKe-hj-ohn"/>
+                            <constraint firstItem="Ti5-Uv-JlL" firstAttribute="trailing" secondItem="3Q2-EN-MW5" secondAttribute="trailing" id="fKs-kb-DFK"/>
                             <constraint firstItem="Ti5-Uv-JlL" firstAttribute="trailing" secondItem="aV3-xX-7Ay" secondAttribute="trailing" constant="10" id="k57-1C-yFI"/>
+                            <constraint firstItem="Ti5-Uv-JlL" firstAttribute="bottom" secondItem="3Q2-EN-MW5" secondAttribute="bottom" id="lxk-fS-kI4"/>
                             <constraint firstItem="aV3-xX-7Ay" firstAttribute="top" secondItem="lHg-l1-70p" secondAttribute="bottom" constant="10" id="qXU-jv-njN"/>
                             <constraint firstItem="aV3-xX-7Ay" firstAttribute="leading" secondItem="Ti5-Uv-JlL" secondAttribute="leading" constant="10" id="rsE-Ae-ADr"/>
                             <constraint firstAttribute="trailing" secondItem="lHg-l1-70p" secondAttribute="trailing" constant="30" id="t2d-gs-7gh"/>
@@ -782,6 +781,19 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No photo added" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Bt-Pd-RKc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="511"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                            <integer key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GPa-TS-5Oh">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -849,6 +861,7 @@
                     <connections>
                         <outlet property="defaultLocationLable" destination="on6-n8-QqT" id="ODT-F8-mNA"/>
                         <outlet property="nameLable" destination="6ux-Cc-SUn" id="jKz-da-2ii"/>
+                        <outlet property="noPhotoLable" destination="aQp-ii-fd9" id="7Ru-qo-1Qg"/>
                         <outlet property="numberOfTripsOfUserLable" destination="qC2-ue-ywx" id="4fm-7e-1t6"/>
                         <outlet property="photoOfUser" destination="LPU-sj-i4n" id="NlO-3E-AhT"/>
                         <outlet property="photoOfUserCollection" destination="aQp-ii-fd9" id="gsl-Nb-dxO"/>

@@ -35,4 +35,5 @@ struct Location {
 	var image: UIImage
 	var name: String
 	var type: String
+	var firebasePath: String
 }

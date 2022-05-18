@@ -14,7 +14,7 @@ import UIKit
 
 protocol SelectedPlacePresentationLogic
 {
-  func presentSomething(response: SelectedPlace.Something.Response)
+  func presentResult(response: SelectedPlace.Something.Response)
 }
 
 class SelectedPlacePresenter: SelectedPlacePresentationLogic
@@ -23,9 +23,8 @@ class SelectedPlacePresenter: SelectedPlacePresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: SelectedPlace.Something.Response)
-  {
-    let viewModel = SelectedPlace.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+  func presentResult(response: SelectedPlace.Something.Response) {
+	  let viewModel = SelectedPlace.Something.ViewModel(result: response.result)
+    viewController?.displayResultOfAdding(viewModel: viewModel)
   }
 }

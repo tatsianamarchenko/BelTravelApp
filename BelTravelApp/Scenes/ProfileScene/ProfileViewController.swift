@@ -12,34 +12,29 @@
 
 import UIKit
 
-protocol ProfileDisplayLogic: class
-{
+protocol ProfileDisplayLogic: class {
   func displaySomething(viewModel: Profile.Something.ViewModel)
 }
 
-class ProfileViewController: UIViewController, ProfileDisplayLogic
-{
+class ProfileViewController: UIViewController, ProfileDisplayLogic {
   var interactor: ProfileBusinessLogic?
   var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
   
-  private func setup()
-  {
+  private func setup() {
     let viewController = self
     let interactor = ProfileInteractor()
     let presenter = ProfilePresenter()
@@ -54,8 +49,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let scene = segue.identifier {
       let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
       if let router = router, router.responds(to: selector) {
@@ -66,8 +60,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
   
   // MARK: View lifecycle
   
-  override func viewDidLoad()
-  {
+  override func viewDidLoad() {
     super.viewDidLoad()
     doSomething()
 	  FirebaseDatabaseManager.shered.fetchUser {[weak self] user in
@@ -85,6 +78,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
 	@IBOutlet weak var defaultLocationLable: UILabel!
 	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
 	@IBOutlet weak var photoOfUserCollection: UICollectionView!
+	@IBOutlet weak var noPhotoLable: UICollectionView!
 
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
@@ -92,14 +86,12 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic
 		}
 	}
 
-  func doSomething()
-  {
+  func doSomething() {
     let request = Profile.Something.Request()
     interactor?.doSomething(request: request)
   }
   
-  func displaySomething(viewModel: Profile.Something.ViewModel)
-  {
+  func displaySomething(viewModel: Profile.Something.ViewModel) {
     //nameTextField.text = viewModel.name
   }
 }
