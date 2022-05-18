@@ -12,78 +12,104 @@
 
 import UIKit
 
-protocol FavoriteDisplayLogic: class
-{
-  func displaySomething(viewModel: Favorite.Something.ViewModel)
+protocol FavoriteDisplayLogic: class {
+  func displayFavoriteLocations(viewModel: Favorite.Something.ViewModel)
 }
 
-class FavoriteViewController: UIViewController, FavoriteDisplayLogic
-{
-  var interactor: FavoriteBusinessLogic?
-  var router: (NSObjectProtocol & FavoriteRoutingLogic & FavoriteDataPassing)?
+class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
+	var interactor: FavoriteBusinessLogic?
+	var router: (NSObjectProtocol & FavoriteRoutingLogic & FavoriteDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = FavoriteInteractor()
-    let presenter = FavoritePresenter()
-    let router = FavoriteRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = Favorite.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: Favorite.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = FavoriteInteractor()
+		let presenter = FavoritePresenter()
+		let router = FavoriteRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		makeFavoriteTableView()
+	}
+
+	// MARK: Do something
+
+	@IBOutlet weak var noLocationsInfavoriteLable: UILabel!
+	@IBOutlet weak var favoriteTableView: UITableView!
+
+	var favoritePlacesArray = [Location]()
+
+	func loadFavorite() {
+		let request = Favorite.Something.Request()
+		interactor?.loadFavorite(request: request)
+	}
+	func makeFavoriteTableView() {
+		favoriteTableView.delegate = self
+		favoriteTableView.dataSource = self
+		let nib = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
+		favoriteTableView.register(nib, forCellReuseIdentifier: FavoriteTableViewCell.identifier)
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		loadFavorite()
+	}
+
+	func displayFavoriteLocations(viewModel: Favorite.Something.ViewModel) {
+		self.favoritePlacesArray = viewModel.locations
+		self.favoriteTableView.reloadData()
+	}
+}
+
+extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return favoritePlacesArray.count
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if !favoritePlacesArray.isEmpty {
+			noLocationsInfavoriteLable.isHidden = true
+		}
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.identifier, for: indexPath) as? FavoriteTableViewCell else {
+			return UITableViewCell()
+		}
+		cell.config(model: favoritePlacesArray[indexPath.row])
+		return cell
+	}
+
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		70
+	}
 }

@@ -23,9 +23,11 @@ enum Favorite
     }
     struct Response
     {
+		var locations: [Location]
     }
     struct ViewModel
     {
+		var locations: [Location]
     }
   }
 }

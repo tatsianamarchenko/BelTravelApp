@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
+import FirebaseDatabase
 
 class FirebaseDatabaseManager {
 
@@ -62,11 +63,53 @@ class FirebaseDatabaseManager {
 
 	public func addFavoriteToDatabase(location: Location, complition: @escaping(Bool)-> Void) {
 
-		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite": location.firebasePath]) { error in
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite":  location.firebasePath]) { error in
 			if error == nil {
 				complition(true)
 			} else {
 				complition(false)
+			}
+		}
+	}
+
+	public func fetchFavoriteData(complition: @escaping ([Location])-> Void) {
+		var result = [Location]()
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").getDocuments { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let path = data["favorite"] as? String ?? ""
+				self.db.document(path).getDocument { (querySnapshot, error) in
+					guard let data = querySnapshot?.data() else {
+						print("No documents")
+						return
+					}
+					let	documentPath = path
+					var image: UIImage?
+					let coordinats = data["coordinats"] as? String ?? ""
+					let description = data["description"] as? String ?? ""
+					let name = data["name"] as? String ?? ""
+					let type = data["type"] as? String ?? ""
+					let path = data["image"] as? String ?? ""
+					let storage = Storage.storage().reference()
+					let fileRef = storage.child(path)
+					fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+						if error == nil {
+							guard let data = data else {
+								return
+							}
+							image = UIImage(data: data)
+							let location = Location(coordinats: coordinats, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
+							result.append(location)
+
+						}
+						print(result.count)
+						complition(result)
+					}
+				}
 			}
 		}
 	}

@@ -14,7 +14,7 @@ import UIKit
 
 protocol FavoritePresentationLogic
 {
-  func presentSomething(response: Favorite.Something.Response)
+  func presentFavoritePlaces(response: Favorite.Something.Response)
 }
 
 class FavoritePresenter: FavoritePresentationLogic
@@ -23,9 +23,9 @@ class FavoritePresenter: FavoritePresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: Favorite.Something.Response)
+  func presentFavoritePlaces(response: Favorite.Something.Response)
   {
-    let viewModel = Favorite.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+	  let viewModel = Favorite.Something.ViewModel(locations: response.locations)
+	  viewController?.displayFavoriteLocations(viewModel: viewModel)
   }
 }

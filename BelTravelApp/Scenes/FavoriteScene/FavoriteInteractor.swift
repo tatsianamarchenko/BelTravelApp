@@ -14,7 +14,7 @@ import UIKit
 
 protocol FavoriteBusinessLogic
 {
-  func doSomething(request: Favorite.Something.Request)
+  func loadFavorite(request: Favorite.Something.Request)
 }
 
 protocol FavoriteDataStore
@@ -30,12 +30,14 @@ class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore
   
   // MARK: Do something
   
-  func doSomething(request: Favorite.Something.Request)
+  func loadFavorite(request: Favorite.Something.Request)
   {
     worker = FavoriteWorker()
     worker?.doSomeWork()
-    
-    let response = Favorite.Something.Response()
-    presenter?.presentSomething(response: response)
+
+	  FirebaseDatabaseManager.shered.fetchFavoriteData { [weak self] locations in
+		  let response = Favorite.Something.Response(locations: locations)
+		  self?.presenter?.presentFavoritePlaces(response: response)
+	  }
   }
 }

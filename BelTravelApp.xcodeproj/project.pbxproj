@@ -89,6 +89,8 @@
 		BFBF0A5A28343CDE0000559E /* SliderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A5428343CDE0000559E /* SliderModels.swift */; };
 		BFBF0A5D28343D270000559E /* SliderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBF0A5B28343D270000559E /* SliderCollectionViewCell.xib */; };
 		BFBF0A5E28343D270000559E /* SliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A5C28343D270000559E /* SliderCollectionViewCell.swift */; };
+		BFC0DFA228357BD500FFAEB6 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */; };
+		BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
@@ -188,6 +190,8 @@
 		BFBF0A5428343CDE0000559E /* SliderModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderModels.swift; sourceTree = "<group>"; };
 		BFBF0A5B28343D270000559E /* SliderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCollectionViewCell.xib; sourceTree = "<group>"; };
 		BFBF0A5C28343D270000559E /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -349,6 +353,15 @@
 			path = SliderCell;
 			sourceTree = "<group>";
 		};
+		BFC0DF9F28357BA500FFAEB6 /* FavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */,
+				BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */,
+			);
+			path = FavoriteCell;
+			sourceTree = "<group>";
+		};
 		BFCC2991282AB2B2004FE1FE = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +508,7 @@
 		BFD57561282BEDEA007CBBE8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFC0DF9F28357BA500FFAEB6 /* FavoriteCell */,
 				BFBF0A5F28343D2E0000559E /* SliderCell */,
 				BF5B626F282BFE0F00D5844D /* ParticipantCell */,
 				BF5B626A282BFC5B00D5844D /* UpcomingTripCell */,
@@ -582,6 +596,7 @@
 				BF5B626E282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib in Resources */,
 				BFCC29A7282AB2C6004FE1FE /* Assets.xcassets in Resources */,
 				BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */,
+				BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */,
 				BF5B6275282C010300D5844D /* GoogleService-Info.plist in Resources */,
 				BFBF0A5D28343D270000559E /* SliderCollectionViewCell.xib in Resources */,
 			);
@@ -691,6 +706,7 @@
 				BFA60B89282B1E07006B3DC4 /* SelectedTripViewController.swift in Sources */,
 				BFCC29C2282AF4EB004FE1FE /* MainModels.swift in Sources */,
 				BFA60B96282B1E17006B3DC4 /* SelectedPlaceInteractor.swift in Sources */,
+				BFC0DFA228357BD500FFAEB6 /* FavoriteTableViewCell.swift in Sources */,
 				BFA60BC3282B1EF3006B3DC4 /* CreateTripWorker.swift in Sources */,
 				BFA60BCF282B1F02006B3DC4 /* UpcomingTripInformationWorker.swift in Sources */,
 				BFA60BA0282B1E6C006B3DC4 /* FavoriteModels.swift in Sources */,

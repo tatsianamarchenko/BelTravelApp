@@ -684,6 +684,10 @@
                             </hierarchicalColors>
                         </imageReference>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="favoriteTableView" destination="3Q2-EN-MW5" id="bE0-xq-cfz"/>
+                        <outlet property="noLocationsInfavoriteLable" destination="KXy-37-Lp8" id="95F-t9-efN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWJ-EW-OsX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
