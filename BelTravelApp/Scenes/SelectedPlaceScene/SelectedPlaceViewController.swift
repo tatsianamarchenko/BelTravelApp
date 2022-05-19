@@ -73,10 +73,13 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	  titleName.title = location?.name
 	  locationImage.image = location?.image
 	  desctiptionLable.text = location?.description
+	  addTLocationToDataStore()
   }
   
   // MARK: Do something
 	var location: Location?
+	var region: String?
+	
 	@IBOutlet weak var titleName: UINavigationItem!
 	@IBOutlet weak var whoWantToVisitThisPlaceCollection: UICollectionView!
 	@IBOutlet weak var locationImage: UIImageView!
@@ -88,6 +91,14 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	@IBOutlet weak var favoriteButtonOutlet: UIBarButtonItem!
 	@IBAction func addToFavoriteButton(_ sender: Any) {
 		addToFavorite()
+	}
+	@IBAction func createTripAction(_ sender: Any) {
+		router?.routeToCreatingViewController()
+	}
+
+	func addTLocationToDataStore() {
+		let request = SelectedPlace.Something.Request(location: location!, region: region!)
+		interactor?.addToDataStore(request: request)
 	}
 
 	var peopleWhoWansToParticipate = [FirebaseAuthManager.FullInformationAppUser]()
@@ -108,7 +119,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	}
 
 	func addToFavorite() {
-		let request = SelectedPlace.Something.Request(location: location!)
+		let request = SelectedPlace.Something.Request(location: location!, region: region!)
 		interactor?.addToFavorite(request: request)
 	}
   

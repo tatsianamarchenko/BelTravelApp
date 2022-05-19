@@ -13,7 +13,8 @@
 import UIKit
 
 protocol ProfileDisplayLogic: class {
-  func displaySomething(viewModel: Profile.Something.ViewModel)
+	func displayUserInformation(viewModel: Profile.Something.ViewModel)
+	func displayNewPhotosOfUser(viewModel: Profile.Something.ViewModel)
 }
 
 class ProfileViewController: UIViewController, ProfileDisplayLogic {
@@ -62,23 +63,20 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    doSomething()
-	  FirebaseDatabaseManager.shered.fetchUser {[weak self] user in
-		  print(user)
-		  self?.nameLable.text = "\(user.name) \(user.lastName)"
-		  self?.defaultLocationLable.text = user.defaultLocation
-		  self?.numberOfTripsOfUserLable.text = user.lastName
-	  }
+	  loadUserInformation()
+	  makePhotosOfUsersCollection()
   }
   
   // MARK: Do something
-  
+
+	var photoOfOtherUsers = [UIImage]()
+
 	@IBOutlet weak var nameLable: UILabel!
 	@IBOutlet weak var photoOfUser: UIImageView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
 	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
 	@IBOutlet weak var photoOfUserCollection: UICollectionView!
-	@IBOutlet weak var noPhotoLable: UICollectionView!
+	@IBOutlet weak var noPhotoLable: UILabel!
 
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
@@ -86,12 +84,147 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		}
 	}
 
-  func doSomething() {
+	@IBAction func addPhotoAction(_ sender: Any) {
+		presentPhoto()
+	}
+
+  func loadUserInformation() {
     let request = Profile.Something.Request()
-    interactor?.doSomething(request: request)
+	  FirebaseDatabaseManager.shered.fetchImageData { images in
+		  guard let images = images else {return}
+		  print(images.count)
+		  self.photoOfOtherUsers = images
+		  self.photoOfUserCollection.reloadData()
+
+	  }
+    interactor?.loadInformation(request: request)
   }
   
-  func displaySomething(viewModel: Profile.Something.ViewModel) {
-    //nameTextField.text = viewModel.name
-  }
+	func displayUserInformation(viewModel: Profile.Something.ViewModel) {
+		self.nameLable.text = "\(viewModel.name!) \(viewModel.lastName!)"
+		self.defaultLocationLable.text = viewModel.defaultLocation
+		self.numberOfTripsOfUserLable.text = viewModel.numberOfTripsOfUser
+		guard let image = viewModel.newImage else {return}
+		photoOfOtherUsers.append(image)
+		photoOfUserCollection.reloadData()
+	}
+
+	func displayNewPhotosOfUser(viewModel: Profile.Something.ViewModel) {
+		guard let image = viewModel.newImage else {return}
+		photoOfOtherUsers.append(image)
+		photoOfUserCollection.reloadData()
+		noPhotoLable.isHidden = true
+	}
+
+	func makePhotosOfUsersCollection () {
+		photoOfUserCollection.delegate = self
+		photoOfUserCollection.dataSource = self
+		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
+		photoOfUserCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	}
+}
+
+
+extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+			return photoOfOtherUsers.count
+	}
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+			if !photoOfOtherUsers.isEmpty {
+				noPhotoLable.isHidden = true
+			}
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	PlaceCollectionViewCell.identifier, for: indexPath)
+					as? PlaceCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+		cell.imageOfLocation.image = photoOfOtherUsers[indexPath.row]
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: 150, height: 150)
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 1
+	}
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+	}
+}
+
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+	func photoWithCamera(){
+		let vc = UIImagePickerController()
+		vc.sourceType = .camera
+		vc.delegate = self
+		vc.allowsEditing = true
+		present(vc, animated: true)
+	}
+	func photoFromLibrary(){
+		let vc = UIImagePickerController()
+		vc.sourceType = .photoLibrary
+		vc.delegate = self
+		vc.allowsEditing = true
+		present(vc, animated: true)
+	}
+
+	func presentPhoto(){
+		let choose = UIAlertController(title: "Profile Photo", message: "How would you like to select a photo?", preferredStyle: .actionSheet)
+		let library = UIAlertAction(title: "photo library", style: .default, handler: {[weak self] _ in self?.photoFromLibrary() } )
+		let camera = UIAlertAction(title: "take photo", style: .default, handler: {[weak self] _ in self?.photoWithCamera()} )
+		let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+		choose.addAction(library)
+		choose.addAction(camera)
+		choose.addAction(cancel)
+		present(choose, animated: true)
+	}
+
+	func imagePickerController (_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any] ) {
+		picker.dismiss(animated: true, completion: nil)
+		guard  let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+			return
+		}
+		let request = Profile.Something.Request(image: selectedImage, name: "\(nameLable.text!)")
+		interactor?.saveImageInDatabase(request: request)
+	}
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true, completion: nil)
+	}
 }

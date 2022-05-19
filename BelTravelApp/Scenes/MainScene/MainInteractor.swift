@@ -15,6 +15,7 @@ import UIKit
 protocol MainBusinessLogic {
   func loadInformation(request: Main.Something.Request)
 	func setPopularLocation(request: Main.Something.Request)
+	func loadCreatedTrips(request: Main.Something.Request)
 }
 
 protocol MainDataStore {
@@ -43,5 +44,12 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 	func setPopularLocation(request: Main.Something.Request) {
 		selectedPopularlocation = request.selectedPopularPlace
 		self.presenter?.presentSelectedPopularlocation()
+	}
+
+	func loadCreatedTrips(request: Main.Something.Request) {
+		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new in
+			let response = Main.Something.Response(locations: nil, new: new)
+			self?.presenter?.presentCreatedTrips(response: response)
+		}
 	}
 }

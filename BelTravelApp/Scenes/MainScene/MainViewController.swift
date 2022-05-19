@@ -14,8 +14,9 @@ import UIKit
 import MapKit
 
 protocol MainDisplayLogic: class {
-  func displayPopularPlaces(viewModel: Main.Something.ViewModel)
+	func displayPopularPlaces(viewModel: Main.Something.ViewModel)
 	func presentSelectedPopularPlaceViewController()
+	func displayCreatedTrips(viewModel: Main.Something.ViewModel)
 }
 
 class MainViewController: UIViewController, MainDisplayLogic {
@@ -66,8 +67,9 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		super.viewDidLoad()
 		makeRegionsCollection()
 		makeMostPopularPlacesCollection()
-		loadInformationForCollections()
 		makeNextTripsCollection()
+		loadInformationForCollections()
+		loadCreatedTrips()
 		print(regionName)
 	}
 
@@ -79,7 +81,7 @@ class MainViewController: UIViewController, MainDisplayLogic {
 				   Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev", identifier: "MogilevRegion")
   ]
 	var popularPlaces = [Location]()
-	var createdTrips = [CreatedTrip]()
+	var createdTrips = [NewTrip]()
 
 	@IBOutlet weak var regionsCollection: UICollectionView!
 	@IBOutlet weak var nextTripsCollection: UICollectionView!
@@ -89,8 +91,7 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	@IBAction func allLocationButtonAction(_ sender: Any) {
 		router?.routeToAllLocationsViewController()
 	}
-
-
+	
 	func makeRegionsCollection () {
 		let nib = UINib(nibName: "RegionCollectionViewCell", bundle: nil)
 		regionsCollection.register(nib, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
@@ -117,8 +118,18 @@ var regionName = "MinskRegion"
   }
   
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel) {
-		popularPlaces = viewModel.locations
+		popularPlaces = viewModel.locations!
 		popularPlacesCollection.reloadData()
+	}
+
+	func loadCreatedTrips() {
+		let request = Main.Something.Request(region: regionName)
+		interactor?.loadCreatedTrips(request: request)
+	}
+
+	func displayCreatedTrips(viewModel: Main.Something.ViewModel) {
+		createdTrips = viewModel.createdTrips!
+		nextTripsCollection.reloadData()
 	}
 
 	func presentSelectedPopularPlaceViewController() {
@@ -215,7 +226,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			return CGSize(width: 150, height: 150)
 		}
 		if collectionView == nextTripsCollection {
-			return CGSize(width: 100, height: 100)
+			return CGSize(width: 200, height: 100)
 		}
 
 		return CGSize(width: 100, height: 100)

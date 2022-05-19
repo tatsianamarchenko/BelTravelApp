@@ -12,20 +12,24 @@
 
 import UIKit
 
-enum Profile
-{
+enum Profile {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
+		var image: UIImage?
+		var name: String?
     }
-    struct Response
-    {
+    struct Response {
+		var person: FirebaseAuthManager.FullInformationAppUser?
+		var image: UIImage?
     }
-    struct ViewModel
-    {
+    struct ViewModel {
+		var name: String?
+		var lastName: String?
+		var defaultLocation: String?
+		var numberOfTripsOfUser: String?
+		var newImage: UIImage?
     }
   }
 }

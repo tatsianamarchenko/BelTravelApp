@@ -14,33 +14,39 @@ import UIKit
 
 protocol SelectedPlaceBusinessLogic {
   func addToFavorite(request: SelectedPlace.Something.Request)
+	func addToDataStore(request: SelectedPlace.Something.Request)
 }
 
 protocol SelectedPlaceDataStore {
   var location: Location? { get set }
+	var region: String? { get set }
 }
 
 class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStore {
-  var presenter: SelectedPlacePresentationLogic?
-  var worker: SelectedPlaceWorker?
-  var location: Location?
-  
-  // MARK: Do something
-  
-  func addToFavorite(request: SelectedPlace.Something.Request) {
-    worker = SelectedPlaceWorker()
-    worker?.doSomeWork()
+	var presenter: SelectedPlacePresentationLogic?
+	var worker: SelectedPlaceWorker?
+	var location: Location?
+	var region: String?
+	// MARK: Do something
 
-	  FirebaseDatabaseManager.shered.addFavoriteToDatabase(location: request.location, complition: {
-		 [weak self] result in
-		  if result == true {
-			  let response = SelectedPlace.Something.Response(result: "Added")
-			  self?.presenter?.presentResult(response: response)
-		  }
-		  else {
-			  let response = SelectedPlace.Something.Response(result: "Error")
-			  self?.presenter?.presentResult(response: response)
-		  }
-	  })
-  }
+	func addToFavorite(request: SelectedPlace.Something.Request) {
+		worker = SelectedPlaceWorker()
+		worker?.doSomeWork()
+		FirebaseDatabaseManager.shered.addFavoriteToDatabase(location: request.location, complition: {
+			[weak self] result in
+			if result == true {
+				let response = SelectedPlace.Something.Response(result: "Added")
+				self?.presenter?.presentResult(response: response)
+			}
+			else {
+				let response = SelectedPlace.Something.Response(result: "Error")
+				self?.presenter?.presentResult(response: response)
+			}
+		})
+	}
+
+	func addToDataStore(request: SelectedPlace.Something.Request) {
+		location = request.location
+		region = request.region
+	}
 }

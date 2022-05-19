@@ -12,30 +12,33 @@
 
 import UIKit
 
-protocol CreateTripBusinessLogic
-{
-  func doSomething(request: CreateTrip.Something.Request)
+protocol CreateTripBusinessLogic {
+	func createNewTrip(request: CreateTrip.Something.Request)
 }
 
-protocol CreateTripDataStore
-{
-  //var name: String { get set }
+protocol CreateTripDataStore {
+	var location: Location? { get set }
+	var region: String? { get set }
 }
 
-class CreateTripInteractor: CreateTripBusinessLogic, CreateTripDataStore
-{
-  var presenter: CreateTripPresentationLogic?
-  var worker: CreateTripWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: CreateTrip.Something.Request)
-  {
-    worker = CreateTripWorker()
-    worker?.doSomeWork()
-    
-    let response = CreateTrip.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+class CreateTripInteractor: CreateTripBusinessLogic, CreateTripDataStore {
+	var presenter: CreateTripPresentationLogic?
+	var worker: CreateTripWorker?
+	var location: Location?
+	var region: String?
+	// MARK: Do something
+
+	func createNewTrip(request: CreateTrip.Something.Request) {
+		worker = CreateTripWorker()
+		worker?.doSomeWork()
+		FirebaseDatabaseManager.shered.addNewTripToDatabase(with: request.trip) { [weak self] result in
+			if result == true {
+			let response = CreateTrip.Something.Response()
+				self?.presenter?.presentSomething(response: response)
+			}
+			else {
+				return
+			}
+		}
+	}
 }

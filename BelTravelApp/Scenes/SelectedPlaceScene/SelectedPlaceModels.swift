@@ -21,6 +21,7 @@ enum SelectedPlace
     struct Request
     {
 		var location: Location
+		var region: String
     }
     struct Response
     {

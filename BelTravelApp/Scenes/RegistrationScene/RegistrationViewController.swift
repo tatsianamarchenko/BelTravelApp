@@ -68,6 +68,7 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 
 	// MARK: Do something
 	var tapGesture: UITapGestureRecognizer?
+	@IBOutlet weak var photoOutlet: UIImageView!
 	@IBOutlet weak var mainView: UIView!
 	@IBOutlet weak var emailView: UIView!
 	@IBOutlet weak var passwordView: UIView!
@@ -79,9 +80,12 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var lastNameTextField: UITextField!
 	@IBOutlet weak var defaultLocationTextField: UITextField!
-
+	
 	@objc func tapped() {
 		self.view.endEditing(true)
+	}
+
+	@objc func addPhoto() {
 	}
 
 	func displaySomething(viewModel: Registration.Something.ViewModel) {

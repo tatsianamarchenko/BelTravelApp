@@ -55,6 +55,7 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as! SelectedPlaceViewController
 		destinationVC.location = dataStore?.selectedPopularlocation
+		destinationVC.region = dataStore?.region
 		var destinationDS = destinationVC.router!.dataStore!
 		passDataToSelectedPlaceViewcontroller(source: dataStore!, destination: &destinationDS)
 		navigateToSelectedPlaceViewcontroller(source: viewController!, destination: destinationVC)
@@ -71,5 +72,6 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 	func passDataToSelectedPlaceViewcontroller(source: MainDataStore, destination: inout SelectedPlaceDataStore)
 	{
 		destination.location = source.selectedPopularlocation
+		destination.region = source.region
 	}
 }

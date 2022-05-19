@@ -72,6 +72,55 @@ class FirebaseDatabaseManager {
 		}
 	}
 
+	public func uploadImageData(data: Data, serverFileName: String, completionHandler: @escaping (_ isSuccess: Bool, _ url: String?) -> Void) {
+		let storage = Storage.storage()
+		let storageRef = storage.reference()
+		let directory = "PhotosOfUser/\(Auth.auth().currentUser!.uid)/"
+		let fileRef = storageRef.child(directory + serverFileName)
+
+		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("AddedPhotosReferences").document().setData([
+			"ref": fileRef.fullPath
+		])
+
+		_ = fileRef.putData(data, metadata: nil) { metadata, error in
+			fileRef.downloadURL { (url, error) in
+				guard let downloadURL = url else {
+					completionHandler(false, nil)
+					return
+				}
+				completionHandler(true, downloadURL.absoluteString)
+			}
+		}
+	}
+
+	public func fetchImageData(completionHandler: @escaping ([UIImage]?) -> Void) {
+		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("AddedPhotosReferences").getDocuments { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
+			var result = [UIImage]()
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let path = data["ref"] as? String ?? ""
+				let storage = Storage.storage().reference()
+				let fileRef = storage.child(path)
+				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+					if error == nil {
+						guard let data = data else {
+							return
+						}
+
+						let image = UIImage(data: data)
+						guard let image = image else {return}
+						result.append(image)
+						completionHandler(result)
+					}
+				}
+			}
+		}
+	}
+
 	public func fetchFavoriteData(complition: @escaping ([Location])-> Void) {
 		var result = [Location]()
 		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").getDocuments { (querySnapshot, error) in
@@ -140,4 +189,57 @@ class FirebaseDatabaseManager {
 			}
 		})
 	}
+
+	public func addNewTripToDatabase(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
+		db.collection("\(tripInformation.region)Trips").document().setData([
+			"locationPath": tripInformation.locationPath,
+			"locationName": tripInformation.locationName,
+			"time": tripInformation.time,
+			"numberOfPeople": tripInformation.maxPeople,
+			"description": tripInformation.description,
+			"creator": Auth.auth().currentUser?.uid,
+			"region": tripInformation.region
+		]) { error in
+			if error == nil {
+				complition(true)
+			} else {
+				complition(false)
+			}
+		}
+	}
+
+	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip])-> Void) {
+		db.collection("\(collection)Trips").getDocuments { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
+			var result = [NewTrip]()
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let locationPath = data["locationPath"] as? String ?? ""
+				let locationName = data["locationName"] as? String ?? ""
+				let creator = data["creator"] as? String ?? ""
+				let description = data["description"] as? String ?? ""
+				let numberOfPeople = data["numberOfPeople"] as? String ?? ""
+				let time = data["time"] as? String ?? ""
+				let region = data["region"] as? String ?? ""
+
+				let location = NewTrip(locationPath: locationPath, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region)
+				result.append(location)
+				complition(result)
+			}
+		}
+	}
+
+}
+
+struct NewTrip {
+	var locationPath: String
+	var locationName: String
+	var time: String
+	var maxPeople: String
+	var description: String
+	var creator: String?
+	var region: String
 }

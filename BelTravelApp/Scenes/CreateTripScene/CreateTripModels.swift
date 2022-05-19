@@ -12,20 +12,16 @@
 
 import UIKit
 
-enum CreateTrip
-{
+enum CreateTrip {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
+		var trip: NewTrip
     }
-    struct Response
-    {
+    struct Response {
     }
-    struct ViewModel
-    {
+    struct ViewModel {
     }
   }
 }

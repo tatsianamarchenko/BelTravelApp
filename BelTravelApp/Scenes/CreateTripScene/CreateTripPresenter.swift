@@ -26,6 +26,6 @@ class CreateTripPresenter: CreateTripPresentationLogic
   func presentSomething(response: CreateTrip.Something.Response)
   {
     let viewModel = CreateTrip.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+    viewController?.displayResult(viewModel: viewModel)
   }
 }

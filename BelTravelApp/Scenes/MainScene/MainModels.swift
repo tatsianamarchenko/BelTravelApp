@@ -21,10 +21,12 @@ enum Main {
 		var selectedPopularPlace: Location?
     }
     struct Response {
-		var locations: [Location]
+		var locations: [Location]?
+		var new: [NewTrip]?
     }
     struct ViewModel {
-		var locations: [Location]
+		var locations: [Location]?
+		var createdTrips: [NewTrip]?
     }
   }
 }

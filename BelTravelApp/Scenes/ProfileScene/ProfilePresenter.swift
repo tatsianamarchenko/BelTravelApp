@@ -12,20 +12,24 @@
 
 import UIKit
 
-protocol ProfilePresentationLogic
-{
-  func presentSomething(response: Profile.Something.Response)
+protocol ProfilePresentationLogic {
+	func presentUserInformation(response: Profile.Something.Response)
+	func presentNewSavedPhoto(response: Profile.Something.Response)
 }
 
-class ProfilePresenter: ProfilePresentationLogic
-{
+class ProfilePresenter: ProfilePresentationLogic {
   weak var viewController: ProfileDisplayLogic?
   
   // MARK: Do something
   
-  func presentSomething(response: Profile.Something.Response)
-  {
-    let viewModel = Profile.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+  func presentUserInformation(response: Profile.Something.Response) {
+	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", numberOfTripsOfUser: response.person?.email ?? "")
+	  viewController?.displayUserInformation(viewModel: viewModel)
   }
+
+	func presentNewSavedPhoto(response: Profile.Something.Response) {
+		let viewModel = Profile.Something.ViewModel(newImage: response.image)
+		viewController?.displayNewPhotosOfUser(viewModel: viewModel)
+	}
+
 }

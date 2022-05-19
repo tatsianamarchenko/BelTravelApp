@@ -20,18 +20,18 @@ class UpcomingTripCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-	func config(model: CreatedTrip) {
-		placeImage.image = model.image
-		placeName.text = model.name
-		tripDate.text = model.date.formatted()
-		quantityOfPeople.text = model.quantity
+	func config(model: NewTrip) {
+		placeImage.image = UIImage(systemName: "heart")
+		placeName.text = model.locationName
+		tripDate.text = model.time
+		quantityOfPeople.text = model.maxPeople
 	}
 
 }
 
-struct CreatedTrip {
-	var name: String
-	var date: Date
-	var quantity: String
-	var image: UIImage
-}
+//struct CreatedTrip {
+//	var name: String
+//	var date: Date
+//	var quantity: String
+//	var image: UIImage
+//}

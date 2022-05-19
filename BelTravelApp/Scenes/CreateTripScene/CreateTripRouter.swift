@@ -12,49 +12,38 @@
 
 import UIKit
 
-@objc protocol CreateTripRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol CreateTripRoutingLogic {
+  func routeToMainViewController()
 }
 
-protocol CreateTripDataPassing
-{
+protocol CreateTripDataPassing {
   var dataStore: CreateTripDataStore? { get }
 }
 
-class CreateTripRouter: NSObject, CreateTripRoutingLogic, CreateTripDataPassing
-{
+class CreateTripRouter: NSObject, CreateTripRoutingLogic, CreateTripDataPassing {
   weak var viewController: CreateTripViewController?
   var dataStore: CreateTripDataStore?
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+	func routeToMainViewController() {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let destinationVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+		destinationVC.regionName = dataStore?.region ?? "MinskRegion"
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToMainviewController(source: dataStore!, destination: &destinationDS)
+      navigateToMainviewController(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: CreateTripViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToMainviewController(source: CreateTripViewController, destination: MainViewController) {
+    source.show(destination, sender: nil)
+  }
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: CreateTripDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToMainviewController(source: CreateTripDataStore, destination: inout MainDataStore) {
+	  destination.region = source.region ?? "MinskRegion"
+  }
 }
