@@ -339,7 +339,7 @@ extension MainViewController: MKMapViewDelegate {
 		view.canShowCallout = false
 		if let markerAnnotationView = view as? MKMarkerAnnotationView {
 			markerAnnotationView.animatesWhenAdded = true
-		//	markerAnnotationView.clusteringIdentifier = "PinCluster"
+			markerAnnotationView.clusteringIdentifier = "PinCluster"
 			markerAnnotationView.markerTintColor = .systemMint
 			markerAnnotationView.titleVisibility = .visible
 		}
@@ -350,10 +350,8 @@ extension MainViewController: MKMapViewDelegate {
 							 didSelect view: MKAnnotationView) {
 		if let annotation = view.annotation as? MapPinAnnotation {
 			let location = annotation.location
-			let vc = SelectedPlaceViewController()
-			vc.location = location
-			vc.region = regionName
-			present(vc, animated: true, completion: nil)
+			let request = Main.Something.Request(region: regionName, selectedPopularPlace: location)
+			interactor?.setPopularLocation(request: request)
 		}
 	}
 }
