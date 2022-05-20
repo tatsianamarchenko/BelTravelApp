@@ -70,14 +70,17 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		makeRegionsCollection()
 		makeMostPopularPlacesCollection()
 		makeNextTripsCollection()
-		loadInformationForCollections()
-		loadCreatedTrips()
-		loadPins()
 		locationManager.delegate = self
 		mapView.delegate = self
 		print(regionName)
 		mapView.register(MKMarkerAnnotationView.self,
 						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		loadInformationForCollections()
+		loadCreatedTrips()
+		loadPins()
 	}
 
 	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
@@ -309,6 +312,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		if collectionView == popularPlacesCollection {
 			let request = Main.Something.Request(region: regionName, selectedPopularPlace: popularPlaces[indexPath.row])
 			interactor?.setPopularLocation(request: request)
+		}
+
+		if collectionView == nextTripsCollection {
+			router?.routeToUpcomingTripViewController()
 		}
 	}
 }

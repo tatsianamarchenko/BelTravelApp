@@ -16,6 +16,7 @@ import UIKit
 {
   func routeToAllLocationsViewController()
 	func routeToSelectedPlaceViewController()
+	func routeToUpcomingTripViewController()
 }
 
 protocol MainDataPassing
@@ -69,9 +70,31 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 
 	// MARK: Passing data
 
-	func passDataToSelectedPlaceViewcontroller(source: MainDataStore, destination: inout SelectedPlaceDataStore)
-	{
+	func passDataToSelectedPlaceViewcontroller(source: MainDataStore, destination: inout SelectedPlaceDataStore) {
 		destination.location = source.selectedPopularlocation
 		destination.region = source.region
+	}
+
+	func routeToUpcomingTripViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "UpcomingTripInformationViewController") as! UpcomingTripInformationViewController
+//		destinationVC.location = dataStore?.selectedPopularlocation
+//		destinationVC.region = dataStore?.region
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToUpcomingTripViewController(source: dataStore!, destination: &destinationDS)
+		navigateToUpcomingTripViewController(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToUpcomingTripViewController(source: MainViewController, destination: UpcomingTripInformationViewController) {
+		source.navigationController?.pushViewController(destination, animated: true)
+	}
+
+	// MARK: Passing data
+
+	func passDataToUpcomingTripViewController(source: MainDataStore, destination: inout UpcomingTripInformationDataStore) {
+//		destination.location = source.selectedPopularlocation
+//		destination.region = source.region
 	}
 }

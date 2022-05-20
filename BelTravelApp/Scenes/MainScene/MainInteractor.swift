@@ -37,8 +37,12 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 		worker?.doSomeWork()
 		region = request.region
 
-	  FirebaseDatabaseManager.shered.fetchPopularData(region: request.region) { [weak self] locations in
-			let response = Main.Something.Response(locations: locations)
+	  FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
+
+		  let popular = locations.filter { location in
+			  location.isPopular == true
+		  }
+			let response = Main.Something.Response(locations: popular)
 			self?.presenter?.presentPopularPlaces(response: response)
 		}
 	}

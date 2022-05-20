@@ -99,6 +99,7 @@ class AllLocationsViewController: UIViewController, AllLocationsDisplayLogic
 	
 	func presentLocationsInSelectedRegion(viewModel: AllLocations.Something.ViewModel) {
 		locationsArray = viewModel.locations
+		print(locationsArray)
 		locationsCollection.reloadData()
 		
 	}
@@ -161,6 +162,7 @@ extension AllLocationsViewController: UICollectionViewDelegate, UICollectionView
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let request = AllLocations.Something.Request(location: locationsArray[indexPath.row])
+		print(locationsArray[indexPath.row])
 		interactor?.setLocation(request: request)
 	}
 }

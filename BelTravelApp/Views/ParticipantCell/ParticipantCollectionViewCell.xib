@@ -16,8 +16,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lXn-84-Us6">
-                        <rect key="frame" x="5" y="5" width="40" height="40"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lXn-84-Us6">
+                        <rect key="frame" x="5" y="5.5" width="40" height="39"/>
+                        <color key="tintColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="5xu-cK-SqY"/>
                             <constraint firstAttribute="height" constant="40" id="Y1i-wu-6bh"/>
@@ -49,4 +50,7 @@
             <point key="canvasLocation" x="240.57971014492756" y="63.616071428571423"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

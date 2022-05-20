@@ -28,13 +28,3 @@ enum AllLocations {
     }
   }
 }
-
-struct Location {
-	var lat: Double
-	var lng: Double
-	var description: String
-	var image: UIImage
-	var name: String
-	var type: String
-	var firebasePath: String
-}

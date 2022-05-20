@@ -26,19 +26,33 @@ class FirebaseDatabaseManager {
 
 			var result = [Location]()
 			documents.map { queryDocumentSnapshot in
+				var wantToVisit = [FirebaseAuthManager.FullInformationAppUser]()
 				let	data = queryDocumentSnapshot.data()
+				queryDocumentSnapshot.reference.collection("FavoriteByUsers").getDocuments { querySnapshot, error in
+					guard let documents = querySnapshot?.documents else {
+						print("No documents")
+						return
+					}
+					wantToVisit.removeAll()
+					documents.map { queryDocumentSnapshot in
+						let	data = queryDocumentSnapshot.data()
+						let favorite = data["favorite"] as? String ?? ""
+						self.fetchOtherUsers(user: favorite) { user in
+							wantToVisit.append(user)
+						}
+					}
+				}
+
 				let	documentPath = queryDocumentSnapshot.reference.path
 				var image: UIImage?
 				let coordinats = data["coordinats"] as! GeoPoint
-
-					let lat = coordinats.latitude
-					let lon = coordinats.longitude
-					print(lat, lon)
-
+				let lat = coordinats.latitude
+				let lon = coordinats.longitude
 				let description = data["description"] as? String ?? ""
 				let name = data["name"] as? String ?? ""
 				let type = data["type"] as? String ?? ""
 				let path = data["image"] as? String ?? ""
+				let isPopular = data["IsPopular"] as? Bool ?? false
 				let storage = Storage.storage().reference()
 				let fileRef = storage.child(path)
 				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -48,11 +62,12 @@ class FirebaseDatabaseManager {
 						}
 
 						image = UIImage(data: data)
-						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
+						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular)
 						result.append(location)
+						print("wantToVisit")
+						print(wantToVisit)
 						complition(result)
 					}
-
 				}
 			}
 		}
@@ -68,10 +83,11 @@ class FirebaseDatabaseManager {
 	}
 
 	public func addFavoriteToDatabase(location: Location, complition: @escaping(Bool)-> Void) {
-
-		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite":  location.firebasePath]) { error in
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite":  location.firebasePath]) { [weak self] error in
 			if error == nil {
-				complition(true)
+				self?.db.document(location.firebasePath).collection("FavoriteByUsers").addDocument(data: ["favorite" : "\(Auth.auth().currentUser?.uid ?? "")"])
+						complition(true)
+
 			} else {
 				complition(false)
 			}
@@ -135,6 +151,27 @@ class FirebaseDatabaseManager {
 				return
 			}
 			documents.map { queryDocumentSnapshot in
+
+				var wantToVisit = [FirebaseAuthManager.FullInformationAppUser]()
+
+				documents.map { queryDocumentSnapshot in
+					let	data = queryDocumentSnapshot.data()
+					wantToVisit.removeAll()
+					queryDocumentSnapshot.reference.collection("FavoriteByUsers").getDocuments { querySnapshot, error in
+						guard let documents = querySnapshot?.documents else {
+							print("No documents")
+							return
+						}
+						documents.map { queryDocumentSnapshot in
+							let	data = queryDocumentSnapshot.data()
+							let favorite = data["favorite"] as? String ?? ""
+							self.fetchOtherUsers(user: favorite) { user in
+								wantToVisit.append(user)
+							}
+						}
+					}
+				}
+
 				let	data = queryDocumentSnapshot.data()
 				let path = data["favorite"] as? String ?? ""
 				self.db.document(path).getDocument { (querySnapshot, error) in
@@ -151,6 +188,7 @@ class FirebaseDatabaseManager {
 					let description = data["description"] as? String ?? ""
 					let name = data["name"] as? String ?? ""
 					let type = data["type"] as? String ?? ""
+					let isPopular = data["IsPopular"] as? Bool ?? false
 					let path = data["image"] as? String ?? ""
 					let storage = Storage.storage().reference()
 					let fileRef = storage.child(path)
@@ -160,11 +198,11 @@ class FirebaseDatabaseManager {
 								return
 							}
 							image = UIImage(data: data)
-							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
+							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular)
 							result.append(location)
 
 						}
-						print(result.count)
+						print(wantToVisit)
 						complition(result)
 					}
 				}
@@ -172,53 +210,8 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-	public func fetchPopularData(region: String, complition: @escaping ([Location])-> Void) {
-		var result = [Location]()
-		db.collection("PopularPlaces").document(region).collection("locatiosReferences").getDocuments { (querySnapshot, error) in
-			guard let documents = querySnapshot?.documents else {
-				print("No documents")
-				return
-			}
-			documents.map { queryDocumentSnapshot in
-				let	data = queryDocumentSnapshot.data()
-				let path = data["ref"] as? String ?? ""
-				self.db.document(path).getDocument { (querySnapshot, error) in
-					guard let data = querySnapshot?.data() else {
-						print("No documents")
-						return
-					}
-					let	documentPath = path
-					var image: UIImage?
-					let coordinats = data["coordinats"] as! GeoPoint
-					let lat = coordinats.latitude
-					let lon = coordinats.longitude
-					print(lat, lon)
-					let description = data["description"] as? String ?? ""
-					let name = data["name"] as? String ?? ""
-					let type = data["type"] as? String ?? ""
-					let path = data["image"] as? String ?? ""
-					let storage = Storage.storage().reference()
-					let fileRef = storage.child(path)
-					fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-						if error == nil {
-							guard let data = data else {
-								return
-							}
-							image = UIImage(data: data)
-							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
-							result.append(location)
-
-						}
-						print(result.count)
-						complition(result)
-					}
-				}
-			}
-		}
-	}
-	
 	public func fetchUser(complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
-		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").getDocument(completion: { (querySnapshot, error) in
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").getDocument { (querySnapshot, error) in
 			guard let data = querySnapshot?.data() else {
 				print("No document")
 				return
@@ -241,7 +234,34 @@ class FirebaseDatabaseManager {
 					complition(user)
 				}
 			}
-		})
+		}
+	}
+
+	public func fetchOtherUsers(user: String, complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
+		db.collection("users").document(user).getDocument { (querySnapshot, error) in
+			guard let data = querySnapshot?.data() else {
+				print("No document")
+				return
+			}
+			var image: UIImage?
+			let email = data["email"] as? String ?? ""
+			let name = data["name"] as? String ?? ""
+			let lastName = data["lastName"] as? String ?? ""
+			let defaultLocation = data["defaultLocation"] as? String ?? ""
+			let path = data["image"] as? String ?? ""
+			let storage = Storage.storage().reference()
+			let fileRef = storage.child(path)
+			fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+				if error == nil {
+					guard let data = data else {
+						return
+					}
+					image = UIImage(data: data)
+					let user = FirebaseAuthManager.FullInformationAppUser(email: email, name: name, lastName: lastName, defaultLocation: defaultLocation, image: image)
+					complition(user)
+				}
+			}
+		}
 	}
 
 	public func addNewTripToDatabase(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
@@ -286,14 +306,4 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-}
-
-struct NewTrip {
-	var locationPath: String
-	var locationName: String
-	var time: String
-	var maxPeople: String
-	var description: String
-	var creator: String?
-	var region: String
 }

@@ -73,6 +73,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	  titleName.title = location?.name
 	  locationImage.image = location?.image
 	  desctiptionLable.text = location?.description
+	  peopleWhoWansToParticipate = (location?.wantToVisit)!
 	  addTLocationToDataStore()
   }
   
@@ -154,8 +155,8 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if collectionView == whoWantToVisitThisPlaceCollection {
 
-			if peopleWhoWansToParticipate.isEmpty {
-				noParticipantsLable.isHidden = false
+			if !peopleWhoWansToParticipate.isEmpty {
+				noParticipantsLable.isHidden = true
 			}
 
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
@@ -202,7 +203,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == whoWantToVisitThisPlaceCollection {
-			return CGSize(width: 100, height: 100)
+			return CGSize(width: 200, height: 100)
 		}
 
 		if collectionView == photosOfOtherUsersCollection {
