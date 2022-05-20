@@ -33,6 +33,7 @@ class AllLocationsRouter: NSObject, AllLocationsRoutingLogic, AllLocationsDataPa
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as! SelectedPlaceViewController
 	  destinationVC.location = dataStore?.location
+	  destinationVC.region = dataStore?.region
       var destinationDS = destinationVC.router!.dataStore!
       passDataToSomewhere(source: dataStore!, destination: &destinationDS)
       navigateToSomewhere(source: viewController!, destination: destinationVC)
@@ -49,5 +50,6 @@ class AllLocationsRouter: NSObject, AllLocationsRoutingLogic, AllLocationsDataPa
   func passDataToSomewhere(source: AllLocationsDataStore, destination: inout SelectedPlaceDataStore)
   {
 	  destination.location = source.location
+	  destination.region = source.region
   }
 }

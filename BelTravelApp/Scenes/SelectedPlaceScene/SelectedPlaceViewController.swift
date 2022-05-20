@@ -97,6 +97,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	}
 
 	func addTLocationToDataStore() {
+		print(region)
 		let request = SelectedPlace.Something.Request(location: location!, region: region!)
 		interactor?.addToDataStore(request: request)
 	}

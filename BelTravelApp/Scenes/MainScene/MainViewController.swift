@@ -121,11 +121,12 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	}
 
 var regionName = "MinskRegion"
+
 	func loadInformationForCollections() {
 		mapView.removeAnnotations(mapView.annotations)
-    let request = Main.Something.Request(region: regionName)
-    interactor?.loadInformation(request: request)
-  }
+		let request = Main.Something.Request(region: regionName)
+		interactor?.loadInformation(request: request)
+	}
   
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel) {
 		popularPlaces = viewModel.locations!
