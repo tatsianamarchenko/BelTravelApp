@@ -23,12 +23,18 @@ class FirebaseDatabaseManager {
 				print("No documents")
 				return
 			}
+
 			var result = [Location]()
 			documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let	documentPath = queryDocumentSnapshot.reference.path
 				var image: UIImage?
-				let coordinats = data["coordinats"] as? String ?? ""
+				let coordinats = data["coordinats"] as! GeoPoint
+
+					let lat = coordinats.latitude
+					let lon = coordinats.longitude
+					print(lat, lon)
+
 				let description = data["description"] as? String ?? ""
 				let name = data["name"] as? String ?? ""
 				let type = data["type"] as? String ?? ""
@@ -42,7 +48,7 @@ class FirebaseDatabaseManager {
 						}
 
 						image = UIImage(data: data)
-						let location = Location(coordinats: coordinats, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
+						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
 						result.append(location)
 						complition(result)
 					}
@@ -138,7 +144,10 @@ class FirebaseDatabaseManager {
 					}
 					let	documentPath = path
 					var image: UIImage?
-					let coordinats = data["coordinats"] as? String ?? ""
+					let coordinats = data["coordinats"] as! GeoPoint
+					let lat = coordinats.latitude
+					let lon = coordinats.longitude
+					print(lat, lon)
 					let description = data["description"] as? String ?? ""
 					let name = data["name"] as? String ?? ""
 					let type = data["type"] as? String ?? ""
@@ -151,7 +160,7 @@ class FirebaseDatabaseManager {
 								return
 							}
 							image = UIImage(data: data)
-							let location = Location(coordinats: coordinats, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
+							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath)
 							result.append(location)
 
 						}

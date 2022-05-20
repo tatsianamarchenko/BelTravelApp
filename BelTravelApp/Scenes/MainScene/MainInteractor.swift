@@ -11,11 +11,13 @@
 //
 
 import UIKit
+import MapKit
 
 protocol MainBusinessLogic {
   func loadInformation(request: Main.Something.Request)
 	func setPopularLocation(request: Main.Something.Request)
 	func loadCreatedTrips(request: Main.Something.Request)
+	func loadPins(request: Main.Something.Request)
 }
 
 protocol MainDataStore {
@@ -50,6 +52,16 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new in
 			let response = Main.Something.Response(locations: nil, new: new)
 			self?.presenter?.presentCreatedTrips(response: response)
+		}
+	}
+
+	func loadPins(request: Main.Something.Request) {
+		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
+			let latitude = locations.last?.lat
+			let longitude = locations.last?.lng
+			let loc = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+			let response = Main.Something.Response(location: MapPinAnnotation(title: locations.last!.name, location: locations.last!, coordinate: loc))
+			self?.presenter?.presentPins(response: response)
 		}
 	}
 }

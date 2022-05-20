@@ -30,7 +30,8 @@ enum AllLocations {
 }
 
 struct Location {
-	var coordinats: String
+	var lat: Double
+	var lng: Double
 	var description: String
 	var image: UIImage
 	var name: String

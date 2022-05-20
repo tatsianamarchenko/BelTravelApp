@@ -22,11 +22,13 @@ enum Main {
     }
     struct Response {
 		var locations: [Location]?
+		var location: MapPinAnnotation?
 		var new: [NewTrip]?
     }
     struct ViewModel {
 		var locations: [Location]?
 		var createdTrips: [NewTrip]?
+		var location: MapPinAnnotation?
     }
   }
 }

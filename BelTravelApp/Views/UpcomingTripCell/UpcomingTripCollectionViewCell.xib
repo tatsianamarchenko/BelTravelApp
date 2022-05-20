@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back1" translatesAutoresizingMaskIntoConstraints="NO" id="biL-je-dNg">
-                        <rect key="frame" x="10" y="10" width="80" height="80"/>
+                        <rect key="frame" x="5" y="10" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="W8m-HO-KDV"/>
                             <constraint firstAttribute="width" constant="80" id="pv7-1K-FaU"/>
@@ -28,20 +28,20 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cu-gI-8dg">
-                        <rect key="frame" x="100" y="10" width="153" height="20"/>
-                        <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cu-gI-8dg">
+                        <rect key="frame" x="95" y="10" width="158" height="12"/>
+                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfW-d4-ew5">
-                        <rect key="frame" x="100" y="35" width="153" height="17.5"/>
+                        <rect key="frame" x="115" y="27" width="138" height="17.5"/>
                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEO-lW-h7d">
-                        <rect key="frame" x="100" y="57.5" width="153" height="17.5"/>
+                        <rect key="frame" x="115" y="49.5" width="138" height="17.5"/>
                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,14 +54,14 @@
                 <constraint firstAttribute="trailing" secondItem="dfW-d4-ew5" secondAttribute="trailing" constant="10" id="2rg-Vr-OBz"/>
                 <constraint firstAttribute="trailing" secondItem="7Cu-gI-8dg" secondAttribute="trailing" constant="10" id="7f9-VD-luM"/>
                 <constraint firstItem="dEO-lW-h7d" firstAttribute="top" secondItem="dfW-d4-ew5" secondAttribute="bottom" constant="5" id="L3d-yH-fP9"/>
-                <constraint firstItem="dfW-d4-ew5" firstAttribute="leading" secondItem="biL-je-dNg" secondAttribute="trailing" constant="10" id="W2J-ic-QoX"/>
+                <constraint firstItem="dfW-d4-ew5" firstAttribute="leading" secondItem="biL-je-dNg" secondAttribute="trailing" constant="30" id="W2J-ic-QoX"/>
                 <constraint firstItem="biL-je-dNg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="XdK-rm-zNo"/>
                 <constraint firstItem="7Cu-gI-8dg" firstAttribute="leading" secondItem="biL-je-dNg" secondAttribute="trailing" constant="10" id="ofs-S4-5bK"/>
-                <constraint firstItem="biL-je-dNg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="ohE-1z-HE6"/>
+                <constraint firstItem="biL-je-dNg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ohE-1z-HE6"/>
                 <constraint firstAttribute="bottom" secondItem="biL-je-dNg" secondAttribute="bottom" constant="10" id="rNx-Sx-K7T"/>
                 <constraint firstItem="dfW-d4-ew5" firstAttribute="top" secondItem="7Cu-gI-8dg" secondAttribute="bottom" constant="5" id="tcb-oW-pfe"/>
                 <constraint firstAttribute="trailing" secondItem="dEO-lW-h7d" secondAttribute="trailing" constant="10" id="tvg-uG-b6h"/>
-                <constraint firstItem="dEO-lW-h7d" firstAttribute="leading" secondItem="biL-je-dNg" secondAttribute="trailing" constant="10" id="yWy-a8-L0a"/>
+                <constraint firstItem="dEO-lW-h7d" firstAttribute="leading" secondItem="biL-je-dNg" secondAttribute="trailing" constant="30" id="yWy-a8-L0a"/>
                 <constraint firstItem="7Cu-gI-8dg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="yxE-7j-wPj"/>
             </constraints>
             <size key="customSize" width="263" height="100"/>

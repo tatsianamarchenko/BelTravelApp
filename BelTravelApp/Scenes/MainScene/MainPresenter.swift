@@ -16,6 +16,7 @@ protocol MainPresentationLogic {
 	func presentPopularPlaces(response: Main.Something.Response)
 	func presentSelectedPopularlocation()
 	func presentCreatedTrips(response: Main.Something.Response)
+	func presentPins(response: Main.Something.Response)
 }
 
 class MainPresenter: MainPresentationLogic {
@@ -37,4 +38,8 @@ class MainPresenter: MainPresentationLogic {
 		viewController?.displayCreatedTrips(viewModel: viewModel)
 	}
 
+	func presentPins(response: Main.Something.Response) {
+		let viewModel = Main.Something.ViewModel(locations: nil, createdTrips: response.new, location: response.location)
+		viewController?.displayPins(viewModel: viewModel)
+	}
 }

@@ -89,12 +89,13 @@
 		BFBF0A5A28343CDE0000559E /* SliderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A5428343CDE0000559E /* SliderModels.swift */; };
 		BFBF0A5D28343D270000559E /* SliderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBF0A5B28343D270000559E /* SliderCollectionViewCell.xib */; };
 		BFBF0A5E28343D270000559E /* SliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A5C28343D270000559E /* SliderCollectionViewCell.swift */; };
+		BFC0BF50283794F400BFC9EC /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */; };
 		BFC0DFA228357BD500FFAEB6 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */; };
 		BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
-		BFCC29A7282AB2C6004FE1FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */; };
+		BFCC29A7282AB2C6004FE1FE /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A6282AB2C6004FE1FE /* assets.xcassets */; };
 		BFCC29AA282AB2C6004FE1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A8282AB2C6004FE1FE /* LaunchScreen.storyboard */; };
 		BFCC29BF282AF4EB004FE1FE /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29B9282AF4EB004FE1FE /* MainPresenter.swift */; };
 		BFCC29C0282AF4EB004FE1FE /* MainWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29BA282AF4EB004FE1FE /* MainWorker.swift */; };
@@ -190,13 +191,14 @@
 		BFBF0A5428343CDE0000559E /* SliderModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderModels.swift; sourceTree = "<group>"; };
 		BFBF0A5B28343D270000559E /* SliderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCollectionViewCell.xib; sourceTree = "<group>"; };
 		BFBF0A5C28343D270000559E /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BFCC29A4282AB2B3004FE1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFCC29A6282AB2C6004FE1FE /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		BFCC29A9282AB2C6004FE1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFCC29AB282AB2C6004FE1FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFCC29B9282AF4EB004FE1FE /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
@@ -353,6 +355,14 @@
 			path = SliderCell;
 			sourceTree = "<group>";
 		};
+		BFC0BF4E283794D000BFC9EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BFC0DF9F28357BA500FFAEB6 /* FavoriteCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,7 +397,8 @@
 				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
 				BFCC29B1282AB7F8004FE1FE /* Scenes */,
 				BFD57561282BEDEA007CBBE8 /* Views */,
-				BFCC29A6282AB2C6004FE1FE /* Assets.xcassets */,
+				BFCC29A6282AB2C6004FE1FE /* assets.xcassets */,
+				BFC0BF4E283794D000BFC9EC /* Models */,
 				BFCC29AB282AB2C6004FE1FE /* Info.plist */,
 				BF5B6274282C010300D5844D /* GoogleService-Info.plist */,
 				BFBF0A47283437B20000559E /* Managers */,
@@ -594,7 +605,7 @@
 				BFCC29AA282AB2C6004FE1FE /* LaunchScreen.storyboard in Resources */,
 				BF5B6269282BFB7F00D5844D /* PlaceCollectionViewCell.xib in Resources */,
 				BF5B626E282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib in Resources */,
-				BFCC29A7282AB2C6004FE1FE /* Assets.xcassets in Resources */,
+				BFCC29A7282AB2C6004FE1FE /* assets.xcassets in Resources */,
 				BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */,
 				BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */,
 				BF5B6275282C010300D5844D /* GoogleService-Info.plist in Resources */,
@@ -734,6 +745,7 @@
 				BFBB173E2832887D00F6C6A9 /* AllLocationsRouter.swift in Sources */,
 				BFA60BC7282B1EF3006B3DC4 /* CreateTripInteractor.swift in Sources */,
 				BFA60B9D282B1E6C006B3DC4 /* FavoritePresenter.swift in Sources */,
+				BFC0BF50283794F400BFC9EC /* MapAnnotation.swift in Sources */,
 				BFA60BB7282B1EC3006B3DC4 /* ChatWorker.swift in Sources */,
 				BFBB173F2832887D00F6C6A9 /* AllLocationsModels.swift in Sources */,
 				BFA60B92282B1E17006B3DC4 /* SelectedPlaceWorker.swift in Sources */,

@@ -12,11 +12,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 protocol MainDisplayLogic: class {
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel)
 	func presentSelectedPopularPlaceViewController()
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel)
+	func displayPins(viewModel: Main.Something.ViewModel)
 }
 
 class MainViewController: UIViewController, MainDisplayLogic {
@@ -70,7 +72,12 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		makeNextTripsCollection()
 		loadInformationForCollections()
 		loadCreatedTrips()
+		loadPins()
+		locationManager.delegate = self
+		mapView.delegate = self
 		print(regionName)
+		mapView.register(MKMarkerAnnotationView.self,
+						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
 	}
 
 	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
@@ -82,6 +89,8 @@ class MainViewController: UIViewController, MainDisplayLogic {
   ]
 	var popularPlaces = [Location]()
 	var createdTrips = [NewTrip]()
+
+	let locationManager = CLLocationManager()
 
 	@IBOutlet weak var regionsCollection: UICollectionView!
 	@IBOutlet weak var nextTripsCollection: UICollectionView!
@@ -113,6 +122,7 @@ class MainViewController: UIViewController, MainDisplayLogic {
 
 var regionName = "MinskRegion"
 	func loadInformationForCollections() {
+		mapView.removeAnnotations(mapView.annotations)
     let request = Main.Something.Request(region: regionName)
     interactor?.loadInformation(request: request)
   }
@@ -127,9 +137,19 @@ var regionName = "MinskRegion"
 		interactor?.loadCreatedTrips(request: request)
 	}
 
+	func loadPins() {
+		let request = Main.Something.Request(region: regionName)
+		interactor?.loadPins(request: request)
+	}
+
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel) {
 		createdTrips = viewModel.createdTrips!
 		nextTripsCollection.reloadData()
+	}
+
+	func displayPins(viewModel: Main.Something.ViewModel) {
+		let pin = viewModel.location!
+		self.mapView.addAnnotations([pin])
 	}
 
 	func presentSelectedPopularPlaceViewController() {
@@ -226,7 +246,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			return CGSize(width: 150, height: 150)
 		}
 		if collectionView == nextTripsCollection {
-			return CGSize(width: 200, height: 100)
+			return CGSize(width: 250, height: 100)
 		}
 
 		return CGSize(width: 100, height: 100)
@@ -289,5 +309,64 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			let request = Main.Something.Request(region: regionName, selectedPopularPlace: popularPlaces[indexPath.row])
 			interactor?.setPopularLocation(request: request)
 		}
+	}
+}
+
+
+extension MainViewController: CLLocationManagerDelegate {
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else {
+			return }
+		manager.stopUpdatingLocation()
+		let regionRadius: CLLocationDistance = 3000
+		mapView.centerToLocation(CLLocation(latitude: locValue.latitude, longitude: locValue.longitude), regionRadius: regionRadius)
+	}
+}
+
+extension MainViewController: MKMapViewDelegate {
+
+	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+		var annotationView: MKAnnotationView?
+		if let annotation = annotation as? MapPinAnnotation {
+			annotationView = setupAnnotationView(for: annotation, on: mapView)
+		}
+		return annotationView
+	}
+
+	private func setupAnnotationView(for annotation: MapPinAnnotation, on mapView: MKMapView) -> MKAnnotationView {
+		let identifier = NSStringFromClass(MapPinAnnotation.self)
+		let view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier, for: annotation)
+		view.canShowCallout = false
+		if let markerAnnotationView = view as? MKMarkerAnnotationView {
+			markerAnnotationView.animatesWhenAdded = true
+		//	markerAnnotationView.clusteringIdentifier = "PinCluster"
+			markerAnnotationView.markerTintColor = .systemMint
+			markerAnnotationView.titleVisibility = .visible
+		}
+		return view
+	}
+
+	func mapView(_ mapView: MKMapView,
+							 didSelect view: MKAnnotationView) {
+		if let annotation = view.annotation as? MapPinAnnotation {
+			let location = annotation.location
+			let vc = SelectedPlaceViewController()
+			vc.location = location
+			vc.region = regionName
+			present(vc, animated: true, completion: nil)
+		}
+	}
+}
+
+extension MKMapView {
+	func centerToLocation(
+		_ location: CLLocation,
+		regionRadius: CLLocationDistance = 650000
+	) {
+		let coordinateRegion = MKCoordinateRegion(
+			center: location.coordinate,
+			latitudinalMeters: regionRadius,
+			longitudinalMeters: regionRadius)
+		setRegion(coordinateRegion, animated: true)
 	}
 }
