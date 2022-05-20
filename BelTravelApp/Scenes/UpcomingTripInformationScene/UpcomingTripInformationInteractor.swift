@@ -19,14 +19,14 @@ protocol UpcomingTripInformationBusinessLogic
 
 protocol UpcomingTripInformationDataStore
 {
-  //var name: String { get set }
+  var newTrip: NewTrip? { get set }
 }
 
 class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, UpcomingTripInformationDataStore
 {
   var presenter: UpcomingTripInformationPresentationLogic?
   var worker: UpcomingTripInformationWorker?
-  //var name: String = ""
+  var newTrip: NewTrip?
   
   // MARK: Do something
   

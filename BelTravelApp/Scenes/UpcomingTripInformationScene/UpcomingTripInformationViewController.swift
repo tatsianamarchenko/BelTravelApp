@@ -12,34 +12,29 @@
 
 import UIKit
 
-protocol UpcomingTripInformationDisplayLogic: class
-{
+protocol UpcomingTripInformationDisplayLogic: class {
   func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel)
 }
 
-class UpcomingTripInformationViewController: UIViewController, UpcomingTripInformationDisplayLogic
-{
+class UpcomingTripInformationViewController: UIViewController, UpcomingTripInformationDisplayLogic {
   var interactor: UpcomingTripInformationBusinessLogic?
   var router: (NSObjectProtocol & UpcomingTripInformationRoutingLogic & UpcomingTripInformationDataPassing)?
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
   
-  private func setup()
-  {
+  private func setup() {
     let viewController = self
     let interactor = UpcomingTripInformationInteractor()
     let presenter = UpcomingTripInformationPresenter()
@@ -54,8 +49,7 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let scene = segue.identifier {
       let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
       if let router = router, router.responds(to: selector) {
@@ -66,24 +60,33 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
   // MARK: View lifecycle
   
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
-  }
+  override func viewDidLoad() {
+		super.viewDidLoad()
+		locationTitle.title = tripInformation?.locationName
+		locationImage.image = UIImage(named: "back1")
+		tripStartPlace.text = tripInformation?.description
+		tripTime.text = tripInformation?.time
+		doSomething()
+	}
   
   // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
+	var tripInformation: NewTrip?
+
+	@IBOutlet weak var locationTitle: UINavigationItem!
+	@IBOutlet weak var locationImage: UIImageView!
+	@IBOutlet weak var tripStartPlace: UILabel!
+	@IBOutlet weak var tripTime: UILabel!
+	@IBOutlet weak var whoPacticipateCollection: UICollectionView!
+	@IBAction func chatButtonAction(_ sender: Any) {
+	}
+	
+	func doSomething() {
     let request = UpcomingTripInformation.Something.Request()
     interactor?.doSomething(request: request)
+
   }
   
-  func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel)
-  {
+  func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel) {
     //nameTextField.text = viewModel.name
   }
 }

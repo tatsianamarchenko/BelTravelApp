@@ -18,11 +18,13 @@ protocol MainBusinessLogic {
 	func setPopularLocation(request: Main.Something.Request)
 	func loadCreatedTrips(request: Main.Something.Request)
 	func loadPins(request: Main.Something.Request)
+	func setNewTripInformation(request: Main.Something.Request)
 }
 
 protocol MainDataStore {
   var region: String { get set }
 	var selectedPopularlocation: Location? { get set }
+	var newTrip: NewTrip? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
@@ -30,6 +32,7 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
   var worker: MainWorker?
   var region: String = ""
 	var selectedPopularlocation: Location?
+	var newTrip: NewTrip?
   // MARK: Do something
   
   func loadInformation(request: Main.Something.Request) {
@@ -51,6 +54,12 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 		selectedPopularlocation = request.selectedPopularPlace
 		self.presenter?.presentSelectedPopularlocation()
 	}
+
+	func setNewTripInformation(request: Main.Something.Request) {
+		newTrip = request.newTrip
+		self.presenter?.presentNewTripInformation()
+	}
+
 
 	func loadCreatedTrips(request: Main.Something.Request) {
 		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new in

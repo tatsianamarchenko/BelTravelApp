@@ -17,6 +17,7 @@ import CoreLocation
 protocol MainDisplayLogic: class {
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel)
 	func presentSelectedPopularPlaceViewController()
+	func presentUpcomingTripViewController() 
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel)
 	func displayPins(viewModel: Main.Something.ViewModel)
 }
@@ -315,8 +316,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		}
 
 		if collectionView == nextTripsCollection {
-			router?.routeToUpcomingTripViewController()
+			let request = Main.Something.Request(region: regionName, newTrip: createdTrips[indexPath.row])
+			interactor?.setNewTripInformation(request: request)
 		}
+	}
+
+	func presentUpcomingTripViewController() {
+		router?.routeToUpcomingTripViewController()
 	}
 }
 

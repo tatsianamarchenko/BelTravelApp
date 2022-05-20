@@ -78,8 +78,7 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 	func routeToUpcomingTripViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "UpcomingTripInformationViewController") as! UpcomingTripInformationViewController
-//		destinationVC.location = dataStore?.selectedPopularlocation
-//		destinationVC.region = dataStore?.region
+		destinationVC.tripInformation = dataStore?.newTrip
 		var destinationDS = destinationVC.router!.dataStore!
 		passDataToUpcomingTripViewController(source: dataStore!, destination: &destinationDS)
 		navigateToUpcomingTripViewController(source: viewController!, destination: destinationVC)
@@ -94,7 +93,6 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 	// MARK: Passing data
 
 	func passDataToUpcomingTripViewController(source: MainDataStore, destination: inout UpcomingTripInformationDataStore) {
-//		destination.location = source.selectedPopularlocation
-//		destination.region = source.region
+		destination.newTrip = source.newTrip
 	}
 }

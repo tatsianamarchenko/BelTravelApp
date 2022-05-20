@@ -15,6 +15,7 @@ import UIKit
 protocol MainPresentationLogic {
 	func presentPopularPlaces(response: Main.Something.Response)
 	func presentSelectedPopularlocation()
+	func presentNewTripInformation()
 	func presentCreatedTrips(response: Main.Something.Response)
 	func presentPins(response: Main.Something.Response)
 }
@@ -31,6 +32,10 @@ class MainPresenter: MainPresentationLogic {
 
 	func presentSelectedPopularlocation() {
 		viewController?.presentSelectedPopularPlaceViewController()
+	}
+
+	func presentNewTripInformation() {
+		viewController?.presentUpcomingTripViewController()
 	}
 
 	func presentCreatedTrips(response: Main.Something.Response) {
