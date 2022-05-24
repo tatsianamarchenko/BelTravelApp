@@ -12,20 +12,18 @@
 
 import UIKit
 
-enum UpcomingTripInformation
-{
+enum UpcomingTripInformation {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
+		var trip: NewTrip
     }
-    struct Response
-    {
+    struct Response {
+		var users: [FirebaseAuthManager.FullInformationAppUser]
     }
-    struct ViewModel
-    {
+    struct ViewModel {
+		var users: [FirebaseAuthManager.FullInformationAppUser]
     }
   }
 }

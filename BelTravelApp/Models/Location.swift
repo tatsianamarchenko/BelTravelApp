@@ -18,6 +18,7 @@ struct NewTrip {
 	var creator: String?
 	var region: String
 	var participants: [FirebaseAuthManager.FullInformationAppUser]?
+	var locationOfParticipants: String
 }
 
 struct Location {

@@ -14,7 +14,7 @@ import UIKit
 
 protocol UpcomingTripInformationPresentationLogic
 {
-  func presentSomething(response: UpcomingTripInformation.Something.Response)
+  func presentParticipants(response: UpcomingTripInformation.Something.Response)
 }
 
 class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic
@@ -23,9 +23,9 @@ class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: UpcomingTripInformation.Something.Response)
+  func presentParticipants(response: UpcomingTripInformation.Something.Response)
   {
-    let viewModel = UpcomingTripInformation.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+	  let viewModel = UpcomingTripInformation.Something.ViewModel(users: response.users)
+    viewController?.displayUsers(viewModel: viewModel)
   }
 }

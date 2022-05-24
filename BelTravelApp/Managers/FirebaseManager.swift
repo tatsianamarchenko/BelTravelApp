@@ -277,7 +277,7 @@ class FirebaseDatabaseManager {
 			let name = data["name"] as? String ?? ""
 			let lastName = data["lastName"] as? String ?? ""
 			let defaultLocation = data["defaultLocation"] as? String ?? ""
-			let path = data["image"] as? String ?? ""
+			let path = data["ref"] as? String ?? ""
 			let storage = Storage.storage().reference()
 			let fileRef = storage.child(path)
 			fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -318,17 +318,12 @@ class FirebaseDatabaseManager {
 		path.collection("participants").document().setData(["participant" : Auth.auth().currentUser?.uid as Any])
 	}
 
-	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip], [FirebaseAuthManager.FullInformationAppUser])-> Void) {
-		var participants = [FirebaseAuthManager.FullInformationAppUser]()
+	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip])-> Void) {
 		var result = [NewTrip]()
+		var participants = [FirebaseAuthManager.FullInformationAppUser]()
 		self.db.collection("\(collection)Trips").addSnapshotListener { (querySnapshot, error) in
-			guard let documents = querySnapshot?.documents else {
-				print("No documents")
-				return
-			}
-			
-			documents.map { queryDocumentSnapshot in
 
+			querySnapshot?.documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let locationPath = data["locationPath"] as? String ?? ""
 				let locationName = data["locationName"] as? String ?? ""
@@ -337,34 +332,36 @@ class FirebaseDatabaseManager {
 				let numberOfPeople = data["numberOfPeople"] as? String ?? ""
 				let time = data["time"] as? String ?? ""
 				let region = data["region"] as? String ?? ""
-					self.fetchParticipants(collection: "\(collection)Trips", document: queryDocumentSnapshot.documentID) { users in
-					participants = users
-						complition(result, participants)
-						print(result)
-			}
-				let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: participants)
-				result.append(location)
-				//	}
-
+				let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: participants, locationOfParticipants: queryDocumentSnapshot.reference.documentID)
+					result.append(location)
+					complition(result)
+					print(result)
 			}
 		}
 	}
 
 	public func fetchParticipants(collection: String, document: String, complition: @escaping ([FirebaseAuthManager.FullInformationAppUser])-> Void) {
+
 		var participants = [FirebaseAuthManager.FullInformationAppUser]()
-		self.db.collection(collection).document(document).addSnapshotListener { (querySnapshot, error) in
+		self.db.collection(collection).document(document).collection("participants").addSnapshotListener { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
 
-			querySnapshot?.reference.collection("participants").addSnapshotListener {  querySnapshot, error in
-
-				querySnapshot?.documents.map { queryDocumentSnapshot in
-					let	data = queryDocumentSnapshot.data()
-					let participant = data["participant"] as? String ?? ""
-					self.fetchOtherUsers(user: participant) { user in
-						participants.append(user)
-						complition(participants)
-					}
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let participant = data["participant"] as? String ?? ""
+				self.fetchOtherUsers(user: participant) { user in
+					participants.append(user)
+					complition(participants)
 				}
 			}
+
 		}
 	}
 }
+
+
+
+

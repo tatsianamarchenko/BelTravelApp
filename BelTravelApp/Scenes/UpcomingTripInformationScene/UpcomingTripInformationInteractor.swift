@@ -14,7 +14,7 @@ import UIKit
 
 protocol UpcomingTripInformationBusinessLogic
 {
-  func doSomething(request: UpcomingTripInformation.Something.Request)
+  func loadUsers(request: UpcomingTripInformation.Something.Request)
 }
 
 protocol UpcomingTripInformationDataStore
@@ -30,12 +30,14 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
   
   // MARK: Do something
   
-  func doSomething(request: UpcomingTripInformation.Something.Request)
+  func loadUsers(request: UpcomingTripInformation.Something.Request)
   {
     worker = UpcomingTripInformationWorker()
     worker?.doSomeWork()
-    
-    let response = UpcomingTripInformation.Something.Response()
-    presenter?.presentSomething(response: response)
+
+	  FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)") { [weak self] users in
+		  let response = UpcomingTripInformation.Something.Response(users: users)
+		  self?.presenter?.presentParticipants(response: response)
+	  }
   }
 }

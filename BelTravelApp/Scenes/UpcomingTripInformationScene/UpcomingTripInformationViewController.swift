@@ -13,7 +13,7 @@
 import UIKit
 
 protocol UpcomingTripInformationDisplayLogic: class {
-  func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel)
+  func displayUsers(viewModel: UpcomingTripInformation.Something.ViewModel)
 }
 
 class UpcomingTripInformationViewController: UIViewController, UpcomingTripInformationDisplayLogic {
@@ -62,14 +62,14 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		guard let tripInformation = tripInformation else {return}
+		guard var tripInformation = tripInformation else {return}
 		locationTitle.title = tripInformation.locationName
 		locationImage.image = UIImage(named: "back1")
 		tripStartPlace.text = tripInformation.description
 		tripTime.text = tripInformation.time
 		participantsArray = tripInformation.participants!
 		makeWhoWantToVisitThisPlaceCollection()
-		doSomething()
+		loadParticipants()
 	}
 
 	func makeWhoWantToVisitThisPlaceCollection () {
@@ -97,14 +97,15 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	}
 
 	
-	func doSomething() {
-    let request = UpcomingTripInformation.Something.Request()
-    interactor?.doSomething(request: request)
+	func loadParticipants() {
+		let request = UpcomingTripInformation.Something.Request(trip: tripInformation!)
+    interactor?.loadUsers(request: request)
 
   }
   
-  func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel) {
-    //nameTextField.text = viewModel.name
+  func displayUsers(viewModel: UpcomingTripInformation.Something.ViewModel) {
+	  self.participantsArray = viewModel.users
+	  self.whoPacticipateCollection.reloadData()
   }
 }
 

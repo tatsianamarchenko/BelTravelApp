@@ -62,8 +62,7 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 
 
 	func loadCreatedTrips(request: Main.Something.Request) {
-		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new, participants  in
-			print(participants)
+		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new  in
 			let response = Main.Something.Response(locations: nil, new: new)
 			self?.presenter?.presentCreatedTrips(response: response)
 		}
