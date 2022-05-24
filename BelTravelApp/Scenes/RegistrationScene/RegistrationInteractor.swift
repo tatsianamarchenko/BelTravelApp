@@ -25,23 +25,28 @@ protocol RegistrationDataStore
 
 class RegistrationInteractor: RegistrationBusinessLogic, RegistrationDataStore
 {
-  var presenter: RegistrationPresentationLogic?
-  var worker: RegistrationWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func createNewUser(request: Registration.Something.Request)
-  {
-//    worker = RegistrationWorker()
-//    worker?.doSomeWork()
-	  FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward), fullInformationAboutUser: FirebaseAuthManager.FullInformationAppUser(email: request.email, name: request.name, lastName: request.lastName, defaultLocation: request.defaultLocation, image: nil)) { [weak self] error in
-		  if error == nil {
-			  if Auth.auth().currentUser != nil {
-				  let response = Registration.Something.Response()
-				  self?.presenter?.presentAuthorized(response: response)
-			  }
-		  }
-	  }
-  }
+	var presenter: RegistrationPresentationLogic?
+	var worker: RegistrationWorker?
+	//var name: String = ""
+
+	// MARK: Do something
+
+	func createNewUser(request: Registration.Something.Request)
+	{
+		//    worker = RegistrationWorker()
+		//    worker?.doSomeWork()
+		FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward), fullInformationAboutUser: FirebaseAuthManager.FullInformationAppUser(email: request.email, name: request.name, lastName: request.lastName, defaultLocation: request.defaultLocation, image: nil)) { [weak self] error in
+			if error == nil {
+				if let data = request.image?.pngData() {
+					FirebaseDatabaseManager().uploadImageData(data: data, serverFileName: "\(request.name).png") { [weak self] (isSuccess, url) in
+						print("uploadImageData: \(isSuccess), \(url!)")
+						if Auth.auth().currentUser != nil {
+							let response = Registration.Something.Response()
+							self?.presenter?.presentAuthorized(response: response)
+						}
+					}
+				}
+			}
+		}
+	}
 }

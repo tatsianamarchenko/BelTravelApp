@@ -14,7 +14,7 @@ import UIKit
 
 protocol ProfileDisplayLogic: class {
 	func displayUserInformation(viewModel: Profile.Something.ViewModel)
-	func displayNewPhotosOfUser(viewModel: Profile.Something.ViewModel)
+	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel)
 }
 
 class ProfileViewController: UIViewController, ProfileDisplayLogic {
@@ -61,16 +61,23 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
   
   // MARK: View lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-	  loadUserInformation()
-	  makePhotosOfUsersCollection()
-  }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		loadUserInformation()
+		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
+		photoOfUser.isUserInteractionEnabled = true
+		photoOfUser.addGestureRecognizer(tapGesture!)
+		makePhotosOfUsersCollection()
+	}
+	@objc func tapped() {
+		presentPhoto()
+	}
   
   // MARK: Do something
 
 	var photoOfOtherUsers = [UIImage]()
 
+	var tapGesture: UITapGestureRecognizer?
 	@IBOutlet weak var nameLable: UILabel!
 	@IBOutlet weak var photoOfUser: UIImageView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
@@ -85,18 +92,11 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	}
 
 	@IBAction func addPhotoAction(_ sender: Any) {
-		presentPhoto()
+	//	presentPhoto()
 	}
 
   func loadUserInformation() {
     let request = Profile.Something.Request()
-	  FirebaseDatabaseManager.shered.fetchImageData { images in
-		  guard let images = images else {return}
-		  print(images.count)
-		  self.photoOfOtherUsers = images
-		  self.photoOfUserCollection.reloadData()
-
-	  }
     interactor?.loadInformation(request: request)
   }
   
@@ -105,15 +105,12 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		self.defaultLocationLable.text = viewModel.defaultLocation
 		self.numberOfTripsOfUserLable.text = viewModel.numberOfTripsOfUser
 		guard let image = viewModel.newImage else {return}
-		photoOfOtherUsers.append(image)
-		photoOfUserCollection.reloadData()
+		photoOfUser.image = image
 	}
 
-	func displayNewPhotosOfUser(viewModel: Profile.Something.ViewModel) {
+	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel) {
 		guard let image = viewModel.newImage else {return}
-		photoOfOtherUsers.append(image)
-		photoOfUserCollection.reloadData()
-		noPhotoLable.isHidden = true
+		photoOfUser.image = image
 	}
 
 	func makePhotosOfUsersCollection () {

@@ -71,6 +71,9 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		makeRegionsCollection()
 		makeMostPopularPlacesCollection()
 		makeNextTripsCollection()
+		loadInformationForCollections()
+		loadCreatedTrips()
+		loadPins()
 		locationManager.delegate = self
 		mapView.delegate = self
 		print(regionName)
@@ -78,11 +81,11 @@ class MainViewController: UIViewController, MainDisplayLogic {
 						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
 	}
 
-	override func viewWillAppear(_ animated: Bool) {
-		loadInformationForCollections()
-		loadCreatedTrips()
-		loadPins()
-	}
+//	override func viewWillAppear(_ animated: Bool) {
+//		loadInformationForCollections()
+//		loadCreatedTrips()
+//		loadPins()
+//	}
 
 	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
 				   Region(image: Image(withImage: UIImage(named: "Brest")!), name: "Brest", identifier: "BrestRegion"),
@@ -149,7 +152,9 @@ var regionName = "MinskRegion"
 
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel) {
 		createdTrips = viewModel.createdTrips!
-		nextTripsCollection.reloadData()
+		DispatchQueue.main.async {
+			self.nextTripsCollection.reloadData()
+		}
 	}
 
 	func displayPins(viewModel: Main.Something.ViewModel) {

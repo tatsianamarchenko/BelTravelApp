@@ -60,18 +60,28 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
   // MARK: View lifecycle
   
-  override func viewDidLoad() {
+	override func viewDidLoad() {
 		super.viewDidLoad()
-		locationTitle.title = tripInformation?.locationName
+		guard let tripInformation = tripInformation else {return}
+		locationTitle.title = tripInformation.locationName
 		locationImage.image = UIImage(named: "back1")
-		tripStartPlace.text = tripInformation?.description
-		tripTime.text = tripInformation?.time
+		tripStartPlace.text = tripInformation.description
+		tripTime.text = tripInformation.time
+		participantsArray = tripInformation.participants!
+		makeWhoWantToVisitThisPlaceCollection()
 		doSomething()
+	}
+
+	func makeWhoWantToVisitThisPlaceCollection () {
+		whoPacticipateCollection.delegate = self
+		whoPacticipateCollection.dataSource = self
+		let nib = UINib(nibName: "ParticipantCollectionViewCell", bundle: nil)
+		whoPacticipateCollection.register(nib, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
 	}
   
   // MARK: Do something
 	var tripInformation: NewTrip?
-
+	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
 	@IBOutlet weak var locationTitle: UINavigationItem!
 	@IBOutlet weak var locationImage: UIImageView!
 	@IBOutlet weak var tripStartPlace: UILabel!
@@ -79,6 +89,13 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	@IBOutlet weak var whoPacticipateCollection: UICollectionView!
 	@IBAction func chatButtonAction(_ sender: Any) {
 	}
+
+	@IBAction func participateButtonAction(_ sender: Any) {
+		FirebaseDatabaseManager.shered.addParticipantInTrip(with: tripInformation!) { result in
+			print(result)
+		}
+	}
+
 	
 	func doSomething() {
     let request = UpcomingTripInformation.Something.Request()
@@ -89,4 +106,64 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   func displaySomething(viewModel: UpcomingTripInformation.Something.ViewModel) {
     //nameTextField.text = viewModel.name
   }
+}
+
+
+
+extension UpcomingTripInformationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+			return participantsArray.count
+
+	}
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	ParticipantCollectionViewCell.identifier, for: indexPath)
+					as? ParticipantCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+			cell.config(model: participantsArray[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
+			return CGSize(width: 200, height: 100)
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 1
+	}
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	}
 }

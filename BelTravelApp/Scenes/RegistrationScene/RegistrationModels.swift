@@ -22,6 +22,8 @@ enum Registration {
 			let name: String
 			let lastName: String
 			let defaultLocation: String
+			let image: UIImage?
+
 		}
 		struct Response {
 		}

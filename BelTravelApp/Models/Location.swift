@@ -10,12 +10,14 @@ import UIKit
 
 struct NewTrip {
 	var locationPath: String
+	var document: String?
 	var locationName: String
 	var time: String
 	var maxPeople: String
 	var description: String
 	var creator: String?
 	var region: String
+	var participants: [FirebaseAuthManager.FullInformationAppUser]?
 }
 
 struct Location {

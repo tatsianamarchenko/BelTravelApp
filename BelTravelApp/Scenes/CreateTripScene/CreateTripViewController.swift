@@ -91,7 +91,7 @@ class CreateTripViewController: UIViewController, CreateTripDisplayLogic {
 			return
 		}
 		if !time.isEmpty &&  !maxPeople.isEmpty &&  !description.isEmpty && !region.isEmpty {
-			let request = CreateTrip.Something.Request(trip: NewTrip(locationPath: location?.firebasePath ?? "", locationName: locationName, time: time, maxPeople: maxPeople, description: description, creator: nil, region: region))
+			let request = CreateTrip.Something.Request(trip: NewTrip(locationPath: location?.firebasePath ?? "", document: nil, locationName: locationName, time: time, maxPeople: maxPeople, description: description, creator: nil, region: region, participants: nil))
 			interactor?.createNewTrip(request: request)
 		}
 	}

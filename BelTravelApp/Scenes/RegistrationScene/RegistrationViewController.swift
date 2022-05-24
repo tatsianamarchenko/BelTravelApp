@@ -62,12 +62,16 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		photoGesture = UITapGestureRecognizer(target: self, action: #selector(addPhoto))
+		photoOutlet.isUserInteractionEnabled = true
+		photoOutlet.addGestureRecognizer(photoGesture!)
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		mainView.addGestureRecognizer(tapGesture!)
 	}
 
 	// MARK: Do something
 	var tapGesture: UITapGestureRecognizer?
+	var photoGesture: UITapGestureRecognizer?
 	@IBOutlet weak var photoOutlet: UIImageView!
 	@IBOutlet weak var mainView: UIView!
 	@IBOutlet weak var emailView: UIView!
@@ -86,6 +90,7 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 	}
 
 	@objc func addPhoto() {
+	presentPhoto()
 	}
 
 	func displaySomething(viewModel: Registration.Something.ViewModel) {
@@ -100,7 +105,7 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 		if checkField.validField(emailView, emailTextField),
 		   checkField.validField(passwordView, passwordTextField) {
 			if passwordTextField.text == repeatPasswordTextField.text {
-				let request = Registration.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "", name: name, lastName: lastName, defaultLocation: defaultLocation)
+				let request = Registration.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "", name: name, lastName: lastName, defaultLocation: defaultLocation, image: photoOutlet.image)
 				interactor?.createNewUser(request: request)
 			}
 		}
@@ -109,5 +114,47 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 
 	@IBAction func closeButtonAction(_ sender: UIButton) {
 		self.dismiss(animated: true)
+	}
+}
+
+
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+	func photoWithCamera(){
+		let vc = UIImagePickerController()
+		vc.sourceType = .camera
+		vc.delegate = self
+		vc.allowsEditing = true
+		present(vc, animated: true)
+	}
+	func photoFromLibrary(){
+		let vc = UIImagePickerController()
+		vc.sourceType = .photoLibrary
+		vc.delegate = self
+		vc.allowsEditing = true
+		present(vc, animated: true)
+	}
+
+	func presentPhoto(){
+		let choose = UIAlertController(title: "Profile Photo", message: "How would you like to select a photo?", preferredStyle: .actionSheet)
+		let library = UIAlertAction(title: "photo library", style: .default, handler: {[weak self] _ in self?.photoFromLibrary() } )
+		let camera = UIAlertAction(title: "take photo", style: .default, handler: {[weak self] _ in self?.photoWithCamera()} )
+		let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+		choose.addAction(library)
+		choose.addAction(camera)
+		choose.addAction(cancel)
+		present(choose, animated: true)
+	}
+
+	func imagePickerController (_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any] ) {
+		picker.dismiss(animated: true, completion: nil)
+		guard  let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+			return
+		}
+		photoOutlet.image = selectedImage
+	}
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true, completion: nil)
 	}
 }
