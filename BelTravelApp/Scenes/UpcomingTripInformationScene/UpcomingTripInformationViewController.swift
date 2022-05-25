@@ -67,7 +67,6 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 		locationImage.image = UIImage(named: "back1")
 		tripStartPlace.text = tripInformation.description
 		tripTime.text = tripInformation.time
-		participantsArray = tripInformation.participants!
 		makeWhoWantToVisitThisPlaceCollection()
 		loadParticipants()
 	}

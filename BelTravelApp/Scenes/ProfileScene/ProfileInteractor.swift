@@ -33,10 +33,8 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
     worker?.doSomeWork()
 
 	  FirebaseDatabaseManager.shered.fetchUser { [weak self] user in
-		  FirebaseDatabaseManager.shered.fetchImageData { image in
-			  let response = Profile.Something.Response(person: user, image: image)
+		  let response = Profile.Something.Response(person: user, image: user.image)
 			  self?.presenter?.presentUserInformation(response: response)
-		  }
 	  }
   }
 

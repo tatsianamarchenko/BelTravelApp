@@ -35,7 +35,7 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
     worker = UpcomingTripInformationWorker()
     worker?.doSomeWork()
 
-	  FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)") { [weak self] users in
+	  FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
 		  let response = UpcomingTripInformation.Something.Response(users: users)
 		  self?.presenter?.presentParticipants(response: response)
 	  }

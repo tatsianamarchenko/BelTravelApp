@@ -12,24 +12,21 @@
 
 import UIKit
 
-enum SelectedPlace
-{
+enum SelectedPlace {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
 		var location: Location
 		var region: String
     }
-    struct Response
-    {
-		var result: String
+    struct Response {
+		var result: String?
+		var users: [FirebaseAuthManager.FullInformationAppUser]?
     }
-    struct ViewModel
-    {
-		var result: String
+    struct ViewModel {
+		var result: String?
+		var liked: [FirebaseAuthManager.FullInformationAppUser]?
     }
   }
 }

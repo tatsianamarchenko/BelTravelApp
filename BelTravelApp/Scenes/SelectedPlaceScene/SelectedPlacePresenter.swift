@@ -12,19 +12,24 @@
 
 import UIKit
 
-protocol SelectedPlacePresentationLogic
-{
-  func presentResult(response: SelectedPlace.Something.Response)
+protocol SelectedPlacePresentationLogic {
+	func presentResult(response: SelectedPlace.Something.Response)
+	func presentWhoLiked(response: SelectedPlace.Something.Response)
 }
 
-class SelectedPlacePresenter: SelectedPlacePresentationLogic
-{
-  weak var viewController: SelectedPlaceDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentResult(response: SelectedPlace.Something.Response) {
-	  let viewModel = SelectedPlace.Something.ViewModel(result: response.result)
-    viewController?.displayResultOfAdding(viewModel: viewModel)
-  }
+class SelectedPlacePresenter: SelectedPlacePresentationLogic {
+	weak var viewController: SelectedPlaceDisplayLogic?
+
+	// MARK: Do something
+
+	func presentResult(response: SelectedPlace.Something.Response) {
+		let viewModel = SelectedPlace.Something.ViewModel(result: response.result!)
+		viewController?.displayResultOfAdding(viewModel: viewModel)
+	}
+
+	func presentWhoLiked(response: SelectedPlace.Something.Response) {
+		let viewModel = SelectedPlace.Something.ViewModel(liked: response.users)
+		viewController?.displayWhoLiked(viewModel: viewModel)
+	}
+
 }

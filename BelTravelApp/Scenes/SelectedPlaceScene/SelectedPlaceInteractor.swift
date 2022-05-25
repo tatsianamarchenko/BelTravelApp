@@ -15,6 +15,7 @@ import UIKit
 protocol SelectedPlaceBusinessLogic {
   func addToFavorite(request: SelectedPlace.Something.Request)
 	func addToDataStore(request: SelectedPlace.Something.Request)
+	func loadWhoAddedToFavorite(request: SelectedPlace.Something.Request)
 }
 
 protocol SelectedPlaceDataStore {
@@ -49,4 +50,12 @@ class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStor
 		location = request.location
 		region = request.region
 	}
+
+	func loadWhoAddedToFavorite(request: SelectedPlace.Something.Request) {
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.region)", document: "\(request.location.locationWhoLiked)", secondCollection: "FavoriteByUsers", field: "favorite") { [weak self] users in
+			let response = SelectedPlace.Something.Response(users: users)
+			self?.presenter?.presentWhoLiked(response: response)
+		}
+	}
+
 }

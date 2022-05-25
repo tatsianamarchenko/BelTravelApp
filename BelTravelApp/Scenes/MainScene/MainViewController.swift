@@ -81,12 +81,6 @@ class MainViewController: UIViewController, MainDisplayLogic {
 						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
 	}
 
-//	override func viewWillAppear(_ animated: Bool) {
-//		loadInformationForCollections()
-//		loadCreatedTrips()
-//		loadPins()
-//	}
-
 	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
 				   Region(image: Image(withImage: UIImage(named: "Brest")!), name: "Brest", identifier: "BrestRegion"),
 				   Region(image: Image(withImage: UIImage(named: "Vitebsk")!), name: "Vitebsk", identifier: "VitebskRegion"),

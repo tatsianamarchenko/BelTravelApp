@@ -31,4 +31,5 @@ struct Location {
 	var firebasePath: String
 	var wantToVisit: [FirebaseAuthManager.FullInformationAppUser]
 	var isPopular: Bool
+	var locationWhoLiked: String
 }

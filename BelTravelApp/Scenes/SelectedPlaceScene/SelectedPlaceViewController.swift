@@ -12,34 +12,30 @@
 
 import UIKit
 
-protocol SelectedPlaceDisplayLogic: class
-{
-  func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
+protocol SelectedPlaceDisplayLogic: class {
+	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
+	func displayWhoLiked(viewModel: SelectedPlace.Something.ViewModel)
 }
 
-class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
-{
+class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
   var interactor: SelectedPlaceBusinessLogic?
   var router: (NSObjectProtocol & SelectedPlaceRoutingLogic & SelectedPlaceDataPassing)?
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
   
-  private func setup()
-  {
+  private func setup() {
     let viewController = self
     let interactor = SelectedPlaceInteractor()
     let presenter = SelectedPlacePresenter()
@@ -54,8 +50,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let scene = segue.identifier {
       let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
       if let router = router, router.responds(to: selector) {
@@ -75,6 +70,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	  desctiptionLable.text = location?.description
 	  peopleWhoWansToParticipate = (location?.wantToVisit)!
 	  addTLocationToDataStore()
+	  loadWhoAddedToFavorite()
   }
   
   // MARK: Do something
@@ -96,6 +92,12 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 	@IBAction func createTripAction(_ sender: Any) {
 		router?.routeToCreatingViewController()
 	}
+
+	func loadWhoAddedToFavorite() {
+		let request = SelectedPlace.Something.Request(location: location!, region: region!)
+		interactor?.loadWhoAddedToFavorite(request: request)
+  }
+
 
 	func addTLocationToDataStore() {
 		print(region)
@@ -126,13 +128,18 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic
 		interactor?.addToFavorite(request: request)
 	}
   
-  func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {
-	  if viewModel.result == "Added" {
-		print("added")
-	  } else {
-		  print(viewModel.result)
-	  }
-  }
+	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {
+		if viewModel.result == "Added" {
+			print("added")
+		} else {
+			print(viewModel.result)
+		}
+	}
+
+	func displayWhoLiked(viewModel: SelectedPlace.Something.ViewModel) {
+		peopleWhoWansToParticipate = viewModel.liked!
+		whoWantToVisitThisPlaceCollection.reloadData()
+	}
 }
 
 
