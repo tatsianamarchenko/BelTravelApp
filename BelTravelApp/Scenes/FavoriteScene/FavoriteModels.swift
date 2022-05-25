@@ -12,21 +12,17 @@
 
 import UIKit
 
-enum Favorite
-{
+enum Favorite {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
+		var location: Location?
     }
-    struct Response
-    {
+    struct Response {
 		var locations: [Location]
     }
-    struct ViewModel
-    {
+    struct ViewModel {
 		var locations: [Location]
     }
   }

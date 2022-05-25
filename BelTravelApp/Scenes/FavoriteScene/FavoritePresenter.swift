@@ -15,6 +15,7 @@ import UIKit
 protocol FavoritePresentationLogic
 {
   func presentFavoritePlaces(response: Favorite.Something.Response)
+	func routeToSelectedPlaceViewController()
 }
 
 class FavoritePresenter: FavoritePresentationLogic
@@ -28,4 +29,8 @@ class FavoritePresenter: FavoritePresentationLogic
 	  let viewModel = Favorite.Something.ViewModel(locations: response.locations)
 	  viewController?.displayFavoriteLocations(viewModel: viewModel)
   }
+
+	func routeToSelectedPlaceViewController() {
+		viewController?.displaySelecteTripViewController()
+	}
 }

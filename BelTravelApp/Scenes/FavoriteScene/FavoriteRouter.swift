@@ -12,49 +12,40 @@
 
 import UIKit
 
-@objc protocol FavoriteRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol FavoriteRoutingLogic {
+  func routeToSelectedPlaceViewController()
 }
 
-protocol FavoriteDataPassing
-{
+protocol FavoriteDataPassing {
   var dataStore: FavoriteDataStore? { get }
 }
 
-class FavoriteRouter: NSObject, FavoriteRoutingLogic, FavoriteDataPassing
-{
+class FavoriteRouter: NSObject, FavoriteRoutingLogic, FavoriteDataPassing {
   weak var viewController: FavoriteViewController?
   var dataStore: FavoriteDataStore?
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToSelectedPlaceViewController() {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as! SelectedPlaceViewController
+	  destinationVC.location = dataStore?.location
+	  destinationVC.region = dataStore?.region
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToSelectedPlaceViewController(source: dataStore!, destination: &destinationDS)
+      navigateToSelectedPlaceViewController(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: FavoriteViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToSelectedPlaceViewController(source: FavoriteViewController, destination: SelectedPlaceViewController) {
+	  source.navigationController?.pushViewController(destination, animated: true)
+  }
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: FavoriteDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToSelectedPlaceViewController(source: FavoriteDataStore, destination: inout SelectedPlaceDataStore) {
+	  destination.location = source.location
+	  destination.region = source.region
+  }
 }

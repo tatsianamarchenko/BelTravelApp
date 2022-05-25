@@ -13,7 +13,8 @@
 import UIKit
 
 protocol FavoriteDisplayLogic: class {
-  func displayFavoriteLocations(viewModel: Favorite.Something.ViewModel)
+	func displayFavoriteLocations(viewModel: Favorite.Something.ViewModel)
+	func displaySelecteTripViewController()
 }
 
 class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
@@ -91,6 +92,10 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
 		self.favoritePlacesArray = viewModel.locations
 		self.favoriteTableView.reloadData()
 	}
+
+	func displaySelecteTripViewController() {
+		router?.routeToSelectedPlaceViewController()
+	}
 }
 
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -111,5 +116,11 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		70
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	//	tableView(tableView, didDeselectRowAt: indexPath)
+		let request = Favorite.Something.Request(location: favoritePlacesArray[indexPath.row])
+		interactor?.setLocation(request: request)
 	}
 }

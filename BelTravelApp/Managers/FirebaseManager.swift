@@ -38,6 +38,7 @@ class FirebaseDatabaseManager {
 				let type = data["type"] as? String ?? ""
 				let path = data["image"] as? String ?? ""
 				let isPopular = data["IsPopular"] as? Bool ?? false
+				let region = data["region"] as? String ?? ""
 				let storage = Storage.storage().reference()
 				let fileRef = storage.child(path)
 				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -47,7 +48,7 @@ class FirebaseDatabaseManager {
 						}
 
 						image = UIImage(data: data)
-						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID)
+						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
 						result.append(location)
 						complition(result)
 					}
@@ -143,6 +144,7 @@ class FirebaseDatabaseManager {
 					let name = data["name"] as? String ?? ""
 					let type = data["type"] as? String ?? ""
 					let isPopular = data["IsPopular"] as? Bool ?? false
+					let region = data["region"] as? String ?? ""
 					let path = data["image"] as? String ?? ""
 					let storage = Storage.storage().reference()
 					let fileRef = storage.child(path)
@@ -152,7 +154,7 @@ class FirebaseDatabaseManager {
 								return
 							}
 							image = UIImage(data: data)
-							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID)
+							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: querySnapshot!.documentID, region: region)
 							result.append(location)
 
 						}

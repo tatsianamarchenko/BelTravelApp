@@ -12,32 +12,40 @@
 
 import UIKit
 
-protocol FavoriteBusinessLogic
-{
-  func loadFavorite(request: Favorite.Something.Request)
+protocol FavoriteBusinessLogic {
+	func loadFavorite(request: Favorite.Something.Request)
+	func setLocation(request: Favorite.Something.Request)
 }
 
-protocol FavoriteDataStore
-{
-  //var name: String { get set }
+protocol FavoriteDataStore {
+  var location: Location? { get set }
+	var region: String { get set }
 }
 
-class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore
-{
-  var presenter: FavoritePresentationLogic?
-  var worker: FavoriteWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func loadFavorite(request: Favorite.Something.Request)
-  {
-    worker = FavoriteWorker()
-    worker?.doSomeWork()
+class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore {
+	var presenter: FavoritePresentationLogic?
+	var worker: FavoriteWorker?
+	var location: Location?
+	var region: String = ""
+	// MARK: Do something
 
-	  FirebaseDatabaseManager.shered.fetchFavoriteData { [weak self] locations in
-		  let response = Favorite.Something.Response(locations: locations)
-		  self?.presenter?.presentFavoritePlaces(response: response)
-	  }
-  }
+	func loadFavorite(request: Favorite.Something.Request) {
+		worker = FavoriteWorker()
+		worker?.doSomeWork()
+
+		FirebaseDatabaseManager.shered.fetchFavoriteData { [weak self] locations in
+			let response = Favorite.Something.Response(locations: locations)
+			self?.presenter?.presentFavoritePlaces(response: response)
+		}
+	}
+
+	func setLocation(request: Favorite.Something.Request) {
+		guard let location = request.location else {
+			return
+		}
+		self.location = location
+		self.region = location.region
+		self.presenter?.routeToSelectedPlaceViewController()
+	}
+
 }
