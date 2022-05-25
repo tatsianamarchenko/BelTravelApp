@@ -13,10 +13,10 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class FirebaseDatabaseManager {
-
+	
 	static let shered = FirebaseDatabaseManager()
 	private let db = Firestore.firestore()
-
+	
 	public func fetchLocationData(collection: String, complition: @escaping ([Location])-> Void) {
 		db.collection(collection).addSnapshotListener { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
@@ -27,7 +27,7 @@ class FirebaseDatabaseManager {
 			documents.map { queryDocumentSnapshot in
 				var wantToVisit = [FirebaseAuthManager.FullInformationAppUser]()
 				let	data = queryDocumentSnapshot.data()
-
+				
 				let	documentPath = queryDocumentSnapshot.reference.path
 				var image: UIImage?
 				let coordinats = data["coordinats"] as! GeoPoint
@@ -46,7 +46,7 @@ class FirebaseDatabaseManager {
 						guard let data = data else {
 							return
 						}
-
+						
 						image = UIImage(data: data)
 						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
 						result.append(location)
@@ -56,7 +56,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func addUserToDatabase(with userInformation: FirebaseAuthManager.FullInformationAppUser, id: String) {
 		db.collection("users").document(id).setData([
 			"email": userInformation.email,
@@ -65,29 +65,29 @@ class FirebaseDatabaseManager {
 			"defaultLocation": userInformation.defaultLocation
 		])
 	}
-
+	
 	public func addFavoriteToDatabase(location: Location, complition: @escaping(Bool)-> Void) {
 		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite":  location.firebasePath]) { [weak self] error in
 			if error == nil {
 				self?.db.document(location.firebasePath).collection("FavoriteByUsers").addDocument(data: ["favorite" : "\(Auth.auth().currentUser?.uid ?? "")"])
 				complition(true)
-
+				
 			} else {
 				complition(false)
 			}
 		}
 	}
-
+	
 	public func uploadImageData(data: Data, serverFileName: String, completionHandler: @escaping (_ isSuccess: Bool, _ url: String?) -> Void) {
 		let storage = Storage.storage()
 		let storageRef = storage.reference()
 		let directory = "PhotosOfUser/\(Auth.auth().currentUser!.uid)/"
 		let fileRef = storageRef.child(directory + serverFileName)
-
+		
 		db.collection("users").document("\(Auth.auth().currentUser!.uid)").updateData([
 			"ref": fileRef.fullPath
 		])
-
+		
 		_ = fileRef.putData(data, metadata: nil) { metadata, error in
 			fileRef.downloadURL { (url, error) in
 				guard let downloadURL = url else {
@@ -98,7 +98,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func fetchImageData(completionHandler: @escaping (UIImage?) -> Void) {
 		db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument {(querySnapshot, error) in
 			let	data = querySnapshot?.data()
@@ -117,7 +117,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func fetchFavoriteData(complition: @escaping ([Location])-> Void) {
 		var result = [Location]()
 		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").getDocuments { (querySnapshot, error) in
@@ -156,16 +156,15 @@ class FirebaseDatabaseManager {
 							image = UIImage(data: data)
 							let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: querySnapshot!.documentID, region: region)
 							result.append(location)
-
+							
 						}
-						print(wantToVisit)
 						complition(result)
 					}
 				}
 			}
 		}
 	}
-
+	
 	public func fetchUser(complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
 		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").getDocument { (querySnapshot, error) in
 			guard let data = querySnapshot?.data() else {
@@ -192,7 +191,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	func fetchOtherUser(user: String, complition: @escaping (FirebaseAuthManager.FullInformationAppUser)-> Void) {
 		db.collection("users").document(user).getDocument { (querySnapshot, error) in
 			guard let data = querySnapshot?.data() else {
@@ -219,7 +218,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func addNewTripToDatabase(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
 		let path = db.collection("\(tripInformation.region)Trips").document()
 		path.collection("participants").document().setData(["participant" : Auth.auth().currentUser?.uid as Any])
@@ -239,12 +238,12 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func addParticipantInTrip(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
 		let path = db.collection("\(tripInformation.region)Trips").document(tripInformation.document!)
 		path.collection("participants").document().setData(["participant" : Auth.auth().currentUser?.uid as Any])
 	}
-
+	
 	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip])-> Void) {
 		var result = [NewTrip]()
 		self.db.collection("\(collection)Trips").addSnapshotListener { (querySnapshot, error) in
@@ -263,7 +262,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
-
+	
 	public func fetchParticipants(collection: String, document: String, secondCollection: String, field: String, complition: @escaping ([FirebaseAuthManager.FullInformationAppUser])-> Void) {
 		var participants = [FirebaseAuthManager.FullInformationAppUser]()
 		self.db.collection(collection).document(document).collection(secondCollection).addSnapshotListener { (querySnapshot, error) in
@@ -274,9 +273,12 @@ class FirebaseDatabaseManager {
 			documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let participant = data[field] as? String ?? ""
+				participants.removeAll()
 				self.fetchOtherUser(user: participant) { user in
 					participants.append(user)
+					print(participants.count)
 					complition(participants)
+
 				}
 			}
 		}

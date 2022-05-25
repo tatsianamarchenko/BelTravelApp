@@ -29,6 +29,8 @@ class SelectedPlacePresenter: SelectedPlacePresentationLogic {
 
 	func presentWhoLiked(response: SelectedPlace.Something.Response) {
 		let viewModel = SelectedPlace.Something.ViewModel(liked: response.users)
+		print("ount")
+		print(viewModel.liked?.count)
 		viewController?.displayWhoLiked(viewModel: viewModel)
 	}
 

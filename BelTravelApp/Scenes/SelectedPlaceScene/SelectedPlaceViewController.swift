@@ -68,7 +68,6 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 	  titleName.title = location?.name
 	  locationImage.image = location?.image
 	  desctiptionLable.text = location?.description
-	  peopleWhoWansToParticipate = (location?.wantToVisit)!
 	  addTLocationToDataStore()
 	  loadWhoAddedToFavorite()
   }
@@ -100,9 +99,6 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 
 
 	func addTLocationToDataStore() {
-		print(region)
-		print(location)
-		print(peopleWhoWansToParticipate)
 		let request = SelectedPlace.Something.Request(location: location!, region: region!)
 		interactor?.addToDataStore(request: request)
 	}
@@ -130,6 +126,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 	}
   
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {
+		peopleWhoWansToParticipate.removeAll()
 		if viewModel.result == "Added" {
 			print("added")
 		} else {
@@ -142,7 +139,6 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 		whoWantToVisitThisPlaceCollection.reloadData()
 	}
 }
-
 
 extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -195,6 +191,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 				return UICollectionViewCell()
 			}
 					cell.imageOfLocation.image = photosOfOtherUsers[indexPath.row]
+
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
 			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)

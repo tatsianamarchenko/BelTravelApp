@@ -414,8 +414,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="vtT-VV-G4E">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="4fL-SD-WuV">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="okO-BF-Jra">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="4fL-SD-WuV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="okO-BF-Jra">
                                 <rect key="frame" x="360" y="5" width="34" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonConfiguration key="configuration" style="filled" image="heart.fill" catalog="system" cornerStyle="capsule">

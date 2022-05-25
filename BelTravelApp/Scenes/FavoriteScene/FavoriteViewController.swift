@@ -119,7 +119,6 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-	//	tableView(tableView, didDeselectRowAt: indexPath)
 		let request = Favorite.Something.Request(location: favoritePlacesArray[indexPath.row])
 		interactor?.setLocation(request: request)
 	}
