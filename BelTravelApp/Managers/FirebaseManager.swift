@@ -250,6 +250,7 @@ class FirebaseDatabaseManager {
 	public func addParticipantInTrip(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
 		let path = db.collection("\(tripInformation.region)Trips").document(tripInformation.document!)
 		path.collection("participants").document().setData(["participant" : Auth.auth().currentUser?.uid as Any])
+		self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("TripsByUser").addDocument(data: ["ref" : path])
 	}
 	
 	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip])-> Void) {
@@ -292,8 +293,8 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-	func getAllMesages(chatId: String, complition : @escaping ([Message])->()) {
-		db.collection("conversations").document(chatId).collection("messages").getDocuments { (querySnapshot, error) in
+	func getAllMesages(tripInformation: NewTrip, complition : @escaping ([Message])->()) {
+		db.collection("\(tripInformation.region)Trips").document(tripInformation.document!).collection("messages").getDocuments { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
 				return
@@ -313,11 +314,12 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-	func sendMessage(otherSenderId: String, conversationId: String, message: Message, messageText: String, complition : @escaping (Bool)->()) {
-		if conversationId == nil {
+	func sendMessage(tripInformation: NewTrip, message: Message, messageText: String, complition : @escaping (Bool)->()) {
+		if tripInformation.document == nil {
 
 		} else {
-			db.collection("conversations").document(conversationId).collection("messages").addDocument(data: [
+			let path = db.collection("\(tripInformation.region)Trips").document("\(tripInformation.document!)")
+			path.collection("messages").addDocument(data: [
 				"data" : Date(),
 				"sender" : message.sender.senderId,
 				"message" : messageText ]) { error in
@@ -329,6 +331,7 @@ class FirebaseDatabaseManager {
 			}
 		}
 	}
+
 }
 
 //	public func fetchImageData(completionHandler: @escaping ([UIImage]?) -> Void) {

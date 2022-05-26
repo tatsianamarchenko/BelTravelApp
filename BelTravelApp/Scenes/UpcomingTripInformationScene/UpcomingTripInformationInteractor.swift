@@ -15,6 +15,7 @@ import UIKit
 protocol UpcomingTripInformationBusinessLogic {
 	func loadUsers(request: UpcomingTripInformation.Something.Request)
 	func setUser(request: UpcomingTripInformation.Something.Request)
+//	func setTrip(request: UpcomingTripInformation.Something.Request)
 }
 
 protocol UpcomingTripInformationDataStore {
@@ -46,4 +47,9 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
 		print(user)
 		self.presenter?.routeToUserViewController()
 	}
+
+//	func setTrip(request: UpcomingTripInformation.Something.Request) {
+//		newTrip = request.trip
+//		self.presenter?.routeToUserViewController()
+//	}
 }

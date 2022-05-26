@@ -89,6 +89,8 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	@IBOutlet weak var tripTime: UILabel!
 	@IBOutlet weak var whoPacticipateCollection: UICollectionView!
 	@IBAction func chatButtonAction(_ sender: Any) {
+		//interactor.setTrip(request: request)
+		router?.routeToChatViewController()
 	}
 
 	@IBAction func participateButtonAction(_ sender: Any) {

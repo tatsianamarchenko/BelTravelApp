@@ -71,8 +71,7 @@ class ChatViewController: MessagesViewController, ChatDisplayLogic
 
 	let selfSender = Sender(senderId: Auth.auth().currentUser!.uid, displayName: "-")
 	var messages = [Message]()
-	var chatId: String?
-	var otherSenderId: String?
+	var tripInfo: NewTrip?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -91,7 +90,7 @@ class ChatViewController: MessagesViewController, ChatDisplayLogic
   // MARK: Do something
 
 	func loadMessages() {
-    let request = Chat.Something.Request(chatId: self.chatId!)
+		let request = Chat.Something.Request(tripInfo: tripInfo!)
     interactor?.loadMessages(request: request)
   }
   
@@ -132,7 +131,7 @@ extension ChatViewController : MessagesDisplayDelegate, MessagesDataSource, Mess
 extension ChatViewController: InputBarAccessoryViewDelegate {
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
 		let message = Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text(text))
-		let request = Chat.Something.Request(chatId: self.chatId!, otherSenderId: self.otherSenderId, message: message, messageText: text)
+		let request = Chat.Something.Request(tripInfo: tripInfo!, message: message, messageText: text)
 		interactor?.sendMessage(request: request)
 		inputBar.inputTextView.text = nil
 	}

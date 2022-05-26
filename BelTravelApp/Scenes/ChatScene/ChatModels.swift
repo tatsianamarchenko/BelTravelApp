@@ -17,8 +17,7 @@ enum Chat {
   
   enum Something {
 	  struct Request {
-		  var chatId: String
-		  var otherSenderId: String?
+		  var tripInfo: NewTrip
 		  var message: Message?
 		  var messageText: String?
 	  }

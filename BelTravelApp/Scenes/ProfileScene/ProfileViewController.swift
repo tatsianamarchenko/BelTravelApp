@@ -82,6 +82,10 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	@IBOutlet weak var photoOfUser: UIImageView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
 	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
+	@IBOutlet weak var finishedTripsCollection: UICollectionView!
+	@IBOutlet weak var noFinishedTripsLable: UILabel!
+	@IBOutlet weak var upcomingTripsCollection: UICollectionView!
+	@IBOutlet weak var noUpcomingTripsLable: UILabel!
 	@IBOutlet weak var photoOfUserCollection: UICollectionView!
 	@IBOutlet weak var noPhotoLable: UILabel!
 	

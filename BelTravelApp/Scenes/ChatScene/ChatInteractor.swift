@@ -12,44 +12,42 @@
 
 import UIKit
 
-protocol ChatBusinessLogic
-{
+protocol ChatBusinessLogic {
   func loadMessages(request: Chat.Something.Request)
 	func sendMessage(request: Chat.Something.Request)
 }
 
-protocol ChatDataStore
-{
+protocol ChatDataStore {
 var otherUserId: String? { get set }
 	var chatId: String? { get set }
+	var newTrip: NewTrip? { get set }
 }
 
-class ChatInteractor: ChatBusinessLogic, ChatDataStore
-{
-  var presenter: ChatPresentationLogic?
-  var worker: ChatWorker?
-  var otherUserId: String?
+class ChatInteractor: ChatBusinessLogic, ChatDataStore {
+	var presenter: ChatPresentationLogic?
+	var worker: ChatWorker?
+	var otherUserId: String?
 	var chatId: String?
-  
-  // MARK: Do something
-  
-  func loadMessages(request: Chat.Something.Request)
-  {
-    worker = ChatWorker()
-    worker?.doSomeWork()
-	
-	  FirebaseDatabaseManager.shered.getAllMesages(chatId: self.chatId!) { [weak self] messages in
-		  let response = Chat.Something.Response(messages: messages, isSended: nil, message: nil)
-		  self?.presenter?.presentMesaages(response: response)
-	  }
-  }
+	var newTrip: NewTrip?
+
+	// MARK: Do something
+
+	func loadMessages(request: Chat.Something.Request) {
+		worker = ChatWorker()
+		worker?.doSomeWork()
+
+		FirebaseDatabaseManager.shered.getAllMesages(tripInformation: request.tripInfo) { [weak self] messages in
+			let response = Chat.Something.Response(messages: messages, isSended: nil, message: nil)
+			self?.presenter?.presentMesaages(response: response)
+		}
+	}
 
 	func sendMessage(request: Chat.Something.Request) {
 
-		FirebaseDatabaseManager.shered.sendMessage(otherSenderId: request.otherSenderId!, conversationId: request.chatId, message: request.message!, messageText: request.messageText!) { [weak self] result in
+		FirebaseDatabaseManager.shered.sendMessage(tripInformation: request.tripInfo, message: request.message!, messageText: request.messageText!) { [weak self] result in
 			let response = Chat.Something.Response(messages: nil, isSended: result, message: request.message)
 			self?.presenter?.presentIsSended(response: response)
 		}
-
 	}
+
 }

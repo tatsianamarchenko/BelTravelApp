@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol UpcomingTripInformationRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+  func routeToChatViewController()
 	func routeToUserViewController()
 }
 
@@ -30,34 +30,28 @@ class UpcomingTripInformationRouter: NSObject, UpcomingTripInformationRoutingLog
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToChatViewController()
+  {
+      let destinationVC = ChatViewController()
+	  destinationVC.tripInfo = dataStore?.newTrip
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+      navigateToSomewhere(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: UpcomingTripInformationViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToSomewhere(source: UpcomingTripInformationViewController, destination: ChatViewController)
+  {
+    source.show(destination, sender: nil)
+  }
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: UpcomingTripInformationDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToSomewhere(source: UpcomingTripInformationDataStore, destination: inout ChatDataStore)
+  {
+	  destination.newTrip = source.newTrip
+  }
 
 	func routeToUserViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
