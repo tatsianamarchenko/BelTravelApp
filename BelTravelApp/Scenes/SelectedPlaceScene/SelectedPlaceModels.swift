@@ -19,6 +19,7 @@ enum SelectedPlace {
     struct Request {
 		var location: Location
 		var region: String
+		var user: FirebaseAuthManager.FullInformationAppUser?
     }
     struct Response {
 		var result: String?

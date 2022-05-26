@@ -84,6 +84,9 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
 	@IBOutlet weak var photoOfUserCollection: UICollectionView!
 	@IBOutlet weak var noPhotoLable: UILabel!
+	
+	@IBOutlet weak var locationLable: UILabel!
+	@IBOutlet weak var tripsLable: UILabel!
 
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {

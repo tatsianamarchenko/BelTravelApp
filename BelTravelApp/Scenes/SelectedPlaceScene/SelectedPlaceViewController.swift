@@ -15,6 +15,7 @@ import UIKit
 protocol SelectedPlaceDisplayLogic: class {
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
 	func displayWhoLiked(viewModel: SelectedPlace.Something.ViewModel)
+	func displayUserViewController()
 }
 
 class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
@@ -138,6 +139,10 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 		peopleWhoWansToParticipate = viewModel.liked!
 		whoWantToVisitThisPlaceCollection.reloadData()
 	}
+
+	func displayUserViewController() {
+		router?.routeToUserViewController()
+	}
 }
 
 extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -238,6 +243,8 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == whoWantToVisitThisPlaceCollection {
+			let request = SelectedPlace.Something.Request(location: location!, region: region!, user: peopleWhoWansToParticipate[indexPath.row])
+			interactor?.setUser(request: request)
 		}
 
 		if collectionView == photosOfOtherUsersCollection {

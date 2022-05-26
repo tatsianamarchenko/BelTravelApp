@@ -16,11 +16,13 @@ protocol SelectedPlaceBusinessLogic {
   func addToFavorite(request: SelectedPlace.Something.Request)
 	func addToDataStore(request: SelectedPlace.Something.Request)
 	func loadWhoAddedToFavorite(request: SelectedPlace.Something.Request)
+	func setUser(request: SelectedPlace.Something.Request)
 }
 
 protocol SelectedPlaceDataStore {
   var location: Location? { get set }
 	var region: String? { get set }
+	var user: FirebaseAuthManager.FullInformationAppUser? { get set }
 }
 
 class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStore {
@@ -28,6 +30,7 @@ class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStor
 	var worker: SelectedPlaceWorker?
 	var location: Location?
 	var region: String?
+	var user: FirebaseAuthManager.FullInformationAppUser?
 	// MARK: Do something
 
 	func addToFavorite(request: SelectedPlace.Something.Request) {
@@ -56,6 +59,11 @@ class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStor
 			let response = SelectedPlace.Something.Response(users: users)
 			self?.presenter?.presentWhoLiked(response: response)
 		}
+	}
+
+	func setUser(request: SelectedPlace.Something.Request) {
+		user = request.user
+		self.presenter?.routeToUserViewController()
 	}
 
 }

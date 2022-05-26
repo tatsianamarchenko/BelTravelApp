@@ -13,39 +13,61 @@
 import UIKit
 
 @objc protocol SelectedPlaceRoutingLogic {
-   func routeToCreatingViewController()
+	func routeToCreatingViewController()
+	func routeToUserViewController()
 }
 
 protocol SelectedPlaceDataPassing {
-  var dataStore: SelectedPlaceDataStore? { get }
+	var dataStore: SelectedPlaceDataStore? { get }
 }
 
 class SelectedPlaceRouter: NSObject, SelectedPlaceRoutingLogic, SelectedPlaceDataPassing {
-  weak var viewController: SelectedPlaceViewController?
-  var dataStore: SelectedPlaceDataStore?
-  
-  // MARK: Routing
-  
-  func routeToCreatingViewController() {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let destinationVC = storyboard.instantiateViewController(withIdentifier: "CreateTripViewController") as! CreateTripViewController
-	  destinationVC.location = dataStore?.location
-	  destinationVC.region = dataStore?.region
-      var destinationDS = destinationVC.router!.dataStore!
-      passDataToCreateTrip(source: dataStore!, destination: &destinationDS)
-      navigateToCreateTrip(source: viewController!, destination: destinationVC)
-  }
+	weak var viewController: SelectedPlaceViewController?
+	var dataStore: SelectedPlaceDataStore?
 
-  // MARK: Navigation
-  
-  func navigateToCreateTrip(source: SelectedPlaceViewController, destination: CreateTripViewController) {
-    source.show(destination, sender: nil)
-  }
-  
-  // MARK: Passing data
-  
-  func passDataToCreateTrip(source: SelectedPlaceDataStore, destination: inout CreateTripDataStore) {
-	  destination.location = source.location
-	  destination.region = source.region
-  }
+	// MARK: Routing
+
+	func routeToCreatingViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "CreateTripViewController") as! CreateTripViewController
+		destinationVC.location = dataStore?.location
+		destinationVC.region = dataStore?.region
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToCreateTrip(source: dataStore!, destination: &destinationDS)
+		navigateToCreateTrip(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToCreateTrip(source: SelectedPlaceViewController, destination: CreateTripViewController) {
+		source.show(destination, sender: nil)
+	}
+
+	// MARK: Passing data
+
+	func passDataToCreateTrip(source: SelectedPlaceDataStore, destination: inout CreateTripDataStore) {
+		destination.location = source.location
+		destination.region = source.region
+	}
+
+	func routeToUserViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+		destinationVC.user = dataStore?.user
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToUser(source: dataStore!, destination: &destinationDS)
+		navigateToUserViewController(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToUserViewController(source: SelectedPlaceViewController, destination: OtherUserViewController) {
+		source.show(destination, sender: nil)
+	}
+
+	// MARK: Passing data
+
+	func passDataToUser(source: SelectedPlaceDataStore, destination: inout OtherUserDataStore) {
+		destination.user = source.user
+	}
 }

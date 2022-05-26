@@ -15,6 +15,7 @@ import UIKit
 protocol SelectedPlacePresentationLogic {
 	func presentResult(response: SelectedPlace.Something.Response)
 	func presentWhoLiked(response: SelectedPlace.Something.Response)
+	func routeToUserViewController()
 }
 
 class SelectedPlacePresenter: SelectedPlacePresentationLogic {
@@ -32,6 +33,10 @@ class SelectedPlacePresenter: SelectedPlacePresentationLogic {
 		print("ount")
 		print(viewModel.liked?.count)
 		viewController?.displayWhoLiked(viewModel: viewModel)
+	}
+
+	func routeToUserViewController() {
+		viewController?.displayUserViewController()
 	}
 
 }

@@ -29,7 +29,7 @@ class FirebaseDatabaseManager {
 				let	data = queryDocumentSnapshot.data()
 				
 				let	documentPath = queryDocumentSnapshot.reference.path
-				var image: UIImage?
+				var image = UIImage()
 				let coordinats = data["coordinats"] as! GeoPoint
 				let lat = coordinats.latitude
 				let lon = coordinats.longitude
@@ -44,14 +44,21 @@ class FirebaseDatabaseManager {
 				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
 					if error == nil {
 						guard let data = data else {
+							print("location")
 							return
 						}
 						
-						image = UIImage(data: data)
-						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
-						result.append(location)
-						complition(result)
+						image = UIImage(data: data)!
+//						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
+//						result.append(location)
+//						complition(result)
+//						print(location)
 					}
+
+					let location = Location(lat: lat, lng: lon, description: description, image: image, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
+					result.append(location)
+					complition(result)
+					print(location)
 				}
 			}
 		}

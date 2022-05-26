@@ -325,7 +325,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	}
 }
 
-
 extension MainViewController: CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else {

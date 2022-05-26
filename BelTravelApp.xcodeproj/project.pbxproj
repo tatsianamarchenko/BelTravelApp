@@ -57,6 +57,12 @@
 		BFA60BD1282B1F02006B3DC4 /* UpcomingTripInformationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCB282B1F02006B3DC4 /* UpcomingTripInformationModels.swift */; };
 		BFA60BD2282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCC282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift */; };
 		BFA60BD3282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA60BCD282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift */; };
+		BFA7A3D4283EBEDB002F94FA /* OtherUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3CE283EBEDB002F94FA /* OtherUserPresenter.swift */; };
+		BFA7A3D5283EBEDB002F94FA /* OtherUserWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3CF283EBEDB002F94FA /* OtherUserWorker.swift */; };
+		BFA7A3D6283EBEDB002F94FA /* OtherUserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3D0283EBEDB002F94FA /* OtherUserRouter.swift */; };
+		BFA7A3D7283EBEDB002F94FA /* OtherUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3D1283EBEDB002F94FA /* OtherUserModels.swift */; };
+		BFA7A3D8283EBEDB002F94FA /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3D2283EBEDB002F94FA /* OtherUserViewController.swift */; };
+		BFA7A3D9283EBEDB002F94FA /* OtherUserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7A3D3283EBEDB002F94FA /* OtherUserInteractor.swift */; };
 		BFB319052832AFB500E13C65 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB319042832AFB500E13C65 /* FirebaseManager.swift */; };
 		BFBB173C2832887D00F6C6A9 /* AllLocationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17362832887C00F6C6A9 /* AllLocationsPresenter.swift */; };
 		BFBB173D2832887D00F6C6A9 /* AllLocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17372832887C00F6C6A9 /* AllLocationsWorker.swift */; };
@@ -160,6 +166,12 @@
 		BFA60BCB282B1F02006B3DC4 /* UpcomingTripInformationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationModels.swift; sourceTree = "<group>"; };
 		BFA60BCC282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationViewController.swift; sourceTree = "<group>"; };
 		BFA60BCD282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripInformationInteractor.swift; sourceTree = "<group>"; };
+		BFA7A3CE283EBEDB002F94FA /* OtherUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserPresenter.swift; sourceTree = "<group>"; };
+		BFA7A3CF283EBEDB002F94FA /* OtherUserWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserWorker.swift; sourceTree = "<group>"; };
+		BFA7A3D0283EBEDB002F94FA /* OtherUserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserRouter.swift; sourceTree = "<group>"; };
+		BFA7A3D1283EBEDB002F94FA /* OtherUserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserModels.swift; sourceTree = "<group>"; };
+		BFA7A3D2283EBEDB002F94FA /* OtherUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
+		BFA7A3D3283EBEDB002F94FA /* OtherUserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserInteractor.swift; sourceTree = "<group>"; };
 		BFB319042832AFB500E13C65 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		BFBB17362832887C00F6C6A9 /* AllLocationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsPresenter.swift; sourceTree = "<group>"; };
 		BFBB17372832887C00F6C6A9 /* AllLocationsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsWorker.swift; sourceTree = "<group>"; };
@@ -282,6 +294,19 @@
 				BFA60BB5282B1EC3006B3DC4 /* ChatInteractor.swift */,
 			);
 			path = ChatScene;
+			sourceTree = "<group>";
+		};
+		BFA7A3CD283EBE8C002F94FA /* OtherUserScene */ = {
+			isa = PBXGroup;
+			children = (
+				BFA7A3CE283EBEDB002F94FA /* OtherUserPresenter.swift */,
+				BFA7A3CF283EBEDB002F94FA /* OtherUserWorker.swift */,
+				BFA7A3D0283EBEDB002F94FA /* OtherUserRouter.swift */,
+				BFA7A3D1283EBEDB002F94FA /* OtherUserModels.swift */,
+				BFA7A3D2283EBEDB002F94FA /* OtherUserViewController.swift */,
+				BFA7A3D3283EBEDB002F94FA /* OtherUserInteractor.swift */,
+			);
+			path = OtherUserScene;
 			sourceTree = "<group>";
 		};
 		BFBB17352832885C00F6C6A9 /* AllLocationsScene */ = {
@@ -412,6 +437,7 @@
 		BFCC29B1282AB7F8004FE1FE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BFA7A3CD283EBE8C002F94FA /* OtherUserScene */,
 				BFBF0A4E28343CDE0000559E /* SliderScene */,
 				BFBF0A2B283435250000559E /* AuthorizationScene */,
 				BFBF0A32283435260000559E /* RegistrationScene */,
@@ -689,6 +715,7 @@
 				BFA60BAE282B1E93006B3DC4 /* ProfileInteractor.swift in Sources */,
 				BFA60B8A282B1E07006B3DC4 /* SelectedTripInteractor.swift in Sources */,
 				BFA60B95282B1E17006B3DC4 /* SelectedPlaceViewController.swift in Sources */,
+				BFA7A3D9283EBEDB002F94FA /* OtherUserInteractor.swift in Sources */,
 				BFBF0A5A28343CDE0000559E /* SliderModels.swift in Sources */,
 				BFBF0A41283435260000559E /* RegistrationRouter.swift in Sources */,
 				BFA60B9F282B1E6C006B3DC4 /* FavoriteRouter.swift in Sources */,
@@ -707,6 +734,7 @@
 				BFBB173D2832887D00F6C6A9 /* AllLocationsWorker.swift in Sources */,
 				BFBB173C2832887D00F6C6A9 /* AllLocationsPresenter.swift in Sources */,
 				BFBF0A5E28343D270000559E /* SliderCollectionViewCell.swift in Sources */,
+				BFA7A3D4283EBEDB002F94FA /* OtherUserPresenter.swift in Sources */,
 				BFBF0A4C283437B20000559E /* FirebaseAuthManager.swift in Sources */,
 				BFA60B86282B1E07006B3DC4 /* SelectedTripWorker.swift in Sources */,
 				BFBF0A3C283435260000559E /* AuthorizationModels.swift in Sources */,
@@ -716,6 +744,7 @@
 				BFCC29C4282AF4EB004FE1FE /* MainInteractor.swift in Sources */,
 				BFA60B93282B1E17006B3DC4 /* SelectedPlaceRouter.swift in Sources */,
 				BFA60BD3282B1F02006B3DC4 /* UpcomingTripInformationInteractor.swift in Sources */,
+				BFA7A3D8283EBEDB002F94FA /* OtherUserViewController.swift in Sources */,
 				BFBF0A39283435260000559E /* AuthorizationRouter.swift in Sources */,
 				BFA60BC6282B1EF3006B3DC4 /* CreateTripViewController.swift in Sources */,
 				BFA60B89282B1E07006B3DC4 /* SelectedTripViewController.swift in Sources */,
@@ -729,6 +758,7 @@
 				BFA60BD2282B1F02006B3DC4 /* UpcomingTripInformationViewController.swift in Sources */,
 				BFBF0A3A283435260000559E /* AuthorizationPresenter.swift in Sources */,
 				BFBF0A5928343CDE0000559E /* SliderViewController.swift in Sources */,
+				BFA7A3D6283EBEDB002F94FA /* OtherUserRouter.swift in Sources */,
 				BFA60B91282B1E17006B3DC4 /* SelectedPlacePresenter.swift in Sources */,
 				BFA60BC2282B1EF3006B3DC4 /* CreateTripPresenter.swift in Sources */,
 				BF5B6268282BFB7F00D5844D /* PlaceCollectionViewCell.swift in Sources */,
@@ -744,11 +774,13 @@
 				BFBF0A3D283435260000559E /* AuthorizationInteractor.swift in Sources */,
 				BFBF0A43283435260000559E /* RegistrationPresenter.swift in Sources */,
 				BF5B6272282BFE2C00D5844D /* ParticipantCollectionViewCell.swift in Sources */,
+				BFA7A3D7283EBEDB002F94FA /* OtherUserModels.swift in Sources */,
 				BFBF0A42283435260000559E /* RegistrationModels.swift in Sources */,
 				BFBF0A462834359B0000559E /* CheckField.swift in Sources */,
 				BFBB173E2832887D00F6C6A9 /* AllLocationsRouter.swift in Sources */,
 				BFA60BC7282B1EF3006B3DC4 /* CreateTripInteractor.swift in Sources */,
 				BFA60B9D282B1E6C006B3DC4 /* FavoritePresenter.swift in Sources */,
+				BFA7A3D5283EBEDB002F94FA /* OtherUserWorker.swift in Sources */,
 				BFC0BF50283794F400BFC9EC /* MapAnnotation.swift in Sources */,
 				BFA60BB7282B1EC3006B3DC4 /* ChatWorker.swift in Sources */,
 				BFBB173F2832887D00F6C6A9 /* AllLocationsModels.swift in Sources */,
