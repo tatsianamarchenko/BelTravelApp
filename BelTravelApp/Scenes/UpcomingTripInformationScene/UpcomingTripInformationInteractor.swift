@@ -12,32 +12,38 @@
 
 import UIKit
 
-protocol UpcomingTripInformationBusinessLogic
-{
-  func loadUsers(request: UpcomingTripInformation.Something.Request)
+protocol UpcomingTripInformationBusinessLogic {
+	func loadUsers(request: UpcomingTripInformation.Something.Request)
+	func setUser(request: UpcomingTripInformation.Something.Request)
 }
 
-protocol UpcomingTripInformationDataStore
-{
-  var newTrip: NewTrip? { get set }
+protocol UpcomingTripInformationDataStore {
+	var newTrip: NewTrip? { get set }
+	var user: FirebaseAuthManager.FullInformationAppUser? { get set }
 }
 
-class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, UpcomingTripInformationDataStore
-{
-  var presenter: UpcomingTripInformationPresentationLogic?
-  var worker: UpcomingTripInformationWorker?
-  var newTrip: NewTrip?
-  
-  // MARK: Do something
-  
-  func loadUsers(request: UpcomingTripInformation.Something.Request)
-  {
-    worker = UpcomingTripInformationWorker()
-    worker?.doSomeWork()
+class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, UpcomingTripInformationDataStore {
+	var presenter: UpcomingTripInformationPresentationLogic?
+	var worker: UpcomingTripInformationWorker?
+	var newTrip: NewTrip?
+	var user: FirebaseAuthManager.FullInformationAppUser?
 
-	  FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
-		  let response = UpcomingTripInformation.Something.Response(users: users)
-		  self?.presenter?.presentParticipants(response: response)
-	  }
-  }
+	// MARK: Do something
+
+	func loadUsers(request: UpcomingTripInformation.Something.Request)
+	{
+		worker = UpcomingTripInformationWorker()
+		worker?.doSomeWork()
+
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip!.region)Trips", document: "\(request.trip!.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+			let response = UpcomingTripInformation.Something.Response(users: users)
+			self?.presenter?.presentParticipants(response: response)
+		}
+	}
+
+	func setUser(request: UpcomingTripInformation.Something.Request) {
+		user = request.user
+		print(user)
+		self.presenter?.routeToUserViewController()
+	}
 }

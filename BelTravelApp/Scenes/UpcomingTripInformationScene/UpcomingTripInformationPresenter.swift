@@ -15,6 +15,7 @@ import UIKit
 protocol UpcomingTripInformationPresentationLogic
 {
   func presentParticipants(response: UpcomingTripInformation.Something.Response)
+	func routeToUserViewController()
 }
 
 class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic
@@ -28,4 +29,8 @@ class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic
 	  let viewModel = UpcomingTripInformation.Something.ViewModel(users: response.users)
     viewController?.displayUsers(viewModel: viewModel)
   }
+
+	func routeToUserViewController() {
+		viewController?.displayUserViewController()
+	}
 }

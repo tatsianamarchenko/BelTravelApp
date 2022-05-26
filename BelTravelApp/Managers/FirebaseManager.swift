@@ -18,7 +18,7 @@ class FirebaseDatabaseManager {
 	private let db = Firestore.firestore()
 	
 	public func fetchLocationData(collection: String, complition: @escaping ([Location])-> Void) {
-		db.collection(collection).addSnapshotListener { (querySnapshot, error) in
+		db.collection(collection).getDocuments { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
 				return
@@ -239,6 +239,7 @@ class FirebaseDatabaseManager {
 			"region": tripInformation.region
 		]) { error in
 			if error == nil {
+				self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("TripsByUser").addDocument(data: ["ref" : path])
 				complition(true)
 			} else {
 				complition(false)
@@ -286,6 +287,44 @@ class FirebaseDatabaseManager {
 					print(participants.count)
 					complition(participants)
 
+				}
+			}
+		}
+	}
+
+	func getAllMesages(chatId: String, complition : @escaping ([Message])->()) {
+		db.collection("conversations").document(chatId).collection("messages").getDocuments { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
+			var messageRecived = [Message]()
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let messageText = data["message"] as? String ?? ""
+				let sender = data["sender"] as? String ?? ""
+				let stamp = data["data"] as? Timestamp
+				let date = stamp?.dateValue() ?? Date()
+
+				let message = Message(sender: Sender(senderId: sender, displayName: "-"), messageId: queryDocumentSnapshot.documentID, sentDate: date, kind: .text(messageText))
+				messageRecived.append(message)
+			}
+			complition(messageRecived)
+		}
+	}
+
+	func sendMessage(otherSenderId: String, conversationId: String, message: Message, messageText: String, complition : @escaping (Bool)->()) {
+		if conversationId == nil {
+
+		} else {
+			db.collection("conversations").document(conversationId).collection("messages").addDocument(data: [
+				"data" : Date(),
+				"sender" : message.sender.senderId,
+				"message" : messageText ]) { error in
+					if error == nil {
+						complition(true)
+					} else {
+						complition(false)
 				}
 			}
 		}

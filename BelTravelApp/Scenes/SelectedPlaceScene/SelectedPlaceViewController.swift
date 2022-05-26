@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol SelectedPlaceDisplayLogic: class {
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
@@ -122,8 +123,13 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 	}
 
 	func addToFavorite() {
-		let request = SelectedPlace.Something.Request(location: location!, region: region!)
-		interactor?.addToFavorite(request: request)
+		if peopleWhoWansToParticipate.contains(where: { user in
+			user.email != Auth.auth().currentUser?.email ?? ""
+		}) {print("alredy have")}
+		else {
+			let request = SelectedPlace.Something.Request(location: location!, region: region!)
+			interactor?.addToFavorite(request: request)
+		}
 	}
   
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {

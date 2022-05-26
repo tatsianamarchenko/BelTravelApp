@@ -17,7 +17,8 @@ enum UpcomingTripInformation {
   
   enum Something {
     struct Request {
-		var trip: NewTrip
+		var trip: NewTrip?
+		var user: FirebaseAuthManager.FullInformationAppUser?
     }
     struct Response {
 		var users: [FirebaseAuthManager.FullInformationAppUser]

@@ -1,6 +1,6 @@
 //
 //  SliderPresenter.swift
-//  Messenger
+//  BelTravelApp
 //
 //  Created by Tatsiana Marchanka on 2.05.22.
 //  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.

@@ -27,7 +27,7 @@ class SelectedTripInteractor: SelectedTripBusinessLogic, SelectedTripDataStore
   var presenter: SelectedTripPresentationLogic?
   var worker: SelectedTripWorker?
   //var name: String = ""
-  
+	
   // MARK: Do something
   
   func doSomething(request: SelectedTrip.Something.Request)
@@ -38,4 +38,5 @@ class SelectedTripInteractor: SelectedTripBusinessLogic, SelectedTripDataStore
     let response = SelectedTrip.Something.Response()
     presenter?.presentSomething(response: response)
   }
+
 }

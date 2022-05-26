@@ -753,47 +753,50 @@
             </objects>
             <point key="canvasLocation" x="1839.1304347826087" y="803.57142857142856"/>
         </scene>
-        <!--Chat-->
+        <!--Chat List View Controller-->
         <scene sceneID="6LV-JS-L1w">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="d4h-Qu-E5f" customClass="ChatViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListViewController" id="d4h-Qu-E5f" customClass="ChatListViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PdI-iY-Lgy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCy-16-Apz">
-                                <rect key="frame" x="360" y="54" width="44" height="31"/>
-                                <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ccm-gf-7VI">
-                                <rect key="frame" x="0.0" y="95" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No trips discussions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1GE-oN-kIx">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="151"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                            <integer key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dOW-eZ-CJK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ccm-gf-7VI" firstAttribute="top" secondItem="dOW-eZ-CJK" secondAttribute="top" id="1ub-nZ-zau"/>
                             <constraint firstItem="dOW-eZ-CJK" firstAttribute="bottom" secondItem="ccm-gf-7VI" secondAttribute="bottom" id="Bl6-2e-fzf"/>
-                            <constraint firstItem="dOW-eZ-CJK" firstAttribute="trailing" secondItem="qCy-16-Apz" secondAttribute="trailing" constant="10" id="EVZ-OK-LH2"/>
                             <constraint firstItem="dOW-eZ-CJK" firstAttribute="trailing" secondItem="ccm-gf-7VI" secondAttribute="trailing" id="RRM-ep-zIU"/>
-                            <constraint firstItem="qCy-16-Apz" firstAttribute="top" secondItem="dOW-eZ-CJK" secondAttribute="top" constant="10" id="Tci-UE-hDL"/>
-                            <constraint firstItem="ccm-gf-7VI" firstAttribute="top" secondItem="qCy-16-Apz" secondAttribute="bottom" constant="10" id="lai-Z2-HnR"/>
                             <constraint firstItem="ccm-gf-7VI" firstAttribute="leading" secondItem="dOW-eZ-CJK" secondAttribute="leading" id="mCE-He-dhm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" id="FTU-ev-Vbn">
-                        <imageReference key="image" image="message" catalog="system" renderingMode="hierarchical-single">
-                            <hierarchicalColors>
-                                <color red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color systemColor="secondaryLabelColor"/>
-                                <color systemColor="tertiaryLabelColor"/>
-                            </hierarchicalColors>
-                        </imageReference>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="I93-og-MDt"/>
+                    <connections>
+                        <outlet property="chatsTableView" destination="ccm-gf-7VI" id="kZB-iq-iK2"/>
+                        <outlet property="noChatsLable" destination="1GE-oN-kIx" id="E3P-0D-DLz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuy-Yv-EbT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2573.913043478261" y="803.57142857142856"/>
+            <point key="canvasLocation" x="3484.057971014493" y="803.57142857142856"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ziJ-A6-ehI">
@@ -968,7 +971,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJU-Ho-upX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3331.884057971015" y="803.57142857142856"/>
+            <point key="canvasLocation" x="4242.0289855072469" y="803.57142857142856"/>
         </scene>
         <!--All Locations View Controller-->
         <scene sceneID="2cZ-w0-1PS">
@@ -1015,7 +1018,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pu-hf-Sf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7528.985507246377" y="825"/>
+            <point key="canvasLocation" x="8439.1304347826099" y="825"/>
         </scene>
         <!--Slider View Controller-->
         <scene sceneID="Oak-Nk-6bP">
@@ -1526,7 +1529,7 @@
                     <connections>
                         <segue destination="kfz-1g-y4S" kind="relationship" relationship="viewControllers" id="u0v-UT-TC2"/>
                         <segue destination="WpU-YZ-Am4" kind="relationship" relationship="viewControllers" id="oKc-5b-cXu"/>
-                        <segue destination="d4h-Qu-E5f" kind="relationship" relationship="viewControllers" id="Bnk-CF-kAy"/>
+                        <segue destination="Q6x-pY-KRT" kind="relationship" relationship="viewControllers" id="Bnk-CF-kAy"/>
                         <segue destination="O05-uo-0o6" kind="relationship" relationship="viewControllers" id="vVA-Xu-FjI"/>
                     </connections>
                 </tabBarController>
@@ -1812,7 +1815,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMr-16-83S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6618.840579710145" y="825"/>
+            <point key="canvasLocation" x="7528.985507246377" y="825"/>
         </scene>
         <!--Favorite-->
         <scene sceneID="YA7-Bl-IpA">
@@ -2022,7 +2025,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ms3-no-NZF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5689.8550724637689" y="803.57142857142856"/>
+            <point key="canvasLocation" x="6600.0000000000009" y="803.57142857142856"/>
         </scene>
         <!--Profile-->
         <scene sceneID="F2v-tX-bcO">
@@ -2049,7 +2052,34 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28z-iI-Pu7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4779.7101449275369" y="803.57142857142856"/>
+            <point key="canvasLocation" x="5689.8550724637689" y="803.57142857142856"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="oOl-59-qjq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q6x-pY-KRT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chat" id="FTU-ev-Vbn">
+                        <imageReference key="image" image="message" catalog="system" renderingMode="hierarchical-single">
+                            <hierarchicalColors>
+                                <color red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CDb-xa-9EU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="d4h-Qu-E5f" kind="relationship" relationship="rootViewController" id="6ZJ-6Y-Dtz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wmv-co-2VE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2573.913043478261" y="803.57142857142856"/>
         </scene>
     </scenes>
     <resources>
@@ -2062,7 +2092,6 @@
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -11,9 +11,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol UpcomingTripInformationDisplayLogic: class {
   func displayUsers(viewModel: UpcomingTripInformation.Something.ViewModel)
+	func	displayUserViewController()
 }
 
 class UpcomingTripInformationViewController: UIViewController, UpcomingTripInformationDisplayLogic {
@@ -90,8 +92,13 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	}
 
 	@IBAction func participateButtonAction(_ sender: Any) {
-		FirebaseDatabaseManager.shered.addParticipantInTrip(with: tripInformation!) { result in
-			print(result)
+		if participantsArray.contains(where: { user in
+			user.email != Auth.auth().currentUser?.email ?? ""
+		}) {print("alredy have")}
+		else {
+			FirebaseDatabaseManager.shered.addParticipantInTrip(with: tripInformation!) { result in
+				print(result)
+			}
 		}
 	}
 
@@ -106,6 +113,10 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	  self.participantsArray = viewModel.users
 	  self.whoPacticipateCollection.reloadData()
   }
+
+	func displayUserViewController() {
+		router?.routeToUserViewController()
+	}
 }
 
 
@@ -165,5 +176,9 @@ extension UpcomingTripInformationViewController: UICollectionViewDelegate, UICol
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		if collectionView == whoPacticipateCollection {
+			let request = UpcomingTripInformation.Something.Request(user: participantsArray[indexPath.row])
+			interactor?.setUser(request: request)
+		}
 	}
 }

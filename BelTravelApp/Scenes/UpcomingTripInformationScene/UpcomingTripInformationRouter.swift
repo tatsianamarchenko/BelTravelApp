@@ -15,6 +15,7 @@ import UIKit
 @objc protocol UpcomingTripInformationRoutingLogic
 {
   //func routeToSomewhere(segue: UIStoryboardSegue?)
+	func routeToUserViewController()
 }
 
 protocol UpcomingTripInformationDataPassing
@@ -57,4 +58,25 @@ class UpcomingTripInformationRouter: NSObject, UpcomingTripInformationRoutingLog
   //{
   //  destination.name = source.name
   //}
+
+	func routeToUserViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+		destinationVC.user = dataStore?.user
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToUser(source: dataStore!, destination: &destinationDS)
+		navigateToUserViewController(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToUserViewController(source: UpcomingTripInformationViewController, destination: OtherUserViewController) {
+		source.show(destination, sender: nil)
+	}
+
+	// MARK: Passing data
+
+	func passDataToUser(source: UpcomingTripInformationDataStore, destination: inout OtherUserDataStore) {
+		destination.user = source.user
+	}
 }

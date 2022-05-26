@@ -12,19 +12,16 @@
 
 import UIKit
 
-protocol SelectedTripPresentationLogic
-{
-  func presentSomething(response: SelectedTrip.Something.Response)
+protocol SelectedTripPresentationLogic {
+	func presentSomething(response: SelectedTrip.Something.Response)
 }
 
-class SelectedTripPresenter: SelectedTripPresentationLogic
-{
+class SelectedTripPresenter: SelectedTripPresentationLogic {
   weak var viewController: SelectedTripDisplayLogic?
   
   // MARK: Do something
   
-  func presentSomething(response: SelectedTrip.Something.Response)
-  {
+  func presentSomething(response: SelectedTrip.Something.Response) {
     let viewModel = SelectedTrip.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }

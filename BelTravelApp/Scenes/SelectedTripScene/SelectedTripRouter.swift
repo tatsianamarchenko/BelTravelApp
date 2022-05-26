@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol SelectedTripRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+	//func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
 protocol SelectedTripDataPassing
