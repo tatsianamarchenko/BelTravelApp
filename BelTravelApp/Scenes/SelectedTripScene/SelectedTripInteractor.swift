@@ -12,31 +12,36 @@
 
 import UIKit
 
-protocol SelectedTripBusinessLogic
-{
-  func doSomething(request: SelectedTrip.Something.Request)
+protocol SelectedTripBusinessLogic {
+	func loadPhotos(request: SelectedTrip.Something.Request)
+	func loadParticipants(request: SelectedTrip.Something.Request)
 }
 
-protocol SelectedTripDataStore
-{
-  //var name: String { get set }
+protocol SelectedTripDataStore {
+	var trip: NewTrip? { get set }
 }
 
-class SelectedTripInteractor: SelectedTripBusinessLogic, SelectedTripDataStore
-{
-  var presenter: SelectedTripPresentationLogic?
-  var worker: SelectedTripWorker?
-  //var name: String = ""
+class SelectedTripInteractor: SelectedTripBusinessLogic, SelectedTripDataStore {
+	var presenter: SelectedTripPresentationLogic?
+	var worker: SelectedTripWorker?
+	var trip: NewTrip?
 	
-  // MARK: Do something
-  
-  func doSomething(request: SelectedTrip.Something.Request)
-  {
-    worker = SelectedTripWorker()
-    worker?.doSomeWork()
-    
-    let response = SelectedTrip.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+	// MARK: Do something
+
+	func loadPhotos(request: SelectedTrip.Something.Request) {
+		worker = SelectedTripWorker()
+		worker?.doSomeWork()
+		FirebaseDatabaseManager.shered.fetchSavedImages(tripInformation: trip!) { [weak self] images in
+			let response = SelectedTrip.Something.Response(images: images)
+			self?.presenter?.presentImages(response: response)
+		}
+	}
+
+	func loadParticipants(request: SelectedTrip.Something.Request) {
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+			let response = SelectedTrip.Something.Response(users: users)
+			self?.presenter?.presentParticipants(response: response)
+		}
+	}
 
 }

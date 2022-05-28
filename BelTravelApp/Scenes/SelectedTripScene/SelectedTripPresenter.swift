@@ -13,16 +13,22 @@
 import UIKit
 
 protocol SelectedTripPresentationLogic {
-	func presentSomething(response: SelectedTrip.Something.Response)
+	func presentImages(response: SelectedTrip.Something.Response)
+	func presentParticipants(response: SelectedTrip.Something.Response)
 }
 
 class SelectedTripPresenter: SelectedTripPresentationLogic {
-  weak var viewController: SelectedTripDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: SelectedTrip.Something.Response) {
-    let viewModel = SelectedTrip.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+	weak var viewController: SelectedTripDisplayLogic?
+
+	// MARK: Do something
+
+	func presentImages(response: SelectedTrip.Something.Response) {
+		let viewModel = SelectedTrip.Something.ViewModel(images: response.images)
+		viewController?.displayPhotos (viewModel: viewModel)
+	}
+
+	func presentParticipants(response: SelectedTrip.Something.Response) {
+		let viewModel = SelectedTrip.Something.ViewModel(users: response.users)
+		viewController?.displayParticipants (viewModel: viewModel)
+	}
 }

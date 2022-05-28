@@ -13,7 +13,8 @@
 import UIKit
 
 protocol SelectedTripDisplayLogic: class {
-	func displaySomething(viewModel: SelectedTrip.Something.ViewModel)
+	func displayPhotos(viewModel: SelectedTrip.Something.ViewModel)
+	func displayParticipants(viewModel: SelectedTrip.Something.ViewModel)
 }
 
 class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
@@ -62,20 +63,161 @@ class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		doSomething()
+		title = trip?.locationName
+		loadPhotos()
+		loadParticipants()
+		makePhotosCollection()
+		makeParticipantsCollection()
 	}
 
 	// MARK: Do something
+	var trip: NewTrip?
+	var photosArray = [UIImage]()
+	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
 
-	//@IBOutlet weak var nameTextField: UITextField!
+	@IBOutlet weak var participantsCollection: UICollectionView!
+	@IBOutlet weak var photosCollection: UICollectionView!
 
-	func doSomething() {
-		let request = SelectedTrip.Something.Request()
-		interactor?.doSomething(request: request)
+	func loadPhotos() {
+		guard let trip = trip else {
+			return
+		}
+		let request = SelectedTrip.Something.Request(trip: trip)
+		interactor?.loadPhotos(request: request)
 	}
 
-	func displaySomething(viewModel: SelectedTrip.Something.ViewModel) {
-		//nameTextField.text = viewModel.name
+	func loadParticipants() {
+		guard let trip = trip else {
+			return
+		}
+		let request = SelectedTrip.Something.Request(trip: trip)
+		interactor?.loadParticipants(request: request)
 	}
 
+	func displayPhotos(viewModel: SelectedTrip.Something.ViewModel) {
+		guard let images = viewModel.images else {
+			return
+		}
+		photosArray = images
+		photosCollection.reloadData()
+	}
+
+	func displayParticipants(viewModel: SelectedTrip.Something.ViewModel) {
+		guard let users = viewModel.users else {
+			return
+		}
+		participantsArray = users
+		participantsCollection.reloadData()
+	}
+
+	func makePhotosCollection() {
+		photosCollection.delegate = self
+		photosCollection.dataSource = self
+		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
+		photosCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	}
+
+	func makeParticipantsCollection() {
+		participantsCollection.delegate = self
+		participantsCollection.dataSource = self
+		let nib = UINib(nibName: "ParticipantCollectionViewCell", bundle: nil)
+		participantsCollection.register(nib, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
+	}
+
+}
+
+extension SelectedTripViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == photosCollection {
+			return photosArray.count
+		}
+		if collectionView == participantsCollection {
+			return participantsArray.count
+		}
+
+		return 0
+	}
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if collectionView == photosCollection {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	PlaceCollectionViewCell.identifier, for: indexPath)
+					as? PlaceCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+			cell.imageOfLocation.image = photosArray[indexPath.row]
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		if collectionView == participantsCollection {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	ParticipantCollectionViewCell.identifier, for: indexPath)
+					as? ParticipantCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+			cell.config(model: participantsArray[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+		return UICollectionViewCell()
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
+		if collectionView == photosCollection {
+			return CGSize(width: 150, height: 150)
+		}
+		if collectionView == participantsCollection {
+			return CGSize(width: 200, height: 100)
+		}
+		return CGSize(width: 150, height: 150)
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 1
+	}
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						insetForSectionAt section: Int) -> UIEdgeInsets {
+
+		if collectionView == photosCollection {
+			return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+		}
+		if collectionView == participantsCollection {
+			return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
+		}
+		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+	}
 }

@@ -12,19 +12,17 @@
 
 import UIKit
 
-@objc protocol ProfileRoutingLogic
-{
-  func routeToSliderViewController()
+@objc protocol ProfileRoutingLogic {
+	func routeToSliderViewController()
 	func routeToSelectedFinishedTripViewController()
+	func routeToReadyToFinishTripViewController()
 }
 
-protocol ProfileDataPassing
-{
-  var dataStore: ProfileDataStore? { get }
+protocol ProfileDataPassing {
+	var dataStore: ProfileDataStore? { get }
 }
 
-class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing
-{
+class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing {
 	weak var viewController: ProfileViewController?
 	var dataStore: ProfileDataStore?
 
@@ -55,9 +53,9 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing
 	}
 
 	func routeToSelectedFinishedTripViewController() {
-
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedTripViewController") as! SelectedTripViewController
+		destinationVC.trip = dataStore?.finishedTrip
 
 		destinationVC.modalPresentationStyle = .fullScreen
 		var destinationDS = destinationVC.router!.dataStore!
@@ -73,12 +71,34 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing
 		if let sheet = nav.sheetPresentationController {
 			sheet.detents = [.medium(), .large()]
 		}
-		source.present(nav, animated: true) //(destination, sender: nil)
+		source.present(nav, animated: true)
 	}
 
 	// MARK: Passing data
 
 	func passDataToSomewhere(source: ProfileDataStore, destination: inout SelectedTripDataStore) {
-		//    destination.name = source.name
+		destination.trip = source.finishedTrip
+	}
+
+	func routeToReadyToFinishTripViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "ReadyToFinishTripViewController") as! ReadyToFinishTripViewController
+		destinationVC.trip = dataStore?.upcomingTrip
+		destinationVC.modalPresentationStyle = .fullScreen
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToReadyToFinishTripViewController(source: dataStore!, destination: &destinationDS)
+		navigateToReadyToFinishTripViewController(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToReadyToFinishTripViewController(source: ProfileViewController, destination: ReadyToFinishTripViewController) {
+		source.navigationController?.pushViewController(destination, animated: true)
+	}
+
+	// MARK: Passing data
+
+	func passDataToReadyToFinishTripViewController(source: ProfileDataStore, destination: inout ReadyToFinishTripDataStore) {
+		destination.trip = source.upcomingTrip
 	}
 }

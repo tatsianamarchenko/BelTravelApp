@@ -64,7 +64,6 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 		super.viewDidLoad()
 		doSomething()
 		makeTripsCollection()
-		makePhotosCollection ()
 		userPhoto.image = user?.image
 		locationLable.text = user?.name
 		tripsLable.text = user?.lastName
@@ -81,8 +80,6 @@ var tripsArray = [NewTrip]()
 	@IBOutlet weak var userPhoto: UIImageView!
 	@IBOutlet weak var tripsCollection: UICollectionView!
 	@IBOutlet weak var noTripsLable: UILabel!
-	@IBOutlet weak var photosCollection: UICollectionView!
-	@IBOutlet weak var noPhotosLable: UILabel!
 	@IBOutlet weak var locationLable: UILabel!
 	@IBOutlet weak var tripsLable: UILabel!
 
@@ -92,14 +89,6 @@ var tripsArray = [NewTrip]()
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		tripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
-
-	func makePhotosCollection () {
-		photosCollection.delegate = self
-		photosCollection.dataSource = self
-		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
-		photosCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
-	}
-
 
 	func doSomething() {
     let request = OtherUser.Something.Request()
@@ -123,22 +112,6 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if collectionView == photosCollection {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-																PlaceCollectionViewCell.identifier, for: indexPath)
-				as? PlaceCollectionViewCell else {
-					return UICollectionViewCell()
-				}
-			cell.imageOfLocation.image = photosArray[indexPath.row]
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
-			return cell
-		}
 
 		if collectionView == tripsCollection {
 			if !tripsArray.isEmpty {
@@ -166,9 +139,6 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		if collectionView == photosCollection {
-			return CGSize(width: 150, height: 150)
-		}
 		if collectionView == tripsCollection {
 			return CGSize(width: 250, height: 100)
 		}
@@ -194,10 +164,7 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-		if collectionView == photosCollection {
-		}
-
+		
 		if collectionView == tripsCollection {
 		}
 	}

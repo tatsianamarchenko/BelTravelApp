@@ -31,8 +31,7 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
 
 	// MARK: Do something
 
-	func loadUsers(request: UpcomingTripInformation.Something.Request)
-	{
+	func loadUsers(request: UpcomingTripInformation.Something.Request) {
 		worker = UpcomingTripInformationWorker()
 		worker?.doSomeWork()
 

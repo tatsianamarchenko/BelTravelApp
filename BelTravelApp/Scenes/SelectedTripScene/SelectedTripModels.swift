@@ -12,20 +12,20 @@
 
 import UIKit
 
-enum SelectedTrip
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
+enum SelectedTrip{
+	// MARK: Use cases
+
+	enum Something {
+		struct Request {
+			var trip: NewTrip
+		}
+		struct Response {
+			var images: [UIImage]?
+			var users: [FirebaseAuthManager.FullInformationAppUser]?
+		}
+		struct ViewModel {
+			var images: [UIImage]?
+			var users: [FirebaseAuthManager.FullInformationAppUser]?
+		}
+	}
 }

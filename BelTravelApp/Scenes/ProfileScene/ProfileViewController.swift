@@ -16,68 +16,72 @@ import FirebaseAuth
 protocol ProfileDisplayLogic: class {
 	func displayUserInformation(viewModel: Profile.Something.ViewModel)
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel)
+	func	displayTrips(viewModel: Profile.Something.ViewModel)
 	func displayFinishTrip()
+	func displayUpcomingTrip()
 }
 
 class ProfileViewController: UIViewController, ProfileDisplayLogic {
-  var interactor: ProfileBusinessLogic?
-  var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
+	var interactor: ProfileBusinessLogic?
+	var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController = self
-    let interactor = ProfileInteractor()
-    let presenter = ProfilePresenter()
-    let router = ProfileRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = ProfileInteractor()
+		let presenter = ProfilePresenter()
+		let router = ProfileRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadUserInformation()
+		loadTripsInformation()
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		photoOfUser.isUserInteractionEnabled = true
 		photoOfUser.addGestureRecognizer(tapGesture!)
 		makeUpcomingTripsCollection()
 		makeFinishedTripsCollection()
 	}
+
 	@objc func tapped() {
 		presentPhoto()
 	}
-  
-  // MARK: Do something
-var upcomingTripsArray = [NewTrip]()
+
+	// MARK: Do something
+	var upcomingTripsArray = [NewTrip]()
 	var finishedTripsArray = [NewTrip]()
 	var photoOfOtherUsers = [UIImage]()
 
@@ -100,26 +104,35 @@ var upcomingTripsArray = [NewTrip]()
 		}
 	}
 
-  func loadUserInformation() {
-    let request = Profile.Something.Request()
-    interactor?.loadInformation(request: request)
-  }
-  
+	func loadUserInformation() {
+		let request = Profile.Something.Request()
+		interactor?.loadInformation(request: request)
+	}
+
+	func loadTripsInformation() {
+		let request = Profile.Something.Request()
+		interactor?.loadTrips(request: request)
+	}
+
 	func displayUserInformation(viewModel: Profile.Something.ViewModel) {
 		self.nameLable.text = "\(viewModel.name!) \(viewModel.lastName!)"
 		self.defaultLocationLable.text = viewModel.defaultLocation
 		self.numberOfTripsOfUserLable.text = viewModel.numberOfTripsOfUser
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
-		upcomingTripsArray = viewModel.upcomingTrips!
-		finishedTripsArray = viewModel.finishedTrips!
-		upcomingTripsCollection.reloadData()
-		finishedTripsCollection.reloadData()
 	}
 
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel) {
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
+	}
+
+
+	func	displayTrips(viewModel: Profile.Something.ViewModel) {
+		upcomingTripsArray = viewModel.upcomingTrips!
+		finishedTripsArray = viewModel.finishedTrips!
+		upcomingTripsCollection.reloadData()
+		finishedTripsCollection.reloadData()
 	}
 
 	func makeUpcomingTripsCollection () {
@@ -128,6 +141,7 @@ var upcomingTripsArray = [NewTrip]()
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		upcomingTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
+
 	func makeFinishedTripsCollection () {
 		finishedTripsCollection.delegate = self
 		finishedTripsCollection.dataSource = self
@@ -137,6 +151,10 @@ var upcomingTripsArray = [NewTrip]()
 
 	func displayFinishTrip() {
 		router?.routeToSelectedFinishedTripViewController()
+	}
+
+	func displayUpcomingTrip() {
+		router?.routeToReadyToFinishTripViewController()
 	}
 }
 
@@ -166,6 +184,8 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 		if collectionView == upcomingTripsCollection {
 			if !upcomingTripsArray.isEmpty {
 				noUpcomingTripsLable.isHidden = true
+			} else {
+				noUpcomingTripsLable.isHidden = false
 			}
 
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
@@ -188,6 +208,8 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 		if collectionView == finishedTripsCollection {
 			if !finishedTripsArray.isEmpty {
 				noFinishedTripsLable.isHidden = true
+			} else {
+				noFinishedTripsLable.isHidden = false
 			}
 
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
@@ -235,12 +257,11 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == upcomingTripsCollection {
-			if upcomingTripsArray[indexPath.row].creator == Auth.auth().currentUser?.uid {
-				print("mine")
-			} else {
-				"SelectedTripViewController"
-			}
+			let request = Profile.Something.Request(upcomingTrip: upcomingTripsArray[indexPath.row])
+			print(upcomingTripsArray[indexPath.row].document)
+			interactor?.setUpcomingTrip(request: request)
 		}
+
 		if collectionView == finishedTripsCollection {
 			let request = Profile.Something.Request(image: nil, name: nil, finishedTrip: finishedTripsArray[indexPath.row])
 			interactor?.setFinishTrip(request: request)

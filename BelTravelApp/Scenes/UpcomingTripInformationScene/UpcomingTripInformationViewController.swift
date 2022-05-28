@@ -65,7 +65,7 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		guard var tripInformation = tripInformation else {return}
-		locationTitle.title = tripInformation.locationName
+	title = tripInformation.locationName
 		locationImage.image = UIImage(named: "back1")
 		tripStartPlace.text = tripInformation.description
 		tripTime.text = tripInformation.time
@@ -83,7 +83,6 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   // MARK: Do something
 	var tripInformation: NewTrip?
 	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
-	@IBOutlet weak var locationTitle: UINavigationItem!
 	@IBOutlet weak var locationImage: UIImageView!
 	@IBOutlet weak var tripStartPlace: UILabel!
 	@IBOutlet weak var tripTime: UILabel!
@@ -120,8 +119,6 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 		router?.routeToUserViewController()
 	}
 }
-
-
 
 extension UpcomingTripInformationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 

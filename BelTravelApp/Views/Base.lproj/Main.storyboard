@@ -469,7 +469,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NSx-sn-Z6Y"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5ix-mh-NHB">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5ix-mh-NHB">
                                     <size key="itemSize" width="129" height="43"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -477,7 +477,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nbS-cP-2Rv">
-                                        <rect key="frame" x="0.0" y="0.0" width="129" height="43"/>
+                                        <rect key="frame" x="0.0" y="3.5" width="129" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UZn-eA-wJt">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="43"/>
@@ -531,6 +531,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" largeTitleDisplayMode="always" id="VBf-Me-R24"/>
+                    <connections>
+                        <outlet property="participantsCollection" destination="ujm-jV-mgs" id="v6h-gu-Kye"/>
+                        <outlet property="photosCollection" destination="p9F-dY-pkx" id="QEu-X1-5LQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DcK-Wa-mja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -680,7 +684,6 @@
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="bKy-F5-Q0R"/>
                     <connections>
                         <outlet property="locationImage" destination="kRo-Li-Swz" id="twv-la-DH4"/>
-                        <outlet property="locationTitle" destination="bKy-F5-Q0R" id="gVm-sy-dHT"/>
                         <outlet property="tripStartPlace" destination="bbY-M8-2tG" id="gU6-OY-8gg"/>
                         <outlet property="tripTime" destination="VTp-eH-KPL" id="GuP-YF-h26"/>
                         <outlet property="whoPacticipateCollection" destination="gJQ-s4-PdC" id="S3P-0O-i1w"/>
@@ -753,52 +756,7 @@
             </objects>
             <point key="canvasLocation" x="1839.1304347826087" y="803.57142857142856"/>
         </scene>
-        <!--Chat List View Controller-->
-        <scene sceneID="6LV-JS-L1w">
-            <objects>
-                <viewController storyboardIdentifier="ChatListViewController" id="d4h-Qu-E5f" customClass="ChatListViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PdI-iY-Lgy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ccm-gf-7VI">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No trips discussions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1GE-oN-kIx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="151"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
-                                            <integer key="value" value="15"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="dOW-eZ-CJK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ccm-gf-7VI" firstAttribute="top" secondItem="dOW-eZ-CJK" secondAttribute="top" id="1ub-nZ-zau"/>
-                            <constraint firstItem="dOW-eZ-CJK" firstAttribute="bottom" secondItem="ccm-gf-7VI" secondAttribute="bottom" id="Bl6-2e-fzf"/>
-                            <constraint firstItem="dOW-eZ-CJK" firstAttribute="trailing" secondItem="ccm-gf-7VI" secondAttribute="trailing" id="RRM-ep-zIU"/>
-                            <constraint firstItem="ccm-gf-7VI" firstAttribute="leading" secondItem="dOW-eZ-CJK" secondAttribute="leading" id="mCE-He-dhm"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="I93-og-MDt"/>
-                    <connections>
-                        <outlet property="chatsTableView" destination="ccm-gf-7VI" id="kZB-iq-iK2"/>
-                        <outlet property="noChatsLable" destination="1GE-oN-kIx" id="E3P-0D-DLz"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cuy-Yv-EbT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3484.057971014493" y="803.57142857142856"/>
-        </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="ziJ-A6-ehI">
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" id="O05-uo-0o6" customClass="ProfileViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -807,13 +765,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-Cc-SUn">
-                                <rect key="frame" x="30" y="54" width="354" height="0.0"/>
+                                <rect key="frame" x="30" y="98" width="354" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-sj-i4n">
-                                <rect key="frame" x="167" y="71" width="80" height="86"/>
+                                <rect key="frame" x="167" y="115" width="80" height="86"/>
                                 <color key="tintColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -828,25 +786,25 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-g6-C0Q">
-                                <rect key="frame" x="10" y="174" width="125" height="27"/>
+                                <rect key="frame" x="10" y="218" width="125" height="27"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="on6-n8-QqT">
-                                <rect key="frame" x="10" y="206" width="0.0" height="0.0"/>
+                                <rect key="frame" x="10" y="250" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GH-ce-g5T">
-                                <rect key="frame" x="10" y="216" width="84" height="27"/>
+                                <rect key="frame" x="10" y="260" width="84" height="27"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-0J-TfG">
-                                <rect key="frame" x="319" y="84" width="65" height="32"/>
+                                <rect key="frame" x="319" y="128" width="65" height="32"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Exit" cornerStyle="capsule">
                                     <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -857,25 +815,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qC2-ue-ywx">
-                                <rect key="frame" x="104" y="229.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="104" y="273.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PU0-ut-IJH">
-                                <rect key="frame" x="145" y="187.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="145" y="231.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIz-hN-Gpr">
-                                <rect key="frame" x="104" y="229.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="104" y="273.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YT5-hL-3hD">
-                                <rect key="frame" x="0.0" y="409" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="453" width="414" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="LF7-TV-UBD"/>
@@ -911,7 +869,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fsq-kb-46d">
-                                <rect key="frame" x="0.0" y="276" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="320" width="414" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Nbv-Ay-8SS"/>
@@ -947,13 +905,13 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finished trips:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LT4-KC-XT0">
-                                <rect key="frame" x="10" y="253" width="154" height="20"/>
+                                <rect key="frame" x="10" y="297" width="154" height="20"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming trips:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFv-3A-Rje">
-                                <rect key="frame" x="10" y="386" width="154" height="20"/>
+                                <rect key="frame" x="10" y="430" width="154" height="20"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -993,16 +951,8 @@
                             <constraint firstItem="YT5-hL-3hD" firstAttribute="leading" secondItem="eUN-bc-5Ya" secondAttribute="leading" id="z4O-nF-Ejo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="g9B-3F-rmv">
-                        <imageReference key="image" image="person" catalog="system" renderingMode="hierarchical-single">
-                            <hierarchicalColors>
-                                <color red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color systemColor="secondaryLabelColor"/>
-                                <color systemColor="tertiaryLabelColor"/>
-                            </hierarchicalColors>
-                        </imageReference>
-                    </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="WRa-Uf-PgV"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="defaultLocationLable" destination="on6-n8-QqT" id="ODT-F8-mNA"/>
@@ -1019,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJU-Ho-upX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4242.0289855072469" y="803.57142857142856"/>
+            <point key="canvasLocation" x="3483" y="800"/>
         </scene>
         <!--All Locations View Controller-->
         <scene sceneID="2cZ-w0-1PS">
@@ -1066,7 +1016,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pu-hf-Sf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8439.1304347826099" y="825"/>
+            <point key="canvasLocation" x="9349.2753623188419" y="825"/>
         </scene>
         <!--Slider View Controller-->
         <scene sceneID="Oak-Nk-6bP">
@@ -1577,8 +1527,7 @@
                     <connections>
                         <segue destination="kfz-1g-y4S" kind="relationship" relationship="viewControllers" id="u0v-UT-TC2"/>
                         <segue destination="WpU-YZ-Am4" kind="relationship" relationship="viewControllers" id="oKc-5b-cXu"/>
-                        <segue destination="Q6x-pY-KRT" kind="relationship" relationship="viewControllers" id="Bnk-CF-kAy"/>
-                        <segue destination="O05-uo-0o6" kind="relationship" relationship="viewControllers" id="vVA-Xu-FjI"/>
+                        <segue destination="4TX-FC-fTu" kind="relationship" relationship="viewControllers" id="vVA-Xu-FjI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IXl-UO-jwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1845,7 +1794,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMr-16-83S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7528.985507246377" y="825"/>
+            <point key="canvasLocation" x="8439.1304347826099" y="825"/>
         </scene>
         <!--Favorite-->
         <scene sceneID="YA7-Bl-IpA">
@@ -2054,7 +2003,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ms3-no-NZF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6600.0000000000009" y="803.57142857142856"/>
+            <point key="canvasLocation" x="7510.1449275362329" y="803.57142857142856"/>
         </scene>
         <!--Profile-->
         <scene sceneID="F2v-tX-bcO">
@@ -2081,39 +2030,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28z-iI-Pu7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5689.8550724637689" y="803.57142857142856"/>
-        </scene>
-        <!--Chat-->
-        <scene sceneID="oOl-59-qjq">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q6x-pY-KRT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" id="FTU-ev-Vbn">
-                        <imageReference key="image" image="message" catalog="system" renderingMode="hierarchical-single">
-                            <hierarchicalColors>
-                                <color red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color systemColor="secondaryLabelColor"/>
-                                <color systemColor="tertiaryLabelColor"/>
-                            </hierarchicalColors>
-                        </imageReference>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CDb-xa-9EU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="d4h-Qu-E5f" kind="relationship" relationship="rootViewController" id="6ZJ-6Y-Dtz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wmv-co-2VE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2573.913043478261" y="803.57142857142856"/>
+            <point key="canvasLocation" x="6600.0000000000009" y="803.57142857142856"/>
         </scene>
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="IRg-qy-lPT">
             <objects>
-                <viewController id="BLk-LP-YaK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReadyToFinishTripViewController" id="BLk-LP-YaK" customClass="ReadyToFinishTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rV3-bq-YzS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2156,6 +2078,19 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No participants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GXl-vB-2va">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                            <integer key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="r7y-MH-Uha">
                                         <rect key="frame" x="0.0" y="2" width="127" height="46"/>
@@ -2182,7 +2117,7 @@
                                     <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="6TI-lS-zy0"/>
+                                    <action selector="dontWantToParticipateAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="2lp-7j-jqR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9S-SZ-WTV">
@@ -2199,25 +2134,7 @@
                                     <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="GuE-FG-f1t"/>
-                                    <action selector="participateButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="eed-Y9-Mtj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-9w-Rua">
-                                <rect key="frame" x="489" y="512" width="59" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7iA-ac-duc"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Don't want to participate" cornerStyle="capsule" titleAlignment="center">
-                                    <backgroundConfiguration key="background">
-                                        <color key="strokeColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="jcY-hN-REJ"/>
+                                    <action selector="openChatAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="mXL-mv-U9L"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwa-TQ-Z4w">
@@ -2231,7 +2148,7 @@
                                     <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="in2-di-41t"/>
+                                    <action selector="finishTripAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="ZPW-OF-3VG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eim-2T-smA">
@@ -2268,38 +2185,19 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="jhs-d0-eCe"/>
                     <connections>
-                        <outlet property="locationImage" destination="OXW-DJ-Gl5" id="vfr-Ts-pzA"/>
-                        <outlet property="locationTitle" destination="jhs-d0-eCe" id="lYm-aC-Sk5"/>
-                        <outlet property="tripTime" destination="Jj8-eh-zck" id="SBP-a1-knb"/>
-                        <outlet property="whoPacticipateCollection" destination="LpP-c9-HWP" id="FLh-de-eFg"/>
+                        <outlet property="participantsCollection" destination="LpP-c9-HWP" id="5Ke-CT-Ppg"/>
+                        <outlet property="timeLable" destination="Jj8-eh-zck" id="6jA-DN-kB4"/>
+                        <outlet property="tripImage" destination="OXW-DJ-Gl5" id="Syz-WJ-XkN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lWw-qD-c3I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5803" y="2265"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="fgn-Tm-Evi">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0So-Xs-ATp" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yT6-hz-ICq">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BLk-LP-YaK" kind="relationship" relationship="rootViewController" id="pTc-iH-ufc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q4Z-XH-WU8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4879.7101449275369" y="2264.7321428571427"/>
+            <point key="canvasLocation" x="4392.753623188406" y="1552.9017857142856"/>
         </scene>
         <!--Gomel, Rumanchevy palace-->
         <scene sceneID="rUn-UR-Tzk">
             <objects>
-                <viewController id="PXu-FJ-0EE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SaveTripViewController" id="PXu-FJ-0EE" customClass="SaveTripViewController" customModule="BelTravelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZZH-9p-3Lv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2346,23 +2244,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alS-4s-2Cm">
-                                <rect key="frame" x="489" y="512" width="59" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="tzD-Pj-lZp"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Don't want to participate" cornerStyle="capsule" titleAlignment="center">
-                                    <backgroundConfiguration key="background">
-                                        <color key="strokeColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="chatButtonAction:" destination="PXu-FJ-0EE" eventType="touchUpInside" id="jxv-Px-q9x"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVq-DV-2ja">
                                 <rect key="frame" x="10" y="54" width="69.5" height="27"/>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
@@ -2385,6 +2266,7 @@
                                 <connections>
                                     <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="SZh-Yc-Y6X"/>
                                     <action selector="participateButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="2Bi-TN-6Mq"/>
+                                    <action selector="saveTripAction:" destination="PXu-FJ-0EE" eventType="touchUpInside" id="i6f-u2-rwM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vo-97-CaY">
@@ -2401,6 +2283,7 @@
                                     <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="addPhotosAction:" destination="PXu-FJ-0EE" eventType="touchUpInside" id="LZp-37-VtF"/>
                                     <action selector="chatButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="WbX-cR-vae"/>
                                     <action selector="participateButtonAction:" destination="BLk-LP-YaK" eventType="touchUpInside" id="o2j-BZ-Na6"/>
                                 </connections>
@@ -2411,7 +2294,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="DCc-gV-CVw"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rk8-6Q-yPc">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rk8-6Q-yPc">
                                     <size key="itemSize" width="127" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2467,14 +2350,61 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="FPA-AG-LMd"/>
                     <connections>
-                        <outlet property="locationTitle" destination="FPA-AG-LMd" id="lo4-UA-DP6"/>
-                        <outlet property="tripTime" destination="WDx-Vs-z9x" id="cUg-K9-1X5"/>
-                        <outlet property="whoPacticipateCollection" destination="8vS-pU-j1P" id="7pY-T1-ZOl"/>
+                        <outlet property="noParticipantsLable" destination="q2t-P4-eLT" id="e2r-9N-tyg"/>
+                        <outlet property="noPhotosLable" destination="Zop-el-4EC" id="uIc-OE-ONY"/>
+                        <outlet property="participantsCollection" destination="8vS-pU-j1P" id="dkx-Rf-z6k"/>
+                        <outlet property="photosCollection" destination="nLH-hd-AcN" id="GkJ-7X-Zhb"/>
+                        <outlet property="tripTime" destination="WDx-Vs-z9x" id="GNw-Xh-eMA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mm6-oC-5Ms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6734.7826086956529" y="2264.7321428571427"/>
+            <point key="canvasLocation" x="5360.8695652173919" y="1552.9017857142856"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="MDP-E2-ch2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4TX-FC-fTu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="g9B-3F-rmv">
+                        <imageReference key="image" image="person" catalog="system" renderingMode="hierarchical-single">
+                            <hierarchicalColors>
+                                <color red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9VB-IW-znO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="O05-uo-0o6" kind="relationship" relationship="rootViewController" id="ae0-8c-MqP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DkK-aq-U5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2667" y="800"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hkk-OW-P1e">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gB0-bw-iq9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vv5-sk-rNk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BLk-LP-YaK" kind="relationship" relationship="rootViewController" id="OVJ-Mm-7hL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dqL-Rb-Zbs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3482.608695652174" y="1552.9017857142856"/>
         </scene>
     </scenes>
     <resources>
@@ -2482,7 +2412,6 @@
         <image name="globe.europe.africa" catalog="system" width="128" height="121"/>
         <image name="globe.europe.africa.fill" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
-        <image name="message" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
