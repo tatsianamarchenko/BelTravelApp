@@ -44,21 +44,15 @@ class FirebaseDatabaseManager {
 				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
 					if error == nil {
 						guard let data = data else {
-							print("location")
 							return
 						}
 						
 						image = UIImage(data: data)!
-//						let location = Location(lat: lat, lng: lon, description: description, image: image!, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
-//						result.append(location)
-//						complition(result)
-//						print(location)
 					}
 
 					let location = Location(lat: lat, lng: lon, description: description, image: image, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: queryDocumentSnapshot.reference.documentID, region: region)
 					result.append(location)
 					complition(result)
-					print(location)
 				}
 			}
 		}
@@ -146,7 +140,6 @@ class FirebaseDatabaseManager {
 					let coordinats = data["coordinats"] as! GeoPoint
 					let lat = coordinats.latitude
 					let lon = coordinats.longitude
-					print(lat, lon)
 					let description = data["description"] as? String ?? ""
 					let name = data["name"] as? String ?? ""
 					let type = data["type"] as? String ?? ""
@@ -236,7 +229,8 @@ class FirebaseDatabaseManager {
 			"numberOfPeople": tripInformation.maxPeople,
 			"description": tripInformation.description,
 			"creator": Auth.auth().currentUser?.uid as Any,
-			"region": tripInformation.region
+			"region": tripInformation.region,
+			"isActive": true as Bool
 		]) { error in
 			if error == nil {
 				self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("TripsByUser").addDocument(data: ["ref" : path])
@@ -265,7 +259,8 @@ class FirebaseDatabaseManager {
 				let numberOfPeople = data["numberOfPeople"] as? String ?? ""
 				let time = data["time"] as? String ?? ""
 				let region = data["region"] as? String ?? ""
-				let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID)
+				let isActive = data["isActive"] as? Bool ?? true
+				let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
 				result.append(location)
 				complition(result)
 			}
@@ -285,8 +280,43 @@ class FirebaseDatabaseManager {
 				participants.removeAll()
 				self.fetchOtherUser(user: participant) { user in
 					participants.append(user)
-					print(participants.count)
 					complition(participants)
+
+				}
+			}
+		}
+	}
+
+	public func fetchUserTrips(document: FirebaseAuthManager.FullInformationAppUser?, complition: @escaping ([NewTrip], [NewTrip])-> Void) {
+		var upcomingTrips = [NewTrip]()
+		var finishedTrips = [NewTrip]()
+		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("TripsByUser").addSnapshotListener { (querySnapshot, error) in
+			guard let documents = querySnapshot?.documents else {
+				print("No documents")
+				return
+			}
+			documents.map { queryDocumentSnapshot in
+				let	data = queryDocumentSnapshot.data()
+				let path = data["ref"] as! DocumentReference
+				self.db.document(path.path).getDocument { (querySnapshot, error) in
+					guard let data = querySnapshot?.data() else {
+						print("No documents")
+						return
+					}
+					let locationPath = data["locationPath"] as? String ?? ""
+					let locationName = data["locationName"] as? String ?? ""
+					let creator = data["creator"] as? String ?? ""
+					let description = data["description"] as? String ?? ""
+					let numberOfPeople = data["numberOfPeople"] as? String ?? ""
+					let time = data["time"] as? String ?? ""
+					let region = data["region"] as? String ?? ""
+					let isActive = data["isActive"] as? Bool ?? true
+					let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
+					if location.isActive == true {
+						upcomingTrips.append(location) } else {
+							finishedTrips.append(location)
+						}
+					complition(upcomingTrips, finishedTrips)
 
 				}
 			}
@@ -333,32 +363,3 @@ class FirebaseDatabaseManager {
 	}
 
 }
-
-//	public func fetchImageData(completionHandler: @escaping ([UIImage]?) -> Void) {
-   //		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("AddedPhotosReferences").getDocuments { (querySnapshot, error) in
-   //			guard let documents = querySnapshot?.documents else {
-   //				print("No documents")
-   //				return
-   //			}
-   //			var result = [UIImage]()
-   //			documents.map { queryDocumentSnapshot in
-   //				let	data = queryDocumentSnapshot.data()
-   //				let path = data["ref"] as? String ?? ""
-   //				let storage = Storage.storage().reference()
-   //				let fileRef = storage.child(path)
-   //				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-   //					if error == nil {
-   //						guard let data = data else {
-   //							return
-   //						}
-   //
-   //						let image = UIImage(data: data)
-   //						guard let image = image else {return}
-   //						result.append(image)
-   //						completionHandler(result)
-   //					}
-   //				}
-   //			}
-   //		}
-   //	}
-

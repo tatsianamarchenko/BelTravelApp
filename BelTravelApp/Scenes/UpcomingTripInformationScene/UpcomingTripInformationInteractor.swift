@@ -44,7 +44,6 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
 
 	func setUser(request: UpcomingTripInformation.Something.Request) {
 		user = request.user
-		print(user)
 		self.presenter?.routeToUserViewController()
 	}
 

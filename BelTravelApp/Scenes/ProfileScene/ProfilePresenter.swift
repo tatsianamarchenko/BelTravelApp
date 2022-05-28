@@ -15,6 +15,7 @@ import UIKit
 protocol ProfilePresentationLogic {
 	func presentUserInformation(response: Profile.Something.Response)
 	func presentNewSavedPhoto(response: Profile.Something.Response)
+	func presentFinishedTrip()
 }
 
 class ProfilePresenter: ProfilePresentationLogic {
@@ -23,7 +24,7 @@ class ProfilePresenter: ProfilePresentationLogic {
   // MARK: Do something
   
   func presentUserInformation(response: Profile.Something.Response) {
-	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", numberOfTripsOfUser: response.person?.email ?? "", newImage: response.image)
+	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", numberOfTripsOfUser: response.person?.email ?? "", newImage: response.image, upcomingTrips: response.upcomingTrips, finishedTrips: response.finishedTrips)
 	  viewController?.displayUserInformation(viewModel: viewModel)
 	  
   }
@@ -31,6 +32,10 @@ class ProfilePresenter: ProfilePresentationLogic {
 	func presentNewSavedPhoto(response: Profile.Something.Response) {
 		let viewModel = Profile.Something.ViewModel(newImage: response.image)
 		viewController?.displayNewPhotoOfUser(viewModel: viewModel)
+	}
+
+	func presentFinishedTrip() {
+		viewController?.displayFinishTrip()
 	}
 
 }

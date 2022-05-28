@@ -19,10 +19,13 @@ enum Profile {
     struct Request {
 		var image: UIImage?
 		var name: String?
+		var finishedTrip: NewTrip?
     }
     struct Response {
 		var person: FirebaseAuthManager.FullInformationAppUser?
 		var image: UIImage?
+		var upcomingTrips: [NewTrip]?
+		var finishedTrips: [NewTrip]?
     }
     struct ViewModel {
 		var name: String?
@@ -30,6 +33,8 @@ enum Profile {
 		var defaultLocation: String?
 		var numberOfTripsOfUser: String?
 		var newImage: UIImage?
+		var upcomingTrips: [NewTrip]?
+		var finishedTrips: [NewTrip]?
     }
   }
 }

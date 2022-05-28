@@ -11,10 +11,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol ProfileDisplayLogic: class {
 	func displayUserInformation(viewModel: Profile.Something.ViewModel)
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel)
+	func displayFinishTrip()
 }
 
 class ProfileViewController: UIViewController, ProfileDisplayLogic {
@@ -67,14 +69,16 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		photoOfUser.isUserInteractionEnabled = true
 		photoOfUser.addGestureRecognizer(tapGesture!)
-		makePhotosOfUsersCollection()
+		makeUpcomingTripsCollection()
+		makeFinishedTripsCollection()
 	}
 	@objc func tapped() {
 		presentPhoto()
 	}
   
   // MARK: Do something
-
+var upcomingTripsArray = [NewTrip]()
+	var finishedTripsArray = [NewTrip]()
 	var photoOfOtherUsers = [UIImage]()
 
 	var tapGesture: UITapGestureRecognizer?
@@ -86,8 +90,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
 	@IBOutlet weak var upcomingTripsCollection: UICollectionView!
 	@IBOutlet weak var noUpcomingTripsLable: UILabel!
-	@IBOutlet weak var photoOfUserCollection: UICollectionView!
-	@IBOutlet weak var noPhotoLable: UILabel!
 	
 	@IBOutlet weak var locationLable: UILabel!
 	@IBOutlet weak var tripsLable: UILabel!
@@ -96,10 +98,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		FirebaseAuthManager.shered.signOut {
 			self.router?.routeToSliderViewController()
 		}
-	}
-
-	@IBAction func addPhotoAction(_ sender: Any) {
-	//	presentPhoto()
 	}
 
   func loadUserInformation() {
@@ -113,6 +111,10 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		self.numberOfTripsOfUserLable.text = viewModel.numberOfTripsOfUser
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
+		upcomingTripsArray = viewModel.upcomingTrips!
+		finishedTripsArray = viewModel.finishedTrips!
+		upcomingTripsCollection.reloadData()
+		finishedTripsCollection.reloadData()
 	}
 
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel) {
@@ -120,11 +122,21 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		photoOfUser.image = image
 	}
 
-	func makePhotosOfUsersCollection () {
-		photoOfUserCollection.delegate = self
-		photoOfUserCollection.dataSource = self
-		let nib = UINib(nibName: "PlaceCollectionViewCell", bundle: nil)
-		photoOfUserCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+	func makeUpcomingTripsCollection () {
+		upcomingTripsCollection.delegate = self
+		upcomingTripsCollection.dataSource = self
+		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
+		upcomingTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
+	}
+	func makeFinishedTripsCollection () {
+		finishedTripsCollection.delegate = self
+		finishedTripsCollection.dataSource = self
+		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
+		finishedTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
+	}
+
+	func displayFinishTrip() {
+		router?.routeToSelectedFinishedTripViewController()
 	}
 }
 
@@ -132,7 +144,15 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-			return photoOfOtherUsers.count
+		if collectionView == upcomingTripsCollection {
+			return upcomingTripsArray.count
+		}
+
+		if collectionView == finishedTripsCollection {
+			return finishedTripsArray.count
+		}
+
+		return 0
 	}
 
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -142,16 +162,19 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-			if !photoOfOtherUsers.isEmpty {
-				noPhotoLable.isHidden = true
+
+		if collectionView == upcomingTripsCollection {
+			if !upcomingTripsArray.isEmpty {
+				noUpcomingTripsLable.isHidden = true
 			}
 
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-																	PlaceCollectionViewCell.identifier, for: indexPath)
-					as? PlaceCollectionViewCell else {
+																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
+					as? UpcomingTripCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-		cell.imageOfLocation.image = photoOfOtherUsers[indexPath.row]
+
+			cell.config(model: upcomingTripsArray[indexPath.row])
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
 			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
@@ -160,13 +183,37 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 			cell.layer.cornerRadius = 15
 			cell.layer.masksToBounds = false
 			return cell
+		}
 
+		if collectionView == finishedTripsCollection {
+			if !finishedTripsArray.isEmpty {
+				noFinishedTripsLable.isHidden = true
+			}
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
+					as? UpcomingTripCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+
+			cell.config(model: finishedTripsArray[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		return UICollectionViewCell()
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 150, height: 150)
+		return CGSize(width: 250, height: 100)
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
@@ -183,11 +230,21 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						insetForSectionAt section: Int) -> UIEdgeInsets {
-		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+		if collectionView == upcomingTripsCollection {
+			if upcomingTripsArray[indexPath.row].creator == Auth.auth().currentUser?.uid {
+				print("mine")
+			} else {
+				"SelectedTripViewController"
+			}
+		}
+		if collectionView == finishedTripsCollection {
+			let request = Profile.Something.Request(image: nil, name: nil, finishedTrip: finishedTripsArray[indexPath.row])
+			interactor?.setFinishTrip(request: request)
+		}
 	}
 }
 

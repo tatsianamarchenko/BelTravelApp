@@ -15,16 +15,17 @@ import UIKit
 protocol ProfileBusinessLogic {
   func loadInformation(request: Profile.Something.Request)
 	func saveImageInDatabase(request: Profile.Something.Request)
+	func setFinishTrip(request: Profile.Something.Request)
 }
 
 protocol ProfileDataStore {
-  //var name: String { get set }
+  var finishedTrip: NewTrip? { get set }
 }
 
 class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
   var presenter: ProfilePresentationLogic?
   var worker: ProfileWorker?
-  //var name: String = ""
+	var finishedTrip: NewTrip?
   
   // MARK: Do something
   
@@ -33,8 +34,10 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
     worker?.doSomeWork()
 
 	  FirebaseDatabaseManager.shered.fetchUser { [weak self] user in
-		  let response = Profile.Something.Response(person: user, image: user.image)
-			  self?.presenter?.presentUserInformation(response: response)
+		  FirebaseDatabaseManager.shered.fetchUserTrips(document: nil) { [weak self] upcomingTrips, finishedTrips in
+			  let response = Profile.Something.Response(person: user, image: user.image, upcomingTrips: upcomingTrips, finishedTrips: finishedTrips)
+				  self?.presenter?.presentUserInformation(response: response)
+		  }
 	  }
   }
 
@@ -46,5 +49,10 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 				self?.presenter?.presentNewSavedPhoto(response: response)
 			}
 		}
+	}
+
+	func setFinishTrip(request: Profile.Something.Request) {
+		finishedTrip = request.finishedTrip
+		self.presenter?.presentFinishedTrip()
 	}
 }
