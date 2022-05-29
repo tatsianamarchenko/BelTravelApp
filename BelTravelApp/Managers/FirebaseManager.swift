@@ -292,7 +292,7 @@ class FirebaseDatabaseManager {
 		let path = db.collection("\(tripInformation.region)Trips").document(tripInformation.document!)
 		path.collection("participants").document("\(Auth.auth().currentUser!.uid)").setData(["participant" : Auth.auth().currentUser?.uid as Any])
 
-		self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("TripsByUser").addDocument(data: ["ref" : path])
+		self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("TripsByUser").document(tripInformation.document!).setData( ["ref" : path])
 	}
 
 	public func deleteParticipantFromTrip(with tripInformation: NewTrip, complition: @escaping (Error?)-> Void) {
@@ -320,10 +320,30 @@ class FirebaseDatabaseManager {
 				let time = data["time"] as? String ?? ""
 				let region = data["region"] as? String ?? ""
 				let isActive = data["isActive"] as? Bool ?? true
-				let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
-				if location.isActive == true {
-					result.append(location)
-					complition(result)
+				self.db.document(locationPath).getDocument { documentSnapshot, error in
+					let	data = documentSnapshot?.data()
+					var image = UIImage()
+					let path = data?["image"] as? String ?? ""
+					let storage = Storage.storage().reference()
+					let fileRef = storage.child(path)
+					fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+						if error == nil {
+							guard let data = data else {
+								return
+							}
+
+							image = UIImage(data: data)!
+
+
+							let location = NewTrip(locationPath: locationPath, document: queryDocumentSnapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, image: image, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
+							if location.isActive == true {
+								result.append(location)
+								complition(result)
+							}
+
+						}
+
+					}
 				}
 			}
 		}
@@ -379,13 +399,28 @@ class FirebaseDatabaseManager {
 					let time = data["time"] as? String ?? ""
 					let region = data["region"] as? String ?? ""
 					let isActive = data["isActive"] as? Bool ?? true
-					let location = NewTrip(locationPath: locationPath, document: querySnapshot?.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
-					if location.isActive == true {
-						upcomingTrips.append(location) } else {
-							finishedTrips.append(location)
-						}
-					complition(upcomingTrips, finishedTrips)
 
+					self.db.document(locationPath).getDocument { documentSnapshot, error in
+						let	data = documentSnapshot?.data()
+						var image = UIImage()
+						let path = data?["image"] as? String ?? ""
+						let storage = Storage.storage().reference()
+						let fileRef = storage.child(path)
+						fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+							if error == nil {
+								guard let data = data else {
+									return
+								}
+								image = UIImage(data: data)!
+								let location = NewTrip(locationPath: locationPath, document: querySnapshot?.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, image: image, participants: nil, locationOfParticipants: queryDocumentSnapshot.reference.documentID, isActive: isActive)
+								if location.isActive == true {
+									upcomingTrips.append(location) } else {
+										finishedTrips.append(location)
+									}
+								complition(upcomingTrips, finishedTrips)
+							}
+						}
+					}
 				}
 			}
 		}
@@ -429,5 +464,4 @@ class FirebaseDatabaseManager {
 				}
 		}
 	}
-
 }

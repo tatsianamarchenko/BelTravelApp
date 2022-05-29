@@ -99,8 +99,6 @@
 		BFC61B4F283FC896003CF2E4 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B49283FC895003CF2E4 /* ChatInteractor.swift */; };
 		BFC61B50283FC896003CF2E4 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B4A283FC896003CF2E4 /* ChatModels.swift */; };
 		BFC61B51283FC896003CF2E4 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B4B283FC896003CF2E4 /* ChatRouter.swift */; };
-		BFC61B62283FE855003CF2E4 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B60283FE855003CF2E4 /* ChatListTableViewCell.swift */; };
-		BFC61B63283FE855003CF2E4 /* ChatListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFC61B61283FE855003CF2E4 /* ChatListTableViewCell.xib */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
@@ -222,8 +220,6 @@
 		BFC61B49283FC895003CF2E4 /* ChatInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		BFC61B4A283FC896003CF2E4 /* ChatModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		BFC61B4B283FC896003CF2E4 /* ChatRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
-		BFC61B60283FE855003CF2E4 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
-		BFC61B61283FE855003CF2E4 /* ChatListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatListTableViewCell.xib; sourceTree = "<group>"; };
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -428,15 +424,6 @@
 			path = FavoriteCell;
 			sourceTree = "<group>";
 		};
-		BFC61B5F283FE7D9003CF2E4 /* ChatListCell */ = {
-			isa = PBXGroup;
-			children = (
-				BFC61B60283FE855003CF2E4 /* ChatListTableViewCell.swift */,
-				BFC61B61283FE855003CF2E4 /* ChatListTableViewCell.xib */,
-			);
-			path = ChatListCell;
-			sourceTree = "<group>";
-		};
 		BFCC2991282AB2B2004FE1FE = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +600,6 @@
 		BFD57561282BEDEA007CBBE8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BFC61B5F283FE7D9003CF2E4 /* ChatListCell */,
 				BFC0DF9F28357BA500FFAEB6 /* FavoriteCell */,
 				BFBF0A5F28343D2E0000559E /* SliderCell */,
 				BF5B626F282BFE0F00D5844D /* ParticipantCell */,
@@ -699,7 +685,6 @@
 				BF5B6273282BFE2C00D5844D /* ParticipantCollectionViewCell.xib in Resources */,
 				BFCC29AA282AB2C6004FE1FE /* LaunchScreen.storyboard in Resources */,
 				BF5B6269282BFB7F00D5844D /* PlaceCollectionViewCell.xib in Resources */,
-				BFC61B63283FE855003CF2E4 /* ChatListTableViewCell.xib in Resources */,
 				BF5B626E282BFC7F00D5844D /* UpcomingTripCollectionViewCell.xib in Resources */,
 				BFCC29A7282AB2C6004FE1FE /* assets.xcassets in Resources */,
 				BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */,
@@ -797,7 +782,6 @@
 				BFCC29C0282AF4EB004FE1FE /* MainWorker.swift in Sources */,
 				BFD49E95284248E50092B643 /* SaveTripPresenter.swift in Sources */,
 				BFC5D6752837FBE10099DCF6 /* Location.swift in Sources */,
-				BFC61B62283FE855003CF2E4 /* ChatListTableViewCell.swift in Sources */,
 				BFBF0A40283435260000559E /* RegistrationInteractor.swift in Sources */,
 				BFD49E8E284248C90092B643 /* ReadyToFinishTripInteractor.swift in Sources */,
 				BFBF0A5628343CDE0000559E /* SliderRouter.swift in Sources */,

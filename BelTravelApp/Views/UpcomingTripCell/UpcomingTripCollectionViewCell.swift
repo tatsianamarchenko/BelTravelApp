@@ -16,22 +16,15 @@ class UpcomingTripCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var tripDate: UILabel!
 	@IBOutlet weak var quantityOfPeople: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+	override func awakeFromNib() {
+		super.awakeFromNib()
+	}
 
 	func config(model: NewTrip) {
-		placeImage.image = UIImage(systemName: "heart")
+		placeImage.image = model.image
 		placeName.text = model.locationName
 		tripDate.text = model.time
 		quantityOfPeople.text = model.maxPeople
 	}
 
 }
-
-//struct CreatedTrip {
-//	var name: String
-//	var date: Date
-//	var quantity: String
-//	var image: UIImage
-//}

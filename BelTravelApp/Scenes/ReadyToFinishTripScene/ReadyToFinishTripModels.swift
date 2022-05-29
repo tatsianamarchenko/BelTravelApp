@@ -25,10 +25,12 @@ enum ReadyToFinishTrip
     struct Response
     {
 		var result: Error?
+		var participants: [FirebaseAuthManager.FullInformationAppUser]?
     }
     struct ViewModel
     {
 		var result: Error?
+		var participants:  [FirebaseAuthManager.FullInformationAppUser]?
     }
   }
 }

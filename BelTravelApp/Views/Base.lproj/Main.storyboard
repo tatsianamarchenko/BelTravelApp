@@ -611,7 +611,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gx-Ak-SAy">
-                                <rect key="frame" x="10" y="702" width="394" height="50"/>
+                                <rect key="frame" x="10" y="742" width="394" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="1bx-32-jKO"/>
                                 </constraints>
@@ -634,7 +634,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfx-WZ-iqI">
-                                <rect key="frame" x="30" y="762" width="354" height="50"/>
+                                <rect key="frame" x="30" y="802" width="354" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BgL-fQ-ked"/>
                                 </constraints>
@@ -672,7 +672,7 @@
                             <constraint firstItem="BFn-DX-N34" firstAttribute="top" secondItem="gJQ-s4-PdC" secondAttribute="bottom" constant="10" id="Pwl-yJ-Tc2"/>
                             <constraint firstItem="VTp-eH-KPL" firstAttribute="leading" secondItem="Oql-N3-stL" secondAttribute="trailing" constant="30" id="YBz-rM-eF5"/>
                             <constraint firstItem="kRo-Li-Swz" firstAttribute="centerX" secondItem="TGD-zE-vPD" secondAttribute="centerX" id="Yzw-qc-4lZ"/>
-                            <constraint firstItem="TGD-zE-vPD" firstAttribute="bottom" secondItem="yfx-WZ-iqI" secondAttribute="bottom" constant="50" id="c9m-5S-yyE"/>
+                            <constraint firstItem="TGD-zE-vPD" firstAttribute="bottom" secondItem="yfx-WZ-iqI" secondAttribute="bottom" constant="10" id="c9m-5S-yyE"/>
                             <constraint firstItem="yfx-WZ-iqI" firstAttribute="leading" secondItem="TGD-zE-vPD" secondAttribute="leading" constant="30" id="dee-j2-JUO"/>
                             <constraint firstItem="BFn-DX-N34" firstAttribute="leading" secondItem="TGD-zE-vPD" secondAttribute="leading" constant="10" id="ezp-2R-0wO"/>
                             <constraint firstItem="Oql-N3-stL" firstAttribute="top" secondItem="kRo-Li-Swz" secondAttribute="bottom" constant="10" id="fJc-Tv-ueu"/>
@@ -2104,7 +2104,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-bX-gZd">
-                                <rect key="frame" x="10" y="702" width="394" height="50"/>
+                                <rect key="frame" x="10" y="742" width="394" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="80f-zE-hmq"/>
                                 </constraints>
@@ -2121,7 +2121,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9S-SZ-WTV">
-                                <rect key="frame" x="30" y="762" width="354" height="50"/>
+                                <rect key="frame" x="30" y="802" width="354" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Uy8-PJ-ReZ"/>
                                 </constraints>
@@ -2167,7 +2167,7 @@
                             <constraint firstItem="Jj8-eh-zck" firstAttribute="leading" secondItem="Eim-2T-smA" secondAttribute="trailing" constant="30" id="8dH-wB-LFN"/>
                             <constraint firstItem="LND-0N-ZBk" firstAttribute="leading" secondItem="Zuh-EY-Sxd" secondAttribute="leading" constant="10" id="8tj-z2-tVy"/>
                             <constraint firstItem="Eim-2T-smA" firstAttribute="leading" secondItem="Zuh-EY-Sxd" secondAttribute="leading" constant="10" id="IM8-ml-sLa"/>
-                            <constraint firstItem="Zuh-EY-Sxd" firstAttribute="bottom" secondItem="x9S-SZ-WTV" secondAttribute="bottom" constant="50" id="JBM-oS-gIf"/>
+                            <constraint firstItem="Zuh-EY-Sxd" firstAttribute="bottom" secondItem="x9S-SZ-WTV" secondAttribute="bottom" constant="10" id="JBM-oS-gIf"/>
                             <constraint firstItem="OXW-DJ-Gl5" firstAttribute="top" secondItem="Zuh-EY-Sxd" secondAttribute="top" constant="10" id="Jwe-nD-haT"/>
                             <constraint firstItem="Eim-2T-smA" firstAttribute="top" secondItem="Jj8-eh-zck" secondAttribute="top" id="Kix-b9-vIw"/>
                             <constraint firstItem="x9S-SZ-WTV" firstAttribute="top" secondItem="WLV-bX-gZd" secondAttribute="bottom" constant="10" id="Nre-lc-Z0d"/>
@@ -2185,6 +2185,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="jhs-d0-eCe"/>
                     <connections>
+                        <outlet property="noParticipants" destination="GXl-vB-2va" id="YA3-Ox-nUM"/>
                         <outlet property="participantsCollection" destination="LpP-c9-HWP" id="5Ke-CT-Ppg"/>
                         <outlet property="timeLable" destination="Jj8-eh-zck" id="6jA-DN-kB4"/>
                         <outlet property="tripImage" destination="OXW-DJ-Gl5" id="Syz-WJ-XkN"/>

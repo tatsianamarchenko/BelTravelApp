@@ -15,6 +15,7 @@ import UIKit
 protocol ReadyToFinishTripPresentationLogic
 {
   func presentResult(response: ReadyToFinishTrip.Something.Response)
+	func presentParticipants(response: ReadyToFinishTrip.Something.Response)
 }
 
 class ReadyToFinishTripPresenter: ReadyToFinishTripPresentationLogic
@@ -28,4 +29,9 @@ class ReadyToFinishTripPresenter: ReadyToFinishTripPresentationLogic
 	  let viewModel = ReadyToFinishTrip.Something.ViewModel(result: response.result)
     viewController?.displayResult(viewModel: viewModel)
   }
+
+	func presentParticipants(response: ReadyToFinishTrip.Something.Response) {
+		let viewModel = ReadyToFinishTrip.Something.ViewModel(participants: response.participants)
+		viewController?.displayParticipants (viewModel: viewModel)
+	}
 }

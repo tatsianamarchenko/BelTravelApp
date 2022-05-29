@@ -17,6 +17,7 @@ struct NewTrip {
 	var description: String
 	var creator: String?
 	var region: String
+	var image: UIImage?
 	var participants: [FirebaseAuthManager.FullInformationAppUser]?
 	var locationOfParticipants: String
 	var isActive: Bool

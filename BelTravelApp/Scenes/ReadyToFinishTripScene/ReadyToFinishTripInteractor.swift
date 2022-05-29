@@ -14,6 +14,7 @@ import UIKit
 
 protocol ReadyToFinishTripBusinessLogic {
 	func removeParticipant(request: ReadyToFinishTrip.Something.Request)
+	func loadParticipants(request: ReadyToFinishTrip.Something.Request)
 }
 
 protocol ReadyToFinishTripDataStore {
@@ -33,6 +34,14 @@ class ReadyToFinishTripInteractor: ReadyToFinishTripBusinessLogic, ReadyToFinish
 		FirebaseDatabaseManager.shered.deleteParticipantFromTrip(with: request.trip) { [weak self] result in
 			let response = ReadyToFinishTrip.Something.Response(result: result)
 			self?.presenter?.presentResult(response: response)
+		}
+	}
+
+	func loadParticipants(request: ReadyToFinishTrip.Something.Request) {
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+			print(users)
+			let response = ReadyToFinishTrip.Something.Response(participants: users)
+			self?.presenter?.presentParticipants(response: response)
 		}
 	}
 	

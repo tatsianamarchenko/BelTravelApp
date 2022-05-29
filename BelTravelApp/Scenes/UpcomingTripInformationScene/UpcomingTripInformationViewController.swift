@@ -64,9 +64,11 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		guard var tripInformation = tripInformation else {return}
-	title = tripInformation.locationName
-		locationImage.image = UIImage(named: "back1")
+		guard let tripInformation = tripInformation else {
+			return
+		}
+		title = tripInformation.locationName
+		locationImage.image = tripInformation.image
 		tripStartPlace.text = tripInformation.description
 		tripTime.text = tripInformation.time
 		makeWhoWantToVisitThisPlaceCollection()
@@ -93,17 +95,11 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	}
 
 	@IBAction func participateButtonAction(_ sender: Any) {
-		if participantsArray.contains(where: { user in
-			user.email != Auth.auth().currentUser?.email ?? ""
-		}) {print("alredy have")}
-		else {
 			FirebaseDatabaseManager.shered.addParticipantInTrip(with: tripInformation!) { result in
 				print(result)
 			}
-		}
 	}
 
-	
 	func loadParticipants() {
 		let request = UpcomingTripInformation.Something.Request(trip: tripInformation!)
     interactor?.loadUsers(request: request)
