@@ -12,20 +12,28 @@
 
 import UIKit
 
-protocol OtherUserPresentationLogic
-{
-  func presentUserInformation(response: OtherUser.Something.Response)
+protocol OtherUserPresentationLogic {
+	func presentUserInformation(response: OtherUser.Something.Response)
+	func presenTripsInformation(response: OtherUser.Something.Response)
+	func presentFinishedTrip()
 }
 
-class OtherUserPresenter: OtherUserPresentationLogic
-{
-  weak var viewController: OtherUserDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentUserInformation(response: OtherUser.Something.Response)
-  {
-    let viewModel = OtherUser.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class OtherUserPresenter: OtherUserPresentationLogic {
+	weak var viewController: OtherUserDisplayLogic?
+
+	// MARK: Do something
+
+	func presentUserInformation(response: OtherUser.Something.Response) {
+		let viewModel = OtherUser.Something.ViewModel()
+		viewController?.displaySomething(viewModel: viewModel)
+	}
+
+	func presenTripsInformation(response: OtherUser.Something.Response) {
+		let viewModel = OtherUser.Something.ViewModel(upcomingTrips: response.upcomingTrips, finishedTrips: response.finishedTrips)
+		viewController?.displayTrips(viewModel: viewModel)
+	}
+
+	func presentFinishedTrip() {
+		viewController?.displayFinishTrip()
+	}
 }

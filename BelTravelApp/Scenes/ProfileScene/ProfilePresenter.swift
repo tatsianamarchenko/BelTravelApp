@@ -26,7 +26,7 @@ class ProfilePresenter: ProfilePresentationLogic {
   // MARK: Do something
   
   func presentUserInformation(response: Profile.Something.Response) {
-	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", numberOfTripsOfUser: response.person?.email ?? "", newImage: response.image)
+	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", newImage: response.image)
 	  viewController?.displayUserInformation(viewModel: viewModel)
 	  
   }

@@ -76,7 +76,6 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		loadPins()
 		locationManager.delegate = self
 		mapView.delegate = self
-		print(regionName)
 		mapView.register(MKMarkerAnnotationView.self,
 						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
 	}
@@ -130,7 +129,10 @@ var regionName = "MinskRegion"
 	}
   
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel) {
-		popularPlaces = viewModel.locations!
+		guard let locations = viewModel.locations else {
+			return
+		}
+		popularPlaces = locations
 		popularPlacesCollection.reloadData()
 	}
 
@@ -145,14 +147,19 @@ var regionName = "MinskRegion"
 	}
 
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel) {
-		createdTrips = viewModel.createdTrips!
+		guard let trips = viewModel.createdTrips else {
+			return
+		}
+		createdTrips = trips
 		DispatchQueue.main.async {
 			self.nextTripsCollection.reloadData()
 		}
 	}
 
 	func displayPins(viewModel: Main.Something.ViewModel) {
-		let pin = viewModel.location!
+		guard let pin = viewModel.location else {
+			return
+		}
 		self.mapView.addAnnotations([pin])
 	}
 

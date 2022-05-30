@@ -23,7 +23,7 @@ enum Profile {
 		var upcomingTrip: NewTrip?
     }
     struct Response {
-		var person: FirebaseAuthManager.FullInformationAppUser?
+		var person: FullInformationAppUser?
 		var image: UIImage?
 		var upcomingTrips: [NewTrip]?
 		var finishedTrips: [NewTrip]?
@@ -32,7 +32,6 @@ enum Profile {
 		var name: String?
 		var lastName: String?
 		var defaultLocation: String?
-		var numberOfTripsOfUser: String?
 		var newImage: UIImage?
 		var upcomingTrips: [NewTrip]?
 		var finishedTrips: [NewTrip]?

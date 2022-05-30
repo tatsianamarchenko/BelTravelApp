@@ -18,7 +18,7 @@ class ParticipantCollectionViewCell: UICollectionViewCell {
 		super.awakeFromNib()
 	}
 
-	func config(model: FirebaseAuthManager.FullInformationAppUser) {
+	func config(model: FullInformationAppUser) {
 		photoOfUser.image = model.image
 		nameLable.text = model.name
 		if model.email == Auth.auth().currentUser?.email {

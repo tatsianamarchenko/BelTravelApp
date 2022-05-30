@@ -16,18 +16,19 @@ import UIKit
 	func routeToSaveTripViewController()
 	func routeToChatViewController()
 	func routeToProfileViewController(source: ReadyToFinishTripViewController)
+	func routeToUserViewController()
 }
 
 protocol ReadyToFinishTripDataPassing {
-  var dataStore: ReadyToFinishTripDataStore? { get }
+	var dataStore: ReadyToFinishTripDataStore? { get }
 }
 
 class ReadyToFinishTripRouter: NSObject, ReadyToFinishTripRoutingLogic, ReadyToFinishTripDataPassing {
 	weak var viewController: ReadyToFinishTripViewController?
 	var dataStore: ReadyToFinishTripDataStore?
-
+	
 	// MARK: Routing
-
+	
 	func routeToSaveTripViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SaveTripViewController") as! SaveTripViewController
@@ -35,19 +36,19 @@ class ReadyToFinishTripRouter: NSObject, ReadyToFinishTripRoutingLogic, ReadyToF
 		passDataToSomewhere(source: dataStore!, destination: &destinationDS)
 		navigateToSomewhere(source: viewController!, destination: destinationVC)
 	}
-
+	
 	// MARK: Navigation
-
+	
 	func navigateToSomewhere(source: ReadyToFinishTripViewController, destination: SaveTripViewController) {
 		source.show(destination, sender: nil)
 	}
-
+	
 	// MARK: Passing data
-
+	
 	func passDataToSomewhere(source: ReadyToFinishTripDataStore, destination: inout SaveTripDataStore) {
 		destination.trip = source.trip
 	}
-
+	
 	func routeToChatViewController() {
 		let destinationVC = ChatViewController()
 		destinationVC.tripInfo = dataStore?.trip
@@ -55,21 +56,43 @@ class ReadyToFinishTripRouter: NSObject, ReadyToFinishTripRoutingLogic, ReadyToF
 		passDataToChat(source: dataStore!, destination: &destinationDS)
 		navigateToChat(source: viewController!, destination: destinationVC)
 	}
-
+	
 	// MARK: Navigation
-
+	
 	func navigateToChat(source: ReadyToFinishTripViewController, destination: ChatViewController) {
 		source.show(destination, sender: nil)
 	}
-
+	
 	// MARK: Passing data
-
+	
 	func passDataToChat(source: ReadyToFinishTripDataStore, destination: inout ChatDataStore) {
 		destination.newTrip = source.trip
 	}
-
+	
 	func routeToProfileViewController(source: ReadyToFinishTripViewController) {
 		source.navigationController?.popViewController(animated: true)
 	}
-
+	
+	
+	func routeToUserViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+		destinationVC.user = dataStore?.user
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToUser(source: dataStore!, destination: &destinationDS)
+		navigateToUserViewController(source: viewController!, destination: destinationVC)
+	}
+	
+	// MARK: Navigation
+	
+	func navigateToUserViewController(source: ReadyToFinishTripViewController, destination: OtherUserViewController) {
+		source.show(destination, sender: nil)
+	}
+	
+	// MARK: Passing data
+	
+	func passDataToUser(source: ReadyToFinishTripDataStore, destination: inout OtherUserDataStore) {
+		destination.user = source.user
+	}
+	
 }

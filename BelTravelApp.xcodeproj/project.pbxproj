@@ -64,7 +64,6 @@
 		BFBB173F2832887D00F6C6A9 /* AllLocationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB17392832887D00F6C6A9 /* AllLocationsModels.swift */; };
 		BFBB17402832887D00F6C6A9 /* AllLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB173A2832887D00F6C6A9 /* AllLocationsViewController.swift */; };
 		BFBB17412832887D00F6C6A9 /* AllLocationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB173B2832887D00F6C6A9 /* AllLocationsInteractor.swift */; };
-		BFBF0A28283428840000559E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A27283428840000559E /* AuthManager.swift */; };
 		BFBF0A2A28342DA40000559E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A2928342DA40000559E /* TabBarViewController.swift */; };
 		BFBF0A39283435260000559E /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A2C283435250000559E /* AuthorizationRouter.swift */; };
 		BFBF0A3A283435260000559E /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A2D283435250000559E /* AuthorizationPresenter.swift */; };
@@ -92,6 +91,8 @@
 		BFC0BF50283794F400BFC9EC /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */; };
 		BFC0DFA228357BD500FFAEB6 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */; };
 		BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */; };
+		BFC4B35B2843C2080081A3C4 /* NewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC4B35A2843C2080081A3C4 /* NewTrip.swift */; };
+		BFC4B35D2843C2290081A3C4 /* FullInformationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC4B35C2843C2290081A3C4 /* FullInformationUser.swift */; };
 		BFC5D6752837FBE10099DCF6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC5D6742837FBE10099DCF6 /* Location.swift */; };
 		BFC61B4C283FC896003CF2E4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B46283FC895003CF2E4 /* ChatViewController.swift */; };
 		BFC61B4D283FC896003CF2E4 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B47283FC895003CF2E4 /* ChatPresenter.swift */; };
@@ -185,7 +186,6 @@
 		BFBB17392832887D00F6C6A9 /* AllLocationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsModels.swift; sourceTree = "<group>"; };
 		BFBB173A2832887D00F6C6A9 /* AllLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsViewController.swift; sourceTree = "<group>"; };
 		BFBB173B2832887D00F6C6A9 /* AllLocationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsInteractor.swift; sourceTree = "<group>"; };
-		BFBF0A27283428840000559E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		BFBF0A2928342DA40000559E /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BFBF0A2C283435250000559E /* AuthorizationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
 		BFBF0A2D283435250000559E /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
@@ -213,6 +213,8 @@
 		BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		BFC0DFA028357BD500FFAEB6 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		BFC0DFA128357BD500FFAEB6 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
+		BFC4B35A2843C2080081A3C4 /* NewTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrip.swift; sourceTree = "<group>"; };
+		BFC4B35C2843C2290081A3C4 /* FullInformationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullInformationUser.swift; sourceTree = "<group>"; };
 		BFC5D6742837FBE10099DCF6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BFC61B46283FC895003CF2E4 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BFC61B47283FC895003CF2E4 /* ChatPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -377,7 +379,6 @@
 			children = (
 				BFBF0A452834359B0000559E /* CheckField.swift */,
 				BFB319042832AFB500E13C65 /* FirebaseManager.swift */,
-				BFBF0A27283428840000559E /* AuthManager.swift */,
 				BFBF0A48283437B20000559E /* MessangeManager.swift */,
 				BFBF0A49283437B20000559E /* FirebaseAuthManager.swift */,
 			);
@@ -411,6 +412,8 @@
 			children = (
 				BFC0BF4F283794F400BFC9EC /* MapAnnotation.swift */,
 				BFC5D6742837FBE10099DCF6 /* Location.swift */,
+				BFC4B35A2843C2080081A3C4 /* NewTrip.swift */,
+				BFC4B35C2843C2290081A3C4 /* FullInformationUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -755,8 +758,8 @@
 				BFD49E96284248E50092B643 /* SaveTripWorker.swift in Sources */,
 				BFA60B88282B1E07006B3DC4 /* SelectedTripModels.swift in Sources */,
 				BFA60B85282B1E07006B3DC4 /* SelectedTripPresenter.swift in Sources */,
-				BFBF0A28283428840000559E /* AuthManager.swift in Sources */,
 				BFBF0A3B283435260000559E /* AuthorizationWorker.swift in Sources */,
+				BFC4B35D2843C2290081A3C4 /* FullInformationUser.swift in Sources */,
 				BFA60BD1282B1F02006B3DC4 /* UpcomingTripInformationModels.swift in Sources */,
 				BFA60BAD282B1E93006B3DC4 /* ProfileViewController.swift in Sources */,
 				BFA60BA2282B1E6C006B3DC4 /* FavoriteInteractor.swift in Sources */,
@@ -769,6 +772,7 @@
 				BFA60B95282B1E17006B3DC4 /* SelectedPlaceViewController.swift in Sources */,
 				BFA7A3D9283EBEDB002F94FA /* OtherUserInteractor.swift in Sources */,
 				BFC61B51283FC896003CF2E4 /* ChatRouter.swift in Sources */,
+				BFC4B35B2843C2080081A3C4 /* NewTrip.swift in Sources */,
 				BFBF0A5A28343CDE0000559E /* SliderModels.swift in Sources */,
 				BFBF0A41283435260000559E /* RegistrationRouter.swift in Sources */,
 				BFD49E8D284248C80092B643 /* ReadyToFinishTripViewController.swift in Sources */,

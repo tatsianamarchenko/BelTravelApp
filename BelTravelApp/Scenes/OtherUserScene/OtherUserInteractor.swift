@@ -13,17 +13,21 @@
 import UIKit
 
 protocol OtherUserBusinessLogic {
-  func setUserInfo(request: OtherUser.Something.Request)
+	func setUserInfo(request: OtherUser.Something.Request)
+	func loadTrips(request: OtherUser.Something.Request)
+	func setFinishTrip(request: OtherUser.Something.Request)
 }
 
 protocol OtherUserDataStore {
-	var user: FirebaseAuthManager.FullInformationAppUser? { get set }
+	var user: FullInformationAppUser? { get set }
+	var finishedTrip: NewTrip? { get set }
 }
 
 class OtherUserInteractor: OtherUserBusinessLogic, OtherUserDataStore {
 	var presenter: OtherUserPresentationLogic?
 	var worker: OtherUserWorker?
-	var user: FirebaseAuthManager.FullInformationAppUser?
+	var user: FullInformationAppUser?
+	var finishedTrip: NewTrip?
 
 	// MARK: Do something
 
@@ -33,4 +37,20 @@ class OtherUserInteractor: OtherUserBusinessLogic, OtherUserDataStore {
 		let response = OtherUser.Something.Response()
 		presenter?.presentUserInformation(response: response)
 	}
+
+
+	func loadTrips(request: OtherUser.Something.Request) {
+		worker = OtherUserWorker()
+		worker?.doSomeWork()
+		FirebaseDatabaseManager.shered.fetchUserTrips(document: user) { [weak self] upcomingTrips, finishedTrips in
+			let response = OtherUser.Something.Response(upcomingTrips: upcomingTrips, finishedTrips: finishedTrips)
+			self?.presenter?.presenTripsInformation(response: response)
+		}
+	}
+
+	func setFinishTrip(request: OtherUser.Something.Request) {
+		finishedTrip = request.finishedTrip
+		self.presenter?.presentFinishedTrip()
+	}
+
 }

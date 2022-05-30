@@ -14,7 +14,7 @@ import UIKit
 
 class ReadyToFinishTripWorker
 {
-  func doSomeWork()
-  {
-  }
+	func doSomeWork()
+	{
+	}
 }

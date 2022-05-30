@@ -38,8 +38,11 @@ class AllLocationsInteractor: AllLocationsBusinessLogic, AllLocationsDataStore {
 	func loadLocation(request: AllLocations.Something.Request) {
 		worker = AllLocationsWorker()
 		worker?.doSomeWork()
-		region = request.region!
-		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region!) { [weak self] locations in
+		guard let reg = request.region else {
+			return
+		}
+		region = reg
+		FirebaseDatabaseManager.shered.fetchLocationData(collection: reg) { [weak self] locations in
 			let response = AllLocations.Something.Response(locations: locations)
 			self?.presenter?.presentLocations(response: response)
 		}

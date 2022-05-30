@@ -35,7 +35,7 @@ class RegistrationInteractor: RegistrationBusinessLogic, RegistrationDataStore
 	{
 		//    worker = RegistrationWorker()
 		//    worker?.doSomeWork()
-		FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward), fullInformationAboutUser: FirebaseAuthManager.FullInformationAppUser(email: request.email, name: request.name, lastName: request.lastName, defaultLocation: request.defaultLocation, image: nil)) { [weak self] error in
+		FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email, passward: request.passward), fullInformationAboutUser: FullInformationAppUser(email: request.email, name: request.name, lastName: request.lastName, defaultLocation: request.defaultLocation, image: nil, document: nil)) { [weak self] error in
 			if error == nil {
 				if let data = request.image?.pngData() {
 					FirebaseDatabaseManager().uploadImageData(data: data, serverFileName: "\(request.name).png", folder: "PhotosOfUser") { [weak self] (isSuccess, url) in

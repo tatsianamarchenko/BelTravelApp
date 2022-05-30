@@ -15,19 +15,18 @@ import UIKit
 protocol UpcomingTripInformationBusinessLogic {
 	func loadUsers(request: UpcomingTripInformation.Something.Request)
 	func setUser(request: UpcomingTripInformation.Something.Request)
-//	func setTrip(request: UpcomingTripInformation.Something.Request)
 }
 
 protocol UpcomingTripInformationDataStore {
 	var newTrip: NewTrip? { get set }
-	var user: FirebaseAuthManager.FullInformationAppUser? { get set }
+	var user: FullInformationAppUser? { get set }
 }
 
 class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, UpcomingTripInformationDataStore {
 	var presenter: UpcomingTripInformationPresentationLogic?
 	var worker: UpcomingTripInformationWorker?
 	var newTrip: NewTrip?
-	var user: FirebaseAuthManager.FullInformationAppUser?
+	var user: FullInformationAppUser?
 
 	// MARK: Do something
 
@@ -45,9 +44,5 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
 		user = request.user
 		self.presenter?.routeToUserViewController()
 	}
-
-//	func setTrip(request: UpcomingTripInformation.Something.Request) {
-//		newTrip = request.trip
-//		self.presenter?.routeToUserViewController()
-//	}
+	
 }

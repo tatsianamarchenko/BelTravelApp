@@ -37,7 +37,7 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 		worker = ProfileWorker()
 		worker?.doSomeWork()
 
-		FirebaseDatabaseManager.shered.fetchUser { [weak self] user in
+		FirebaseDatabaseManager.shered.fetchUser(otherUser: nil) { [weak self] user in
 			let response = Profile.Something.Response(person: user, image: user.image)
 			self?.presenter?.presentUserInformation(response: response)
 		}
@@ -54,7 +54,10 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 
 	func saveImageInDatabase(request: Profile.Something.Request) {
 		if let data = request.image?.pngData() {
-			FirebaseDatabaseManager().uploadImageData(data: data, serverFileName: "\(request.name!).png", folder: "PhotosOfUser") { [weak self] (isSuccess, url) in
+			guard let name = request.name else {
+				return
+			}
+			FirebaseDatabaseManager().uploadImageData(data: data, serverFileName: "\(name).png", folder: "PhotosOfUser") { [weak self] (isSuccess, url) in
 				print("uploadImageData: \(isSuccess), \(url!)")
 				let response = Profile.Something.Response(image: request.image)
 				self?.presenter?.presentNewSavedPhoto(response: response)

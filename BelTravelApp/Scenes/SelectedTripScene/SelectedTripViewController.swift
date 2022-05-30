@@ -73,7 +73,7 @@ class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
 	// MARK: Do something
 	var trip: NewTrip?
 	var photosArray = [UIImage]()
-	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
+	var participantsArray = [FullInformationAppUser]()
 
 	@IBOutlet weak var participantsCollection: UICollectionView!
 	@IBOutlet weak var photosCollection: UICollectionView!

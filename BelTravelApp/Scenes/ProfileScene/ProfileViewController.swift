@@ -83,20 +83,17 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	// MARK: Do something
 	var upcomingTripsArray = [NewTrip]()
 	var finishedTripsArray = [NewTrip]()
-	var photoOfOtherUsers = [UIImage]()
 
 	var tapGesture: UITapGestureRecognizer?
 	@IBOutlet weak var nameLable: UILabel!
 	@IBOutlet weak var photoOfUser: UIImageView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
-	@IBOutlet weak var numberOfTripsOfUserLable: UILabel!
 	@IBOutlet weak var finishedTripsCollection: UICollectionView!
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
 	@IBOutlet weak var upcomingTripsCollection: UICollectionView!
 	@IBOutlet weak var noUpcomingTripsLable: UILabel!
 	
 	@IBOutlet weak var locationLable: UILabel!
-	@IBOutlet weak var tripsLable: UILabel!
 
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
@@ -117,7 +114,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	func displayUserInformation(viewModel: Profile.Something.ViewModel) {
 		self.nameLable.text = "\(viewModel.name!) \(viewModel.lastName!)"
 		self.defaultLocationLable.text = viewModel.defaultLocation
-		self.numberOfTripsOfUserLable.text = viewModel.numberOfTripsOfUser
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
 	}
@@ -157,7 +153,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		router?.routeToReadyToFinishTripViewController()
 	}
 }
-
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -258,7 +253,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == upcomingTripsCollection {
 			let request = Profile.Something.Request(upcomingTrip: upcomingTripsArray[indexPath.row])
-			print(upcomingTripsArray[indexPath.row].document)
 			interactor?.setUpcomingTrip(request: request)
 		}
 

@@ -22,7 +22,7 @@ protocol SelectedPlaceBusinessLogic {
 protocol SelectedPlaceDataStore {
   var location: Location? { get set }
 	var region: String? { get set }
-	var user: FirebaseAuthManager.FullInformationAppUser? { get set }
+	var user: FullInformationAppUser? { get set }
 }
 
 class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStore {
@@ -30,7 +30,7 @@ class SelectedPlaceInteractor: SelectedPlaceBusinessLogic, SelectedPlaceDataStor
 	var worker: SelectedPlaceWorker?
 	var location: Location?
 	var region: String?
-	var user: FirebaseAuthManager.FullInformationAppUser?
+	var user: FullInformationAppUser?
 	// MARK: Do something
 
 	func addToFavorite(request: SelectedPlace.Something.Request) {

@@ -84,13 +84,12 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
   
   // MARK: Do something
 	var tripInformation: NewTrip?
-	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
+	var participantsArray = [FullInformationAppUser]()
 	@IBOutlet weak var locationImage: UIImageView!
 	@IBOutlet weak var tripStartPlace: UILabel!
 	@IBOutlet weak var tripTime: UILabel!
 	@IBOutlet weak var whoPacticipateCollection: UICollectionView!
 	@IBAction func chatButtonAction(_ sender: Any) {
-		//interactor.setTrip(request: request)
 		router?.routeToChatViewController()
 	}
 
@@ -114,6 +113,7 @@ class UpcomingTripInformationViewController: UIViewController, UpcomingTripInfor
 	func displayUserViewController() {
 		router?.routeToUserViewController()
 	}
+	
 }
 
 extension UpcomingTripInformationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

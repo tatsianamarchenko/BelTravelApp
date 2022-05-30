@@ -33,8 +33,6 @@ class SaveTripInteractor: SaveTripBusinessLogic, SaveTripDataStore {
 		for i in 0..<request.photos!.count{
 			if let data = request.photos?[i].pngData() {
 				FirebaseDatabaseManager.shered.saveImages(tripInformation: trip!, data: data, serverFileName: "\(request.photos?[i].size)\(i)", folder: trip?.document ?? "") { isSuccess, url in
-					print(self.trip?.document as Any)
-
 				}}
 		}
 		FirebaseDatabaseManager.shered.finishTrip(with: trip!)

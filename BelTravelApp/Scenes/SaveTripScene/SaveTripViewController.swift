@@ -75,7 +75,7 @@ class SaveTripViewController: UIViewController, SaveTripDisplayLogic
   // MARK: Do something
 
 	var photosArray = [UIImage]()
-	var participantsArray = [FirebaseAuthManager.FullInformationAppUser]()
+	var participantsArray = [FullInformationAppUser]()
 
 	@IBOutlet weak var tripTime: UILabel!
 	@IBOutlet weak var noPhotosLable: UILabel!

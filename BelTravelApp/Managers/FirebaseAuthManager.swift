@@ -13,13 +13,19 @@ class FirebaseAuthManager {
 	public func insertNewUser(with user: AppUserAuthorization, fullInformationAboutUser: FullInformationAppUser, completion: @escaping (Error?) -> Void) {
 		Auth.auth().createUser(withEmail: user.email, password: user.passward) { authResult, error in
 			if  error != nil {
-				completion(error!)
+				guard let error = error else {
+					return
+				}
+				completion(error)
 			}
 			else {
 				if authResult != nil {
+					guard let id = authResult?.user.uid else {
+						return
+					}
 					Auth.auth().signIn(withEmail: user.email, password: user.passward)
-					FirebaseDatabaseManager.shered.addUserToDatabase(with: fullInformationAboutUser, id: (authResult?.user.uid)!)
-				completion(nil)
+					FirebaseDatabaseManager.shered.addUserToDatabase(with: fullInformationAboutUser, id: id)
+					completion(nil)
 				}
 			}
 		}
@@ -28,7 +34,10 @@ class FirebaseAuthManager {
 	public func enterUser(with user: AppUserAuthorization, completion: @escaping((Result<(), Error>) -> Void)) {
 		Auth.auth().signIn(withEmail: user.email, password: user.passward) { authResult, error in
 			if  error != nil {
-				completion(.failure(error!))
+				guard let error = error else {
+					return
+				}
+				completion(.failure(error))
 			}
 			else {
 				completion(.success(()))
@@ -46,15 +55,7 @@ class FirebaseAuthManager {
 	}
 
 	struct AppUserAuthorization {
-		   let email: String
-		   let passward: String
-	   }
-
-	struct FullInformationAppUser {
 		let email: String
-		let name: String
-		let lastName: String
-		let defaultLocation: String
-		let image: UIImage?
+		let passward: String
 	}
 }

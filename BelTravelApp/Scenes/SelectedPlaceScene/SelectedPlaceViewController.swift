@@ -105,7 +105,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 		interactor?.addToDataStore(request: request)
 	}
 
-	var peopleWhoWansToParticipate = [FirebaseAuthManager.FullInformationAppUser]()
+	var peopleWhoWansToParticipate = [FullInformationAppUser]()
 	var photosOfOtherUsers = [UIImage]()
 
 	func makeWhoWantToVisitThisPlaceCollection () {
@@ -136,8 +136,6 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 		peopleWhoWansToParticipate.removeAll()
 		if viewModel.result == "Added" {
 			print("added")
-		} else {
-			print(viewModel.result)
 		}
 	}
 

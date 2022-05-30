@@ -13,75 +13,79 @@
 import UIKit
 
 protocol OtherUserDisplayLogic: class {
-  func displaySomething(viewModel: OtherUser.Something.ViewModel)
+	func displaySomething(viewModel: OtherUser.Something.ViewModel)
+	func	displayTrips(viewModel: OtherUser.Something.ViewModel)
+	func displayFinishTrip()
 }
 
 class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
-  var interactor: OtherUserBusinessLogic?
-  var router: (NSObjectProtocol & OtherUserRoutingLogic & OtherUserDataPassing)?
+	var interactor: OtherUserBusinessLogic?
+	var router: (NSObjectProtocol & OtherUserRoutingLogic & OtherUserDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController = self
-    let interactor = OtherUserInteractor()
-    let presenter = OtherUserPresenter()
-    let router = OtherUserRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = OtherUserInteractor()
+		let presenter = OtherUserPresenter()
+		let router = OtherUserRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		doSomething()
+		loadTripsInformation()
 		makeTripsCollection()
+		makeFinishedTripsCollection()
 		userPhoto.image = user?.image
 		locationLable.text = user?.name
-		tripsLable.text = user?.lastName
 		title = user?.name
 	}
-  
-  // MARK: Do something
 
+	// MARK: Do something
 
-	var user: FirebaseAuthManager.FullInformationAppUser?
-var tripsArray = [NewTrip]()
+	var user: FullInformationAppUser?
 	var photosArray = [UIImage]()
+	var upcomingTripsArray = [NewTrip]()
+	var finishedTripsArray = [NewTrip]()
 
 	@IBOutlet weak var userPhoto: UIImageView!
 	@IBOutlet weak var tripsCollection: UICollectionView!
 	@IBOutlet weak var noTripsLable: UILabel!
 	@IBOutlet weak var locationLable: UILabel!
-	@IBOutlet weak var tripsLable: UILabel!
+	@IBOutlet weak var finishedTripsCollection: UICollectionView!
+	@IBOutlet weak var noFinishedTripsLable: UILabel!
 
 	func makeTripsCollection () {
 		tripsCollection.delegate = self
@@ -90,19 +94,51 @@ var tripsArray = [NewTrip]()
 		tripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
 
+	func makeFinishedTripsCollection () {
+		finishedTripsCollection.delegate = self
+		finishedTripsCollection.dataSource = self
+		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
+		finishedTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
+	}
+
+
+	func loadTripsInformation() {
+		let request = OtherUser.Something.Request()
+		interactor?.loadTrips(request: request)
+	}
+
+	func	displayTrips(viewModel: OtherUser.Something.ViewModel) {
+		upcomingTripsArray = viewModel.upcomingTrips!
+		finishedTripsArray = viewModel.finishedTrips!
+		tripsCollection.reloadData()
+		finishedTripsCollection.reloadData()
+	}
+
 	func doSomething() {
-    let request = OtherUser.Something.Request()
+		let request = OtherUser.Something.Request()
 		interactor?.setUserInfo(request: request)
-  }
-  
-  func displaySomething(viewModel: OtherUser.Something.ViewModel) {
-    //nameTextField.text = viewModel.name
-  }
+	}
+
+	func displaySomething(viewModel: OtherUser.Something.ViewModel) {
+		//nameTextField.text = viewModel.name
+	}
+
+	func displayFinishTrip() {
+		router?.routeToSelectedFinishedTripViewController()
+	}
 }
 
 extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == tripsCollection {
+			return upcomingTripsArray.count
+		}
+
+		if collectionView == finishedTripsCollection {
+			return finishedTripsArray.count
+		}
+
 		return 0
 	}
 
@@ -113,16 +149,43 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
+
 		if collectionView == tripsCollection {
-			if !tripsArray.isEmpty {
+			if !upcomingTripsArray.isEmpty {
 				noTripsLable.isHidden = true
 			}
+
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
-						return UICollectionViewCell()
-					}
-			cell.config(model: tripsArray[indexPath.row])
+				return UICollectionViewCell()
+			}
+
+			cell.config(model: upcomingTripsArray[indexPath.row])
+			cell.layer.borderWidth = 0
+			cell.layer.shadowColor = UIColor.systemGray.cgColor
+			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
+			cell.layer.shadowRadius = 3
+			cell.layer.shadowOpacity = 0.5
+			cell.layer.cornerRadius = 15
+			cell.layer.masksToBounds = false
+			return cell
+		}
+
+		if collectionView == finishedTripsCollection {
+			if !finishedTripsArray.isEmpty {
+				noFinishedTripsLable.isHidden = true
+			} else {
+				noFinishedTripsLable.isHidden = false
+			}
+
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
+					as? UpcomingTripCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+
+			cell.config(model: finishedTripsArray[indexPath.row])
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
 			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
@@ -139,11 +202,7 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		if collectionView == tripsCollection {
-			return CGSize(width: 250, height: 100)
-		}
-
-		return CGSize(width: 100, height: 100)
+		return CGSize(width: 250, height: 100)
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
@@ -164,10 +223,10 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		
-		if collectionView == tripsCollection {
+
+		if collectionView == finishedTripsCollection {
+						let request = OtherUser.Something.Request(finishedTrip: finishedTripsArray[indexPath.row])
+						interactor?.setFinishTrip(request: request)
 		}
 	}
-
 }
-

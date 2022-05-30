@@ -21,11 +21,11 @@ enum SelectedTrip{
 		}
 		struct Response {
 			var images: [UIImage]?
-			var users: [FirebaseAuthManager.FullInformationAppUser]?
+			var users: [FullInformationAppUser]?
 		}
 		struct ViewModel {
 			var images: [UIImage]?
-			var users: [FirebaseAuthManager.FullInformationAppUser]?
+			var users: [FullInformationAppUser]?
 		}
 	}
 }

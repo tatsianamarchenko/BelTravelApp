@@ -19,15 +19,15 @@ enum SelectedPlace {
     struct Request {
 		var location: Location
 		var region: String
-		var user: FirebaseAuthManager.FullInformationAppUser?
+		var user: FullInformationAppUser?
     }
     struct Response {
 		var result: String?
-		var users: [FirebaseAuthManager.FullInformationAppUser]?
+		var users: [FullInformationAppUser]?
     }
     struct ViewModel {
 		var result: String?
-		var liked: [FirebaseAuthManager.FullInformationAppUser]?
+		var liked: [FullInformationAppUser]?
     }
   }
 }

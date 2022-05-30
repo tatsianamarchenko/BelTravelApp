@@ -70,10 +70,11 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 
 	func loadPins(request: Main.Something.Request) {
 		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
-			let latitude = locations.last?.lat
-			let longitude = locations.last?.lng
-			let loc = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-			let response = Main.Something.Response(location: MapPinAnnotation(title: locations.last!.name, location: locations.last!, coordinate: loc))
+			guard let location = locations.last else {
+				return
+			}
+			let loc = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
+			let response = Main.Something.Response(location: MapPinAnnotation(title: location.name, location: location, coordinate: loc))
 			self?.presenter?.presentPins(response: response)
 		}
 	}

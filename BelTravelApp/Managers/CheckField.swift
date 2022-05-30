@@ -29,7 +29,7 @@ class CheckField{
                  return true
             }
         case "email":
-            if isValid("e", field.text!) {
+            if isValid("e", field.text ?? "") {
                validView(parentView, field, true)
                 return true
             } else {
@@ -37,7 +37,7 @@ class CheckField{
                 return false
             }
         case "password":
-            if isValid("p", field.text!) {
+            if isValid("p", field.text ?? "") {
                 validView(parentView, field, true)
                 return true
             } else {

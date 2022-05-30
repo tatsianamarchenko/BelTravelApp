@@ -17,11 +17,16 @@ enum OtherUser {
 
 	enum Something {
 		struct Request {
-			var user: FirebaseAuthManager.FullInformationAppUser?
+			var user: FullInformationAppUser?
+			var finishedTrip: NewTrip?
 		}
 		struct Response {
+			var upcomingTrips: [NewTrip]?
+			var finishedTrips: [NewTrip]?
 		}
 		struct ViewModel {
+			var upcomingTrips: [NewTrip]?
+			var finishedTrips: [NewTrip]?
 		}
 	}
 }

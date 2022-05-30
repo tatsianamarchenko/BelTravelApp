@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol OtherUserRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+	func routeToSelectedFinishedTripViewController()
 }
 
 protocol OtherUserDataPassing
@@ -27,34 +27,31 @@ class OtherUserRouter: NSObject, OtherUserRoutingLogic, OtherUserDataPassing
   weak var viewController: OtherUserViewController?
   var dataStore: OtherUserDataStore?
   
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+	func routeToSelectedFinishedTripViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedTripViewController") as! SelectedTripViewController
+		destinationVC.trip = dataStore?.finishedTrip
 
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: OtherUserViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: OtherUserDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+		destinationVC.modalPresentationStyle = .fullScreen
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+		navigateToSomewhere(source: viewController!, destination: destinationVC)
+	}
+
+	// MARK: Navigation
+
+	func navigateToSomewhere(source: OtherUserViewController, destination: SelectedTripViewController) {
+		let nav = UINavigationController(rootViewController: destination)
+		nav.modalPresentationStyle = .automatic
+		if let sheet = nav.sheetPresentationController {
+			sheet.detents = [.medium(), .large()]
+		}
+		source.present(nav, animated: true)
+	}
+
+	// MARK: Passing data
+
+	func passDataToSomewhere(source: OtherUserDataStore, destination: inout SelectedTripDataStore) {
+		destination.trip = source.finishedTrip
+	}
 }
