@@ -13,7 +13,7 @@
 import UIKit
 import FirebaseAuth
 
-protocol SelectedPlaceDisplayLogic: class {
+protocol SelectedPlaceDisplayLogic: AnyObject {
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel)
 	func displayWhoLiked(viewModel: SelectedPlace.Something.ViewModel)
 	func displayUserViewController()

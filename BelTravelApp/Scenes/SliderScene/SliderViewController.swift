@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol SliderDisplayLogic: class {
+protocol SliderDisplayLogic: AnyObject {
 	func updateyCollectionView(viewModel: [Slider.Something.ViewModel])
 }
 

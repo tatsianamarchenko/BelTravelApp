@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol AllLocationsDisplayLogic: class
+protocol AllLocationsDisplayLogic: AnyObject
 {
   func presentLocationsInSelectedRegion(viewModel: AllLocations.Something.ViewModel)
 	func presentLocation()

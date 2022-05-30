@@ -13,7 +13,7 @@
 import UIKit
 import FirebaseAuth
 
-protocol UpcomingTripInformationDisplayLogic: class {
+protocol UpcomingTripInformationDisplayLogic: AnyObject {
   func displayUsers(viewModel: UpcomingTripInformation.Something.ViewModel)
 	func	displayUserViewController()
 }

@@ -13,7 +13,7 @@
 import UIKit
 import FirebaseAuth
 
-protocol ProfileDisplayLogic: class {
+protocol ProfileDisplayLogic: AnyObject {
 	func displayUserInformation(viewModel: Profile.Something.ViewModel)
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel)
 	func	displayTrips(viewModel: Profile.Something.ViewModel)
@@ -92,9 +92,6 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
 	@IBOutlet weak var upcomingTripsCollection: UICollectionView!
 	@IBOutlet weak var noUpcomingTripsLable: UILabel!
-	
-	@IBOutlet weak var locationLable: UILabel!
-
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
 			self.router?.routeToSliderViewController()

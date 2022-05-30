@@ -63,7 +63,7 @@ class FirebaseDatabaseManager {
 				return
 			}
 			var result = [Location]()
-			documents.map { [weak self] queryDocumentSnapshot in
+			_ = documents.map { [weak self] queryDocumentSnapshot in
 				self?.getSingleLocation(snapshot: queryDocumentSnapshot) { location in
 					result.append(location)
 					complition(result)
@@ -150,7 +150,7 @@ class FirebaseDatabaseManager {
 				return
 			}
 			var images = [UIImage]()
-			documents.map { queryDocumentSnapshot in
+			_ =	documents.map { queryDocumentSnapshot in
 
 				let	data = queryDocumentSnapshot.data()
 				let path = data["ref"] as? String ?? ""
@@ -201,8 +201,7 @@ class FirebaseDatabaseManager {
 				print("No documents")
 				return
 			}
-			documents.map { queryDocumentSnapshot in
-				let wantToVisit = [FullInformationAppUser]()
+			_ = documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let path = data["favorite"] as? String ?? ""
 				self.db.document(path).getDocument { (querySnapshot, error) in
@@ -339,7 +338,7 @@ class FirebaseDatabaseManager {
 	public func fetchCreatedTrips(collection: String, complition: @escaping ([NewTrip])-> Void) {
 		var result = [NewTrip]()
 		self.db.collection("\(collection)Trips").addSnapshotListener { (querySnapshot, error) in
-			querySnapshot?.documents.map { queryDocumentSnapshot in
+			_ = querySnapshot?.documents.map { queryDocumentSnapshot in
 				self.fetchSingleTrip(snapshot: queryDocumentSnapshot) { location in
 					if location.isActive == true {
 						result.append(location)
@@ -364,7 +363,7 @@ class FirebaseDatabaseManager {
 				print("No documents")
 				return
 			}
-			documents.map { queryDocumentSnapshot in
+			_ = documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let participant = data[field] as? String ?? ""
 				participants.removeAll()
@@ -388,7 +387,7 @@ class FirebaseDatabaseManager {
 				print("No documents")
 				return
 			}
-			documents.map { queryDocumentSnapshot in
+			_ = documents.map { queryDocumentSnapshot in
 				upcomingTrips.removeAll()
 				finishedTrips.removeAll()
 				let	data = queryDocumentSnapshot.data()
@@ -419,7 +418,7 @@ class FirebaseDatabaseManager {
 				return
 			}
 			var messageRecived = [Message]()
-			documents.map { queryDocumentSnapshot in
+			_ = documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
 				let messageText = data["message"] as? String ?? ""
 				let sender = data["sender"] as? String ?? ""

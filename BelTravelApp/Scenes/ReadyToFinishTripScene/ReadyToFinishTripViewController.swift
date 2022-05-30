@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol ReadyToFinishTripDisplayLogic: class {
+protocol ReadyToFinishTripDisplayLogic: AnyObject {
 	func displayResult(viewModel: ReadyToFinishTrip.Something.ViewModel)
 	func displayParticipants(viewModel: ReadyToFinishTrip.Something.ViewModel)
 	func displayUserViewController()
@@ -124,7 +124,7 @@ class ReadyToFinishTripViewController: UIViewController, ReadyToFinishTripDispla
 			router?.routeToProfileViewController(source: self)
 		}
 		else {
-			print(viewModel.result)
+			print(viewModel.result as Any)
 		}
 	}
 	

@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol FavoriteDisplayLogic: class {
+protocol FavoriteDisplayLogic: AnyObject {
 	func displayFavoriteLocations(viewModel: Favorite.Something.ViewModel)
 	func displaySelecteTripViewController()
 }

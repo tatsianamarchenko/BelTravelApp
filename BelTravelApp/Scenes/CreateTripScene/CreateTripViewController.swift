@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol CreateTripDisplayLogic: class {
+protocol CreateTripDisplayLogic: AnyObject {
 	func displayResult(viewModel: CreateTrip.Something.ViewModel)
 }
 

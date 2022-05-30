@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol OtherUserDisplayLogic: class {
+protocol OtherUserDisplayLogic: AnyObject {
 	func displaySomething(viewModel: OtherUser.Something.ViewModel)
 	func	displayTrips(viewModel: OtherUser.Something.ViewModel)
 	func displayFinishTrip()

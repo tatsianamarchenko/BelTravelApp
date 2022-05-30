@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol AuthorizationDisplayLogic: class {
+protocol AuthorizationDisplayLogic: AnyObject {
   func displayAuthorized(viewModel: Authorization.Something.ViewModel)
 }
 

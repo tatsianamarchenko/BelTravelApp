@@ -15,7 +15,7 @@ import MessageKit
 import InputBarAccessoryView
 import FirebaseAuth
 
-protocol ChatDisplayLogic: class {
+protocol ChatDisplayLogic: AnyObject {
   func displayMessages(viewModel: Chat.Something.ViewModel)
 	func displayNewMessages(viewModel: Chat.Something.ViewModel)
 }

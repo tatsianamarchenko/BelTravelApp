@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol RegistrationDisplayLogic: class {
+protocol RegistrationDisplayLogic: AnyObject {
   func displaySomething(viewModel: Registration.Something.ViewModel)
 }
 

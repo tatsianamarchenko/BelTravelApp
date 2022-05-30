@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol SelectedTripDisplayLogic: class {
+protocol SelectedTripDisplayLogic: AnyObject {
 	func displayPhotos(viewModel: SelectedTrip.Something.ViewModel)
 	func displayParticipants(viewModel: SelectedTrip.Something.ViewModel)
 }

@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-protocol MainDisplayLogic: class {
+protocol MainDisplayLogic: AnyObject {
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel)
 	func presentSelectedPopularPlaceViewController()
 	func presentUpcomingTripViewController() 

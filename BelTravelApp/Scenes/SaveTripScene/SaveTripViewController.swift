@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol SaveTripDisplayLogic: class
+protocol SaveTripDisplayLogic: AnyObject
 {
   func displayProfile(viewModel: SaveTrip.Something.ViewModel)
 }
