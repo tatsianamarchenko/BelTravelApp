@@ -182,7 +182,7 @@ extension ReadyToFinishTripViewController: UICollectionViewDelegate, UICollectio
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return Constants.share.profileImageSize
+		return Constants.share.participantCellSize
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,

@@ -13,7 +13,7 @@ class Constants {
 	var tableHeight: CGFloat = 70
 	var imageSize = CGSize(width: 150, height: 150)
 	var profileImageSize = CGSize(width: 250, height: 100)
-	var participantCellSize = CGSize(width: 200, height: 100)
+	var participantCellSize = CGSize(width: 200, height: 50)
 	var userCollection = "users"
 	var participantsCollection = "participants"
 	var favoriteCollection = "Favorite"

@@ -197,6 +197,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 			cell.layer.shadowOpacity = 0.5
 			cell.layer.cornerRadius = 15
 			cell.layer.masksToBounds = false
+			cell.clipsToBounds = true
 			return cell
 		}
 
@@ -219,6 +220,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 			cell.layer.shadowOpacity = 0.5
 			cell.layer.cornerRadius = 15
 			cell.layer.masksToBounds = false
+			cell.clipsToBounds = true
 			return cell
 		}
 
