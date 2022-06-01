@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  BelTravelApp
+
+  Created by Tatsiana Marchanka on 31.05.22.
+  
+*/
+"mostPopularLable" = "Найбольш папулярныя";
+"upcommingTripsLable" = "Будучыя паездкі";
+"showAllButton" = "Паказаць усё";
+"wantToParticipateButton" = "Хочацца паўдзельнічаць";
+"photosOfOtherUsersLable" = "Фота іншых карыстальнікаў";
+"descriptionLable" = "Апісанне";
+"createTripButton" = "Стварыце падарожжа";
+"noTripsCreated" = "Паездак не створана";
+"noLocationsInFavorite" = "Няма месцаў у абраным";
+"noUpcomingTripsLable" = "Няма маючых адбыцца паездак";
+"noFinishedTripsLable" = "Няма скончаных паездак";
+"timeLable" = "Дата";
+"whoParticipateLable" = "Хто ўдзельнічае";
+"participateButton" = "Удзельнічаць";
+"openChatButton" = "Адкрыць чат";
+"wantToVisitLable" = "Хочацца наведаць";
+"locationLable" = "Месцазнаходжанне";
+"finishedTripsLable" = "Cкончаныя паездкі";
+"dontWantToParticipateButton" = "Не хачу ўдзельнічаць";
+"finishTripLable" = "Скончыць падарожжа";
+"addPhotoButton" = "Дадаць фота";
+"saveButton" = "Захаваць";
+"exitButton" = "Выхад";
+"name" = "Імя:";
+"lastName" = "Прозвішча:";
+"defaultLocation" = "Месцазнаходжанне па змаўчанні:";
+"email" = "E-mail:";
+"password" = "Пароль:";
+"repeatPassword" = "Паўтарыце пароль:";
+"createAccount" = "Стварыць уліковы запіс";
+"alreadyHaveAnAccount" = "У вас ужо ёсць уліковы запіс?";
+"forgetPassword" = "Забыліся на пароль?";
+"enter" = " Увайсці";
+"forgetPassword" = "Забыліся на пароль?";
+"enter" = " Увайсці";
+"registration" = "Рэгістрацыя";
+"withLable" = "З";
+"generalPhotosLable" = "Агульныя фатаграфіі";
+"noPhotoLable" = "Няма фота";
+"maxPeopleLable" = "Mаксімум удзельнікаў";
+"noParticipateLable" = "Няма ўдзельнікаў";

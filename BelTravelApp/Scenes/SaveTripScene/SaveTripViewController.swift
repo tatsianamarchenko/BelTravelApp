@@ -12,81 +12,78 @@
 
 import UIKit
 
-protocol SaveTripDisplayLogic: AnyObject
-{
-  func displayProfile(viewModel: SaveTrip.Something.ViewModel)
+protocol SaveTripDisplayLogic: AnyObject {
+	func displayProfile(viewModel: SaveTrip.Something.ViewModel)
 }
 
-class SaveTripViewController: UIViewController, SaveTripDisplayLogic
-{
-  var interactor: SaveTripBusinessLogic?
-  var router: (NSObjectProtocol & SaveTripRoutingLogic & SaveTripDataPassing)?
+class SaveTripViewController: UIViewController, SaveTripDisplayLogic {
+	var interactor: SaveTripBusinessLogic?
+	var router: (NSObjectProtocol & SaveTripRoutingLogic & SaveTripDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = SaveTripInteractor()
-    let presenter = SaveTripPresenter()
-    let router = SaveTripRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = SaveTripInteractor()
+		let presenter = SaveTripPresenter()
+		let router = SaveTripRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		setLabels()
 		makePhotosCollection()
 		makeParticipantsCollection()
+		title = ""
 	}
-  
-  // MARK: Do something
+
+	// MARK: Do something
 
 	var photosArray = [UIImage]()
 	var participantsArray = [FullInformationAppUser]()
 
-	@IBOutlet weak var tripTime: UILabel!
 	@IBOutlet weak var noPhotosLable: UILabel!
 	@IBOutlet weak var photosCollection: UICollectionView!
 	@IBOutlet weak var noParticipantsLable: UILabel!
 	@IBOutlet weak var participantsCollection: UICollectionView!
 
+	@IBOutlet weak var addPhotosOutlet: UIButton!
 	@IBAction func addPhotosAction(_ sender: Any) {
 		presentPhoto()
 	}
 
+	@IBOutlet weak var saveOutlet: UIButton!
 	@IBAction func saveTripAction(_ sender: Any) {
 		let request = SaveTrip.Something.Request(photos: photosArray)
 		interactor?.saveImages(request: request)
@@ -104,6 +101,13 @@ class SaveTripViewController: UIViewController, SaveTripDisplayLogic
 		participantsCollection.dataSource = self
 		let nib = UINib(nibName: "ParticipantCollectionViewCell", bundle: nil)
 		participantsCollection.register(nib, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
+	}
+
+	func setLabels() {
+		noPhotosLable.text = NSLocalizedString("noPhotoLable", comment: "")
+		noParticipantsLable.text = NSLocalizedString("noParticipateLable", comment: "")
+		addPhotosOutlet.setTitle(NSLocalizedString("addPhotoButton", comment: ""), for: .normal)
+		saveOutlet.setTitle(NSLocalizedString("saveButton", comment: ""), for: .normal)
 	}
 
 	func displayProfile(viewModel: SaveTrip.Something.ViewModel) {
@@ -183,7 +187,7 @@ extension SaveTripViewController: UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 250, height: 100)
+		return Constants.share.profileImageSize
 	}
 
 	func collectionView(_ collectionView: UICollectionView,

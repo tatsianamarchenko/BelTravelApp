@@ -14,7 +14,7 @@ import UIKit
 
 enum OtherUser {
 	// MARK: Use cases
-
+	
 	enum Something {
 		struct Request {
 			var user: FullInformationAppUser?

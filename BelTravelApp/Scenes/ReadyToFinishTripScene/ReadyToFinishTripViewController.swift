@@ -66,7 +66,8 @@ class ReadyToFinishTripViewController: UIViewController, ReadyToFinishTripDispla
 		super.viewDidLoad()
 		timeLable.text = trip?.time
 		title = trip?.locationName
-		tripImage.image = UIImage(named: "back1")
+		tripImage.image = trip?.image
+		setLabels()
 		makeParticipantsCollection()
 		loadParticipants()
 	}
@@ -76,14 +77,16 @@ class ReadyToFinishTripViewController: UIViewController, ReadyToFinishTripDispla
 	var trip: NewTrip?
 	@IBOutlet weak var tripImage: UIImageView!
 	@IBOutlet weak var timeLable: UILabel!
+	@IBOutlet weak var dateLable: UILabel!
 	@IBOutlet weak var participantsCollection: UICollectionView!
 	@IBOutlet weak var noParticipants: UILabel!
-	
-	
+	@IBOutlet weak var whoParticipateLable: UILabel!
+	@IBOutlet weak var dontWantToParticipateOutlet: UIButton!
+	@IBOutlet weak var finishTripOutlet: UIButton!
 	@IBAction func finishTripAction(_ sender: Any) {
 		router?.routeToSaveTripViewController()
 	}
-	
+	@IBOutlet weak var openChatOutlet: UIButton!
 	@IBAction func dontWantToParticipateAction(_ sender: Any) {
 		guard let trip = trip else {
 			return
@@ -109,6 +112,15 @@ class ReadyToFinishTripViewController: UIViewController, ReadyToFinishTripDispla
 		}
 		let request = ReadyToFinishTrip.Something.Request(trip: trip)
 		interactor?.loadParticipants(request: request)
+	}
+
+	func setLabels() {
+		dateLable.text = NSLocalizedString("timeLable", comment: "")
+		noParticipants.text = NSLocalizedString("noParticipateLable", comment: "")
+		whoParticipateLable.text = NSLocalizedString("whoParticipateLable", comment: "")
+		dontWantToParticipateOutlet.setTitle(NSLocalizedString("dontWantToParticipateButton", comment: ""), for: .normal)
+		finishTripOutlet.setTitle(NSLocalizedString("finishTripLable", comment: ""), for: .normal)
+		openChatOutlet.setTitle(NSLocalizedString("openChatButton", comment: ""), for: .normal)
 	}
 	
 	func displayParticipants(viewModel: ReadyToFinishTrip.Something.ViewModel) {
@@ -170,7 +182,7 @@ extension ReadyToFinishTripViewController: UICollectionViewDelegate, UICollectio
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 250, height: 100)
+		return Constants.share.profileImageSize
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,

@@ -14,7 +14,7 @@ import UIKit
 
 enum SelectedTrip{
 	// MARK: Use cases
-
+	
 	enum Something {
 		struct Request {
 			var trip: NewTrip

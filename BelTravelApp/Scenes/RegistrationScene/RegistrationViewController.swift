@@ -13,7 +13,7 @@
 import UIKit
 
 protocol RegistrationDisplayLogic: AnyObject {
-  func displaySomething(viewModel: Registration.Something.ViewModel)
+	func displaySomething(viewModel: Registration.Something.ViewModel)
 }
 
 class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
@@ -65,6 +65,7 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 		photoGesture = UITapGestureRecognizer(target: self, action: #selector(addPhoto))
 		photoOutlet.isUserInteractionEnabled = true
 		photoOutlet.addGestureRecognizer(photoGesture!)
+		setLabels()
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		mainView.addGestureRecognizer(tapGesture!)
 	}
@@ -77,20 +78,38 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 	@IBOutlet weak var emailView: UIView!
 	@IBOutlet weak var passwordView: UIView!
 	@IBOutlet weak var repeatPasswordView: UIView!
-
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
 	@IBOutlet weak var repeatPasswordTextField: UITextField!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var lastNameTextField: UITextField!
 	@IBOutlet weak var defaultLocationTextField: UITextField!
-	
+	@IBOutlet weak var nameLable: UILabel!
+	@IBOutlet weak var lastNameLable: UILabel!
+	@IBOutlet weak var defaultLocationLable: UILabel!
+	@IBOutlet weak var emailLable: UILabel!
+	@IBOutlet weak var passwardLable: UILabel!
+	@IBOutlet weak var repeatPasswardLable: UILabel!
+	@IBOutlet weak var createAccountOutlet: UIButton!
+	@IBOutlet weak var alreadeHaveAnAccountLable: UIButton!
+
 	@objc func tapped() {
 		self.view.endEditing(true)
 	}
 
 	@objc func addPhoto() {
-	presentPhoto()
+		presentPhoto()
+	}
+
+	func setLabels() {
+		nameLable.text = NSLocalizedString("name", comment: "")
+		lastNameLable.text = NSLocalizedString("lastName", comment: "")
+		defaultLocationLable.text = NSLocalizedString("defaultLocation", comment: "")
+		emailLable.text = NSLocalizedString("email", comment: "")
+		passwardLable.text = NSLocalizedString("password", comment: "")
+		repeatPasswardLable.text = NSLocalizedString("repeatPassword", comment: "")
+		createAccountOutlet.setTitle(NSLocalizedString("createAccount", comment: ""), for: .normal)
+		alreadeHaveAnAccountLable.setTitle(NSLocalizedString("alreadyHaveAnAccount", comment: ""), for: .normal)
 	}
 
 	func displaySomething(viewModel: Registration.Something.ViewModel) {
@@ -99,25 +118,28 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 
 	@IBAction func registrationButtonAction(_ sender: UIButton) {
 		if !nameTextField.text!.isEmpty && !lastNameTextField.text!.isEmpty && !defaultLocationTextField.text!.isEmpty {
-		guard let name = nameTextField.text else {return}
-		guard let lastName = lastNameTextField.text else {return}
-		guard let defaultLocation = defaultLocationTextField.text else {return}
-		if checkField.validField(emailView, emailTextField),
-		   checkField.validField(passwordView, passwordTextField) {
-			if passwordTextField.text == repeatPasswordTextField.text {
-				let request = Registration.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "", name: name, lastName: lastName, defaultLocation: defaultLocation, image: photoOutlet.image)
-				interactor?.createNewUser(request: request)
+			guard let name = nameTextField.text else {return}
+			guard let lastName = lastNameTextField.text else {return}
+			guard let defaultLocation = defaultLocationTextField.text else {return}
+			if checkField.validField(emailView, emailTextField),
+			   checkField.validField(passwordView, passwordTextField) {
+				if passwordTextField.text == repeatPasswordTextField.text {
+					let request = Registration.Something.Request(email: emailTextField.text ?? "",
+																 passward: passwordTextField.text ?? "",
+																 name: name,
+																 lastName: lastName,
+																 defaultLocation: defaultLocation,
+																 image: photoOutlet.image)
+					interactor?.createNewUser(request: request)
+				}
 			}
 		}
-	}
 	}
 
 	@IBAction func closeButtonAction(_ sender: UIButton) {
 		self.dismiss(animated: true)
 	}
 }
-
-
 
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

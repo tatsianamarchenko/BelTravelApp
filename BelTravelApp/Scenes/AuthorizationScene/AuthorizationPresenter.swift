@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol AuthorizationPresentationLogic
-{
-  func presentAuthorized(response: Authorization.Something.Response)
+protocol AuthorizationPresentationLogic {
+	func presentAuthorized(response: Authorization.Something.Response)
 }
 
-class AuthorizationPresenter: AuthorizationPresentationLogic
-{
-  weak var viewController: AuthorizationDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentAuthorized(response: Authorization.Something.Response)
-  {
-    let viewModel = Authorization.Something.ViewModel()
-    viewController?.displayAuthorized(viewModel: viewModel)
-  }
+class AuthorizationPresenter: AuthorizationPresentationLogic {
+	weak var viewController: AuthorizationDisplayLogic?
+
+	// MARK: Do something
+
+	func presentAuthorized(response: Authorization.Something.Response) {
+		let viewModel = Authorization.Something.ViewModel()
+		viewController?.displayAuthorized(viewModel: viewModel)
+	}
 }

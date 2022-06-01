@@ -17,61 +17,62 @@ import CoreLocation
 protocol MainDisplayLogic: AnyObject {
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel)
 	func presentSelectedPopularPlaceViewController()
-	func presentUpcomingTripViewController() 
+	func presentUpcomingTripViewController()
 	func displayCreatedTrips(viewModel: Main.Something.ViewModel)
 	func displayPins(viewModel: Main.Something.ViewModel)
 }
 
 class MainViewController: UIViewController, MainDisplayLogic {
-  var interactor: MainBusinessLogic?
-  var router: (NSObjectProtocol & MainRoutingLogic & MainDataPassing)?
+	var interactor: MainBusinessLogic?
+	var router: (NSObjectProtocol & MainRoutingLogic & MainDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController = self
-    let interactor = MainInteractor()
-    let presenter = MainPresenter()
-    let router = MainRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = MainInteractor()
+		let presenter = MainPresenter()
+		let router = MainRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		makeRegionsCollection()
 		makeMostPopularPlacesCollection()
 		makeNextTripsCollection()
 		loadInformationForCollections()
+		setLabels()
 		loadCreatedTrips()
 		loadPins()
 		locationManager.delegate = self
@@ -86,17 +87,20 @@ class MainViewController: UIViewController, MainDisplayLogic {
 				   Region(image: Image(withImage: UIImage(named: "Gomel")!), name: "Gomel", identifier: "GomelRegion"),
 				   Region(image: Image(withImage: UIImage(named: "Grodno")!), name: "Grodno", identifier: "GrodnoRegion"),
 				   Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev", identifier: "MogilevRegion")
-  ]
+	]
 	var popularPlaces = [Location]()
 	var createdTrips = [NewTrip]()
 
 	let locationManager = CLLocationManager()
 
+	@IBOutlet weak var mostPopularLable: UILabel!
 	@IBOutlet weak var regionsCollection: UICollectionView!
 	@IBOutlet weak var nextTripsCollection: UICollectionView!
+	@IBOutlet weak var upcommingTripsLable: UILabel!
 	@IBOutlet weak var popularPlacesCollection: UICollectionView!
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var noTripsLable: UILabel!
+	@IBOutlet weak var showAllButtonOutlet: UIButton!
 	@IBAction func allLocationButtonAction(_ sender: Any) {
 		router?.routeToAllLocationsViewController()
 	}
@@ -120,14 +124,21 @@ class MainViewController: UIViewController, MainDisplayLogic {
 		nextTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
 
-var regionName = "MinskRegion"
+	func setLabels() {
+		mostPopularLable.text = NSLocalizedString("mostPopularLable", comment: "")
+		upcommingTripsLable.text = NSLocalizedString("upcommingTripsLable", comment: "")
+		noTripsLable.text = NSLocalizedString("noTripsCreated", comment: "")
+		showAllButtonOutlet.setTitle(NSLocalizedString("showAllButton", comment: ""), for: .normal)
+	}
+
+	var regionName = "MinskRegion"
 
 	func loadInformationForCollections() {
 		mapView.removeAnnotations(mapView.annotations)
 		let request = Main.Something.Request(region: regionName)
 		interactor?.loadInformation(request: request)
 	}
-  
+
 	func displayPopularPlaces(viewModel: Main.Something.ViewModel) {
 		guard let locations = viewModel.locations else {
 			return
@@ -190,12 +201,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if collectionView == regionsCollection {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-																RegionCollectionViewCell.identifier, for: indexPath)
-				as? RegionCollectionViewCell else {
-					return UICollectionViewCell()
-				}
-		cell.config(model: regions[indexPath.row])
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+																	RegionCollectionViewCell.identifier, for: indexPath)
+					as? RegionCollectionViewCell else {
+				return UICollectionViewCell()
+			}
+			cell.config(model: regions[indexPath.row])
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
 			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
@@ -210,8 +221,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	PlaceCollectionViewCell.identifier, for: indexPath)
 					as? PlaceCollectionViewCell else {
-						return UICollectionViewCell()
-					}
+				return UICollectionViewCell()
+			}
 			cell.imageOfLocation.image = popularPlaces[indexPath.row].image
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
@@ -230,8 +241,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
-						return UICollectionViewCell()
-					}
+				return UICollectionViewCell()
+			}
 			cell.config(model: createdTrips[indexPath.row])
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
@@ -274,18 +285,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		if collectionView == regionsCollection {
-			return 20
-		}
 		return 20
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						insetForSectionAt section: Int) -> UIEdgeInsets {
-		if collectionView == regionsCollection {
-			return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
-		}
 		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
 	}
 
@@ -366,7 +371,7 @@ extension MainViewController: MKMapViewDelegate {
 	}
 
 	func mapView(_ mapView: MKMapView,
-							 didSelect view: MKAnnotationView) {
+				 didSelect view: MKAnnotationView) {
 		if let annotation = view.annotation as? MapPinAnnotation {
 			let location = annotation.location
 			let request = Main.Something.Request(region: regionName, selectedPopularPlace: location)

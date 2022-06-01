@@ -12,33 +12,30 @@
 
 import UIKit
 
-@objc protocol AuthorizationRoutingLogic
-{
+@objc protocol AuthorizationRoutingLogic {
 	func routeToMessengerTabBarViewController()
 }
 
-protocol AuthorizationDataPassing
-{
-  var dataStore: AuthorizationDataStore? { get }
+protocol AuthorizationDataPassing {
+	var dataStore: AuthorizationDataStore? { get }
 }
 
-class AuthorizationRouter: NSObject, AuthorizationRoutingLogic, AuthorizationDataPassing
-{
-  weak var viewController: AuthorizationViewController?
-  var dataStore: AuthorizationDataStore?
-  
-  // MARK: Routing
-  
-	func routeToMessengerTabBarViewController() {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-		destinationVC.modalPresentationStyle = .fullScreen
-		navigateToMessengerTabBarViewController(source: viewController!, destination: destinationVC)
-  }
+class AuthorizationRouter: NSObject, AuthorizationRoutingLogic, AuthorizationDataPassing {
+	weak var viewController: AuthorizationViewController?
+	var dataStore: AuthorizationDataStore?
 
-//   MARK: Navigation
-  
-  func navigateToMessengerTabBarViewController(source: AuthorizationViewController, destination: TabBarViewController) {
-    source.show(destination, sender: nil)
-  }
+	// MARK: Routing
+
+	func routeToMessengerTabBarViewController() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+		destinationVC?.modalPresentationStyle = .fullScreen
+		navigateToMessengerTabBarViewController(source: viewController!, destination: destinationVC!)
+	}
+
+	//   MARK: Navigation
+
+	func navigateToMessengerTabBarViewController(source: AuthorizationViewController, destination: TabBarViewController) {
+		source.show(destination, sender: nil)
+	}
 }

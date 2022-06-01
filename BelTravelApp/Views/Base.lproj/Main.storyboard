@@ -200,10 +200,13 @@
                     <navigationItem key="navigationItem" id="tsx-DB-tML"/>
                     <connections>
                         <outlet property="mapView" destination="aWm-nv-eKq" id="c4e-tu-7B3"/>
+                        <outlet property="mostPopularLable" destination="auR-8u-wbi" id="44A-Da-wFj"/>
                         <outlet property="nextTripsCollection" destination="erd-G3-Qat" id="QK0-rU-Ov8"/>
                         <outlet property="noTripsLable" destination="SDl-OF-jC4" id="ruE-d3-bcj"/>
                         <outlet property="popularPlacesCollection" destination="cKs-2P-yqs" id="tiv-TB-Nny"/>
                         <outlet property="regionsCollection" destination="BXB-6H-Rhz" id="fsm-24-QnI"/>
+                        <outlet property="showAllButtonOutlet" destination="bB5-NU-o4V" id="O2B-JO-OjW"/>
+                        <outlet property="upcommingTripsLable" destination="LIG-OB-a5u" id="nr1-5r-P1n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -285,7 +288,7 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vitebsk" translatesAutoresizingMaskIntoConstraints="NO" id="vUw-Vh-I1p">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vUw-Vh-I1p">
                                                 <rect key="frame" x="107" y="134" width="200" height="256"/>
                                                 <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
@@ -433,13 +436,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createTripOutlet" destination="nFx-UP-bvY" id="531-ct-Tud"/>
+                        <outlet property="descriptionLable" destination="KWi-Hq-qMv" id="cF2-Mz-WXa"/>
                         <outlet property="desctiptionLable" destination="o1e-Gp-fmv" id="mzX-YJ-1Bs"/>
                         <outlet property="favoriteButtonOutlet" destination="4fL-SD-WuV" id="NCW-If-W2H"/>
                         <outlet property="locationImage" destination="vUw-Vh-I1p" id="59x-ks-v3Y"/>
                         <outlet property="noParticipantsLable" destination="gA9-Bl-hZE" id="cBg-tO-raJ"/>
                         <outlet property="noPhotoLable" destination="KTk-Wp-wcK" id="dBx-L9-f27"/>
                         <outlet property="photosOfOtherUsersCollection" destination="OQD-7p-IhZ" id="690-BU-ljE"/>
+                        <outlet property="photosOfOtherUsersLable" destination="B6W-NJ-9HO" id="ZCB-EN-UXb"/>
                         <outlet property="titleName" destination="vtT-VV-G4E" id="cuc-md-QGh"/>
+                        <outlet property="whoAlsoWantToVisitLable" destination="KZB-uO-8Qn" id="xha-pI-jRT"/>
                         <outlet property="whoWantToVisitThisPlaceCollection" destination="0WS-ff-Azz" id="Bqc-db-t01"/>
                     </connections>
                 </viewController>
@@ -532,8 +539,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" largeTitleDisplayMode="always" id="VBf-Me-R24"/>
                     <connections>
+                        <outlet property="generalPhotosLable" destination="SUA-Fn-zjx" id="lTE-yo-Wdv"/>
                         <outlet property="participantsCollection" destination="ujm-jV-mgs" id="v6h-gu-Kye"/>
                         <outlet property="photosCollection" destination="p9F-dY-pkx" id="QEu-X1-5LQ"/>
+                        <outlet property="withLable" destination="bZ4-Sp-F1j" id="13p-kJ-NbP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DcK-Wa-mja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -624,7 +633,7 @@
                                     <color key="baseForegroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="chatButtonAction:" destination="dGc-lD-hrK" eventType="touchUpInside" id="zaU-WE-mvN"/>
+                                    <action selector="chatButtonAction:" destination="dGc-lD-hrK" eventType="touchUpInside" id="dZ1-gy-KKg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minsk" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbY-M8-2tG">
@@ -685,10 +694,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="bKy-F5-Q0R"/>
                     <connections>
+                        <outlet property="descriptionLable" destination="BFn-DX-N34" id="Cyk-M9-1MU"/>
                         <outlet property="locationImage" destination="kRo-Li-Swz" id="twv-la-DH4"/>
+                        <outlet property="openChatOutlet" destination="9gx-Ak-SAy" id="kdd-5P-ckf"/>
+                        <outlet property="participateOutlet" destination="yfx-WZ-iqI" id="1rc-wU-4y9"/>
+                        <outlet property="timeLable" destination="Oql-N3-stL" id="nnD-Qe-F12"/>
                         <outlet property="tripStartPlace" destination="bbY-M8-2tG" id="gU6-OY-8gg"/>
                         <outlet property="tripTime" destination="VTp-eH-KPL" id="GuP-YF-h26"/>
                         <outlet property="whoPacticipateCollection" destination="gJQ-s4-PdC" id="S3P-0O-i1w"/>
+                        <outlet property="whoParticipateLable" destination="hpy-nG-1di" id="oDT-1R-nhr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCI-d8-4co" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -751,7 +765,8 @@
                     <navigationItem key="navigationItem" id="Unk-Jf-9Md"/>
                     <connections>
                         <outlet property="favoriteTableView" destination="3Q2-EN-MW5" id="bE0-xq-cfz"/>
-                        <outlet property="noLocationsInfavoriteLable" destination="KXy-37-Lp8" id="95F-t9-efN"/>
+                        <outlet property="noLocationsInFavoriteLable" destination="KXy-37-Lp8" id="y8F-44-stU"/>
+                        <outlet property="wantToVisitLable" destination="aV3-xX-7Ay" id="fAT-KR-Odq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWJ-EW-OsX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -787,8 +802,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-g6-C0Q">
-                                <rect key="frame" x="10" y="218" width="125" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-g6-C0Q">
+                                <rect key="frame" x="10" y="218" width="180" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="gJe-wX-yDO"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -799,8 +817,6 @@
                                     <color key="baseBackgroundColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="closeButtonAction:" destination="7m3-CT-AwT" eventType="touchUpInside" id="7Hz-fS-0s5"/>
-                                    <action selector="closeButtonAction:" destination="8Fa-mC-9Rn" eventType="touchUpInside" id="YwJ-cL-kne"/>
                                     <action selector="exitButton:" destination="O05-uo-0o6" eventType="touchUpInside" id="tBY-NB-RvI"/>
                                 </connections>
                             </button>
@@ -889,7 +905,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="on6-n8-QqT">
-                                <rect key="frame" x="145" y="218" width="0.0" height="0.0"/>
+                                <rect key="frame" x="200" y="218" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -928,12 +944,16 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="defaultLocationLable" destination="on6-n8-QqT" id="ODT-F8-mNA"/>
+                        <outlet property="exitButtonOutlet" destination="oNR-0J-TfG" id="RNf-X5-aIJ"/>
                         <outlet property="finishedTripsCollection" destination="Fsq-kb-46d" id="a06-os-vk3"/>
+                        <outlet property="finishedTripsLable" destination="LT4-KC-XT0" id="GpQ-N7-g9K"/>
+                        <outlet property="locationLable" destination="sgm-g6-C0Q" id="aeJ-eW-zcJ"/>
                         <outlet property="nameLable" destination="6ux-Cc-SUn" id="jKz-da-2ii"/>
                         <outlet property="noFinishedTripsLable" destination="TeP-X7-8XA" id="XYs-GS-Opf"/>
                         <outlet property="noUpcomingTripsLable" destination="0P6-jD-hLp" id="PKr-NY-OtU"/>
                         <outlet property="photoOfUser" destination="LPU-sj-i4n" id="NlO-3E-AhT"/>
                         <outlet property="upcomingTripsCollection" destination="YT5-hL-3hD" id="3jl-h0-q7p"/>
+                        <outlet property="upcommintTripsLable" destination="ZFv-3A-Rje" id="nqv-j8-ch8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJU-Ho-upX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -996,7 +1016,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H0g-KT-MX7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h44-N3-qqj">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1022,7 +1042,7 @@
                             </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZAi-ea-SFb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="H0g-KT-MX7" firstAttribute="top" secondItem="Px1-Gv-D3q" secondAttribute="top" id="6xa-tY-0y7"/>
                             <constraint firstItem="gee-M8-KiH" firstAttribute="leading" secondItem="ZAi-ea-SFb" secondAttribute="leading" constant="30" id="8aa-Re-2nE"/>
@@ -1030,7 +1050,7 @@
                             <constraint firstItem="H0g-KT-MX7" firstAttribute="trailing" secondItem="ZAi-ea-SFb" secondAttribute="trailing" id="EvM-r1-PzQ"/>
                             <constraint firstItem="ZAi-ea-SFb" firstAttribute="trailing" secondItem="gee-M8-KiH" secondAttribute="trailing" constant="30" id="KjL-9k-g0q"/>
                             <constraint firstItem="H0g-KT-MX7" firstAttribute="leading" secondItem="ZAi-ea-SFb" secondAttribute="leading" id="qE5-f8-eqS"/>
-                            <constraint firstItem="H0g-KT-MX7" firstAttribute="bottom" secondItem="ZAi-ea-SFb" secondAttribute="bottom" id="w4x-LX-l2U"/>
+                            <constraint firstItem="H0g-KT-MX7" firstAttribute="bottom" secondItem="Px1-Gv-D3q" secondAttribute="bottom" id="w4x-LX-l2U"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1319,15 +1339,23 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alreadeHaveAnAccountLable" destination="Z3s-6m-MsW" id="TWq-nE-8Le"/>
+                        <outlet property="createAccountOutlet" destination="xd6-wg-7ko" id="aUD-A9-Sgk"/>
+                        <outlet property="defaultLocationLable" destination="luv-3Z-OpQ" id="hnQ-cz-IOA"/>
                         <outlet property="defaultLocationTextField" destination="a06-l0-MoG" id="MtQ-p4-wMY"/>
+                        <outlet property="emailLable" destination="ze9-bC-TCz" id="9aG-tk-9qb"/>
                         <outlet property="emailTextField" destination="IQw-Y7-OSZ" id="BJM-Im-kYO"/>
                         <outlet property="emailView" destination="Uuc-5D-ic3" id="PIk-uP-BPp"/>
+                        <outlet property="lastNameLable" destination="1yH-r1-rbq" id="uHM-eO-gmx"/>
                         <outlet property="lastNameTextField" destination="Tvq-oX-Q80" id="xJW-yi-sXY"/>
                         <outlet property="mainView" destination="4VC-Os-7bG" id="XBM-oQ-crN"/>
+                        <outlet property="nameLable" destination="VHC-LP-dN1" id="xd0-Up-EN1"/>
                         <outlet property="nameTextField" destination="W49-Zs-YOT" id="4CP-zU-npZ"/>
+                        <outlet property="passwardLable" destination="OO0-Np-j6n" id="jAR-cT-Xg9"/>
                         <outlet property="passwordTextField" destination="9Fm-wT-hyu" id="URk-oE-gOX"/>
                         <outlet property="passwordView" destination="v9M-et-yl4" id="VSs-FO-tTR"/>
                         <outlet property="photoOutlet" destination="jVI-Ta-M8R" id="F9x-cn-Xk5"/>
+                        <outlet property="repeatPasswardLable" destination="OO0-Np-j6n" id="sg2-U1-YhZ"/>
                         <outlet property="repeatPasswordTextField" destination="tX0-Ze-eDz" id="VLJ-vm-UPA"/>
                         <outlet property="repeatPasswordView" destination="WG3-2S-WPv" id="pxd-m9-lxW"/>
                     </connections>
@@ -1472,9 +1500,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="vur-MY-KAD"/>
                     <connections>
+                        <outlet property="emailLable" destination="QgR-2A-VJ8" id="FFV-8a-l1X"/>
                         <outlet property="emailTextField" destination="mhA-pd-Eze" id="nsA-Bw-3gW"/>
                         <outlet property="emailView" destination="paw-1D-VGW" id="3tK-aO-1Aq"/>
+                        <outlet property="enterButtonOutlet" destination="Ao3-vl-60j" id="EKS-te-Uqw"/>
+                        <outlet property="forgetPasswordButtonOutlet" destination="0at-Tp-5r2" id="JzM-zN-C1T"/>
                         <outlet property="mainView" destination="Nnd-gF-XDx" id="Fub-TU-ap8"/>
+                        <outlet property="passwardLable" destination="Gqs-f2-GcH" id="CwG-nH-1tX"/>
                         <outlet property="passwordTextField" destination="2iD-ln-BXi" id="3m7-3q-Lh1"/>
                         <outlet property="passwordView" destination="d01-Kr-wA8" id="dv8-og-22v"/>
                     </connections>
@@ -1653,9 +1685,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="eKG-FX-waT"/>
                     <connections>
+                        <outlet property="createTripOutlet" destination="M7r-HJ-CGp" id="6xL-52-qAQ"/>
+                        <outlet property="descriptionLable" destination="Cfc-tm-6RB" id="ovt-UO-vey"/>
                         <outlet property="descriptionTextField" destination="O8L-Fn-aTx" id="vgD-wD-4jB"/>
                         <outlet property="locationImage" destination="7eS-yT-JGk" id="pVD-Us-i2h"/>
+                        <outlet property="maxPeopleLable" destination="PMD-Ke-aoY" id="ZrQ-GE-UjZ"/>
                         <outlet property="maxPeopleTextField" destination="sMo-m6-tgg" id="EMt-UA-X10"/>
+                        <outlet property="timeLable" destination="W5V-Us-HEy" id="tqw-GZ-lPQ"/>
                         <outlet property="timeTextField" destination="Mgp-jA-3G3" id="mJc-tE-pyd"/>
                         <outlet property="titleLable" destination="eKG-FX-waT" id="TgV-Uk-B9Y"/>
                     </connections>
@@ -1860,6 +1896,7 @@
                     <navigationItem key="navigationItem" id="IHw-j5-HIz"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="defaultLocationLable" destination="T9x-B1-AwW" id="hVa-SD-ah1"/>
                         <outlet property="finishedTripsCollection" destination="Tfn-x0-c9K" id="Z1X-w5-xQa"/>
                         <outlet property="locationLable" destination="8dY-JF-pBX" id="dsv-NW-Co3"/>
                         <outlet property="noFinishedTripsLable" destination="I0o-2X-DNt" id="gN1-ya-xCJ"/>
@@ -2027,10 +2064,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="jhs-d0-eCe"/>
                     <connections>
+                        <outlet property="dateLable" destination="Eim-2T-smA" id="wnG-Na-lWS"/>
+                        <outlet property="dontWantToParticipateOutlet" destination="WLV-bX-gZd" id="xuM-Z6-CvI"/>
+                        <outlet property="finishTripOutlet" destination="Xwa-TQ-Z4w" id="fSB-G0-8Tu"/>
                         <outlet property="noParticipants" destination="GXl-vB-2va" id="YA3-Ox-nUM"/>
+                        <outlet property="openChatOutlet" destination="x9S-SZ-WTV" id="mPa-H5-ZJc"/>
                         <outlet property="participantsCollection" destination="LpP-c9-HWP" id="5Ke-CT-Ppg"/>
                         <outlet property="timeLable" destination="Jj8-eh-zck" id="6jA-DN-kB4"/>
                         <outlet property="tripImage" destination="OXW-DJ-Gl5" id="Syz-WJ-XkN"/>
+                        <outlet property="whoParticipateLable" destination="LND-0N-ZBk" id="mbc-ox-98N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lWw-qD-c3I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2045,16 +2087,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDx-Vs-z9x">
-                                <rect key="frame" x="109.5" y="54" width="152.5" height="27"/>
-                                <string key="text">19 may 2021
-</string>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-pU-j1P">
-                                <rect key="frame" x="0.0" y="341" width="414" height="471"/>
+                                <rect key="frame" x="0.0" y="304" width="414" height="508"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Fw-Jt-QoU">
                                     <size key="itemSize" width="127" height="46"/>
@@ -2063,7 +2097,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No participants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q2t-P4-eLT">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="471"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="508"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.96109277010000005" green="0.93582099679999997" blue="0.99608606099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
@@ -2087,12 +2121,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVq-DV-2ja">
-                                <rect key="frame" x="10" y="54" width="69.5" height="27"/>
-                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqL-gZ-OHq">
                                 <rect key="frame" x="80" y="822" width="254" height="30"/>
                                 <constraints>
@@ -2113,7 +2141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vo-97-CaY">
-                                <rect key="frame" x="80" y="91" width="254" height="30"/>
+                                <rect key="frame" x="80" y="54" width="254" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AKQ-tp-Fbf"/>
                                 </constraints>
@@ -2132,7 +2160,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nLH-hd-AcN">
-                                <rect key="frame" x="0.0" y="131" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="DCc-gV-CVw"/>
@@ -2177,28 +2205,24 @@
                             <constraint firstItem="nLH-hd-AcN" firstAttribute="leading" secondItem="1yz-18-V2Q" secondAttribute="leading" id="BMS-Hm-fNs"/>
                             <constraint firstItem="8Vo-97-CaY" firstAttribute="leading" secondItem="1yz-18-V2Q" secondAttribute="leading" constant="80" id="Cdz-AR-Tfh"/>
                             <constraint firstItem="nLH-hd-AcN" firstAttribute="top" secondItem="8Vo-97-CaY" secondAttribute="bottom" constant="10" id="F60-mk-NrY"/>
-                            <constraint firstItem="1yz-18-V2Q" firstAttribute="trailing" secondItem="WDx-Vs-z9x" secondAttribute="trailing" constant="152" id="KQx-8x-Wvn"/>
                             <constraint firstItem="nqL-gZ-OHq" firstAttribute="top" secondItem="8vS-pU-j1P" secondAttribute="bottom" constant="10" id="NQs-PK-Mjj"/>
                             <constraint firstItem="1yz-18-V2Q" firstAttribute="trailing" secondItem="nLH-hd-AcN" secondAttribute="trailing" id="PDV-fu-XWX"/>
-                            <constraint firstItem="8Vo-97-CaY" firstAttribute="top" secondItem="WDx-Vs-z9x" secondAttribute="bottom" constant="10" id="Wdn-5J-RlB"/>
                             <constraint firstItem="nqL-gZ-OHq" firstAttribute="leading" secondItem="1yz-18-V2Q" secondAttribute="leading" constant="80" id="WiQ-qa-jjO"/>
                             <constraint firstItem="1yz-18-V2Q" firstAttribute="bottom" secondItem="nqL-gZ-OHq" secondAttribute="bottom" constant="10" id="aMV-eB-FmI"/>
                             <constraint firstItem="1yz-18-V2Q" firstAttribute="trailing" secondItem="8Vo-97-CaY" secondAttribute="trailing" constant="80" id="dWY-WR-0mS"/>
-                            <constraint firstItem="WDx-Vs-z9x" firstAttribute="top" secondItem="qVq-DV-2ja" secondAttribute="top" id="esp-zB-hsN"/>
-                            <constraint firstItem="qVq-DV-2ja" firstAttribute="top" secondItem="1yz-18-V2Q" secondAttribute="top" constant="10" id="hja-XP-u1d"/>
-                            <constraint firstItem="qVq-DV-2ja" firstAttribute="leading" secondItem="1yz-18-V2Q" secondAttribute="leading" constant="10" id="ivq-IN-bUH"/>
-                            <constraint firstItem="WDx-Vs-z9x" firstAttribute="leading" secondItem="qVq-DV-2ja" secondAttribute="trailing" constant="30" id="suk-2y-V7e"/>
+                            <constraint firstItem="8Vo-97-CaY" firstAttribute="top" secondItem="1yz-18-V2Q" secondAttribute="top" constant="10" id="ugQ-Xe-l3z"/>
                             <constraint firstItem="1yz-18-V2Q" firstAttribute="trailing" secondItem="8vS-pU-j1P" secondAttribute="trailing" id="y14-bg-dgM"/>
                             <constraint firstAttribute="trailing" secondItem="nqL-gZ-OHq" secondAttribute="trailing" constant="80" id="yG0-y1-S9z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Gomel, Rumanchevy palace" id="FPA-AG-LMd"/>
                     <connections>
+                        <outlet property="addPhotosOutlet" destination="8Vo-97-CaY" id="P5n-uu-Yt0"/>
                         <outlet property="noParticipantsLable" destination="q2t-P4-eLT" id="e2r-9N-tyg"/>
                         <outlet property="noPhotosLable" destination="Zop-el-4EC" id="uIc-OE-ONY"/>
                         <outlet property="participantsCollection" destination="8vS-pU-j1P" id="dkx-Rf-z6k"/>
                         <outlet property="photosCollection" destination="nLH-hd-AcN" id="GkJ-7X-Zhb"/>
-                        <outlet property="tripTime" destination="WDx-Vs-z9x" id="GNw-Xh-eMA"/>
+                        <outlet property="saveOutlet" destination="nqL-gZ-OHq" id="DxU-oj-zQ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mm6-oC-5Ms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2234,7 +2258,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Vitebsk" width="552" height="396"/>
         <image name="globe.europe.africa" catalog="system" width="128" height="121"/>
         <image name="globe.europe.africa.fill" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

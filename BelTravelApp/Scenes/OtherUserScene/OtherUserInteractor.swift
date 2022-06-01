@@ -13,7 +13,6 @@
 import UIKit
 
 protocol OtherUserBusinessLogic {
-	func setUserInfo(request: OtherUser.Something.Request)
 	func loadTrips(request: OtherUser.Something.Request)
 	func setFinishTrip(request: OtherUser.Something.Request)
 }
@@ -30,14 +29,6 @@ class OtherUserInteractor: OtherUserBusinessLogic, OtherUserDataStore {
 	var finishedTrip: NewTrip?
 
 	// MARK: Do something
-
-	func setUserInfo(request: OtherUser.Something.Request) {
-		worker = OtherUserWorker()
-		worker?.doSomeWork()
-		let response = OtherUser.Something.Response()
-		presenter?.presentUserInformation(response: response)
-	}
-
 
 	func loadTrips(request: OtherUser.Something.Request) {
 		worker = OtherUserWorker()

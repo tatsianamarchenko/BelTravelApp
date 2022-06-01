@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol MainBusinessLogic {
-  func loadInformation(request: Main.Something.Request)
+	func loadInformation(request: Main.Something.Request)
 	func setPopularLocation(request: Main.Something.Request)
 	func loadCreatedTrips(request: Main.Something.Request)
 	func loadPins(request: Main.Something.Request)
@@ -22,29 +22,29 @@ protocol MainBusinessLogic {
 }
 
 protocol MainDataStore {
-  var region: String { get set }
+	var region: String { get set }
 	var selectedPopularlocation: Location? { get set }
 	var newTrip: NewTrip? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
-  var presenter: MainPresentationLogic?
-  var worker: MainWorker?
-  var region: String = ""
+	var presenter: MainPresentationLogic?
+	var worker: MainWorker?
+	var region: String = ""
 	var selectedPopularlocation: Location?
 	var newTrip: NewTrip?
-  // MARK: Do something
-  
-  func loadInformation(request: Main.Something.Request) {
+	// MARK: Do something
+
+	func loadInformation(request: Main.Something.Request) {
 		worker = MainWorker()
 		worker?.doSomeWork()
 		region = request.region
 
-	  FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
+		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
 
-		  let popular = locations.filter { location in
-			  location.isPopular == true
-		  }
+			let popular = locations.filter { location in
+				location.isPopular == true
+			}
 			let response = Main.Something.Response(locations: popular)
 			self?.presenter?.presentPopularPlaces(response: response)
 		}
@@ -67,7 +67,7 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 			self?.presenter?.presentCreatedTrips(response: response)
 		}
 	}
-
+	
 	func loadPins(request: Main.Something.Request) {
 		FirebaseDatabaseManager.shered.fetchLocationData(collection: request.region) { [weak self] locations in
 			guard let location = locations.last else {

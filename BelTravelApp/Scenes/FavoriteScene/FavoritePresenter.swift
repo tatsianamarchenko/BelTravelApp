@@ -12,23 +12,20 @@
 
 import UIKit
 
-protocol FavoritePresentationLogic
-{
-  func presentFavoritePlaces(response: Favorite.Something.Response)
+protocol FavoritePresentationLogic {
+	func presentFavoritePlaces(response: Favorite.Something.Response)
 	func routeToSelectedPlaceViewController()
 }
 
-class FavoritePresenter: FavoritePresentationLogic
-{
-  weak var viewController: FavoriteDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentFavoritePlaces(response: Favorite.Something.Response)
-  {
-	  let viewModel = Favorite.Something.ViewModel(locations: response.locations)
-	  viewController?.displayFavoriteLocations(viewModel: viewModel)
-  }
+class FavoritePresenter: FavoritePresentationLogic {
+	weak var viewController: FavoriteDisplayLogic?
+
+	// MARK: Do something
+
+	func presentFavoritePlaces(response: Favorite.Something.Response) {
+		let viewModel = Favorite.Something.ViewModel(locations: response.locations)
+		viewController?.displayFavoriteLocations(viewModel: viewModel)
+	}
 
 	func routeToSelectedPlaceViewController() {
 		viewController?.displaySelecteTripViewController()

@@ -16,58 +16,53 @@ import InputBarAccessoryView
 import FirebaseAuth
 
 protocol ChatDisplayLogic: AnyObject {
-  func displayMessages(viewModel: Chat.Something.ViewModel)
+	func displayMessages(viewModel: Chat.Something.ViewModel)
 	func displayNewMessages(viewModel: Chat.Something.ViewModel)
 }
 
-class ChatViewController: MessagesViewController, ChatDisplayLogic
-{
-  var interactor: ChatBusinessLogic?
-  var router: (NSObjectProtocol & ChatRoutingLogic & ChatDataPassing)?
+class ChatViewController: MessagesViewController, ChatDisplayLogic {
+	var interactor: ChatBusinessLogic?
+	var router: (NSObjectProtocol & ChatRoutingLogic & ChatDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = ChatInteractor()
-    let presenter = ChatPresenter()
-    let router = ChatRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = ChatInteractor()
+		let presenter = ChatPresenter()
+		let router = ChatRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
 
 	let selfSender = Sender(senderId: Auth.auth().currentUser!.uid, displayName: "-")
 	var messages = [Message]()
@@ -86,21 +81,21 @@ class ChatViewController: MessagesViewController, ChatDisplayLogic
 		messageInputBar.delegate = self
 		showMessageTimestampOnSwipeLeft = true
 	}
-  
-  // MARK: Do something
+
+	// MARK: Do something
 
 	func loadMessages() {
 		let request = Chat.Something.Request(tripInfo: tripInfo!)
-    interactor?.loadMessages(request: request)
-  }
-  
-  func displayMessages(viewModel: Chat.Something.ViewModel) {
-	  self.messages = viewModel.messages!
-	  self.messages.sort {
-		  $0.sentDate < $1.sentDate
-	  }
-	  self.messagesCollectionView.reloadDataAndKeepOffset()
-  }
+		interactor?.loadMessages(request: request)
+	}
+
+	func displayMessages(viewModel: Chat.Something.ViewModel) {
+		self.messages = viewModel.messages!
+		self.messages.sort {
+			$0.sentDate < $1.sentDate
+		}
+		self.messagesCollectionView.reloadDataAndKeepOffset()
+	}
 
 	func displayNewMessages(viewModel: Chat.Something.ViewModel) {
 		DispatchQueue.main.async {

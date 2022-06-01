@@ -20,61 +20,62 @@ protocol SelectedPlaceDisplayLogic: AnyObject {
 }
 
 class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
-  var interactor: SelectedPlaceBusinessLogic?
-  var router: (NSObjectProtocol & SelectedPlaceRoutingLogic & SelectedPlaceDataPassing)?
+	var interactor: SelectedPlaceBusinessLogic?
+	var router: (NSObjectProtocol & SelectedPlaceRoutingLogic & SelectedPlaceDataPassing)?
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController = self
-    let interactor = SelectedPlaceInteractor()
-    let presenter = SelectedPlacePresenter()
-    let router = SelectedPlaceRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-	  makeWhoWantToVisitThisPlaceCollection()
-	  makePhotosOfOtherUsersCollection()
-	  titleName.title = location?.name
-	  locationImage.image = location?.image
-	  desctiptionLable.text = location?.description
-	  addTLocationToDataStore()
-	  loadWhoAddedToFavorite()
-  }
-  
-  // MARK: Do something
+	// MARK: Object lifecycle
+
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		setup()
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+
+	// MARK: Setup
+
+	private func setup() {
+		let viewController = self
+		let interactor = SelectedPlaceInteractor()
+		let presenter = SelectedPlacePresenter()
+		let router = SelectedPlaceRouter()
+		viewController.interactor = interactor
+		viewController.router = router
+		interactor.presenter = presenter
+		presenter.viewController = viewController
+		router.viewController = viewController
+		router.dataStore = interactor
+	}
+
+	// MARK: Routing
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let scene = segue.identifier {
+			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+			if let router = router, router.responds(to: selector) {
+				router.perform(selector, with: segue)
+			}
+		}
+	}
+
+	// MARK: View lifecycle
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		makeWhoWantToVisitThisPlaceCollection()
+		makePhotosOfOtherUsersCollection()
+		titleName.title = location?.name
+		locationImage.image = location?.image
+		desctiptionLable.text = location?.description
+		setLabels()
+		addTLocationToDataStore()
+		loadWhoAddedToFavorite()
+	}
+
+	// MARK: Do something
 	var location: Location?
 	var region: String?
 	
@@ -82,14 +83,18 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 	@IBOutlet weak var whoWantToVisitThisPlaceCollection: UICollectionView!
 	@IBOutlet weak var locationImage: UIImageView!
 	@IBOutlet weak var photosOfOtherUsersCollection: UICollectionView!
+	@IBOutlet weak var whoAlsoWantToVisitLable: UILabel!
 	@IBOutlet weak var desctiptionLable: UILabel!
 	@IBOutlet weak var noPhotoLable: UILabel!
 	@IBOutlet weak var noParticipantsLable: UILabel!
-
+	@IBOutlet weak var photosOfOtherUsersLable: UILabel!
 	@IBOutlet weak var favoriteButtonOutlet: UIBarButtonItem!
 	@IBAction func addToFavoriteButton(_ sender: Any) {
 		addToFavorite()
 	}
+
+	@IBOutlet weak var descriptionLable: UILabel!
+	@IBOutlet weak var createTripOutlet: UIButton!
 	@IBAction func createTripAction(_ sender: Any) {
 		router?.routeToCreatingViewController()
 	}
@@ -97,8 +102,7 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 	func loadWhoAddedToFavorite() {
 		let request = SelectedPlace.Something.Request(location: location!, region: region!)
 		interactor?.loadWhoAddedToFavorite(request: request)
-  }
-
+	}
 
 	func addTLocationToDataStore() {
 		let request = SelectedPlace.Something.Request(location: location!, region: region!)
@@ -122,16 +126,23 @@ class SelectedPlaceViewController: UIViewController, SelectedPlaceDisplayLogic {
 		photosOfOtherUsersCollection.register(nib, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
 	}
 
+	func setLabels() {
+		whoAlsoWantToVisitLable.text = NSLocalizedString("wantToVisitLable", comment: "")
+		descriptionLable.text = NSLocalizedString("descriptionLable", comment: "")
+		noPhotoLable.text = NSLocalizedString("noPhotoLable", comment: "")
+		photosOfOtherUsersLable.text = NSLocalizedString("photosOfOtherUsersLable", comment: "")
+		createTripOutlet.setTitle(NSLocalizedString("createTripButton", comment: ""), for: .normal)
+	}
+
 	func addToFavorite() {
-		if peopleWhoWansToParticipate.contains(where: { user in
-			user.email != Auth.auth().currentUser?.email ?? ""
-		}) {print("alredy have")}
-		else {
+		if !peopleWhoWansToParticipate.contains(where: { user in
+			user.email == Auth.auth().currentUser?.email ?? ""
+		}) {
 			let request = SelectedPlace.Something.Request(location: location!, region: region!)
 			interactor?.addToFavorite(request: request)
 		}
 	}
-  
+
 	func displayResultOfAdding(viewModel: SelectedPlace.Something.ViewModel) {
 		peopleWhoWansToParticipate.removeAll()
 		if viewModel.result == "Added" {
@@ -199,7 +210,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 					as? PlaceCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-					cell.imageOfLocation.image = photosOfOtherUsers[indexPath.row]
+			cell.imageOfLocation.image = photosOfOtherUsers[indexPath.row]
 
 			cell.layer.borderWidth = 0
 			cell.layer.shadowColor = UIColor.systemGray.cgColor
@@ -218,11 +229,11 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == whoWantToVisitThisPlaceCollection {
-			return CGSize(width: 200, height: 100)
+			return Constants.share.participantCellSize
 		}
 
 		if collectionView == photosOfOtherUsersCollection {
-			return CGSize(width: 150, height: 150)
+			return Constants.share.imageSize
 		}
 
 		return CGSize(width: 100, height: 100)
@@ -249,10 +260,6 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 		if collectionView == whoWantToVisitThisPlaceCollection {
 			let request = SelectedPlace.Something.Request(location: location!, region: region!, user: peopleWhoWansToParticipate[indexPath.row])
 			interactor?.setUser(request: request)
-		}
-
-		if collectionView == photosOfOtherUsersCollection {
-
 		}
 	}
 }

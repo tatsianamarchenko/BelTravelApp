@@ -108,24 +108,32 @@ class SliderViewController: UIViewController, SliderDisplayLogic {
 }
 
 extension SliderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-		func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-			self.sliderPages?.count ?? 0
-		}
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		self.sliderPages?.count ?? 0
+	}
 
-		func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SliderCollectionViewCell.identifier, for: indexPath) as! SliderCollectionViewCell
-			cell.config(model: (sliderPages?[indexPath.row])!)
-			cell.registrationButtonOutlet.addTarget(self, action: #selector(openRegistrationVC), for: .touchUpInside)
-			cell.authorizationButtonOutlet.addTarget(self, action: #selector(openAuthorizationVC), for: .touchUpInside)
-			return cell
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SliderCollectionViewCell.identifier, for: indexPath) as? SliderCollectionViewCell else {
+			return UICollectionViewCell()
 		}
+		cell.config(model: (sliderPages?[indexPath.row])!)
+		cell.registrationButtonOutlet.addTarget(self, action: #selector(openRegistrationVC), for: .touchUpInside)
+		cell.authorizationButtonOutlet.addTarget(self, action: #selector(openAuthorizationVC), for: .touchUpInside)
+		return cell
+	}
 
-		func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-			return self.view.frame.size
-		}
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return self.view.frame.size
+	}
 
-		 func scrollViewDidScroll(_ scrollView: UIScrollView) {
-			let scrollPos = scrollView.contentOffset.x / view.frame.width
-			pageControl.currentPage = Int(scrollPos)
-		}
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+	}
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let scrollPos = scrollView.contentOffset.x / view.frame.width
+		pageControl.currentPage = Int(scrollPos)
+	}
 }

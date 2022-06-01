@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Brest" translatesAutoresizingMaskIntoConstraints="NO" id="I7G-6H-zp4">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I7G-6H-zp4">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="150" id="LXm-uG-eZn"/>
@@ -43,7 +43,4 @@
             <point key="canvasLocation" x="201.44927536231884" y="93.75"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="Brest" width="494" height="371"/>
-    </resources>
 </document>

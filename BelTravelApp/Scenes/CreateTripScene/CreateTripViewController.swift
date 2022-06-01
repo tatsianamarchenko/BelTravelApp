@@ -65,15 +65,20 @@ class CreateTripViewController: UIViewController, CreateTripDisplayLogic {
 		super.viewDidLoad()
 		titleLable.title = location?.name
 		locationImage.image = location?.image
+		setLabels()
 	}
 
 	// MARK: Do something
 
 	@IBOutlet weak var titleLable: UINavigationItem!
 	@IBOutlet weak var locationImage: UIImageView!
+	@IBOutlet weak var timeLable: UILabel!
 	@IBOutlet weak var timeTextField: UITextField!
+	@IBOutlet weak var maxPeopleLable: UILabel!
 	@IBOutlet weak var maxPeopleTextField: UITextField!
+	@IBOutlet weak var descriptionLable: UILabel!
 	@IBOutlet weak var descriptionTextField: UITextField!
+	@IBOutlet weak var createTripOutlet: UIButton!
 	@IBAction func createTripAction(_ sender: Any) {
 		guard let time = timeTextField.text else {
 			return
@@ -91,7 +96,16 @@ class CreateTripViewController: UIViewController, CreateTripDisplayLogic {
 			return
 		}
 		if !time.isEmpty &&  !maxPeople.isEmpty &&  !description.isEmpty && !region.isEmpty {
-			let request = CreateTrip.Something.Request(trip: NewTrip(locationPath: location?.firebasePath ?? "", document: nil, locationName: locationName, time: time, maxPeople: maxPeople, description: description, creator: nil, region: region, participants: nil, locationOfParticipants: "", isActive: true))
+			let request = CreateTrip.Something.Request(trip: NewTrip(locationPath: location?.firebasePath ?? "",
+																	 document: nil,
+																	 locationName: locationName,
+																	 time: time, maxPeople: maxPeople,
+																	 description: description,
+																	 creator: nil,
+																	 region: region,
+																	 participants: nil,
+																	 locationOfParticipants: "",
+																	 isActive: true))
 			interactor?.createNewTrip(request: request)
 		}
 	}
@@ -99,4 +113,12 @@ class CreateTripViewController: UIViewController, CreateTripDisplayLogic {
 	func displayResult(viewModel: CreateTrip.Something.ViewModel) {
 		router?.routeToMainViewController()
 	}
+
+	func setLabels() {
+		timeLable.text = NSLocalizedString("timeLable", comment: "")
+		maxPeopleLable.text = NSLocalizedString("maxPeopleLable", comment: "")
+		descriptionLable.text = NSLocalizedString("descriptionLable", comment: "")
+		createTripOutlet.setTitle(NSLocalizedString("createTripButton", comment: ""), for: .normal)
+	}
+
 }

@@ -13,16 +13,16 @@
 import UIKit
 
 protocol RegistrationPresentationLogic {
-  func presentAuthorized(response: Registration.Something.Response)
+	func presentAuthorized(response: Registration.Something.Response)
 }
 
 class RegistrationPresenter: RegistrationPresentationLogic {
-  weak var viewController: RegistrationDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentAuthorized(response: Registration.Something.Response) {
-    let viewModel = Registration.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+	weak var viewController: RegistrationDisplayLogic?
+	
+	// MARK: Do something
+	
+	func presentAuthorized(response: Registration.Something.Response) {
+		let viewModel = Registration.Something.ViewModel()
+		viewController?.displaySomething(viewModel: viewModel)
+	}
 }

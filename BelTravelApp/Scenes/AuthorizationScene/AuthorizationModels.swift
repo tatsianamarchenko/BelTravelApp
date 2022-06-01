@@ -15,8 +15,7 @@ import UIKit
 enum Authorization {
 	// MARK: Use cases
 	
-	enum Something
-	{
+	enum Something {
 		struct Request {
 			var email: String
 			var passward: String

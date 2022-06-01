@@ -14,6 +14,7 @@ import UIKit
 
 protocol UpcomingTripInformationBusinessLogic {
 	func loadUsers(request: UpcomingTripInformation.Something.Request)
+	func addParticipant(request: UpcomingTripInformation.Something.Request)
 	func setUser(request: UpcomingTripInformation.Something.Request)
 }
 
@@ -34,15 +35,23 @@ class UpcomingTripInformationInteractor: UpcomingTripInformationBusinessLogic, U
 		worker = UpcomingTripInformationWorker()
 		worker?.doSomeWork()
 
-		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip!.region)Trips", document: "\(request.trip!.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip!.region)Trips",
+														 document: "\(request.trip!.locationOfParticipants)",
+														 secondCollection: "participants", field: "participant") { [weak self] users in
 			let response = UpcomingTripInformation.Something.Response(users: users)
 			self?.presenter?.presentParticipants(response: response)
 		}
 	}
-
+	
 	func setUser(request: UpcomingTripInformation.Something.Request) {
 		user = request.user
 		self.presenter?.routeToUserViewController()
 	}
-	
+
+	func addParticipant(request: UpcomingTripInformation.Something.Request) {
+		guard let trip = request.trip else {
+			return
+		}
+		FirebaseDatabaseManager.shered.addParticipantInTrip(with: trip)
+	}
 }

@@ -25,7 +25,6 @@ class FirebaseDatabaseManager {
 		}
 
 		let wantToVisit = [FullInformationAppUser]()
-		//let	data = snapshot.data()
 		let	documentPath = snapshot.reference.path
 		let coordinats = data["coordinats"] as? GeoPoint
 		guard let coordinats = coordinats else {
@@ -50,7 +49,17 @@ class FirebaseDatabaseManager {
 				guard let image = UIImage(data: data) else {
 					return
 				}
-				let location = Location(lat: lat, lng: lon, description: description, image: image, name: name, type: type, firebasePath: documentPath, wantToVisit: wantToVisit, isPopular: isPopular, locationWhoLiked: snapshot.reference.documentID, region: region)
+				let location = Location(lat: lat,
+										lng: lon,
+										description: description,
+										image: image,
+										name: name,
+										type: type,
+										firebasePath: documentPath,
+										wantToVisit: wantToVisit,
+										isPopular: isPopular,
+										locationWhoLiked: snapshot.reference.documentID,
+										region: region)
 				complition(location)
 			}
 		}
@@ -73,7 +82,7 @@ class FirebaseDatabaseManager {
 	}
 	
 	public func addUserToDatabase(with userInformation: FullInformationAppUser, id: String) {
-		db.collection("users").document(id).setData([
+		db.collection(Constants.share.userCollection).document(id).setData([
 			"email": userInformation.email,
 			"name": userInformation.name,
 			"lastName": userInformation.lastName,
@@ -82,9 +91,10 @@ class FirebaseDatabaseManager {
 	}
 	
 	public func addFavoriteToDatabase(location: Location, complition: @escaping(Bool)-> Void) {
-		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").addDocument(data: ["favorite":  location.firebasePath]) { [weak self] error in
+		db.collection(Constants.share.userCollection).document("\(Auth.auth().currentUser?.uid ?? "")")
+			.collection(Constants.share.favoriteCollection).addDocument(data: [Constants.share.favoriteField:  location.firebasePath]) { [weak self] error in
 			if error == nil {
-				self?.db.document(location.firebasePath).collection("FavoriteByUsers").addDocument(data: ["favorite" : "\(Auth.auth().currentUser?.uid ?? "")"])
+				self?.db.document(location.firebasePath).collection("FavoriteByUsers").addDocument(data: [Constants.share.favoriteField : "\(Auth.auth().currentUser?.uid ?? "")"])
 				complition(true)
 				
 			} else {
@@ -101,8 +111,8 @@ class FirebaseDatabaseManager {
 		}
 		let directory = "\(folder)/\(user)/"
 		let fileRef = storageRef.child(directory + serverFileName)
-		db.collection("users").document("\(user)").updateData([
-			"ref": fileRef.fullPath
+		db.collection(Constants.share.userCollection).document("\(user)").updateData([
+			Constants.share.referenceField : fileRef.fullPath
 		])
 		_ = fileRef.putData(data, metadata: nil) { metadata, error in
 			fileRef.downloadURL { (url, error) in
@@ -115,7 +125,7 @@ class FirebaseDatabaseManager {
 		}
 	}
 
-	public func saveImages(tripInformation: NewTrip, data: Data, serverFileName: String, folder: String, completionHandler: @escaping (_ isSuccess: Bool, _ url: String?) -> Void) {
+	public func saveImages(tripInformation: NewTrip, data: Data, serverFileName: String, folder: String, completionHandler: @escaping (_ isSuccess: Bool) -> Void) {
 		let storage = Storage.storage()
 		let storageRef = storage.reference()
 		guard let user = Auth.auth().currentUser?.uid else {
@@ -126,15 +136,15 @@ class FirebaseDatabaseManager {
 		}
 		let directory = "\(folder)/\(user)/"
 		let fileRef = storageRef.child(directory + serverFileName)
-		db.collection("\(tripInformation.region)Trips").document(document).collection("photos").document().setData(["ref": fileRef.fullPath])
+		db.collection("\(tripInformation.region)Trips").document(document).collection(Constants.share.photosCollection).document().setData([Constants.share.referenceField : fileRef.fullPath])
 
 		_ = fileRef.putData(data, metadata: nil) { metadata, error in
 			fileRef.downloadURL { (url, error) in
 				guard let downloadURL = url else {
-					completionHandler(false, nil)
+					completionHandler(false)
 					return
 				}
-				completionHandler(true, downloadURL.absoluteString)
+				completionHandler(true)
 			}
 		}
 	}
@@ -143,7 +153,7 @@ class FirebaseDatabaseManager {
 		guard let document = tripInformation.document else {
 			return
 		}
-		db.collection("\(tripInformation.region)Trips").document(document).collection("photos").getDocuments {(querySnapshot, error) in
+		db.collection("\(tripInformation.region)Trips").document(document).collection(Constants.share.photosCollection).getDocuments {(querySnapshot, error) in
 
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
@@ -153,7 +163,7 @@ class FirebaseDatabaseManager {
 			_ =	documents.map { queryDocumentSnapshot in
 
 				let	data = queryDocumentSnapshot.data()
-				let path = data["ref"] as? String ?? ""
+				let path = data[Constants.share.referenceField] as? String ?? ""
 				let storage = Storage.storage().reference()
 				let fileRef = storage.child(path)
 				fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -176,9 +186,9 @@ class FirebaseDatabaseManager {
 		guard let user = Auth.auth().currentUser?.uid else {
 			return
 		}
-		db.collection("users").document(user).getDocument {(querySnapshot, error) in
+		db.collection(Constants.share.userCollection).document(user).getDocument {(querySnapshot, error) in
 			let	data = querySnapshot?.data()
-			let path = data?["ref"] as? String ?? ""
+			let path = data?[Constants.share.referenceField] as? String ?? ""
 			let storage = Storage.storage().reference()
 			let fileRef = storage.child(path)
 			fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -196,14 +206,14 @@ class FirebaseDatabaseManager {
 	
 	public func fetchFavoriteData(complition: @escaping ([Location])-> Void) {
 		var result = [Location]()
-		db.collection("users").document("\(Auth.auth().currentUser?.uid ?? "")").collection("Favorite").getDocuments { (querySnapshot, error) in
+		db.collection(Constants.share.userCollection).document("\(Auth.auth().currentUser?.uid ?? "")").collection(Constants.share.favoriteCollection).getDocuments { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
 				return
 			}
 			_ = documents.map { queryDocumentSnapshot in
 				let	data = queryDocumentSnapshot.data()
-				let path = data["favorite"] as? String ?? ""
+				let path = data[Constants.share.favoriteField] as? String ?? ""
 				self.db.document(path).getDocument { (querySnapshot, error) in
 					guard let querySnapshot = querySnapshot else {return}
 					self.getSingleLocation(snapshot: querySnapshot) { location in
@@ -220,7 +230,7 @@ class FirebaseDatabaseManager {
 		if otherUser != nil {
 			user = otherUser!
 		}
-		db.collection("users").document(user).getDocument { (querySnapshot, error) in
+		db.collection(Constants.share.userCollection).document(user).getDocument { (querySnapshot, error) in
 			guard let data = querySnapshot?.data() else {
 				print("No document")
 				return
@@ -230,7 +240,7 @@ class FirebaseDatabaseManager {
 			let name = data["name"] as? String ?? ""
 			let lastName = data["lastName"] as? String ?? ""
 			let defaultLocation = data["defaultLocation"] as? String ?? ""
-			let path = data["ref"] as? String ?? ""
+			let path = data[Constants.share.referenceField] as? String ?? ""
 			guard let document = Auth.auth().currentUser?.uid else {
 				return
 			}
@@ -254,7 +264,7 @@ class FirebaseDatabaseManager {
 			return
 		}
 		let path = db.collection("\(tripInformation.region)Trips").document()
-		path.collection("participants").document("\(Auth.auth().currentUser?.uid ?? "")").setData(["participant" : Auth.auth().currentUser?.uid as Any])
+		path.collection(Constants.share.participantsCollection).document("\(Auth.auth().currentUser?.uid ?? "")").setData(["participant" : Auth.auth().currentUser?.uid as Any])
 		path.setData([
 			"locationPath": tripInformation.locationPath,
 			"locationName": tripInformation.locationName,
@@ -265,7 +275,7 @@ class FirebaseDatabaseManager {
 			"isActive": true as Bool
 		]) { error in
 			if error == nil {
-				self.db.collection("users").document(user).collection("TripsByUser").document(path.documentID).setData( ["ref" : path])
+				self.db.collection(Constants.share.userCollection).document(user).collection(Constants.share.userTripsCollection).document(path.documentID).setData( [Constants.share.referenceField : path])
 				complition(true)
 			} else {
 				complition(false)
@@ -273,7 +283,7 @@ class FirebaseDatabaseManager {
 		}
 	}
 	
-	public func addParticipantInTrip(with tripInformation: NewTrip, complition: @escaping (Bool)-> Void) {
+	public func addParticipantInTrip(with tripInformation: NewTrip) {
 		guard let document = tripInformation.document else {
 			return
 		}
@@ -281,9 +291,9 @@ class FirebaseDatabaseManager {
 			return
 		}
 		let path = db.collection("\(tripInformation.region)Trips").document(document)
-		path.collection("participants").document(user).setData(["participant" : user as Any])
+		path.collection(Constants.share.participantsCollection).document(user).setData(["participant" : user as Any])
 
-		self.db.collection("users").document(user).collection("TripsByUser").document(document).setData( ["ref" : path])
+		self.db.collection(Constants.share.userCollection).document(user).collection(Constants.share.userTripsCollection).document(document).setData( [Constants.share.referenceField : path])
 	}
 
 	public func deleteParticipantFromTrip(with tripInformation: NewTrip, complition: @escaping (Error?)-> Void) {
@@ -293,9 +303,9 @@ class FirebaseDatabaseManager {
 		guard let user = Auth.auth().currentUser?.uid else {
 			return
 		}
-		db.collection("\(tripInformation.region)Trips").document(document).collection("participants").document(user).delete { error in
+		db.collection("\(tripInformation.region)Trips").document(document).collection(Constants.share.participantsCollection).document(user).delete { error in
 			if error == nil {
-				self.db.collection("users").document(user).collection("TripsByUser").document(document).delete { error in
+				self.db.collection(Constants.share.userCollection).document(user).collection(Constants.share.userTripsCollection).document(document).delete { error in
 					complition(error)
 				}
 			}
@@ -328,7 +338,18 @@ class FirebaseDatabaseManager {
 					guard let image = UIImage(data: data) else {
 						return
 					}
-					let location = NewTrip(locationPath: locationPath, document: snapshot.documentID, locationName: locationName, time: time, maxPeople: numberOfPeople, description: description, creator: creator, region: region, image: image, participants: nil, locationOfParticipants: snapshot.reference.documentID, isActive: isActive)
+					let location = NewTrip(locationPath: locationPath,
+										   document: snapshot.documentID,
+										   locationName: locationName,
+										   time: time,
+										   maxPeople: numberOfPeople,
+										   description: description,
+										   creator: creator,
+										   region: region,
+										   image: image,
+										   participants: nil,
+										   locationOfParticipants: snapshot.reference.documentID,
+										   isActive: isActive)
 					complition(location)
 				}
 			}
@@ -382,7 +403,7 @@ class FirebaseDatabaseManager {
 		}
 		var upcomingTrips = [NewTrip]()
 		var finishedTrips = [NewTrip]()
-		db.collection("users").document(user ?? "").collection("TripsByUser").addSnapshotListener { (querySnapshot, error) in
+		db.collection(Constants.share.userCollection).document(user ?? "").collection(Constants.share.userTripsCollection).addSnapshotListener { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
 				return
@@ -391,7 +412,7 @@ class FirebaseDatabaseManager {
 				upcomingTrips.removeAll()
 				finishedTrips.removeAll()
 				let	data = queryDocumentSnapshot.data()
-				let pathDoc = data["ref"] as? DocumentReference
+				let pathDoc = data[Constants.share.referenceField] as? DocumentReference
 				guard let path = pathDoc?.path else {
 					return
 				}
@@ -412,7 +433,7 @@ class FirebaseDatabaseManager {
 		guard let document = tripInformation.document else {
 			return
 		}
-		db.collection("\(tripInformation.region)Trips").document(document).collection("messages").getDocuments { (querySnapshot, error) in
+		db.collection("\(tripInformation.region)Trips").document(document).collection(Constants.share.messagesCollection).getDocuments { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				print("No documents")
 				return
@@ -437,7 +458,7 @@ class FirebaseDatabaseManager {
 			return
 		}
 		let path = db.collection("\(tripInformation.region)Trips").document(document)
-		path.collection("messages").addDocument(data: [
+		path.collection(Constants.share.messagesCollection).addDocument(data: [
 			"data" : Date(),
 			"sender" : message.sender.senderId,
 			"message" : messageText ]) { error in

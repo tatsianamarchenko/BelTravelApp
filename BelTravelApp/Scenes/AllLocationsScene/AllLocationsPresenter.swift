@@ -13,19 +13,19 @@
 import UIKit
 
 protocol AllLocationsPresentationLogic {
-  func presentLocations(response: AllLocations.Something.Response)
+	func presentLocations(response: AllLocations.Something.Response)
 	func presentLocation()
 }
 
 class AllLocationsPresenter: AllLocationsPresentationLogic {
-  weak var viewController: AllLocationsDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentLocations(response: AllLocations.Something.Response) {
-	  let viewModel = AllLocations.Something.ViewModel(locations: response.locations)
-	  viewController?.presentLocationsInSelectedRegion(viewModel: viewModel)
-  }
+	weak var viewController: AllLocationsDisplayLogic?
+
+	// MARK: Do something
+
+	func presentLocations(response: AllLocations.Something.Response) {
+		let viewModel = AllLocations.Something.ViewModel(locations: response.locations)
+		viewController?.presentLocationsInSelectedRegion(viewModel: viewModel)
+	}
 
 	func presentLocation() {
 		viewController?.presentLocation()

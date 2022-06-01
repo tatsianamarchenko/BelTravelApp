@@ -13,22 +13,22 @@
 import UIKit
 
 enum Chat {
-  // MARK: Use cases
-  
-  enum Something {
-	  struct Request {
-		  var tripInfo: NewTrip
-		  var message: Message?
-		  var messageText: String?
-	  }
-    struct Response {
-		let messages: [Message]?
-		let isSended: Bool?
-		let message: Message?
-    }
-    struct ViewModel {
-		let messages: [Message]?
-		let message: Message?
-    }
-  }
+	// MARK: Use cases
+	
+	enum Something {
+		struct Request {
+			var tripInfo: NewTrip
+			var message: Message?
+			var messageText: String?
+		}
+		struct Response {
+			let messages: [Message]?
+			let isSended: Bool?
+			let message: Message?
+		}
+		struct ViewModel {
+			let messages: [Message]?
+			let message: Message?
+		}
+	}
 }

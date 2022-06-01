@@ -13,7 +13,6 @@
 import UIKit
 
 protocol OtherUserDisplayLogic: AnyObject {
-	func displaySomething(viewModel: OtherUser.Something.ViewModel)
 	func	displayTrips(viewModel: OtherUser.Something.ViewModel)
 	func displayFinishTrip()
 }
@@ -64,13 +63,13 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		doSomething()
 		loadTripsInformation()
 		makeTripsCollection()
 		makeFinishedTripsCollection()
 		userPhoto.image = user?.image
 		locationLable.text = user?.name
 		title = user?.name
+		setLabels()
 	}
 
 	// MARK: Do something
@@ -85,6 +84,7 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 	@IBOutlet weak var noTripsLable: UILabel!
 	@IBOutlet weak var locationLable: UILabel!
 	@IBOutlet weak var finishedTripsCollection: UICollectionView!
+	@IBOutlet weak var defaultLocationLable: UILabel!
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
 
 	func makeTripsCollection () {
@@ -101,6 +101,11 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 		finishedTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
 
+	func setLabels() {
+		defaultLocationLable.text = NSLocalizedString("locationLable", comment: "")
+		noTripsLable.text = NSLocalizedString("noUpcomingTripsLable", comment: "")
+		noFinishedTripsLable.text = NSLocalizedString("noFinishedTripsLable", comment: "")
+	}
 
 	func loadTripsInformation() {
 		let request = OtherUser.Something.Request()
@@ -112,15 +117,6 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 		finishedTripsArray = viewModel.finishedTrips!
 		tripsCollection.reloadData()
 		finishedTripsCollection.reloadData()
-	}
-
-	func doSomething() {
-		let request = OtherUser.Something.Request()
-		interactor?.setUserInfo(request: request)
-	}
-
-	func displaySomething(viewModel: OtherUser.Something.ViewModel) {
-		//nameTextField.text = viewModel.name
 	}
 
 	func displayFinishTrip() {
@@ -202,7 +198,7 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 250, height: 100)
+		return Constants.share.profileImageSize
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
@@ -225,8 +221,8 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		if collectionView == finishedTripsCollection {
-						let request = OtherUser.Something.Request(finishedTrip: finishedTripsArray[indexPath.row])
-						interactor?.setFinishTrip(request: request)
+			let request = OtherUser.Something.Request(finishedTrip: finishedTripsArray[indexPath.row])
+			interactor?.setFinishTrip(request: request)
 		}
 	}
 }

@@ -1,0 +1,258 @@
+
+/* Class = "UILabel"; text = "No upcoming trips"; ObjectID = "0P6-jD-hLp"; */
+"0P6-jD-hLp.text" = "No upcoming trips";
+
+/* Class = "UIButton"; configuration.title = "Forget passward?"; ObjectID = "0at-Tp-5r2"; */
+"0at-Tp-5r2.configuration.title" = "Forget passward?";
+
+/* Class = "UIButton"; normalTitle = "Forget passward?"; ObjectID = "0at-Tp-5r2"; */
+"0at-Tp-5r2.normalTitle" = "Forget passward?";
+
+/* Class = "UILabel"; text = "Last name:"; ObjectID = "1yH-r1-rbq"; */
+"1yH-r1-rbq.text" = "Last name:";
+
+/* Class = "UILabel"; text = "Belarus"; ObjectID = "4Sy-Ir-ynm"; */
+"4Sy-Ir-ynm.text" = "Belarus";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "4fL-SD-WuV"; */
+"4fL-SD-WuV.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Add photos"; ObjectID = "8Vo-97-CaY"; */
+"8Vo-97-CaY.configuration.title" = "Add photos";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "8Vo-97-CaY"; */
+"8Vo-97-CaY.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "8dY-JF-pBX"; */
+"8dY-JF-pBX.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Favorite"; ObjectID = "8eD-Wm-bDP"; */
+"8eD-Wm-bDP.title" = "Favorite";
+
+/* Class = "UIButton"; configuration.title = "Open Chat"; ObjectID = "9gx-Ak-SAy"; */
+"9gx-Ak-SAy.configuration.title" = "Open Chat";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "9gx-Ak-SAy"; */
+"9gx-Ak-SAy.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Enter"; ObjectID = "Ao3-vl-60j"; */
+"Ao3-vl-60j.configuration.title" = "Enter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ao3-vl-60j"; */
+"Ao3-vl-60j.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "photos of other users:"; ObjectID = "B6W-NJ-9HO"; */
+"B6W-NJ-9HO.text" = "photos of other users:";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "BFn-DX-N34"; */
+"BFn-DX-N34.text" = "Description";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "Cfc-tm-6RB"; */
+"Cfc-tm-6RB.text" = "Description:";
+
+/* Class = "UILabel"; text = "Time:"; ObjectID = "Eim-2T-smA"; */
+"Eim-2T-smA.text" = "Time:";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "FPA-AG-LMd"; */
+"FPA-AG-LMd.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UILabel"; text = "No participants"; ObjectID = "GXl-vB-2va"; */
+"GXl-vB-2va.text" = "No participants";
+
+/* Class = "UILabel"; text = "Passward"; ObjectID = "Gqs-f2-GcH"; */
+"Gqs-f2-GcH.text" = "Passward";
+
+/* Class = "UILabel"; text = "No upcoming trips"; ObjectID = "I0o-2X-DNt"; */
+"I0o-2X-DNt.text" = "No upcoming trips";
+
+/* Class = "UILabel"; text = "19 may 2021\n"; ObjectID = "Jj8-eh-zck"; */
+"Jj8-eh-zck.text" = "19 may 2021\n";
+
+/* Class = "UILabel"; text = "No photos yet"; ObjectID = "KTk-Wp-wcK"; */
+"KTk-Wp-wcK.text" = "No photos yet";
+
+/* Class = "UILabel"; text = "description:"; ObjectID = "KWi-Hq-qMv"; */
+"KWi-Hq-qMv.text" = "description:";
+
+/* Class = "UILabel"; text = "No locations in favorite"; ObjectID = "KXy-37-Lp8"; */
+"KXy-37-Lp8.text" = "No locations in favorite";
+
+/* Class = "UILabel"; text = "who also want to visit this palce:"; ObjectID = "KZB-uO-8Qn"; */
+"KZB-uO-8Qn.text" = "who also want to visit this palce:";
+
+/* Class = "UILabel"; text = "Upcoming trips to this region:"; ObjectID = "LIG-OB-a5u"; */
+"LIG-OB-a5u.text" = "Upcoming trips to this region:";
+
+/* Class = "UILabel"; text = "Who participate:"; ObjectID = "LND-0N-ZBk"; */
+"LND-0N-ZBk.text" = "Who participate:";
+
+/* Class = "UILabel"; text = "Finished trips:"; ObjectID = "LT4-KC-XT0"; */
+"LT4-KC-XT0.text" = "Finished trips:";
+
+/* Class = "UIButton"; configuration.title = "Create trip"; ObjectID = "M7r-HJ-CGp"; */
+"M7r-HJ-CGp.configuration.title" = "Create trip";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "M7r-HJ-CGp"; */
+"M7r-HJ-CGp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Repeat passward"; ObjectID = "OO0-Np-j6n"; */
+"OO0-Np-j6n.text" = "Repeat passward";
+
+/* Class = "UILabel"; text = "Time:"; ObjectID = "Oql-N3-stL"; */
+"Oql-N3-stL.text" = "Time:";
+
+/* Class = "UILabel"; text = "Max people:"; ObjectID = "PMD-Ke-aoY"; */
+"PMD-Ke-aoY.text" = "Max people:";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "QgR-2A-VJ8"; */
+"QgR-2A-VJ8.text" = "E-mail";
+
+/* Class = "UILabel"; text = "No trips created yet"; ObjectID = "SDl-OF-jC4"; */
+"SDl-OF-jC4.text" = "No trips created yet";
+
+/* Class = "UILabel"; text = "General photos:"; ObjectID = "SUA-Fn-zjx"; */
+"SUA-Fn-zjx.text" = "General photos:";
+
+/* Class = "UILabel"; text = "Location:"; ObjectID = "T9x-B1-AwW"; */
+"T9x-B1-AwW.text" = "Location:";
+
+/* Class = "UILabel"; text = "No finished trips"; ObjectID = "TeP-X7-8XA"; */
+"TeP-X7-8XA.text" = "No finished trips";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "VBf-Me-R24"; */
+"VBf-Me-R24.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UITabBarItem"; title = "Explore"; ObjectID = "VCw-Rd-ewS"; */
+"VCw-Rd-ewS.title" = "Explore";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "VHC-LP-dN1"; */
+"VHC-LP-dN1.text" = "Name:";
+
+/* Class = "UILabel"; text = "19 may 2021\n"; ObjectID = "VTp-eH-KPL"; */
+"VTp-eH-KPL.text" = "19 may 2021\n";
+
+/* Class = "UILabel"; text = "Time:"; ObjectID = "W5V-Us-HEy"; */
+"W5V-Us-HEy.text" = "Time:";
+
+/* Class = "UILabel"; text = "19 may 2021\n"; ObjectID = "WDx-Vs-z9x"; */
+"WDx-Vs-z9x.text" = "19 may 2021\n";
+
+/* Class = "UIButton"; configuration.title = "Don't want to participate"; ObjectID = "WLV-bX-gZd"; */
+"WLV-bX-gZd.configuration.title" = "Don't want to participate";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WLV-bX-gZd"; */
+"WLV-bX-gZd.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Finish trip"; ObjectID = "Xwa-TQ-Z4w"; */
+"Xwa-TQ-Z4w.configuration.title" = "Finish trip";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xwa-TQ-Z4w"; */
+"Xwa-TQ-Z4w.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Already have an account?"; ObjectID = "Z3s-6m-MsW"; */
+"Z3s-6m-MsW.configuration.title" = "Already have an account?";
+
+/* Class = "UIButton"; normalTitle = "Already have an account?"; ObjectID = "Z3s-6m-MsW"; */
+"Z3s-6m-MsW.normalTitle" = "Already have an account?";
+
+/* Class = "UILabel"; text = "Upcoming trips:"; ObjectID = "ZFv-3A-Rje"; */
+"ZFv-3A-Rje.text" = "Upcoming trips:";
+
+/* Class = "UILabel"; text = "No photos"; ObjectID = "Zop-el-4EC"; */
+"Zop-el-4EC.text" = "No photos";
+
+/* Class = "UILabel"; text = "Want to visit:"; ObjectID = "aV3-xX-7Ay"; */
+"aV3-xX-7Ay.text" = "Want to visit:";
+
+/* Class = "UILabel"; text = "Most popular:"; ObjectID = "auR-8u-wbi"; */
+"auR-8u-wbi.text" = "Most popular:";
+
+/* Class = "UIButton"; configuration.title = "Show all"; ObjectID = "bB5-NU-o4V"; */
+"bB5-NU-o4V.configuration.title" = "Show all";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bB5-NU-o4V"; */
+"bB5-NU-o4V.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "bKy-F5-Q0R"; */
+"bKy-F5-Q0R.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UILabel"; text = "With:"; ObjectID = "bZ4-Sp-F1j"; */
+"bZ4-Sp-F1j.text" = "With:";
+
+/* Class = "UILabel"; text = "Minsk"; ObjectID = "bbY-M8-2tG"; */
+"bbY-M8-2tG.text" = "Minsk";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "eKG-FX-waT"; */
+"eKG-FX-waT.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UILabel"; text = "No trips"; ObjectID = "er4-fi-PHq"; */
+"er4-fi-PHq.text" = "No trips";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "g9B-3F-rmv"; */
+"g9B-3F-rmv.title" = "Profile";
+
+/* Class = "UILabel"; text = "No added in wishlist"; ObjectID = "gA9-Bl-hZE"; */
+"gA9-Bl-hZE.text" = "No added in wishlist";
+
+/* Class = "UILabel"; text = "Who participate:"; ObjectID = "hpy-nG-1di"; */
+"hpy-nG-1di.text" = "Who participate:";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "jhs-d0-eCe"; */
+"jhs-d0-eCe.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UILabel"; text = "Belarus"; ObjectID = "lHg-l1-70p"; */
+"lHg-l1-70p.text" = "Belarus";
+
+/* Class = "UILabel"; text = "Default location:"; ObjectID = "luv-3Z-OpQ"; */
+"luv-3Z-OpQ.text" = "Default location:";
+
+/* Class = "UIButton"; configuration.title = "Create trip"; ObjectID = "nFx-UP-bvY"; */
+"nFx-UP-bvY.configuration.title" = "Create trip";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nFx-UP-bvY"; */
+"nFx-UP-bvY.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Save"; ObjectID = "nqL-gZ-OHq"; */
+"nqL-gZ-OHq.configuration.title" = "Save";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nqL-gZ-OHq"; */
+"nqL-gZ-OHq.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Exit"; ObjectID = "oNR-0J-TfG"; */
+"oNR-0J-TfG.configuration.title" = "Exit";
+
+/* Class = "UILabel"; text = "No participants"; ObjectID = "q2t-P4-eLT"; */
+"q2t-P4-eLT.text" = "No participants";
+
+/* Class = "UILabel"; text = "Time:"; ObjectID = "qVq-DV-2ja"; */
+"qVq-DV-2ja.text" = "Time:";
+
+/* Class = "UILabel"; text = "Location:"; ObjectID = "sgm-g6-C0Q"; */
+"sgm-g6-C0Q.text" = "Location:";
+
+/* Class = "UINavigationItem"; title = "Gomel, Rumanchevy palace"; ObjectID = "vtT-VV-G4E"; */
+"vtT-VV-G4E.title" = "Gomel, Rumanchevy palace";
+
+/* Class = "UIButton"; configuration.title = "Open chat"; ObjectID = "x9S-SZ-WTV"; */
+"x9S-SZ-WTV.configuration.title" = "Open chat";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "x9S-SZ-WTV"; */
+"x9S-SZ-WTV.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Create account"; ObjectID = "xd6-wg-7ko"; */
+"xd6-wg-7ko.configuration.title" = "Create account";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xd6-wg-7ko"; */
+"xd6-wg-7ko.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Participate"; ObjectID = "yfx-WZ-iqI"; */
+"yfx-WZ-iqI.configuration.title" = "Participate";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yfx-WZ-iqI"; */
+"yfx-WZ-iqI.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Passward"; ObjectID = "zR4-Ja-VbH"; */
+"zR4-Ja-VbH.text" = "Passward";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "ze9-bC-TCz"; */
+"ze9-bC-TCz.text" = "E-mail";

@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol CreateTripPresentationLogic
-{
-  func presentSomething(response: CreateTrip.Something.Response)
+protocol CreateTripPresentationLogic {
+	func presentSomething(response: CreateTrip.Something.Response)
 }
 
-class CreateTripPresenter: CreateTripPresentationLogic
-{
-  weak var viewController: CreateTripDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: CreateTrip.Something.Response)
-  {
-    let viewModel = CreateTrip.Something.ViewModel()
-    viewController?.displayResult(viewModel: viewModel)
-  }
+class CreateTripPresenter: CreateTripPresentationLogic {
+	weak var viewController: CreateTripDisplayLogic?
+	
+	// MARK: Do something
+	
+	func presentSomething(response: CreateTrip.Something.Response) {
+		let viewModel = CreateTrip.Something.ViewModel()
+		viewController?.displayResult(viewModel: viewModel)
+	}
 }

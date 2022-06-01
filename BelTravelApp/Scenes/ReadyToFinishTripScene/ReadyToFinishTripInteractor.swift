@@ -47,7 +47,9 @@ class ReadyToFinishTripInteractor: ReadyToFinishTripBusinessLogic, ReadyToFinish
 		guard let trip = request.trip else {
 			return
 		}
-		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(trip.region)Trips", document: "\(trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(trip.region)Trips",
+														 document: "\(trip.locationOfParticipants)",
+														 secondCollection: "participants", field: "participant") { [weak self] users in
 			let response = ReadyToFinishTrip.Something.Response(participants: users)
 			self?.presenter?.presentParticipants(response: response)
 		}

@@ -72,6 +72,7 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		photoOfUser.isUserInteractionEnabled = true
 		photoOfUser.addGestureRecognizer(tapGesture!)
+		setLabels()
 		makeUpcomingTripsCollection()
 		makeFinishedTripsCollection()
 	}
@@ -85,13 +86,17 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	var finishedTripsArray = [NewTrip]()
 
 	var tapGesture: UITapGestureRecognizer?
+	@IBOutlet weak var locationLable: UILabel!
 	@IBOutlet weak var nameLable: UILabel!
 	@IBOutlet weak var photoOfUser: UIImageView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
+	@IBOutlet weak var finishedTripsLable: UILabel!
 	@IBOutlet weak var finishedTripsCollection: UICollectionView!
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
+	@IBOutlet weak var upcommintTripsLable: UILabel!
 	@IBOutlet weak var upcomingTripsCollection: UICollectionView!
 	@IBOutlet weak var noUpcomingTripsLable: UILabel!
+	@IBOutlet weak var exitButtonOutlet: UIButton!
 	@IBAction func exitButton(_ sender: Any) {
 		FirebaseAuthManager.shered.signOut {
 			self.router?.routeToSliderViewController()
@@ -106,6 +111,15 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	func loadTripsInformation() {
 		let request = Profile.Something.Request()
 		interactor?.loadTrips(request: request)
+	}
+
+	func setLabels() {
+		locationLable.text = NSLocalizedString("defaultLocation", comment: "")
+		finishedTripsLable.text = NSLocalizedString("finishedTripsLable", comment: "")
+		noFinishedTripsLable.text = NSLocalizedString("noFinishedTripsLable", comment: "")
+		upcommintTripsLable.text = NSLocalizedString("upcommingTripsLable", comment: "")
+		noUpcomingTripsLable.text = NSLocalizedString("noUpcomingTripsLable", comment: "")
+		exitButtonOutlet.setTitle(NSLocalizedString("exitButton", comment: ""), for: .normal)
 	}
 
 	func displayUserInformation(viewModel: Profile.Something.ViewModel) {
@@ -227,7 +241,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 250, height: 100)
+		Constants.share.profileImageSize
 	}
 
 	func collectionView(_ collectionView: UICollectionView,

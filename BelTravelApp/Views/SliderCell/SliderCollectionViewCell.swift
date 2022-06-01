@@ -13,14 +13,18 @@ static let identifier = "SliderCollectionViewCell"
 
 	@IBOutlet weak var lable: UILabel!
 	@IBOutlet weak var image: UIImageView!
+	
 	@IBOutlet weak var registrationButtonOutlet: UIButton!
 	@IBOutlet weak var authorizationButtonOutlet: UIButton!
-	
+
 	override func awakeFromNib() {
         super.awakeFromNib()
     }
 
 	func config(model: Slider.Something.ViewModel) {
+		lable.text = NSLocalizedString("registration", comment: "")
+		registrationButtonOutlet.setTitle(NSLocalizedString("registration", comment: ""), for: .normal)
+		authorizationButtonOutlet.setTitle(NSLocalizedString("enter", comment: ""), for: .normal)
 		lable.text = model.lable
 		image.image = model.image
 		if model.id == 2 {

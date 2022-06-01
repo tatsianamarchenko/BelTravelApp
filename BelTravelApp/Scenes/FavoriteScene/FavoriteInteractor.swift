@@ -18,7 +18,7 @@ protocol FavoriteBusinessLogic {
 }
 
 protocol FavoriteDataStore {
-  var location: Location? { get set }
+	var location: Location? { get set }
 	var region: String { get set }
 }
 
@@ -32,7 +32,7 @@ class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore {
 	func loadFavorite(request: Favorite.Something.Request) {
 		worker = FavoriteWorker()
 		worker?.doSomeWork()
-
+		
 		FirebaseDatabaseManager.shered.fetchFavoriteData { [weak self] locations in
 			let response = Favorite.Something.Response(locations: locations)
 			self?.presenter?.presentFavoritePlaces(response: response)

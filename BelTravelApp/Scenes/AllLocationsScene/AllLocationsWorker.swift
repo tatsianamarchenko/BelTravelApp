@@ -12,9 +12,7 @@
 
 import UIKit
 
-class AllLocationsWorker
-{
-  func doSomeWork()
-  {
+class AllLocationsWorker {
+  func doSomeWork() {
   }
 }

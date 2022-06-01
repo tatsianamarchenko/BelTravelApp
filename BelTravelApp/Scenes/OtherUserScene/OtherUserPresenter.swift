@@ -13,7 +13,6 @@
 import UIKit
 
 protocol OtherUserPresentationLogic {
-	func presentUserInformation(response: OtherUser.Something.Response)
 	func presenTripsInformation(response: OtherUser.Something.Response)
 	func presentFinishedTrip()
 }
@@ -23,11 +22,6 @@ class OtherUserPresenter: OtherUserPresentationLogic {
 
 	// MARK: Do something
 
-	func presentUserInformation(response: OtherUser.Something.Response) {
-		let viewModel = OtherUser.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
-	}
-
 	func presenTripsInformation(response: OtherUser.Something.Response) {
 		let viewModel = OtherUser.Something.ViewModel(upcomingTrips: response.upcomingTrips, finishedTrips: response.finishedTrips)
 		viewController?.displayTrips(viewModel: viewModel)
@@ -36,4 +30,5 @@ class OtherUserPresenter: OtherUserPresentationLogic {
 	func presentFinishedTrip() {
 		viewController?.displayFinishTrip()
 	}
+	
 }

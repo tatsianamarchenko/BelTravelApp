@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  BelTravelApp
+
+  Created by Tatsiana Marchanka on 31.05.22.
+  
+*/
+"mostPopularLable" = "Most popular";
+"upcommingTripsLable" = "Upcomming trips";
+"showAllButton" = "Show all";
+"wantToParticipateButton" = "Want to participate";
+"photosOfOtherUsersLable" = "Photos of other users";
+"descriptionLable" = "description";
+"createTripButton" = "Create trip";
+"noTripsCreated" = "No trips created";
+"noLocationsInFavorite" = "No locations in favorite";
+"noUpcomingTripsLable" = "No upcoming trips";
+"noFinishedTripsLable" = "No finished trips";
+"timeLable" = "Time";
+"whoParticipateLable" = "Who participate";
+"participateButton" = "participate";
+"openChatButton" = "Open chat";
+"wantToVisitLable" = "Want to visit";
+"locationLable" = "location";
+"finishedTripsLable" = "Finished trips";
+"dontWantToParticipateButton" = "Don't want to participate";
+"finishTripLable" = "Finish trip";
+"addPhotoButton" = "Add Photos";
+"saveButton" = "Save";
+"exitButton" = "Exit";
+"name" = "Name:";
+"lastName" = "Last name:";
+"defaultLocation" = "Default location:";
+"email" = "E-mail:";
+"password" = "Passward:";
+"repeatPassword" = "Repeat passward:";
+"createAccount" = "Create account";
+"alreadyHaveAnAccount" = "Already have an account?";
+"forgetPassword" = "Forget password?";
+"enter" = "Enter";
+"registration" = "Registration";
+"withLable" = "With";
+"generalPhotosLable" = "General photos";
+"noPhotoLable" = "No photo";
+"maxPeopleLable" = "Max participants";
+"noParticipateLable" = "No participants";

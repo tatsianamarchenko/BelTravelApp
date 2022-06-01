@@ -12,23 +12,20 @@
 
 import UIKit
 
-protocol UpcomingTripInformationPresentationLogic
-{
-  func presentParticipants(response: UpcomingTripInformation.Something.Response)
+protocol UpcomingTripInformationPresentationLogic {
+	func presentParticipants(response: UpcomingTripInformation.Something.Response)
 	func routeToUserViewController()
 }
 
-class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic
-{
-  weak var viewController: UpcomingTripInformationDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentParticipants(response: UpcomingTripInformation.Something.Response)
-  {
-	  let viewModel = UpcomingTripInformation.Something.ViewModel(users: response.users)
-    viewController?.displayUsers(viewModel: viewModel)
-  }
+class UpcomingTripInformationPresenter: UpcomingTripInformationPresentationLogic {
+	weak var viewController: UpcomingTripInformationDisplayLogic?
+
+	// MARK: Do something
+
+	func presentParticipants(response: UpcomingTripInformation.Something.Response) {
+		let viewModel = UpcomingTripInformation.Something.ViewModel(users: response.users)
+		viewController?.displayUsers(viewModel: viewModel)
+	}
 
 	func routeToUserViewController() {
 		viewController?.displayUserViewController()

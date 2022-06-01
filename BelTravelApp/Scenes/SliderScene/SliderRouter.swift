@@ -18,35 +18,35 @@ import UIKit
 }
 
 protocol SliderDataPassing {
-  var dataStore: SliderDataStore? { get }
+	var dataStore: SliderDataStore? { get }
 }
 
 class SliderRouter: NSObject, SliderRoutingLogic, SliderDataPassing {
 	weak var viewController: SliderViewController?
 	var dataStore: SliderDataStore?
-
+	
 	// MARK: Routing
-
+	
 	func routeToRegister() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "RegistrationViewController") as! RegistrationViewController
-		destinationVC.modalPresentationStyle = .fullScreen
-		navigateToRegistrationViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "RegistrationViewController") as? RegistrationViewController
+		destinationVC?.modalPresentationStyle = .fullScreen
+		navigateToRegistrationViewController(source: viewController!, destination: destinationVC!)
 	}
-
+	
 	func routeToAuthorization() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "AuthorizationViewController") as! AuthorizationViewController
-		destinationVC.modalPresentationStyle = .fullScreen
-		navigateToAuthorizationViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "AuthorizationViewController") as? AuthorizationViewController
+		destinationVC?.modalPresentationStyle = .fullScreen
+		navigateToAuthorizationViewController(source: viewController!, destination: destinationVC!)
 	}
-
+	
 	// MARK: Navigation
-
+	
 	func navigateToRegistrationViewController(source: SliderViewController, destination: RegistrationViewController) {
 		source.show(destination, sender: nil)
 	}
-
+	
 	func navigateToAuthorizationViewController(source: SliderViewController, destination: AuthorizationViewController) {
 		source.show(destination, sender: nil)
 	}

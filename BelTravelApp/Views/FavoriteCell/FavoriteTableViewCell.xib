@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="321" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back2" translatesAutoresizingMaskIntoConstraints="NO" id="qQf-3k-3Wx">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qQf-3k-3Wx">
                         <rect key="frame" x="10" y="10" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="CxM-O2-INT"/>
@@ -64,7 +64,4 @@
             <point key="canvasLocation" x="138.40579710144928" y="100.78125"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="back2" width="1500" height="1000"/>
-    </resources>
 </document>

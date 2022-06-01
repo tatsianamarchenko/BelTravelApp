@@ -111,6 +111,9 @@
 		BFCC29C2282AF4EB004FE1FE /* MainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29BC282AF4EB004FE1FE /* MainModels.swift */; };
 		BFCC29C3282AF4EB004FE1FE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29BD282AF4EB004FE1FE /* MainViewController.swift */; };
 		BFCC29C4282AF4EB004FE1FE /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC29BE282AF4EB004FE1FE /* MainInteractor.swift */; };
+		BFD240B3284685DF00E9A6D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD240B2284685DF00E9A6D3 /* Constants.swift */; };
+		BFD240B728469A5A00E9A6D3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BFD240B628469A5A00E9A6D3 /* .swiftlint.yml */; };
+		BFD240BD2846A3D600E9A6D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFD240BF2846A3D600E9A6D3 /* Localizable.strings */; };
 		BFD49E89284248C80092B643 /* ReadyToFinishTripPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD49E83284248C80092B643 /* ReadyToFinishTripPresenter.swift */; };
 		BFD49E8A284248C80092B643 /* ReadyToFinishTripWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD49E84284248C80092B643 /* ReadyToFinishTripWorker.swift */; };
 		BFD49E8B284248C80092B643 /* ReadyToFinishTripRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD49E85284248C80092B643 /* ReadyToFinishTripRouter.swift */; };
@@ -235,6 +238,12 @@
 		BFCC29BC282AF4EB004FE1FE /* MainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModels.swift; sourceTree = "<group>"; };
 		BFCC29BD282AF4EB004FE1FE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BFCC29BE282AF4EB004FE1FE /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		BFD240B2284685DF00E9A6D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BFD240B628469A5A00E9A6D3 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		BFD240B92846A36800E9A6D3 /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/Main.strings"; sourceTree = "<group>"; };
+		BFD240BA2846A36800E9A6D3 /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BFD240BE2846A3D600E9A6D3 /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BFD240C02846A3DA00E9A6D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFD49E83284248C80092B643 /* ReadyToFinishTripPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToFinishTripPresenter.swift; sourceTree = "<group>"; };
 		BFD49E84284248C80092B643 /* ReadyToFinishTripWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToFinishTripWorker.swift; sourceTree = "<group>"; };
 		BFD49E85284248C80092B643 /* ReadyToFinishTripRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToFinishTripRouter.swift; sourceTree = "<group>"; };
@@ -377,6 +386,7 @@
 		BFBF0A47283437B20000559E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				BFD240B2284685DF00E9A6D3 /* Constants.swift */,
 				BFBF0A452834359B0000559E /* CheckField.swift */,
 				BFB319042832AFB500E13C65 /* FirebaseManager.swift */,
 				BFBF0A48283437B20000559E /* MessangeManager.swift */,
@@ -430,6 +440,7 @@
 		BFCC2991282AB2B2004FE1FE = {
 			isa = PBXGroup;
 			children = (
+				BFD240B628469A5A00E9A6D3 /* .swiftlint.yml */,
 				BFCC299C282AB2B3004FE1FE /* BelTravelApp */,
 				BFCC299B282AB2B3004FE1FE /* Products */,
 				AD51456387D955C8AA146C03 /* Pods */,
@@ -449,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */,
+				BFD240BF2846A3D600E9A6D3 /* Localizable.strings */,
 				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
 				BFCC29B1282AB7F8004FE1FE /* Scenes */,
 				BFD57561282BEDEA007CBBE8 /* Views */,
@@ -636,6 +648,7 @@
 				BFCC2997282AB2B2004FE1FE /* Frameworks */,
 				BFCC2998282AB2B2004FE1FE /* Resources */,
 				B4BFABB18E7B4ED72ACF3CB1 /* [CP] Embed Pods Frameworks */,
+				BFD240B828469A8A00E9A6D3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -668,6 +681,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"be-BY",
 			);
 			mainGroup = BFCC2991282AB2B2004FE1FE;
 			productRefGroup = BFCC299B282AB2B3004FE1FE /* Products */;
@@ -685,6 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD57565282BEE28007CBBE8 /* RegionCollectionViewCell.xib in Resources */,
+				BFD240BD2846A3D600E9A6D3 /* Localizable.strings in Resources */,
 				BF5B6273282BFE2C00D5844D /* ParticipantCollectionViewCell.xib in Resources */,
 				BFCC29AA282AB2C6004FE1FE /* LaunchScreen.storyboard in Resources */,
 				BF5B6269282BFB7F00D5844D /* PlaceCollectionViewCell.xib in Resources */,
@@ -694,6 +709,7 @@
 				BFC0DFA328357BD500FFAEB6 /* FavoriteTableViewCell.xib in Resources */,
 				BF5B6275282C010300D5844D /* GoogleService-Info.plist in Resources */,
 				BFBF0A5D28343D270000559E /* SliderCollectionViewCell.xib in Resources */,
+				BFD240B728469A5A00E9A6D3 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +754,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BelTravelApp/Pods-BelTravelApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BFD240B828469A8A00E9A6D3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -853,6 +886,7 @@
 				BFD49E8C284248C80092B643 /* ReadyToFinishTripModels.swift in Sources */,
 				BFC61B4E283FC896003CF2E4 /* ChatWorker.swift in Sources */,
 				BFA60B92282B1E17006B3DC4 /* SelectedPlaceWorker.swift in Sources */,
+				BFD240B3284685DF00E9A6D3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +897,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BFCC29A4282AB2B3004FE1FE /* Base */,
+				BFD240B92846A36800E9A6D3 /* be-BY */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -871,8 +906,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				BFCC29A9282AB2C6004FE1FE /* Base */,
+				BFD240BA2846A36800E9A6D3 /* be-BY */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BFD240BF2846A3D600E9A6D3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFD240BE2846A3D600E9A6D3 /* be-BY */,
+				BFD240C02846A3DA00E9A6D3 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -882,6 +927,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -942,6 +988,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1006,6 +1053,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1035,6 +1083,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

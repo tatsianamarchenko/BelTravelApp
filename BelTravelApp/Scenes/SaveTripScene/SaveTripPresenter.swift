@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol SaveTripPresentationLogic
-{
-  func presentProfile(response: SaveTrip.Something.Response)
+protocol SaveTripPresentationLogic {
+	func presentProfile(response: SaveTrip.Something.Response)
 }
 
-class SaveTripPresenter: SaveTripPresentationLogic
-{
-  weak var viewController: SaveTripDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentProfile(response: SaveTrip.Something.Response)
-  {
-    let viewModel = SaveTrip.Something.ViewModel()
-    viewController?.displayProfile(viewModel: viewModel)
-  }
+class SaveTripPresenter: SaveTripPresentationLogic {
+	weak var viewController: SaveTripDisplayLogic?
+
+	// MARK: Do something
+
+	func presentProfile(response: SaveTrip.Something.Response) {
+		let viewModel = SaveTrip.Something.ViewModel()
+		viewController?.displayProfile(viewModel: viewModel)
+	}
 }

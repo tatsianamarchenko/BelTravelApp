@@ -13,18 +13,18 @@
 import UIKit
 
 enum AllLocations {
-  // MARK: Use cases
-  
-  enum Something {
-    struct Request {
-		var region: String?
-		var location: Location?
-    }
-	  struct Response {
-		  var locations: [Location]
-	  }
-    struct ViewModel {
-		var locations: [Location]
-    }
-  }
+	// MARK: Use cases
+
+	enum Something {
+		struct Request {
+			var region: String?
+			var location: Location?
+		}
+		struct Response {
+			var locations: [Location]
+		}
+		struct ViewModel {
+			var locations: [Location]
+		}
+	}
 }

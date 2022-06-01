@@ -21,15 +21,18 @@ protocol ProfilePresentationLogic {
 }
 
 class ProfilePresenter: ProfilePresentationLogic {
-  weak var viewController: ProfileDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentUserInformation(response: Profile.Something.Response) {
-	  let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "", lastName: response.person?.lastName ?? "", defaultLocation: response.person?.defaultLocation ?? "", newImage: response.image)
-	  viewController?.displayUserInformation(viewModel: viewModel)
-	  
-  }
+	weak var viewController: ProfileDisplayLogic?
+
+	// MARK: Do something
+
+	func presentUserInformation(response: Profile.Something.Response) {
+		let viewModel = Profile.Something.ViewModel(name: response.person?.name ?? "",
+													lastName: response.person?.lastName ?? "",
+													defaultLocation: response.person?.defaultLocation ?? "",
+													newImage: response.image)
+		viewController?.displayUserInformation(viewModel: viewModel)
+
+	}
 
 	func presentNewSavedPhoto(response: Profile.Something.Response) {
 		let viewModel = Profile.Something.ViewModel(newImage: response.image)

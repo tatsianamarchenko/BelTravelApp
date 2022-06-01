@@ -31,10 +31,10 @@ class ReadyToFinishTripRouter: NSObject, ReadyToFinishTripRoutingLogic, ReadyToF
 	
 	func routeToSaveTripViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SaveTripViewController") as! SaveTripViewController
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-		navigateToSomewhere(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SaveTripViewController") as? SaveTripViewController
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToSomewhere(source: dataStore!, destination: &destinationDS!)
+		navigateToSomewhere(source: viewController!, destination: destinationVC!)
 	}
 	
 	// MARK: Navigation
@@ -76,11 +76,11 @@ class ReadyToFinishTripRouter: NSObject, ReadyToFinishTripRoutingLogic, ReadyToF
 	
 	func routeToUserViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
-		destinationVC.user = dataStore?.user
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToUser(source: dataStore!, destination: &destinationDS)
-		navigateToUserViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as? OtherUserViewController
+		destinationVC?.user = dataStore?.user
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToUser(source: dataStore!, destination: &destinationDS!)
+		navigateToUserViewController(source: viewController!, destination: destinationVC!)
 	}
 	
 	// MARK: Navigation

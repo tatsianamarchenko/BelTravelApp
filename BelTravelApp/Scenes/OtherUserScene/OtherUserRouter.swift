@@ -12,34 +12,30 @@
 
 import UIKit
 
-@objc protocol OtherUserRoutingLogic
-{
+@objc protocol OtherUserRoutingLogic {
 	func routeToSelectedFinishedTripViewController()
 }
 
-protocol OtherUserDataPassing
-{
-  var dataStore: OtherUserDataStore? { get }
+protocol OtherUserDataPassing {
+	var dataStore: OtherUserDataStore? { get }
 }
 
-class OtherUserRouter: NSObject, OtherUserRoutingLogic, OtherUserDataPassing
-{
-  weak var viewController: OtherUserViewController?
-  var dataStore: OtherUserDataStore?
-  
+class OtherUserRouter: NSObject, OtherUserRoutingLogic, OtherUserDataPassing {
+	weak var viewController: OtherUserViewController?
+	var dataStore: OtherUserDataStore?
+	
 	func routeToSelectedFinishedTripViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedTripViewController") as! SelectedTripViewController
-		destinationVC.trip = dataStore?.finishedTrip
-
-		destinationVC.modalPresentationStyle = .fullScreen
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-		navigateToSomewhere(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedTripViewController") as? SelectedTripViewController
+		destinationVC?.trip = dataStore?.finishedTrip
+		destinationVC?.modalPresentationStyle = .fullScreen
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToSomewhere(source: dataStore!, destination: &destinationDS!)
+		navigateToSomewhere(source: viewController!, destination: destinationVC!)
 	}
-
+	
 	// MARK: Navigation
-
+	
 	func navigateToSomewhere(source: OtherUserViewController, destination: SelectedTripViewController) {
 		let nav = UINavigationController(rootViewController: destination)
 		nav.modalPresentationStyle = .automatic
@@ -48,9 +44,9 @@ class OtherUserRouter: NSObject, OtherUserRoutingLogic, OtherUserDataPassing
 		}
 		source.present(nav, animated: true)
 	}
-
+	
 	// MARK: Passing data
-
+	
 	func passDataToSomewhere(source: OtherUserDataStore, destination: inout SelectedTripDataStore) {
 		destination.trip = source.finishedTrip
 	}

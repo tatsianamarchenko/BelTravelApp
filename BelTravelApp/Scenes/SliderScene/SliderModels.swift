@@ -12,23 +12,18 @@
 
 import UIKit
 
-enum Slider
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-		var id: Int
-		var lable: String
-		var image: UIImage
-    }
-  }
+enum Slider {
+	// MARK: Use cases
+	
+	enum Something {
+		struct Request {
+		}
+		struct Response {
+		}
+		struct ViewModel {
+			var id: Int
+			var lable: String
+			var image: UIImage
+		}
+	}
 }

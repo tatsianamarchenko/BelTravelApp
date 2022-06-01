@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AuthorizationDisplayLogic: AnyObject {
-  func displayAuthorized(viewModel: Authorization.Something.ViewModel)
+	func displayAuthorized(viewModel: Authorization.Something.ViewModel)
 }
 
 class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
@@ -21,19 +21,19 @@ class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
 	var router: (NSObjectProtocol & AuthorizationRoutingLogic & AuthorizationDataPassing)?
 	let checkField = CheckField.shared
 	// MARK: Object lifecycle
-
+	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 		setup()
 	}
-
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
 	}
-
+	
 	// MARK: Setup
-
+	
 	private func setup() {
 		let viewController = self
 		let interactor = AuthorizationInteractor()
@@ -46,9 +46,9 @@ class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
 		router.viewController = viewController
 		router.dataStore = interactor
 	}
-
+	
 	// MARK: Routing
-
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let scene = segue.identifier {
 			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
@@ -57,11 +57,12 @@ class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
 			}
 		}
 	}
-
+	
 	// MARK: View lifecycle
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		setLabels()
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
 		mainView.addGestureRecognizer(tapGesture!)
 	}
@@ -76,18 +77,27 @@ class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
 	@IBOutlet weak var mainView: UIView!
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
-
 	@IBOutlet weak var emailView: UIView!
 	@IBOutlet weak var passwordView: UIView!
-
+	@IBOutlet weak var emailLable: UILabel!
+	@IBOutlet weak var passwardLable: UILabel!
+	@IBOutlet weak var enterButtonOutlet: UIButton!
+	@IBOutlet weak var forgetPasswordButtonOutlet: UIButton!
 	func displayAuthorized(viewModel: Authorization.Something.ViewModel) {
 		router?.routeToMessengerTabBarViewController()
+	}
+
+	func setLabels() {
+		emailLable.text = NSLocalizedString("email", comment: "")
+		passwardLable.text = NSLocalizedString("password", comment: "")
+		enterButtonOutlet.setTitle(NSLocalizedString("enter", comment: ""), for: .normal)
+		forgetPasswordButtonOutlet.setTitle(NSLocalizedString("forgetPassward", comment: ""), for: .normal)
 	}
 
 	@IBAction func closeButtonAction(_ sender: Any) {
 		self.dismiss(animated: true)
 	}
-
+	
 	@IBAction func authorizationButtonAction(_ sender: UIButton) {
 		if checkField.validField(emailView, emailTextField),
 		   checkField.validField(passwordView, passwordTextField) {

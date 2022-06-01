@@ -27,13 +27,13 @@ class CreateTripInteractor: CreateTripBusinessLogic, CreateTripDataStore {
 	var location: Location?
 	var region: String?
 	// MARK: Do something
-
+	
 	func createNewTrip(request: CreateTrip.Something.Request) {
 		worker = CreateTripWorker()
 		worker?.doSomeWork()
 		FirebaseDatabaseManager.shered.addNewTripToDatabase(with: request.trip) { [weak self] result in
 			if result == true {
-			let response = CreateTrip.Something.Response()
+				let response = CreateTrip.Something.Response()
 				self?.presenter?.presentSomething(response: response)
 			}
 			else {

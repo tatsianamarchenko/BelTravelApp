@@ -22,7 +22,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gomel" translatesAutoresizingMaskIntoConstraints="NO" id="dfg-o6-ljP">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dfg-o6-ljP">
                         <rect key="frame" x="10" y="0.0" width="80" height="80"/>
                         <color key="tintColor" red="0.84055465460000001" green="0.73025768999999996" blue="0.98041981460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -51,7 +51,4 @@
             <point key="canvasLocation" x="169.56521739130437" y="79.6875"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="Gomel" width="500" height="410"/>
-    </resources>
 </document>

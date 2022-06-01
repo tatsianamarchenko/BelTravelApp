@@ -38,7 +38,10 @@ class SelectedTripInteractor: SelectedTripBusinessLogic, SelectedTripDataStore {
 	}
 
 	func loadParticipants(request: SelectedTrip.Something.Request) {
-		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips", document: "\(request.trip.locationOfParticipants)", secondCollection: "participants", field: "participant") { [weak self] users in
+		FirebaseDatabaseManager.shered.fetchParticipants(collection: "\(request.trip.region)Trips",
+														 document: "\(request.trip.locationOfParticipants)",
+														 secondCollection: "participants",
+														 field: "participant") { [weak self] users in
 			let response = SelectedTrip.Something.Response(users: users)
 			self?.presenter?.presentParticipants(response: response)
 		}

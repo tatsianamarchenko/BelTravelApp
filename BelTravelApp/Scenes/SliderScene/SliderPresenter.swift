@@ -12,22 +12,19 @@
 
 import UIKit
 
-protocol SliderPresentationLogic
-{
-  func presentSomething(response: Slider.Something.Response)
+protocol SliderPresentationLogic {
+	func presentSomething(response: Slider.Something.Response)
 }
 
-class SliderPresenter: SliderPresentationLogic
-{
-  weak var viewController: SliderDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Slider.Something.Response)
-  {
-	  let firstPage = Slider.Something.ViewModel(id: 1, lable: "BelTravelApp", image: UIImage(named: "back1")!)
-	  let secondPage = Slider.Something.ViewModel(id: 2, lable: "Registration...", image: UIImage(named: "back2")!)
-	  let viewModel = [firstPage, secondPage]
-    viewController?.updateyCollectionView(viewModel: viewModel)
-  }
+class SliderPresenter: SliderPresentationLogic {
+	weak var viewController: SliderDisplayLogic?
+	
+	// MARK: Do something
+	
+	func presentSomething(response: Slider.Something.Response) {
+		let firstPage = Slider.Something.ViewModel(id: 1, lable: "BelTravelApp", image: UIImage(named: "back1")!)
+		let secondPage = Slider.Something.ViewModel(id: 2, lable: "Registration...", image: UIImage(named: "back2")!)
+		let viewModel = [firstPage, secondPage]
+		viewController?.updateyCollectionView(viewModel: viewModel)
+	}
 }

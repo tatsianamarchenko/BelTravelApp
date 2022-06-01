@@ -12,16 +12,14 @@
 
 import UIKit
 
-@objc protocol MainRoutingLogic
-{
-  func routeToAllLocationsViewController()
+@objc protocol MainRoutingLogic {
+	func routeToAllLocationsViewController()
 	func routeToSelectedPlaceViewController()
 	func routeToUpcomingTripViewController()
 }
 
-protocol MainDataPassing
-{
-  var dataStore: MainDataStore? { get }
+protocol MainDataPassing {
+	var dataStore: MainDataStore? { get }
 }
 
 class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
@@ -33,11 +31,11 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 	func routeToAllLocationsViewController() {
 
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "AllLocationsViewController") as! AllLocationsViewController
-		destinationVC.region = dataStore?.region
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToAllLocationsViewController(source: dataStore!, destination: &destinationDS)
-		navigateToAllLocationsViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "AllLocationsViewController") as? AllLocationsViewController
+		destinationVC?.region = dataStore?.region
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToAllLocationsViewController(source: dataStore!, destination: &destinationDS!)
+		navigateToAllLocationsViewController(source: viewController!, destination: destinationVC!)
 	}
 
 	// MARK: Navigation
@@ -54,12 +52,12 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 
 	func routeToSelectedPlaceViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as! SelectedPlaceViewController
-		destinationVC.location = dataStore?.selectedPopularlocation
-		destinationVC.region = dataStore?.region
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToSelectedPlaceViewcontroller(source: dataStore!, destination: &destinationDS)
-		navigateToSelectedPlaceViewcontroller(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as? SelectedPlaceViewController
+		destinationVC?.location = dataStore?.selectedPopularlocation
+		destinationVC?.region = dataStore?.region
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToSelectedPlaceViewcontroller(source: dataStore!, destination: &destinationDS!)
+		navigateToSelectedPlaceViewcontroller(source: viewController!, destination: destinationVC!)
 	}
 
 	// MARK: Navigation
@@ -77,11 +75,11 @@ class MainRouter: NSObject, MainRoutingLogic, MainDataPassing {
 
 	func routeToUpcomingTripViewController() {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "UpcomingTripInformationViewController") as! UpcomingTripInformationViewController
-		destinationVC.tripInformation = dataStore?.newTrip
-		var destinationDS = destinationVC.router!.dataStore!
-		passDataToUpcomingTripViewController(source: dataStore!, destination: &destinationDS)
-		navigateToUpcomingTripViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "UpcomingTripInformationViewController") as? UpcomingTripInformationViewController
+		destinationVC?.tripInformation = dataStore?.newTrip
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToUpcomingTripViewController(source: dataStore!, destination: &destinationDS!)
+		navigateToUpcomingTripViewController(source: viewController!, destination: destinationVC!)
 	}
 
 	// MARK: Navigation

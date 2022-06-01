@@ -12,9 +12,7 @@
 
 import UIKit
 
-class SelectedTripWorker
-{
-  func doSomeWork()
-  {
+class SelectedTripWorker {
+  func doSomeWork() {
   }
 }

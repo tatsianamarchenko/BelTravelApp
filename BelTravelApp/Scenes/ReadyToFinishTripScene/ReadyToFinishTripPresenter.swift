@@ -12,21 +12,18 @@
 
 import UIKit
 
-protocol ReadyToFinishTripPresentationLogic
-{
+protocol ReadyToFinishTripPresentationLogic {
 	func presentResult(response: ReadyToFinishTrip.Something.Response)
 	func presentParticipants(response: ReadyToFinishTrip.Something.Response)
 	func routeToUserViewController()
 }
 
-class ReadyToFinishTripPresenter: ReadyToFinishTripPresentationLogic
-{
+class ReadyToFinishTripPresenter: ReadyToFinishTripPresentationLogic {
 	weak var viewController: ReadyToFinishTripDisplayLogic?
 	
 	// MARK: Do something
 	
-	func presentResult(response: ReadyToFinishTrip.Something.Response)
-	{
+	func presentResult(response: ReadyToFinishTrip.Something.Response) {
 		let viewModel = ReadyToFinishTrip.Something.ViewModel(result: response.result)
 		viewController?.displayResult(viewModel: viewModel)
 	}

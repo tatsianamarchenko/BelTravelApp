@@ -20,21 +20,21 @@ protocol SelectedPlacePresentationLogic {
 
 class SelectedPlacePresenter: SelectedPlacePresentationLogic {
 	weak var viewController: SelectedPlaceDisplayLogic?
-
+	
 	// MARK: Do something
-
+	
 	func presentResult(response: SelectedPlace.Something.Response) {
 		let viewModel = SelectedPlace.Something.ViewModel(result: response.result!)
 		viewController?.displayResultOfAdding(viewModel: viewModel)
 	}
-
+	
 	func presentWhoLiked(response: SelectedPlace.Something.Response) {
 		let viewModel = SelectedPlace.Something.ViewModel(liked: response.users)
 		viewController?.displayWhoLiked(viewModel: viewModel)
 	}
-
+	
 	func routeToUserViewController() {
 		viewController?.displayUserViewController()
 	}
-
+	
 }

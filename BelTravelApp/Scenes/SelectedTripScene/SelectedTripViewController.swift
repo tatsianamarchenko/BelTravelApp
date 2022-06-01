@@ -66,6 +66,7 @@ class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
 		title = trip?.locationName
 		loadPhotos()
 		loadParticipants()
+		setLabels()
 		makePhotosCollection()
 		makeParticipantsCollection()
 	}
@@ -75,7 +76,9 @@ class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
 	var photosArray = [UIImage]()
 	var participantsArray = [FullInformationAppUser]()
 
+	@IBOutlet weak var withLable: UILabel!
 	@IBOutlet weak var participantsCollection: UICollectionView!
+	@IBOutlet weak var generalPhotosLable: UILabel!
 	@IBOutlet weak var photosCollection: UICollectionView!
 
 	func loadPhotos() {
@@ -92,6 +95,11 @@ class SelectedTripViewController: UIViewController, SelectedTripDisplayLogic {
 		}
 		let request = SelectedTrip.Something.Request(trip: trip)
 		interactor?.loadParticipants(request: request)
+	}
+
+	func setLabels() {
+		withLable.text = NSLocalizedString("withLable", comment: "")
+		generalPhotosLable.text = NSLocalizedString("generalPhotosLable", comment: "")
 	}
 
 	func displayPhotos(viewModel: SelectedTrip.Something.ViewModel) {
@@ -185,12 +193,12 @@ extension SelectedTripViewController: UICollectionViewDelegate, UICollectionView
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == photosCollection {
-			return CGSize(width: 150, height: 150)
+			return Constants.share.imageSize
 		}
 		if collectionView == participantsCollection {
-			return CGSize(width: 200, height: 100)
+			return Constants.share.participantCellSize
 		}
-		return CGSize(width: 150, height: 150)
+		 return Constants.share.imageSize
 	}
 
 	func collectionView(_ collectionView: UICollectionView,
@@ -216,8 +224,5 @@ extension SelectedTripViewController: UICollectionViewDelegate, UICollectionView
 		}
 		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 	}
-
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-	}
+	
 }

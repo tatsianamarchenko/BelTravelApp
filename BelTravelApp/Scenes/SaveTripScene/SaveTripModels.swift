@@ -12,21 +12,16 @@
 
 import UIKit
 
-enum SaveTrip
-{
+enum SaveTrip {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Something {
+    struct Request {
 		var photos: [UIImage]?
     }
-    struct Response
-    {
+    struct Response {
     }
-    struct ViewModel
-    {
+    struct ViewModel {
     }
   }
 }

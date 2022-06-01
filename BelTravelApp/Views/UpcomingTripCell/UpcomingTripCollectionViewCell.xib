@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="263" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back1" translatesAutoresizingMaskIntoConstraints="NO" id="biL-je-dNg">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="biL-je-dNg">
                         <rect key="frame" x="5" y="10" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="W8m-HO-KDV"/>
@@ -74,7 +74,4 @@
             <point key="canvasLocation" x="292.02898550724638" y="79.6875"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="back1" width="2500" height="1667"/>
-    </resources>
 </document>

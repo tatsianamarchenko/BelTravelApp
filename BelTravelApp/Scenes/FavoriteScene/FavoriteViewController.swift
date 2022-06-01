@@ -64,13 +64,15 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		makeFavoriteTableView()
+		setLabels()
 	}
 
 	// MARK: Do something
 
-	@IBOutlet weak var noLocationsInfavoriteLable: UILabel!
-	@IBOutlet weak var favoriteTableView: UITableView!
+	@IBOutlet weak var wantToVisitLable: UILabel!
 
+	@IBOutlet weak var favoriteTableView: UITableView!
+	@IBOutlet weak var noLocationsInFavoriteLable: UILabel!
 	var favoritePlacesArray = [Location]()
 
 	func loadFavorite() {
@@ -82,6 +84,11 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
 		favoriteTableView.dataSource = self
 		let nib = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
 		favoriteTableView.register(nib, forCellReuseIdentifier: FavoriteTableViewCell.identifier)
+	}
+
+	func setLabels() {
+		wantToVisitLable.text = NSLocalizedString("wantToVisitLable", comment: "")
+		noLocationsInFavoriteLable.text = NSLocalizedString("noLocationsInFavorite", comment: "")
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +112,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if !favoritePlacesArray.isEmpty {
-			noLocationsInfavoriteLable.isHidden = true
+			noLocationsInFavoriteLable.isHidden = true
 		}
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.identifier, for: indexPath) as? FavoriteTableViewCell else {
 			return UITableViewCell()
@@ -115,7 +122,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		70
+		Constants.share.tableHeight
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

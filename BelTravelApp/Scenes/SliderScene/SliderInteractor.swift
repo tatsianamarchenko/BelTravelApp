@@ -12,26 +12,20 @@
 
 import UIKit
 
-protocol SliderBusinessLogic
-{
+protocol SliderBusinessLogic {
   func doSomething(request: Slider.Something.Request)
 }
 
-protocol SliderDataStore
-{
-  //var name: String { get set }
+protocol SliderDataStore {
 }
 
-class SliderInteractor: SliderBusinessLogic, SliderDataStore
-{
+class SliderInteractor: SliderBusinessLogic, SliderDataStore {
   var presenter: SliderPresentationLogic?
   var worker: SliderWorker?
-  //var name: String = ""
   
   // MARK: Do something
   
-  func doSomething(request: Slider.Something.Request)
-  {
+  func doSomething(request: Slider.Something.Request) {
     worker = SliderWorker()
     worker?.doSomeWork()
     

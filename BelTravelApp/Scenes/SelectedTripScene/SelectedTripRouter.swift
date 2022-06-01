@@ -12,49 +12,15 @@
 
 import UIKit
 
-@objc protocol SelectedTripRoutingLogic
-{
-	//func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol SelectedTripRoutingLogic {
 }
 
-protocol SelectedTripDataPassing
-{
-  var dataStore: SelectedTripDataStore? { get }
+protocol SelectedTripDataPassing {
+	var dataStore: SelectedTripDataStore? { get }
 }
 
-class SelectedTripRouter: NSObject, SelectedTripRoutingLogic, SelectedTripDataPassing
-{
-  weak var viewController: SelectedTripViewController?
-  var dataStore: SelectedTripDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+class SelectedTripRouter: NSObject, SelectedTripRoutingLogic, SelectedTripDataPassing {
+	weak var viewController: SelectedTripViewController?
+	var dataStore: SelectedTripDataStore?
 
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: SelectedTripViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: SelectedTripDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
 }

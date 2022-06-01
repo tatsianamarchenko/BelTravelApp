@@ -12,44 +12,39 @@
 
 import UIKit
 
-@objc protocol AllLocationsRoutingLogic
-{
+@objc protocol AllLocationsRoutingLogic {
   func routeToSelectedPlaceViewcontroller()
 }
 
-protocol AllLocationsDataPassing
-{
+protocol AllLocationsDataPassing {
   var dataStore: AllLocationsDataStore? { get }
 }
 
-class AllLocationsRouter: NSObject, AllLocationsRoutingLogic, AllLocationsDataPassing
-{
-  weak var viewController: AllLocationsViewController?
-  var dataStore: AllLocationsDataStore?
-  
-  // MARK: Routing
-  
-  func routeToSelectedPlaceViewcontroller() {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as! SelectedPlaceViewController
-	  destinationVC.location = dataStore?.location
-	  destinationVC.region = dataStore?.region
-      var destinationDS = destinationVC.router!.dataStore!
-      passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-      navigateToSomewhere(source: viewController!, destination: destinationVC)
-  }
+class AllLocationsRouter: NSObject, AllLocationsRoutingLogic, AllLocationsDataPassing {
+	weak var viewController: AllLocationsViewController?
+	var dataStore: AllLocationsDataStore?
 
-  // MARK: Navigation
-  
-  func navigateToSomewhere(source: AllLocationsViewController, destination: SelectedPlaceViewController) {
-	  source.navigationController?.pushViewController(destination, animated: true)
-  }
-  
-  // MARK: Passing data
-  
-  func passDataToSomewhere(source: AllLocationsDataStore, destination: inout SelectedPlaceDataStore)
-  {
-	  destination.location = source.location
-	  destination.region = source.region
-  }
+	// MARK: Routing
+
+	func routeToSelectedPlaceViewcontroller() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SelectedPlaceViewController") as? SelectedPlaceViewController
+		destinationVC?.location = dataStore?.location
+		destinationVC?.region = dataStore?.region
+		var destinationDS = destinationVC?.router!.dataStore!
+		passDataToSomewhere(source: dataStore!, destination: &destinationDS!)
+		navigateToSomewhere(source: viewController!, destination: destinationVC!)
+	}
+
+	// MARK: Navigation
+	func navigateToSomewhere(source: AllLocationsViewController, destination: SelectedPlaceViewController) {
+		source.navigationController?.pushViewController(destination, animated: true)
+	}
+
+	// MARK: Passing data
+
+	func passDataToSomewhere(source: AllLocationsDataStore, destination: inout SelectedPlaceDataStore) {
+		destination.location = source.location
+		destination.region = source.region
+	}
 }

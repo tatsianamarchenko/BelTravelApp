@@ -12,24 +12,19 @@
 
 import UIKit
 
-enum ReadyToFinishTrip
-{
+enum ReadyToFinishTrip {
 	// MARK: Use cases
 	
-	enum Something
-	{
-		struct Request
-		{
+	enum Something {
+		struct Request {
 			var trip: NewTrip?
 			var user: FullInformationAppUser?
 		}
-		struct Response
-		{
+		struct Response {
 			var result: Error?
 			var participants: [FullInformationAppUser]?
 		}
-		struct ViewModel
-		{
+		struct ViewModel {
 			var result: Error?
 			var participants:  [FullInformationAppUser]?
 		}

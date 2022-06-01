@@ -13,26 +13,26 @@
 import UIKit
 
 @objc protocol RegistrationRoutingLogic {
-  func routeToTabBarViewController()
+	func routeToTabBarViewController()
 }
 
 protocol RegistrationDataPassing {
-  var dataStore: RegistrationDataStore? { get }
+	var dataStore: RegistrationDataStore? { get }
 }
 
 class RegistrationRouter: NSObject, RegistrationRoutingLogic, RegistrationDataPassing {
 	weak var viewController: RegistrationViewController?
 	var dataStore: RegistrationDataStore?
-
+	
 	// MARK: Routing
-
+	
 	func routeToTabBarViewController (){
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-		destinationVC.modalPresentationStyle = .fullScreen
-		navigateToTabBarViewController(source: viewController!, destination: destinationVC)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+		destinationVC?.modalPresentationStyle = .fullScreen
+		navigateToTabBarViewController(source: viewController!, destination: destinationVC!)
 	}
-
+	
 	// MARK:  Navigation
 	
 	func navigateToTabBarViewController(source: RegistrationViewController, destination: TabBarViewController) {
