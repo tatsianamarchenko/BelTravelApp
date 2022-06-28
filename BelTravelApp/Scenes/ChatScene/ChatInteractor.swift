@@ -36,7 +36,7 @@ class ChatInteractor: ChatBusinessLogic, ChatDataStore {
 		worker = ChatWorker()
 		worker?.doSomeWork()
 		
-		FirebaseDatabaseManager.shered.getAllMesages(tripInformation: request.tripInfo) { [weak self] messages in
+		MessageManager.shered.getAllMesages(tripInformation: request.tripInfo) { [weak self] messages in
 			let response = Chat.Something.Response(messages: messages, isSended: nil, message: nil)
 			self?.presenter?.presentMesaages(response: response)
 		}
@@ -44,7 +44,7 @@ class ChatInteractor: ChatBusinessLogic, ChatDataStore {
 	
 	func sendMessage(request: Chat.Something.Request) {
 		
-		FirebaseDatabaseManager.shered.sendMessage(tripInformation: request.tripInfo, message: request.message!, messageText: request.messageText!) { [weak self] result in
+		MessageManager.shered.sendMessage(tripInformation: request.tripInfo, message: request.message!, messageText: request.messageText!) { [weak self] result in
 			let response = Chat.Something.Response(messages: nil, isSended: result, message: request.message)
 			self?.presenter?.presentIsSended(response: response)
 		}

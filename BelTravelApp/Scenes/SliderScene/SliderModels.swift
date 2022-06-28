@@ -13,7 +13,6 @@
 import UIKit
 
 enum Slider {
-	// MARK: Use cases
 	
 	enum Something {
 		struct Request {

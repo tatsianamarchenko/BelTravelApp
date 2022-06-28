@@ -18,30 +18,14 @@ class RegionCollectionViewCell: UICollectionViewCell {
 	}
 
 	func config(model: Region) {
-		regionBoardsImage.image = model.image.getImage()
+		regionBoardsImage.image = model.image
 		regionNameLable.text = model.name
+		layer.borderWidth = 0
+		layer.shadowColor = UIColor.systemGray.cgColor
+		layer.shadowOffset = CGSize(width: 0.3, height: 0)
+		layer.shadowRadius = 3
+		layer.shadowOpacity = 0.5
+		layer.cornerRadius = 15
+		layer.masksToBounds = false
 	}
-
 }
-
-struct Region {
-	var image: Image
-	var name: String
-	var identifier: String
-
-}
-
-struct Image: Codable {
-  let imageData: Data?
-  init(withImage image: UIImage) {
-	self.imageData = image.pngData()
-  }
-  func getImage() -> UIImage? {
-	guard let imageData = self.imageData else {
-	  return nil
-	}
-	let image = UIImage(data: imageData)
-	return image
-  }
-}
-

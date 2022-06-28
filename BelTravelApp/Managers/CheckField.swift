@@ -1,10 +1,10 @@
 import UIKit
 
-class CheckField{
+class CheckField {
     
     static let shared = CheckField()
 
-    private func isValid(_ type: String, _ data: String) -> Bool{
+    private func isValid(_ type: String, _ data: String) -> Bool {
         var dataRegEx = ""
         switch type {
         case "e":
@@ -12,16 +12,16 @@ class CheckField{
         default:
             dataRegEx = "(?=.*[A-Z0-9a-z]).{6,}"
         }
-        let dataPred = NSPredicate(format:"SELF MATCHES %@", dataRegEx)
+        let dataPred = NSPredicate(format: "SELF MATCHES %@", dataRegEx)
         return dataPred.evaluate(with: data)
     }
 
-    func validField(_ parentView: UIView, _ field: UITextField) -> Bool{
+    func validField(_ parentView: UIView, _ field: UITextField) -> Bool {
         let id = field.restorationIdentifier
         
         switch id {
         case "name":
-            if field.text?.count ?? 0 < 3{
+            if field.text?.count ?? 0 < 3 {
                 validView(parentView, field, false)
                 return false
             } else {
@@ -45,7 +45,7 @@ class CheckField{
                 return false
             }
         default:
-            if field.text?.count ?? 0 < 2{
+            if field.text?.count ?? 0 < 2 {
                 validView(parentView, field, false)
                 return false
             } else {
@@ -55,8 +55,8 @@ class CheckField{
         }
     }
 
-	private func validView(_ parentView: UIView, _ field: UITextField, _ valid: Bool){
-        if valid{
+	private func validView(_ parentView: UIView, _ field: UITextField, _ valid: Bool) {
+        if valid {
             field.backgroundColor = #colorLiteral(red: 0.862870574, green: 0.725133419, blue: 0.9991236329, alpha: 1)
             parentView.backgroundColor = #colorLiteral(red: 0.862870574, green: 0.725133419, blue: 0.9991236329, alpha: 1)
 

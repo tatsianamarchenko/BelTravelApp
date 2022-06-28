@@ -143,33 +143,41 @@ class RegistrationViewController: UIViewController, RegistrationDisplayLogic {
 
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-	func photoWithCamera(){
-		let vc = UIImagePickerController()
-		vc.sourceType = .camera
-		vc.delegate = self
-		vc.allowsEditing = true
-		present(vc, animated: true)
-	}
-	func photoFromLibrary(){
-		let vc = UIImagePickerController()
-		vc.sourceType = .photoLibrary
-		vc.delegate = self
-		vc.allowsEditing = true
-		present(vc, animated: true)
+	private func photoWithCamera() {
+		let viewController = UIImagePickerController()
+		viewController.sourceType = .camera
+		viewController.delegate = self
+		viewController.allowsEditing = true
+		self.present(viewController, animated: true)
 	}
 
-	func presentPhoto(){
-		let choose = UIAlertController(title: "Profile Photo", message: "How would you like to select a photo?", preferredStyle: .actionSheet)
-		let library = UIAlertAction(title: "photo library", style: .default, handler: {[weak self] _ in self?.photoFromLibrary() } )
-		let camera = UIAlertAction(title: "take photo", style: .default, handler: {[weak self] _ in self?.photoWithCamera()} )
+	private func photoFromLibrary() {
+		let viewController = UIImagePickerController()
+		viewController.sourceType = .photoLibrary
+		viewController.delegate = self
+		viewController.allowsEditing = true
+		self.present(viewController, animated: true)
+	}
+
+	func presentPhoto() {
+		let choose = UIAlertController(title: "Profile Photo",
+									   message: "How would you like to select a photo?",
+									   preferredStyle: .actionSheet)
+		let library = UIAlertAction(title: "photo library", style: .default) { [weak self] _ in
+			self?.photoFromLibrary()
+		}
+		let camera = UIAlertAction(title: "take photo", style: .default) { [weak self] _ in
+			self?.photoWithCamera()
+		}
 		let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
 		choose.addAction(library)
 		choose.addAction(camera)
 		choose.addAction(cancel)
-		present(choose, animated: true)
+		self.present(choose, animated: true)
 	}
 
-	func imagePickerController (_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any] ) {
+	func imagePickerController (_ picker: UIImagePickerController,
+								didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		picker.dismiss(animated: true, completion: nil)
 		guard  let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
 			return

@@ -11,7 +11,6 @@ class FavoriteTableViewCell: UITableViewCell {
 
 	static let identifier = "FavoriteTableViewCell"
 
-
 	@IBOutlet weak var nameLable: UILabel!
 	@IBOutlet weak var typeLable: UILabel!
 	@IBOutlet weak var placePhoto: UIImageView!

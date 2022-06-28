@@ -24,11 +24,11 @@ class SelectedTripPresenter: SelectedTripPresentationLogic {
 
 	func presentImages(response: SelectedTrip.Something.Response) {
 		let viewModel = SelectedTrip.Something.ViewModel(images: response.images)
-		viewController?.displayPhotos (viewModel: viewModel)
+		viewController?.displayPhotos(viewModel: viewModel)
 	}
 
 	func presentParticipants(response: SelectedTrip.Something.Response) {
 		let viewModel = SelectedTrip.Something.ViewModel(users: response.users)
-		viewController?.displayParticipants (viewModel: viewModel)
+		viewController?.displayParticipants(viewModel: viewModel)
 	}
 }

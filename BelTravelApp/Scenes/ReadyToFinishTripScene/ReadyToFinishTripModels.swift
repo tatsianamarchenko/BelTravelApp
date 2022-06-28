@@ -13,7 +13,6 @@
 import UIKit
 
 enum ReadyToFinishTrip {
-	// MARK: Use cases
 	
 	enum Something {
 		struct Request {

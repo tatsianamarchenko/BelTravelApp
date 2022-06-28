@@ -101,8 +101,8 @@ class AuthorizationViewController: UIViewController, AuthorizationDisplayLogic {
 	@IBAction func authorizationButtonAction(_ sender: UIButton) {
 		if checkField.validField(emailView, emailTextField),
 		   checkField.validField(passwordView, passwordTextField) {
-			
-			let request = Authorization.Something.Request(email: emailTextField.text ?? "", passward: passwordTextField.text ?? "")
+			let request = Authorization.Something.Request(email: emailTextField.text ?? "",
+														  passward: passwordTextField.text ?? "")
 			interactor?.doSomething(request: request)
 		}
 	}

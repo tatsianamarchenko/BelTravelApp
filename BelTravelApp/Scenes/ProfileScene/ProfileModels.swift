@@ -13,7 +13,6 @@
 import UIKit
 
 enum Profile {
-  // MARK: Use cases
   
   enum Something {
     struct Request {

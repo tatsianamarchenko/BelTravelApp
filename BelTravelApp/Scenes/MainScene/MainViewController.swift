@@ -81,12 +81,12 @@ class MainViewController: UIViewController, MainDisplayLogic {
 						 forAnnotationViewWithReuseIdentifier: NSStringFromClass(MapPinAnnotation.self))
 	}
 
-	let regions = [Region(image: Image(withImage: UIImage(named: "Minsk")!), name: "Minsk", identifier: "MinskRegion"),
-				   Region(image: Image(withImage: UIImage(named: "Brest")!), name: "Brest", identifier: "BrestRegion"),
-				   Region(image: Image(withImage: UIImage(named: "Vitebsk")!), name: "Vitebsk", identifier: "VitebskRegion"),
-				   Region(image: Image(withImage: UIImage(named: "Gomel")!), name: "Gomel", identifier: "GomelRegion"),
-				   Region(image: Image(withImage: UIImage(named: "Grodno")!), name: "Grodno", identifier: "GrodnoRegion"),
-				   Region(image: Image(withImage: UIImage(named: "Mogilev")!), name: "Mogilev", identifier: "MogilevRegion")
+	let regions = [Region(image: UIImage(named: "Minsk")!, name: "Minsk", identifier: "MinskRegion"),
+				   Region(image: UIImage(named: "Brest")!, name: "Brest", identifier: "BrestRegion"),
+				   Region(image: UIImage(named: "Vitebsk")!, name: "Vitebsk", identifier: "VitebskRegion"),
+				   Region(image: UIImage(named: "Gomel")!, name: "Gomel", identifier: "GomelRegion"),
+				   Region(image: UIImage(named: "Grodno")!, name: "Grodno", identifier: "GrodnoRegion"),
+				   Region(image: UIImage(named: "Mogilev")!, name: "Mogilev", identifier: "MogilevRegion")
 	]
 	var popularPlaces = [Location]()
 	var createdTrips = [NewTrip]()
@@ -104,7 +104,7 @@ class MainViewController: UIViewController, MainDisplayLogic {
 	@IBAction func allLocationButtonAction(_ sender: Any) {
 		router?.routeToAllLocationsViewController()
 	}
-	
+
 	func makeRegionsCollection () {
 		let nib = UINib(nibName: "RegionCollectionViewCell", bundle: nil)
 		regionsCollection.register(nib, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
@@ -207,13 +207,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 				return UICollectionViewCell()
 			}
 			cell.config(model: regions[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
 
@@ -223,14 +216,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 					as? PlaceCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-			cell.imageOfLocation.image = popularPlaces[indexPath.row].image
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
+			cell.config(image: popularPlaces[indexPath.row].image)
 			return cell
 		}
 
@@ -244,13 +230,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 				return UICollectionViewCell()
 			}
 			cell.config(model: createdTrips[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
 
@@ -296,29 +275,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == regionsCollection {
-			if	regions[indexPath.row].identifier == "MinskRegion" {
-				regionName = "MinskRegion"
-				self.viewDidLoad()
-			} else if regions[indexPath.row].identifier == "BrestRegion" {
-				regionName = "BrestRegion"
-				self.viewDidLoad()
-			}
-			else if regions[indexPath.row].identifier == "VitebskRegion" {
-				regionName = "VitebskRegion"
-				self.viewDidLoad()
-			}
-			else if regions[indexPath.row].identifier == "GrodnoRegion" {
-				regionName = "GrodnoRegion"
-				self.viewDidLoad()
-			}
-			else if regions[indexPath.row].identifier == "GomelRegion" {
-				regionName = "GomelRegion"
-				self.viewDidLoad()
-			}
-			else if regions[indexPath.row].identifier == "MogilevRegion" {
-				regionName = "MogilevRegion"
-				self.viewDidLoad()
-			}
+			regionName = regions[indexPath.row].identifier
+			self.viewDidLoad()
 		}
 
 		if collectionView == popularPlacesCollection {

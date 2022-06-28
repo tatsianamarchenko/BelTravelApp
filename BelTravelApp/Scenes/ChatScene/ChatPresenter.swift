@@ -26,8 +26,7 @@ class ChatPresenter: ChatPresentationLogic {
 		let viewModel = Chat.Something.ViewModel(messages: response.messages!, message: nil)
 		viewController?.displayMessages(viewModel: viewModel)
 	}
-	
-	
+
 	func presentIsSended(response: Chat.Something.Response) {
 		let viewModel = Chat.Something.ViewModel(messages: response.messages, message: response.message)
 		viewController?.displayNewMessages(viewModel: viewModel)

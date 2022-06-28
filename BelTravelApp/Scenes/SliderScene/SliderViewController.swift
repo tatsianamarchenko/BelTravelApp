@@ -92,7 +92,8 @@ class SliderViewController: UIViewController, SliderDisplayLogic {
 		slidersCollectionView.delegate = self
 		slidersCollectionView.dataSource = self
 
-		slidersCollectionView.register(UINib(nibName: SliderCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: SliderCollectionViewCell.identifier)
+		slidersCollectionView.register(UINib(nibName: SliderCollectionViewCell.identifier, bundle: nil),
+									   forCellWithReuseIdentifier: SliderCollectionViewCell.identifier)
 		slidersCollectionView.showsHorizontalScrollIndicator = false
 		slidersCollectionView.isPagingEnabled = true
 		slidersCollectionView.backgroundColor = .clear
@@ -113,7 +114,8 @@ extension SliderViewController: UICollectionViewDelegate, UICollectionViewDataSo
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-	guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SliderCollectionViewCell.identifier, for: indexPath) as? SliderCollectionViewCell else {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SliderCollectionViewCell.identifier,
+															for: indexPath) as? SliderCollectionViewCell else {
 			return UICollectionViewCell()
 		}
 		cell.config(model: (sliderPages?[indexPath.row])!)
@@ -122,7 +124,9 @@ extension SliderViewController: UICollectionViewDelegate, UICollectionViewDataSo
 		return cell
 	}
 
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return self.view.frame.size
 	}
 

@@ -20,21 +20,21 @@ protocol OtherUserDisplayLogic: AnyObject {
 class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 	var interactor: OtherUserBusinessLogic?
 	var router: (NSObjectProtocol & OtherUserRoutingLogic & OtherUserDataPassing)?
-
+	
 	// MARK: Object lifecycle
-
+	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 		setup()
 	}
-
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
 	}
-
+	
 	// MARK: Setup
-
+	
 	private func setup() {
 		let viewController = self
 		let interactor = OtherUserInteractor()
@@ -47,9 +47,9 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 		router.viewController = viewController
 		router.dataStore = interactor
 	}
-
+	
 	// MARK: Routing
-
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let scene = segue.identifier {
 			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
@@ -58,9 +58,9 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 			}
 		}
 	}
-
+	
 	// MARK: View lifecycle
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadTripsInformation()
@@ -71,14 +71,14 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 		title = user?.name
 		setLabels()
 	}
-
+	
 	// MARK: Do something
-
+	
 	var user: FullInformationAppUser?
 	var photosArray = [UIImage]()
 	var upcomingTripsArray = [NewTrip]()
 	var finishedTripsArray = [NewTrip]()
-
+	
 	@IBOutlet weak var userPhoto: UIImageView!
 	@IBOutlet weak var tripsCollection: UICollectionView!
 	@IBOutlet weak var noTripsLable: UILabel!
@@ -86,121 +86,106 @@ class OtherUserViewController: UIViewController, OtherUserDisplayLogic {
 	@IBOutlet weak var finishedTripsCollection: UICollectionView!
 	@IBOutlet weak var defaultLocationLable: UILabel!
 	@IBOutlet weak var noFinishedTripsLable: UILabel!
-
+	
 	func makeTripsCollection () {
 		tripsCollection.delegate = self
 		tripsCollection.dataSource = self
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		tripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
-
+	
 	func makeFinishedTripsCollection () {
 		finishedTripsCollection.delegate = self
 		finishedTripsCollection.dataSource = self
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		finishedTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
-
+	
 	func setLabels() {
 		defaultLocationLable.text = NSLocalizedString("locationLable", comment: "")
 		noTripsLable.text = NSLocalizedString("noUpcomingTripsLable", comment: "")
 		noFinishedTripsLable.text = NSLocalizedString("noFinishedTripsLable", comment: "")
 	}
-
+	
 	func loadTripsInformation() {
 		let request = OtherUser.Something.Request()
 		interactor?.loadTrips(request: request)
 	}
-
+	
 	func	displayTrips(viewModel: OtherUser.Something.ViewModel) {
 		upcomingTripsArray = viewModel.upcomingTrips!
 		finishedTripsArray = viewModel.finishedTrips!
 		tripsCollection.reloadData()
 		finishedTripsCollection.reloadData()
 	}
-
+	
 	func displayFinishTrip() {
 		router?.routeToSelectedFinishedTripViewController()
 	}
 }
 
 extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if collectionView == tripsCollection {
 			return upcomingTripsArray.count
 		}
-
+		
 		if collectionView == finishedTripsCollection {
 			return finishedTripsArray.count
 		}
-
+		
 		return 0
 	}
-
+	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-
+		
 		if collectionView == tripsCollection {
 			if !upcomingTripsArray.isEmpty {
 				noTripsLable.isHidden = true
 			}
-
+			
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-
+			
 			cell.config(model: upcomingTripsArray[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
-
+		
 		if collectionView == finishedTripsCollection {
 			if !finishedTripsArray.isEmpty {
 				noFinishedTripsLable.isHidden = true
 			} else {
 				noFinishedTripsLable.isHidden = false
 			}
-
+			
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-
+			
 			cell.config(model: finishedTripsArray[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
-
+		
 		return UICollectionViewCell()
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return Constants.share.profileImageSize
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -211,15 +196,15 @@ extension OtherUserViewController: UICollectionViewDelegate, UICollectionViewDat
 						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return 20
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+		
 		if collectionView == finishedTripsCollection {
 			let request = OtherUser.Something.Request(finishedTrip: finishedTripsArray[indexPath.row])
 			interactor?.setFinishTrip(request: request)

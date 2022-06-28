@@ -9,17 +9,18 @@ import Foundation
 import UIKit
 
 class Constants {
-	static var share = Constants()
-	var tableHeight: CGFloat = 70
-	var imageSize = CGSize(width: 150, height: 150)
-	var profileImageSize = CGSize(width: 250, height: 100)
-	var participantCellSize = CGSize(width: 200, height: 50)
-	var userCollection = "users"
-	var participantsCollection = "participants"
-	var favoriteCollection = "Favorite"
-	var photosCollection = "photos"
-	var favoriteField = "favorite"
-	var referenceField = "ref"
-	var userTripsCollection = "TripsByUser"
-	var messagesCollection = "messages"
+	static let share = Constants()
+	let tableHeight: CGFloat = 70
+	let imageSize = CGSize(width: 150, height: 150)
+	let profileImageSize = CGSize(width: 250, height: 100)
+	let participantCellSize = CGSize(width: 200, height: 50)
+	let userCollection = "users"
+	let participantsCollection = "participants"
+	let favoriteCollection = "Favorite"
+	let photosCollection = "photos"
+	let favoriteField = "favorite"
+	let referenceField = "ref"
+	let userTripsCollection = "TripsByUser"
+	let messagesCollection = "messages"
+	let favoriteByUsersCollection = "FavoriteByUsers"
 }

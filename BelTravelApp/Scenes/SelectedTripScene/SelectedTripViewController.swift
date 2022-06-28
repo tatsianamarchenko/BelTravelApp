@@ -159,14 +159,7 @@ extension SelectedTripViewController: UICollectionViewDelegate, UICollectionView
 					as? PlaceCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-			cell.imageOfLocation.image = photosArray[indexPath.row]
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
+			cell.config(image: photosArray[indexPath.row])
 			return cell
 		}
 
@@ -177,13 +170,6 @@ extension SelectedTripViewController: UICollectionViewDelegate, UICollectionView
 				return UICollectionViewCell()
 			}
 			cell.config(model: participantsArray[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
 		return UICollectionViewCell()
@@ -224,5 +210,4 @@ extension SelectedTripViewController: UICollectionViewDelegate, UICollectionView
 		}
 		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 	}
-	
 }

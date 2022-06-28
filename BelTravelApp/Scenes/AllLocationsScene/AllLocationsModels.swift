@@ -13,8 +13,7 @@
 import UIKit
 
 enum AllLocations {
-	// MARK: Use cases
-
+	
 	enum Something {
 		struct Request {
 			var region: String?

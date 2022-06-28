@@ -135,9 +135,6 @@ class ReadyToFinishTripViewController: UIViewController, ReadyToFinishTripDispla
 		if viewModel.result == nil {
 			router?.routeToProfileViewController(source: self)
 		}
-		else {
-			print(viewModel.result as Any)
-		}
 	}
 	
 	func displayUserViewController() {
@@ -169,13 +166,6 @@ extension ReadyToFinishTripViewController: UICollectionViewDelegate, UICollectio
 		}
 		
 		cell.config(model: participantsArray[indexPath.row])
-		cell.layer.borderWidth = 0
-		cell.layer.shadowColor = UIColor.systemGray.cgColor
-		cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-		cell.layer.shadowRadius = 3
-		cell.layer.shadowOpacity = 0.5
-		cell.layer.cornerRadius = 15
-		cell.layer.masksToBounds = false
 		return cell
 	}
 	

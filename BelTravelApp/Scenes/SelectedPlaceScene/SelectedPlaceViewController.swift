@@ -190,14 +190,6 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 				return UICollectionViewCell()
 			}
 			cell.config(model: peopleWhoWansToParticipate[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
-			cell.clipsToBounds = true
 			return cell
 		}
 
@@ -211,16 +203,7 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 					as? PlaceCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-			cell.imageOfLocation.image = photosOfOtherUsers[indexPath.row]
-
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
-			cell.clipsToBounds = true
+			cell.config(image: photosOfOtherUsers[indexPath.row])
 			return cell
 		}
 
@@ -260,7 +243,15 @@ extension SelectedPlaceViewController: UICollectionViewDelegate, UICollectionVie
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == whoWantToVisitThisPlaceCollection {
-			let request = SelectedPlace.Something.Request(location: location!, region: region!, user: peopleWhoWansToParticipate[indexPath.row])
+			guard let location = location else {
+				return
+			}
+			guard let region = region else {
+				return
+			}
+			let request = SelectedPlace.Something.Request(location: location,
+														  region: region,
+														  user: peopleWhoWansToParticipate[indexPath.row])
 			interactor?.setUser(request: request)
 		}
 	}

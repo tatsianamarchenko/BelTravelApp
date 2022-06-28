@@ -114,7 +114,7 @@ class CreateTripViewController: UIViewController, CreateTripDisplayLogic {
 		router?.routeToMainViewController()
 	}
 
-	func setLabels() {
+	private func setLabels() {
 		timeLable.text = NSLocalizedString("timeLable", comment: "")
 		maxPeopleLable.text = NSLocalizedString("maxPeopleLable", comment: "")
 		descriptionLable.text = NSLocalizedString("descriptionLable", comment: "")

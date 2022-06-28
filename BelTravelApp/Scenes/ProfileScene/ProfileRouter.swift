@@ -34,8 +34,6 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing {
 		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SliderViewController") as? SliderViewController
 
 		destinationVC?.modalPresentationStyle = .fullScreen
-		var destinationDS = destinationVC?.router!.dataStore!
-		passDataToSomewhere(source: dataStore!, destination: &destinationDS!)
 		navigateToSomewhere(source: viewController!, destination: destinationVC!)
 	}
 
@@ -43,12 +41,6 @@ class ProfileRouter: NSObject, ProfileRoutingLogic, ProfileDataPassing {
 
 	func navigateToSomewhere(source: ProfileViewController, destination: SliderViewController) {
 		source.present(destination, animated: true)
-	}
-
-	// MARK: Passing data
-
-	func passDataToSomewhere(source: ProfileDataStore, destination: inout SliderDataStore) {
-		//    destination.name = source.name
 	}
 
 	func routeToSelectedFinishedTripViewController() {

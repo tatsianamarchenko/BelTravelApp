@@ -26,7 +26,7 @@ class RegistrationInteractor: RegistrationBusinessLogic, RegistrationDataStore {
 	// MARK: Do something
 
 	func createNewUser(request: Registration.Something.Request) {
-		FirebaseAuthManager.shered.insertNewUser(with: FirebaseAuthManager.AppUserAuthorization(email: request.email,
+		FirebaseAuthManager.shered.insertNewUser(with: AppUserAuthorization(email: request.email,
 																								passward: request.passward),
 												 fullInformationAboutUser: FullInformationAppUser(email: request.email,
 																								  name: request.name,

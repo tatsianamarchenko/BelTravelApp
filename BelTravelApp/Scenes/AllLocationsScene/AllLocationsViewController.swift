@@ -117,14 +117,7 @@ extension AllLocationsViewController: UICollectionViewDelegate, UICollectionView
 				as? PlaceCollectionViewCell else {
 			return UICollectionViewCell()
 		}
-		cell.imageOfLocation.image = locationsArray[indexPath.row].image
-		cell.layer.borderWidth = 0
-		cell.layer.shadowColor = UIColor.systemGray.cgColor
-		cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-		cell.layer.shadowRadius = 3
-		cell.layer.shadowOpacity = 0.5
-		cell.layer.cornerRadius = 15
-		cell.layer.masksToBounds = false
+		cell.config(image: locationsArray[indexPath.row].image)
 		return cell
 	}
 

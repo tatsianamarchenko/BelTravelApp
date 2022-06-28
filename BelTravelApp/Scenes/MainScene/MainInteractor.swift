@@ -60,7 +60,6 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 		self.presenter?.presentNewTripInformation()
 	}
 
-
 	func loadCreatedTrips(request: Main.Something.Request) {
 		FirebaseDatabaseManager.shered.fetchCreatedTrips(collection: request.region) { [weak self] new  in
 			let response = Main.Something.Response(locations: nil, new: new)
@@ -74,7 +73,9 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 				return
 			}
 			let loc = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
-			let response = Main.Something.Response(location: MapPinAnnotation(title: location.name, location: location, coordinate: loc))
+			let response = Main.Something.Response(location: MapPinAnnotation(title: location.name,
+																			  location: location,
+																			  coordinate: loc))
 			self?.presenter?.presentPins(response: response)
 		}
 	}

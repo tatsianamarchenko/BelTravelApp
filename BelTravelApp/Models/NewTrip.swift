@@ -22,4 +22,3 @@ struct NewTrip {
 	var locationOfParticipants: String
 	var isActive: Bool
 }
-

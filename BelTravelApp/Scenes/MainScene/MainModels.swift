@@ -13,8 +13,7 @@
 import UIKit
 
 enum Main {
-  // MARK: Use cases
-  
+	
   enum Something {
     struct Request {
 		var region: String

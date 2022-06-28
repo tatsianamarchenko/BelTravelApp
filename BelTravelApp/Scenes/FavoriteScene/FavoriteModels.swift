@@ -13,7 +13,6 @@
 import UIKit
 
 enum Favorite {
-	// MARK: Use cases
 	
 	enum Something {
 		struct Request {

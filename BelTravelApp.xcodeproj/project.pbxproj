@@ -78,7 +78,7 @@
 		BFBF0A43283435260000559E /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A37283435260000559E /* RegistrationPresenter.swift */; };
 		BFBF0A44283435260000559E /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A38283435260000559E /* RegistrationViewController.swift */; };
 		BFBF0A462834359B0000559E /* CheckField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A452834359B0000559E /* CheckField.swift */; };
-		BFBF0A4B283437B20000559E /* MessangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A48283437B20000559E /* MessangeManager.swift */; };
+		BFBF0A4B283437B20000559E /* MessangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A48283437B20000559E /* MessangeModel.swift */; };
 		BFBF0A4C283437B20000559E /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A49283437B20000559E /* FirebaseAuthManager.swift */; };
 		BFBF0A5528343CDE0000559E /* SliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A4F28343CDE0000559E /* SliderInteractor.swift */; };
 		BFBF0A5628343CDE0000559E /* SliderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF0A5028343CDE0000559E /* SliderRouter.swift */; };
@@ -100,6 +100,9 @@
 		BFC61B4F283FC896003CF2E4 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B49283FC895003CF2E4 /* ChatInteractor.swift */; };
 		BFC61B50283FC896003CF2E4 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B4A283FC896003CF2E4 /* ChatModels.swift */; };
 		BFC61B51283FC896003CF2E4 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC61B4B283FC896003CF2E4 /* ChatRouter.swift */; };
+		BFC95649286AFDBD002A5827 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC95648286AFDBD002A5827 /* MessageManager.swift */; };
+		BFC9564B286B0578002A5827 /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9564A286B0578002A5827 /* RegionModel.swift */; };
+		BFC9564D286B05B8002A5827 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9564C286B05B8002A5827 /* ImageModel.swift */; };
 		BFCC299E282AB2B3004FE1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */; };
 		BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */; };
 		BFCC29A5282AB2B3004FE1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCC29A3282AB2B3004FE1FE /* Main.storyboard */; };
@@ -203,7 +206,7 @@
 		BFBF0A37283435260000559E /* RegistrationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		BFBF0A38283435260000559E /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		BFBF0A452834359B0000559E /* CheckField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckField.swift; sourceTree = "<group>"; };
-		BFBF0A48283437B20000559E /* MessangeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessangeManager.swift; sourceTree = "<group>"; };
+		BFBF0A48283437B20000559E /* MessangeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessangeModel.swift; sourceTree = "<group>"; };
 		BFBF0A49283437B20000559E /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		BFBF0A4F28343CDE0000559E /* SliderInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderInteractor.swift; sourceTree = "<group>"; };
 		BFBF0A5028343CDE0000559E /* SliderRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderRouter.swift; sourceTree = "<group>"; };
@@ -225,6 +228,9 @@
 		BFC61B49283FC895003CF2E4 /* ChatInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		BFC61B4A283FC896003CF2E4 /* ChatModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		BFC61B4B283FC896003CF2E4 /* ChatRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
+		BFC95648286AFDBD002A5827 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		BFC9564A286B0578002A5827 /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
+		BFC9564C286B05B8002A5827 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		BFCC299A282AB2B3004FE1FE /* BelTravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelTravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -389,8 +395,8 @@
 				BFD240B2284685DF00E9A6D3 /* Constants.swift */,
 				BFBF0A452834359B0000559E /* CheckField.swift */,
 				BFB319042832AFB500E13C65 /* FirebaseManager.swift */,
-				BFBF0A48283437B20000559E /* MessangeManager.swift */,
 				BFBF0A49283437B20000559E /* FirebaseAuthManager.swift */,
+				BFC95648286AFDBD002A5827 /* MessageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -424,6 +430,9 @@
 				BFC5D6742837FBE10099DCF6 /* Location.swift */,
 				BFC4B35A2843C2080081A3C4 /* NewTrip.swift */,
 				BFC4B35C2843C2290081A3C4 /* FullInformationUser.swift */,
+				BFBF0A48283437B20000559E /* MessangeModel.swift */,
+				BFC9564A286B0578002A5827 /* RegionModel.swift */,
+				BFC9564C286B05B8002A5827 /* ImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -459,15 +468,10 @@
 		BFCC299C282AB2B3004FE1FE /* BelTravelApp */ = {
 			isa = PBXGroup;
 			children = (
-				BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */,
-				BFD240BF2846A3D600E9A6D3 /* Localizable.strings */,
-				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
+				BFFE0952286A04B70003103F /* Supporting files */,
 				BFCC29B1282AB7F8004FE1FE /* Scenes */,
 				BFD57561282BEDEA007CBBE8 /* Views */,
-				BFCC29A6282AB2C6004FE1FE /* assets.xcassets */,
 				BFC0BF4E283794D000BFC9EC /* Models */,
-				BFCC29AB282AB2C6004FE1FE /* Info.plist */,
-				BF5B6274282C010300D5844D /* GoogleService-Info.plist */,
 				BFBF0A47283437B20000559E /* Managers */,
 			);
 			path = BelTravelApp;
@@ -626,6 +630,19 @@
 				BFCC29A8282AB2C6004FE1FE /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BFFE0952286A04B70003103F /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				BFD240BF2846A3D600E9A6D3 /* Localizable.strings */,
+				BFCC29AB282AB2C6004FE1FE /* Info.plist */,
+				BF5B6274282C010300D5844D /* GoogleService-Info.plist */,
+				BFCC29A6282AB2C6004FE1FE /* assets.xcassets */,
+				BFCC299F282AB2B3004FE1FE /* SceneDelegate.swift */,
+				BFCC299D282AB2B3004FE1FE /* AppDelegate.swift */,
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 		D83654848DCA5C41C1A7D37E /* Frameworks */ = {
@@ -801,8 +818,10 @@
 				BFCC29A0282AB2B3004FE1FE /* SceneDelegate.swift in Sources */,
 				BFA60BAE282B1E93006B3DC4 /* ProfileInteractor.swift in Sources */,
 				BFA60B8A282B1E07006B3DC4 /* SelectedTripInteractor.swift in Sources */,
+				BFC9564D286B05B8002A5827 /* ImageModel.swift in Sources */,
 				BFD49E8B284248C80092B643 /* ReadyToFinishTripRouter.swift in Sources */,
 				BFA60B95282B1E17006B3DC4 /* SelectedPlaceViewController.swift in Sources */,
+				BFC95649286AFDBD002A5827 /* MessageManager.swift in Sources */,
 				BFA7A3D9283EBEDB002F94FA /* OtherUserInteractor.swift in Sources */,
 				BFC61B51283FC896003CF2E4 /* ChatRouter.swift in Sources */,
 				BFC4B35B2843C2080081A3C4 /* NewTrip.swift in Sources */,
@@ -817,6 +836,7 @@
 				BFA60B87282B1E07006B3DC4 /* SelectedTripRouter.swift in Sources */,
 				BFBF0A5528343CDE0000559E /* SliderInteractor.swift in Sources */,
 				BFCC29C0282AF4EB004FE1FE /* MainWorker.swift in Sources */,
+				BFC9564B286B0578002A5827 /* RegionModel.swift in Sources */,
 				BFD49E95284248E50092B643 /* SaveTripPresenter.swift in Sources */,
 				BFC5D6752837FBE10099DCF6 /* Location.swift in Sources */,
 				BFBF0A40283435260000559E /* RegistrationInteractor.swift in Sources */,
@@ -862,7 +882,7 @@
 				BFA60BC2282B1EF3006B3DC4 /* CreateTripPresenter.swift in Sources */,
 				BF5B6268282BFB7F00D5844D /* PlaceCollectionViewCell.swift in Sources */,
 				BFA60BC4282B1EF3006B3DC4 /* CreateTripRouter.swift in Sources */,
-				BFBF0A4B283437B20000559E /* MessangeManager.swift in Sources */,
+				BFBF0A4B283437B20000559E /* MessangeModel.swift in Sources */,
 				BFA60BD0282B1F02006B3DC4 /* UpcomingTripInformationRouter.swift in Sources */,
 				BFA60BAB282B1E93006B3DC4 /* ProfileRouter.swift in Sources */,
 				BFCC29C1282AF4EB004FE1FE /* MainRouter.swift in Sources */,
@@ -1049,7 +1069,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WN5VMWRJC6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BelTravelApp/Info.plist;
+				INFOPLIST_FILE = "BelTravelApp/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1079,7 +1099,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WN5VMWRJC6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BelTravelApp/Info.plist;
+				INFOPLIST_FILE = "BelTravelApp/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

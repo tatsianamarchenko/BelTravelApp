@@ -8,7 +8,7 @@
 import UIKit
 
 class UpcomingTripCollectionViewCell: UICollectionViewCell {
-
+	
 	static let identifier = "UpcomingTripCollectionViewCell"
 
 	@IBOutlet weak var placeImage: UIImageView!
@@ -25,6 +25,12 @@ class UpcomingTripCollectionViewCell: UICollectionViewCell {
 		placeName.text = model.locationName
 		tripDate.text = model.time
 		quantityOfPeople.text = model.maxPeople
+		layer.borderWidth = 0
+		layer.shadowColor = UIColor.systemGray.cgColor
+		layer.shadowOffset = CGSize(width: 0.3, height: 0)
+		layer.shadowRadius = 3
+		layer.shadowOpacity = 0.5
+		layer.cornerRadius = 15
+		layer.masksToBounds = false
 	}
-
 }

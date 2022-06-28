@@ -13,8 +13,7 @@
 import UIKit
 
 enum UpcomingTripInformation {
-  // MARK: Use cases
-  
+	
   enum Something {
     struct Request {
 		var trip: NewTrip?

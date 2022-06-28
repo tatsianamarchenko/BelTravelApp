@@ -13,7 +13,6 @@
 import UIKit
 
 enum Authorization {
-	// MARK: Use cases
 	
 	enum Something {
 		struct Request {

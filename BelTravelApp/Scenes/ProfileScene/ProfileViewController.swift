@@ -24,21 +24,21 @@ protocol ProfileDisplayLogic: AnyObject {
 class ProfileViewController: UIViewController, ProfileDisplayLogic {
 	var interactor: ProfileBusinessLogic?
 	var router: (NSObjectProtocol & ProfileRoutingLogic & ProfileDataPassing)?
-
+	
 	// MARK: Object lifecycle
-
+	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 		setup()
 	}
-
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
 	}
-
+	
 	// MARK: Setup
-
+	
 	private func setup() {
 		let viewController = self
 		let interactor = ProfileInteractor()
@@ -51,9 +51,9 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		router.viewController = viewController
 		router.dataStore = interactor
 	}
-
+	
 	// MARK: Routing
-
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let scene = segue.identifier {
 			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
@@ -62,9 +62,9 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 			}
 		}
 	}
-
+	
 	// MARK: View lifecycle
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadUserInformation()
@@ -76,15 +76,15 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		makeUpcomingTripsCollection()
 		makeFinishedTripsCollection()
 	}
-
+	
 	@objc func tapped() {
 		presentPhoto()
 	}
-
+	
 	// MARK: Do something
 	var upcomingTripsArray = [NewTrip]()
 	var finishedTripsArray = [NewTrip]()
-
+	
 	var tapGesture: UITapGestureRecognizer?
 	@IBOutlet weak var locationLable: UILabel!
 	@IBOutlet weak var nameLable: UILabel!
@@ -102,17 +102,17 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 			self.router?.routeToSliderViewController()
 		}
 	}
-
+	
 	func loadUserInformation() {
 		let request = Profile.Something.Request()
 		interactor?.loadInformation(request: request)
 	}
-
+	
 	func loadTripsInformation() {
 		let request = Profile.Something.Request()
 		interactor?.loadTrips(request: request)
 	}
-
+	
 	func setLabels() {
 		locationLable.text = NSLocalizedString("defaultLocation", comment: "")
 		finishedTripsLable.text = NSLocalizedString("finishedTripsLable", comment: "")
@@ -121,129 +121,108 @@ class ProfileViewController: UIViewController, ProfileDisplayLogic {
 		noUpcomingTripsLable.text = NSLocalizedString("noUpcomingTripsLable", comment: "")
 		exitButtonOutlet.setTitle(NSLocalizedString("exitButton", comment: ""), for: .normal)
 	}
-
+	
 	func displayUserInformation(viewModel: Profile.Something.ViewModel) {
 		self.nameLable.text = "\(viewModel.name!) \(viewModel.lastName!)"
 		self.defaultLocationLable.text = viewModel.defaultLocation
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
 	}
-
+	
 	func displayNewPhotoOfUser(viewModel: Profile.Something.ViewModel) {
 		guard let image = viewModel.newImage else {return}
 		photoOfUser.image = image
 	}
-
-
+	
 	func	displayTrips(viewModel: Profile.Something.ViewModel) {
 		upcomingTripsArray = viewModel.upcomingTrips!
 		finishedTripsArray = viewModel.finishedTrips!
 		upcomingTripsCollection.reloadData()
 		finishedTripsCollection.reloadData()
 	}
-
+	
 	func makeUpcomingTripsCollection () {
 		upcomingTripsCollection.delegate = self
 		upcomingTripsCollection.dataSource = self
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		upcomingTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
-
+	
 	func makeFinishedTripsCollection () {
 		finishedTripsCollection.delegate = self
 		finishedTripsCollection.dataSource = self
 		let nib = UINib(nibName: "UpcomingTripCollectionViewCell", bundle: nil)
 		finishedTripsCollection.register(nib, forCellWithReuseIdentifier: UpcomingTripCollectionViewCell.identifier)
 	}
-
+	
 	func displayFinishTrip() {
 		router?.routeToSelectedFinishedTripViewController()
 	}
-
+	
 	func displayUpcomingTrip() {
 		router?.routeToReadyToFinishTripViewController()
 	}
 }
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if collectionView == upcomingTripsCollection {
 			return upcomingTripsArray.count
 		}
-
+		
 		if collectionView == finishedTripsCollection {
 			return finishedTripsArray.count
 		}
-
+		
 		return 0
 	}
-
+	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-
 		if collectionView == upcomingTripsCollection {
 			if !upcomingTripsArray.isEmpty {
 				noUpcomingTripsLable.isHidden = true
 			} else {
 				noUpcomingTripsLable.isHidden = false
 			}
-
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-
 			cell.config(model: upcomingTripsArray[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
-
+		
 		if collectionView == finishedTripsCollection {
 			if !finishedTripsArray.isEmpty {
 				noFinishedTripsLable.isHidden = true
 			} else {
 				noFinishedTripsLable.isHidden = false
 			}
-
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
 																	UpcomingTripCollectionViewCell.identifier, for: indexPath)
 					as? UpcomingTripCollectionViewCell else {
 				return UICollectionViewCell()
 			}
-
 			cell.config(model: finishedTripsArray[indexPath.row])
-			cell.layer.borderWidth = 0
-			cell.layer.shadowColor = UIColor.systemGray.cgColor
-			cell.layer.shadowOffset = CGSize(width: 0.3, height: 0)
-			cell.layer.shadowRadius = 3
-			cell.layer.shadowOpacity = 0.5
-			cell.layer.cornerRadius = 15
-			cell.layer.masksToBounds = false
 			return cell
 		}
-
+		
 		return UICollectionViewCell()
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		Constants.share.profileImageSize
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -254,19 +233,19 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 						minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return 20
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 120)
 	}
-
+	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == upcomingTripsCollection {
 			let request = Profile.Something.Request(upcomingTrip: upcomingTripsArray[indexPath.row])
 			interactor?.setUpcomingTrip(request: request)
 		}
-
+		
 		if collectionView == finishedTripsCollection {
 			let request = Profile.Something.Request(image: nil, name: nil, finishedTrip: finishedTripsArray[indexPath.row])
 			interactor?.setFinishTrip(request: request)
@@ -274,35 +253,41 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 	}
 }
 
-
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-	func photoWithCamera(){
-		let vc = UIImagePickerController()
-		vc.sourceType = .camera
-		vc.delegate = self
-		vc.allowsEditing = true
-		present(vc, animated: true)
-	}
-	func photoFromLibrary(){
-		let vc = UIImagePickerController()
-		vc.sourceType = .photoLibrary
-		vc.delegate = self
-		vc.allowsEditing = true
-		present(vc, animated: true)
+	private func photoWithCamera() {
+		let viewController = UIImagePickerController()
+		viewController.sourceType = .camera
+		viewController.delegate = self
+		viewController.allowsEditing = true
+		self.present(viewController, animated: true)
 	}
 
-	func presentPhoto(){
-		let choose = UIAlertController(title: "Profile Photo", message: "How would you like to select a photo?", preferredStyle: .actionSheet)
-		let library = UIAlertAction(title: "photo library", style: .default, handler: {[weak self] _ in self?.photoFromLibrary() } )
-		let camera = UIAlertAction(title: "take photo", style: .default, handler: {[weak self] _ in self?.photoWithCamera()} )
+	private func photoFromLibrary() {
+		let viewController = UIImagePickerController()
+		viewController.sourceType = .photoLibrary
+		viewController.delegate = self
+		viewController.allowsEditing = true
+		self.present(viewController, animated: true)
+	}
+
+	func presentPhoto() {
+		let choose = UIAlertController(title: "Profile Photo",
+									   message: "How would you like to select a photo?",
+									   preferredStyle: .actionSheet)
+		let library = UIAlertAction(title: "photo library", style: .default) { [weak self] _ in
+			self?.photoFromLibrary()
+		}
+		let camera = UIAlertAction(title: "take photo", style: .default) { [weak self] _ in
+			self?.photoWithCamera()
+		}
 		let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
 		choose.addAction(library)
 		choose.addAction(camera)
 		choose.addAction(cancel)
-		present(choose, animated: true)
+		self.present(choose, animated: true)
 	}
-
+	
 	func imagePickerController (_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any] ) {
 		picker.dismiss(animated: true, completion: nil)
 		guard  let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {

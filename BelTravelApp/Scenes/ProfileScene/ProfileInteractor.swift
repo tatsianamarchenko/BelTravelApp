@@ -30,19 +30,19 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 	var worker: ProfileWorker?
 	var finishedTrip: NewTrip?
 	var upcomingTrip: NewTrip?
-
+	
 	// MARK: Do something
-
+	
 	func loadInformation(request: Profile.Something.Request) {
 		worker = ProfileWorker()
 		worker?.doSomeWork()
-
+		
 		FirebaseDatabaseManager.shered.fetchUser(otherUser: nil) { [weak self] user in
 			let response = Profile.Something.Response(person: user, image: user.image)
 			self?.presenter?.presentUserInformation(response: response)
 		}
 	}
-
+	
 	func loadTrips(request: Profile.Something.Request) {
 		worker = ProfileWorker()
 		worker?.doSomeWork()
@@ -51,7 +51,7 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 			self?.presenter?.presenTripsInformation(response: response)
 		}
 	}
-
+	
 	func saveImageInDatabase(request: Profile.Something.Request) {
 		if let data = request.image?.pngData() {
 			guard let name = request.name else {
@@ -64,15 +64,15 @@ class ProfileInteractor: ProfileBusinessLogic, ProfileDataStore {
 			}
 		}
 	}
-
+	
 	func setFinishTrip(request: Profile.Something.Request) {
 		finishedTrip = request.finishedTrip
 		self.presenter?.presentFinishedTrip()
 	}
-
+	
 	func setUpcomingTrip(request: Profile.Something.Request) {
 		upcomingTrip = request.upcomingTrip
 		self.presenter?.presentUpcomingTrip()
 	}
-
+	
 }

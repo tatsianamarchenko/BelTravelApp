@@ -30,7 +30,7 @@ class ReadyToFinishTripPresenter: ReadyToFinishTripPresentationLogic {
 	
 	func presentParticipants(response: ReadyToFinishTrip.Something.Response) {
 		let viewModel = ReadyToFinishTrip.Something.ViewModel(participants: response.participants)
-		viewController?.displayParticipants (viewModel: viewModel)
+		viewController?.displayParticipants(viewModel: viewModel)
 	}
 	
 	func routeToUserViewController() {
